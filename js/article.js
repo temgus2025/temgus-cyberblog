@@ -1,6 +1,6 @@
 /* ============================================================
    Temgus.CyberBlog — article.js
-   - Lit l'ID dans l'URL (?id=xxx)
+   - Lit l'ID dans l'URL (#id)
    - Charge les métadonnées depuis articles.json
    - Charge le fichier .md et le convertit en HTML avec marked.js
    - Génère la table des matières automatiquement
@@ -9,44 +9,47 @@
    ============================================================ */
 
 // ─── Point d'entrée ───────────────────────────────────────
-document.addEventListener('DOMContentLoaded', async () => {
-  initCanvas();
-  initNavbar();
-  initProgressBar();
-
+async function chargerArticle() {
   const id = window.location.hash.replace('#', '');
   if (!id) return afficherErreur();
 
   try {
-    // 1. Charger les métadonnées
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('article-main').classList.add('hidden');
+
     const articles = await fetchJSON('data/articles.json');
     const article = articles.find(a => a.id === id);
     if (!article) return afficherErreur();
 
-    // 2. Charger le contenu Markdown
     const markdown = await fetchTexte(article.fichier);
 
-    // 3. Tout afficher
     afficherHero(article);
     afficherContenu(markdown);
     afficherSidebarInfo(article);
     afficherNavigation(articles, article);
     genererTDM();
 
-    // 4. Mettre à jour le titre de la page
     document.title = `${article.titre} — Temgus.CyberBlog`;
-
-    // 5. Cacher le loader, montrer l'article
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('article-main').classList.remove('hidden');
-
-    // 6. Scroll vers le haut
     window.scrollTo(0, 0);
 
   } catch (err) {
     console.error('Erreur chargement article :', err);
     afficherErreur();
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initCanvas();
+  initNavbar();
+  initProgressBar();
+  chargerArticle();
+
+  // Recharger l'article quand le hash change (navigation suivant/précédent)
+  window.addEventListener('hashchange', () => {
+    chargerArticle();
+  });
 });
 
 // ─── Hero de l'article ────────────────────────────────────
