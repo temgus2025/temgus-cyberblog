@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article — Temgus.CyberBlog</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/article.css">
+<!-- highlight.js pour la coloration syntaxique du code -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="index.html#articles" class="active">Articles</a></li>
+    <li><a href="index.html#categories">Catégories</a></li>
+    <li><a href="a-propos.html">À propos</a></li>
+  </ul>
+  <a href="index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ÉTAT CHARGEMENT -->
+<div id="loading" class="loading-screen">
+  <div class="loading-spinner"></div>
+  <p>Chargement de l'article...</p>
+</div>
+
+<!-- ARTICLE -->
+<main id="article-main" class="hidden">
+
+  <!-- HERO ARTICLE -->
+  <div class="article-hero" id="article-hero">
+    <div class="article-hero-content">
+      <div class="article-meta-top" id="article-meta-top"></div>
+      <h1 id="article-titre"></h1>
+      <div class="article-meta-bar" id="article-meta-bar"></div>
+    </div>
+  </div>
+
+  <!-- CONTENU -->
+  <div class="article-layout">
+
+    <!-- SIDEBAR gauche : Table des matières -->
+    <aside class="toc-sidebar" id="toc-sidebar">
+      <div class="toc-title">// Sommaire</div>
+      <nav id="toc-nav"></nav>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <article class="article-content" id="article-content">
+      <!-- Rendu Markdown injecté ici -->
+    </article>
+
+    <!-- SIDEBAR droite : infos article -->
+    <aside class="article-info-sidebar">
+      <div class="info-card" id="info-card"></div>
+    </aside>
+
+  </div>
+
+  <!-- NAVIGATION articles suivant/précédent -->
+  <div class="article-nav" id="article-nav"></div>
+
+</main>
+
+<!-- ERREUR -->
+<div id="error-screen" class="hidden error-screen">
+  <span>⚠️</span>
+  <h2>Article introuvable</h2>
+  <p>Cet article n'existe pas ou a été déplacé.</p>
+  <a href="index.html" class="btn-primary" style="margin-top:20px;display:inline-flex">← Retour à l'accueil</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Contact</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Librairies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="js/article.js"></script>
+</body>
+</html>

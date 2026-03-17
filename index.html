@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temgus.CyberBlog — Cybersécurité & Réseaux</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Accueil</a></li>
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#categories">Catégories</a></li>
+    <li><a href="a-propos.html">À propos</a></li>
+  </ul>
+  <div class="nav-search">
+    <span>🔍</span>
+    <input type="text" id="search-input" placeholder="Rechercher..." autocomplete="off">
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">// SYSTÈME EN LIGNE — ACCÈS SÉCURISÉ</div>
+    <h1><span class="cyan">Cybersécurité</span> & Réseaux<br><span class="muted">expliqués simplement.</span></h1>
+    <p class="hero-sub">Maîtrisez la cybersécurité, les réseaux et les bonnes pratiques pour protéger vos systèmes — sans jargon inutile.</p>
+    <div class="hero-cta">
+      <a href="#articles" class="btn-primary">▶ Lire les articles</a>
+      <a href="#categories" class="btn-outline">⚡ Catégories</a>
+    </div>
+    <div class="hero-stats" id="hero-stats">
+      <!-- Rempli dynamiquement via JS -->
+    </div>
+  </div>
+</section>
+
+<!-- FILTRES CATÉGORIES -->
+<section class="section" id="categories">
+  <div class="topics" id="topics-filter">
+    <button class="topic-pill active" data-cat="tous">Tous</button>
+    <!-- Généré dynamiquement -->
+  </div>
+</section>
+
+<!-- ARTICLES À LA UNE -->
+<section class="section" id="featured-section">
+  <div class="section-header">
+    <h2 class="section-title"><span>// 01</span> Articles à la une</h2>
+  </div>
+  <div class="featured-grid" id="featured-grid">
+    <!-- Généré dynamiquement -->
+  </div>
+</section>
+
+<!-- TOUS LES ARTICLES -->
+<section class="section" id="articles">
+  <div class="section-header">
+    <h2 class="section-title"><span>// 02</span> <span id="articles-title">Articles récents</span></h2>
+    <span id="articles-count" class="articles-count"></span>
+  </div>
+  <div class="articles-grid" id="articles-grid">
+    <!-- Généré dynamiquement -->
+  </div>
+  <div id="no-results" class="no-results hidden">
+    <span>🔍</span>
+    <p>Aucun article trouvé pour "<span id="search-term"></span>"</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Contact</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
