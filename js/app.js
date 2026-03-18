@@ -86,6 +86,18 @@ function renderFiltres() {
   const cats = [...new Set(ARTICLES.map(a => a.categorie))];
   const container = document.getElementById('topics-filter');
 
+  // Vider le container sauf le bouton "Tous" déjà présent dans le HTML
+  container.innerHTML = '';
+
+  // Recréer le bouton "Tous"
+  const btnTous = document.createElement('button');
+  btnTous.className = 'topic-pill active';
+  btnTous.dataset.cat = 'tous';
+  btnTous.innerHTML = `<span class="dot"></span> Tous`;
+  btnTous.addEventListener('click', () => setFiltre('tous'));
+  container.appendChild(btnTous);
+
+  // Créer un bouton par catégorie
   cats.forEach(cat => {
     const btn = document.createElement('button');
     btn.className = 'topic-pill';
@@ -94,9 +106,6 @@ function renderFiltres() {
     btn.addEventListener('click', () => setFiltre(cat));
     container.appendChild(btn);
   });
-
-  // Activer le filtre "Tous"
-  container.querySelector('[data-cat="tous"]').addEventListener('click', () => setFiltre('tous'));
 }
 
 function setFiltre(cat) {
