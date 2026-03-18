@@ -114,6 +114,8 @@ function setFiltre(cat) {
     p.classList.toggle('active', p.dataset.cat === cat);
   });
   renderArticles();
+  // Scroll vers la grille d'articles
+  document.getElementById('articles').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ─── Articles filtrés ─────────────────────────────────────
