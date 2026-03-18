@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://temgus2025.github.io/temgus-cyberblog/sitemap.xml
+
+# Bloquer les dossiers inutiles
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.vs/

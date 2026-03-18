@@ -30,6 +30,7 @@ async function chargerArticle() {
     genererTDM();
 
     document.title = `${article.titre} — Temgus.CyberBlog`;
+    updateSEO(article);
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('article-main').classList.remove('hidden');
     window.scrollTo(0, 0);
@@ -297,4 +298,73 @@ function formatDate(dateStr) {
 
 function niveauClass(n) {
   return { 'Débutant': 'niveau-debutant', 'Intermédiaire': 'niveau-intermediaire', 'Avancé': 'niveau-avance' }[n] || '';
+}
+
+// ─── Mise à jour SEO dynamique ─────────────────────────────
+function updateSEO(article) {
+  const base = 'https://temgus2025.github.io/temgus-cyberblog/';
+  const url = `${base}article.html#${article.id}`;
+  const title = `${article.titre} — Temgus.CyberBlog`;
+  const desc = article.resume;
+
+  // Balises meta standard
+  setMeta('description', desc);
+  setMeta('keywords', article.tags.join(', ') + ', cybersécurité, sécurité informatique');
+
+  // Canonical
+  const canonical = document.getElementById('canonical');
+  if (canonical) canonical.setAttribute('href', url);
+
+  // Open Graph
+  setOG('og-url', url, 'content');
+  setOG('og-title', title, 'content');
+  setOG('og-desc', desc, 'content');
+  setMetaName('og:article:published_time', article.date);
+
+  // Twitter
+  setOG('tw-title', title, 'content');
+  setOG('tw-desc', desc, 'content');
+
+  // Schema.org Article
+  const schema = document.getElementById('schema-article');
+  if (schema) {
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.titre,
+      "description": article.resume,
+      "datePublished": article.date,
+      "author": {"@type": "Person", "name": "Temgus", "url": `${base}a-propos.html`},
+      "publisher": {"@type": "Person", "name": "Temgus"},
+      "url": url,
+      "inLanguage": "fr",
+      "keywords": article.tags.join(', '),
+      "timeRequired": `PT${article.lecture}M`
+    });
+  }
+}
+
+function setMeta(name, content) {
+  let el = document.querySelector(`meta[name="${name}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute('name', name);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function setMetaName(property, content) {
+  let el = document.querySelector(`meta[property="${property}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute('property', property);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function setOG(id, value, attr) {
+  const el = document.getElementById(id);
+  if (el) el.setAttribute('content', value);
 }
