@@ -227,6 +227,3 @@ def mon_chiffrement(texte):
 ## Conclusion
 
 La cryptographie est partout — dans votre navigateur, votre téléphone, vos applications bancaires. Retenez l'essentiel : **AES-256 pour stocker, RSA/ECC pour échanger, bcrypt pour les mots de passe, SHA-256 pour vérifier l'intégrité**. Et surtout, n'inventez jamais votre propre algorithme de chiffrement — utilisez toujours des implémentations éprouvées.
-
----
-*Prochain article : [Introduction au pentesting éthique](../articles/intro-pentest)*

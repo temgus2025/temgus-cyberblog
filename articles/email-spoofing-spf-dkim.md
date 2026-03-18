@@ -221,6 +221,3 @@ dig +short TXT _dmarc.exemple.com
 ## Conclusion
 
 SPF + DKIM + DMARC en p=reject = votre domaine est **quasi-impossible à usurper**. Déployez-les dans l'ordre et avec patience : commencez par p=none pour analyser votre trafic légitime, puis montez progressivement en p=quarantine, puis p=reject. Cette configuration élimine la grande majorité des attaques de phishing utilisant votre domaine.
-
----
-*Article suivant : [Forensics numérique : investigation](../articles/forensics-numerique)*

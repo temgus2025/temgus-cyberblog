@@ -168,6 +168,3 @@ arp                     # Voir la table ARP (détecter ARP spoofing)
 ## Conclusion
 
 La sécurité WiFi repose sur trois piliers : **protocole moderne (WPA3)**, **mot de passe robuste**, et **segmentation du réseau**. Sur les réseaux publics, un VPN est indispensable. La majorité des attaques WiFi réussies exploitent des mots de passe faibles — c'est le premier point à corriger.
-
----
-*Article suivant : [Mots de passe : créer et gérer des mots de passe forts](../articles/mots-de-passe)*

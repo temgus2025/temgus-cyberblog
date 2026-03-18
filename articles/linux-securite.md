@@ -282,6 +282,3 @@ alias scanlocal='nmap -sn 192.168.1.0/24'
 ## Conclusion
 
 Maîtriser ces commandes Linux vous donne une **visibilité complète** sur votre système. En cybersécurité, la connaissance du système sur lequel vous travaillez est fondamentale — que vous défendiez vos propres serveurs ou que vous testiez ceux d'un client. Pratiquez sur une machine virtuelle pour intégrer ces commandes naturellement.
-
----
-*Article suivant : [OSINT : trouver des informations en source ouverte](../articles/osint)*

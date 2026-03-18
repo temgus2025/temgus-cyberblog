@@ -55,6 +55,3 @@ Voici les règles d'or à appliquer dès maintenant :
 ## Conclusion
 
 La cybersécurité n'est pas réservée aux experts. En adoptant quelques réflexes simples, vous réduisez considérablement les risques. Dans les prochains articles, nous plongerons plus profondément dans chaque domaine.
-
----
-*Prochain article : [Comprendre les réseaux](../articles/comprendre-reseaux)*

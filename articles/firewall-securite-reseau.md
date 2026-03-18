@@ -174,6 +174,3 @@ Un firewall bien configuré est indispensable mais insuffisant seul. Retenez ces
 3. **Analysez vos logs** régulièrement
 4. **Testez vos règles** périodiquement
 5. **Combinez** firewall, IDS/IPS et autres outils de sécurité
-
----
-*Prochain article : [Malwares et virus : comprendre les menaces](../articles/malwares-virus)*

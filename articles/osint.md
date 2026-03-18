@@ -228,6 +228,3 @@ Vérifier les informations d'un candidat (dans le cadre légal RGPD).
 ## Conclusion
 
 L'OSINT est une discipline puissante qui démontre à quel point nos informations personnelles et professionnelles sont exposées en ligne. Maîtriser ces techniques vous permet à la fois de **mieux comprendre les attaquants** et de **protéger votre propre empreinte numérique**.
-
----
-*Article suivant : [Injection SQL : comprendre et se protéger](../articles/injection-sql)*

@@ -265,6 +265,3 @@ Programme de Vulnerability Management :
 ## Conclusion
 
 Log4Shell, EternalBlue, Heartbleed — ces vulnérabilités démontrent qu'une seule faille dans une bibliothèque largement utilisée peut avoir des conséquences mondiales en quelques heures. La leçon : **inventoriez vos dépendances, suivez les CVE, patchez vite**. Le délai moyen d'exploitation après publication d'un patch est passé sous les 24 heures.
-
----
-*Article suivant : [DevSecOps : intégrer la sécurité](../articles/devsecops)*

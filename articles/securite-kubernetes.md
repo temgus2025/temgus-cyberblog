@@ -386,6 +386,3 @@ Images
 ## Conclusion
 
 Kubernetes est puissant mais complexe à sécuriser. Les principaux risques viennent du **RBAC trop permissif, des conteneurs privilégiés et des secrets mal gérés**. Commencez par appliquer le CIS Kubernetes Benchmark avec kube-bench, activez Falco pour la détection runtime, et implémentez Network Policies pour micro-segmenter vos workloads.
-
----
-*Article suivant : [Stéganographie : cacher des données dans les images](../articles/steganographie)*

@@ -207,6 +207,3 @@ Monitoring
 ## Conclusion
 
 La sécurité cloud repose sur le **modèle de responsabilité partagée** : le provider sécurise l'infrastructure, vous sécurisez vos données et configurations. La majorité des incidents cloud viennent de misconfigurations — utilisez des outils comme Prowler, ScoutSuite ou Checkov pour auditer régulièrement votre posture.
-
----
-*Article suivant : [Tunneling et pivoting réseau](../articles/tunneling-pivoting)*

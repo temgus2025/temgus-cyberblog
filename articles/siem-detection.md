@@ -289,6 +289,3 @@ kpis = {
 ## Conclusion
 
 Un SIEM efficace n'est pas juste un agrégateur de logs — c'est un outil de **détection contextuelle** qui croise des événements de sources multiples pour révéler des attaques invisibles individuellement. La clé du succès : des sources de données de qualité, des règles bien calibrées (peu de faux positifs), et des analystes formés pour investiguer rapidement.
-
----
-*Article suivant : [Zero Trust Architecture](../articles/zero-trust)*

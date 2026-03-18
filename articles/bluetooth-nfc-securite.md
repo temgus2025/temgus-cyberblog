@@ -261,6 +261,3 @@ NFCtools (Android)    # Application Android pour lire les tags
 ## Conclusion
 
 Bluetooth et NFC sont des technologies pratiques mais pas sans risques. Les vulnérabilités comme BlueBorne et BIAS ont montré que ces protocoles peuvent être exploités de façon transparente. La défense basique est simple : **désactivez Bluetooth quand vous ne l'utilisez pas, utilisez un portefeuille RFID-blocking, et maintenez vos firmwares à jour**. Pour les entreprises, la migration vers MIFARE DESFire pour les badges d'accès est urgente.
-
----
-*Article suivant : [Hardening Windows Server](../articles/hardening-windows-server)*

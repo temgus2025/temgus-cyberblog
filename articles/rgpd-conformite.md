@@ -348,6 +348,3 @@ Amendes notables :
 ## Conclusion
 
 Le RGPD n'est pas qu'un obstacle légal — c'est une opportunité de construire la confiance avec vos utilisateurs. En pratique : **minimisez la collecte, chiffrez les données sensibles, documentez vos traitements, et préparez vos procédures de réponse aux droits et aux violations**. La CNIL propose des guides pratiques gratuits pour chaque secteur sur cnil.fr.
-
----
-*Article suivant : [Attaques supply chain](../articles/supply-chain-attacks)*

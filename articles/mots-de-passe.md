@@ -243,6 +243,3 @@ Priorité 3 — Continu
 ## Conclusion
 
 La gestion des mots de passe n'est pas une contrainte — c'est une habitude à prendre une fois. Avec un gestionnaire comme **Bitwarden**, vous n'avez plus qu'UN seul mot de passe à retenir, et tous vos comptes sont protégés par des mots de passe uniques et forts. C'est l'investissement sécurité le plus rentable que vous puissiez faire.
-
----
-*Article suivant : [Ingénierie sociale : manipuler l'humain](../articles/ingenierie-sociale)*

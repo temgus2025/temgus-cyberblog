@@ -265,6 +265,3 @@ HSTS Preload
 ## Conclusion
 
 TLS est la fondation de la sécurité web. Avec Let's Encrypt, **n'importe quel site peut avoir HTTPS gratuitement en quelques minutes**. La configuration optimale selon Mozilla SSL Configuration Generator + un score A+ sur Qualys SSL Labs = vous êtes dans le top 10% des sites les mieux configurés.
-
----
-*Article suivant : [Sécurité cloud AWS, Azure, GCP](../articles/securite-cloud)*

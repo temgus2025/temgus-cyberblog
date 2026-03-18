@@ -193,6 +193,3 @@ Google : Clic droit sur l'email → Signaler le phishing
 ## Conclusion
 
 Le phishing mise sur la **précipitation et la peur**. Prenez toujours le temps de vérifier avant d'agir. Demandez-vous : "Est-ce que j'attendais cet email ? Est-ce que ce lien mène bien où il dit ?" Ces quelques secondes de réflexion peuvent vous éviter bien des ennuis.
-
----
-*Prochain article : [Cryptographie : chiffrer ses données](../articles/cryptographie-bases)*

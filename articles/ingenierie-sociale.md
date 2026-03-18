@@ -232,6 +232,3 @@ Si NON à l'une de ces questions → REFUSER et SIGNALER
 ## Conclusion
 
 L'ingénierie sociale démontre que la technologie seule ne suffit pas à sécuriser une organisation. **La formation et la sensibilisation des humains** sont aussi importantes que les firewalls et les antivirus. La règle d'or : **vérifiez toujours, faites confiance prudemment**.
-
----
-*Article suivant : [Sécurité des APIs REST](../articles/securite-api)*

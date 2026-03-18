@@ -271,6 +271,3 @@ Windows 10+ intègre AMSI qui scanne le contenu PowerShell avant exécution.
 ## Conclusion
 
 PowerShell est indispensable en cybersécurité Windows, des deux côtés. Pour les défenseurs : activez la journalisation ScriptBlock, surveillez les EventID 4103/4104, et formez vos équipes à reconnaître les usages suspects. Pour les pentesters : PowerShell est votre meilleur allié pour la reconnaissance et la post-exploitation sur les environnements Windows.
-
----
-*Article suivant : [Threat Hunting : chasse aux menaces](../articles/threat-hunting)*

@@ -303,6 +303,3 @@ Alternatives au paiement :
 ## Conclusion
 
 Les ransomwares sont devenus une industrie criminelle professionnelle avec ses équipes de développement, son support client et ses affiliés. La défense efficace repose sur **sauvegardes immuables hors-ligne + EDR + MFA partout + segmentation réseau**. Ces quatre mesures réduisent de 90% le risque d'être impacté. La question n'est pas "si" vous serez ciblé, mais "quand" — préparez votre plan de réponse avant l'incident.
-
----
-*Article suivant : [Sécurité Kubernetes](../articles/securite-kubernetes)*

@@ -270,6 +270,3 @@ Brute force sur SSH → Mot de passe faible du compte www-data
 ## Conclusion
 
 La forensique numérique est une discipline qui demande **rigueur, méthode et rapidité**. La collecte dans l'ordre de volatilité, la préservation des preuves et la documentation exhaustive sont non-négociables. Des outils comme **Autopsy, Volatility et The Sleuth Kit** permettent d'analyser des incidents complexes même sans budget commercial.
-
----
-*Retour à l'accueil : [Temgus.CyberBlog](../index.html)*

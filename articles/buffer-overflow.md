@@ -284,6 +284,3 @@ from pwn import *
 ## Conclusion
 
 Le buffer overflow illustre les conséquences catastrophiques d'un simple manque de vérification de taille. Aujourd'hui, les protections (ASLR, DEP, canaries) rendent les exploitations plus complexes mais pas impossibles. La meilleure défense reste d'utiliser des langages sûrs (Rust, Go) ou des fonctions sécurisées (`strncpy` plutôt que `strcpy`, `fgets` plutôt que `gets`). Pour tout pentester, maîtriser le BOF basique reste incontournable — c'est obligatoire pour l'OSCP.
-
----
-*Article suivant : [CTF : compétitions de hacking éthique](../articles/ctf-competitions)*

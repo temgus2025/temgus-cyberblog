@@ -341,6 +341,3 @@ metrics = {
 ## Conclusion
 
 DevSecOps transforme la sécurité d'un obstacle de fin de projet en **compagnon du développement**. L'automatisation est la clé : SAST dans l'IDE, SCA sur chaque commit, secrets scanning dans Git, DAST sur le staging. Quand les développeurs ont des feedbacks de sécurité en secondes plutôt qu'en semaines, ils corrigent naturellement les problèmes avant qu'ils n'arrivent en production.
-
----
-*Article suivant : [Protocoles réseau industriels SCADA/ICS](../articles/scada-ics-securite)*

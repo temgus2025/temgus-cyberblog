@@ -216,6 +216,3 @@ Niveau 3 - Optimal :
 ## Conclusion
 
 Zero Trust n'est pas un produit qu'on achète — c'est une **philosophie et une architecture** qu'on implémente progressivement. Commencez par les bases : MFA fort pour tous, gestion des appareils (MDM), et politiques d'accès conditionnel. Chaque étape réduit significativement votre surface d'attaque, même sans atteindre la maturité maximale.
-
----
-*Article suivant : [Email spoofing et SPF/DKIM/DMARC](../articles/email-spoofing-spf-dkim)*

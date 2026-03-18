@@ -258,6 +258,3 @@ Fournisseurs :
 ## Conclusion
 
 Les attaques supply chain exploitent la **confiance implicite** que nous accordons à nos fournisseurs et dépendances. La défense passe par la **méfiance systématique** : SBOM, hashes vérifiés, signatures cryptographiques, revue des mises à jour et évaluation des fournisseurs. SolarWinds et XZ Utils ont montré que même les entreprises les plus prudentes peuvent être victimes — la vigilance est permanente.
-
----
-*Article suivant : [Bluetooth et NFC : sécurité des communications sans fil courte portée](../articles/bluetooth-nfc-securite)*

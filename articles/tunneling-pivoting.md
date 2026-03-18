@@ -194,6 +194,3 @@ rita show-exploded-dns -H --limit 100 rita-analysis
 ## Conclusion
 
 Le pivoting est une compétence avancée qui démontre la vraie profondeur d'une compromission. En défense, la **segmentation réseau stricte** (micro-segmentation) limite considérablement les possibilités de pivoting. En attaque/test, maîtriser SSH tunneling, Chisel et Ligolo-ng permet de simuler fidèlement le comportement des APT réels.
-
----
-*Article suivant : [SIEM et détection d'intrusion](../articles/siem-detection)*

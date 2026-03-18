@@ -128,6 +128,3 @@ Un port est comme une **porte numérotée** sur votre ordinateur. Chaque service
 ## Conclusion
 
 Comprendre les réseaux vous permet de mieux sécuriser vos systèmes et de diagnostiquer les problèmes. Dans les prochains articles, nous verrons comment les attaquants exploitent ces protocoles et comment s'en protéger.
-
----
-*Prochain article : [Firewall et sécurité réseau](../articles/firewall-securite-reseau)*

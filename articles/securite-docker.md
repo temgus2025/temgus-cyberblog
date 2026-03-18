@@ -296,6 +296,3 @@ Secrets
 ## Conclusion
 
 La sécurité Docker repose sur la **défense en profondeur** : images minimales, utilisateurs non-root, capabilities réduites, réseaux segmentés et secrets gérés séparément. Ces pratiques réduisent considérablement la surface d'attaque et limitent l'impact d'un conteneur compromis.
-
----
-*Article suivant : [Active Directory : attaques et défense](../articles/active-directory)*

@@ -258,6 +258,3 @@ def surveiller_typosquats(domaine):
 ## Conclusion
 
 Les phishing kits modernes sont des outils professionnels, accessibles même aux attaquants sans compétence technique. La défense passe par l'éducation des utilisateurs, les gestionnaires de mots de passe (qui refusent de s'auto-remplir sur les faux sites), et les clés physiques FIDO2 qui sont totalement résistantes au phishing — même aux attaques AiTM.
-
----
-*Article suivant : [Log4Shell et vulnérabilités critiques](../articles/log4shell-vulnerabilites)*

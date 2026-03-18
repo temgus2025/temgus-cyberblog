@@ -335,6 +335,3 @@ Write-Host "Redémarrage recommandé pour appliquer tous les changements."
 ## Conclusion
 
 Le hardening Windows Server est un processus continu, pas une action ponctuelle. Référencez-vous au **CIS Benchmark Windows Server** et au **DISA STIG** pour avoir une liste exhaustive et priorisée. Automatisez avec des scripts PowerShell et vérifiez régulièrement la conformité avec CIS-CAT. Un serveur bien durci réduit de 80% la surface d'attaque exploitable par les attaquants.
-
----
-*Retour à l'accueil : [Temgus.CyberBlog](../index.html)*

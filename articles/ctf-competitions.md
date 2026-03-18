@@ -314,6 +314,3 @@ equipe = {
 ## Conclusion
 
 Les CTF sont la voie royale pour progresser en cybersécurité : on apprend en faisant, dans un cadre légal, avec des défis réalistes. Commencez par **PicoCTF** ou **TryHackMe**, progressez vers **HackTheBox**, et inscrivez-vous sur **CTFtime.org** pour rejoindre des compétitions mondiales. Chaque flag trouvé est une compétence réelle acquise.
-
----
-*Article suivant : [RGPD et conformité sécurité](../articles/rgpd-conformite)*

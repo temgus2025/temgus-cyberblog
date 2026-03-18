@@ -286,6 +286,3 @@ Cheatsheets :
 ## Conclusion
 
 L'OSCP n'est pas une certification qu'on passe en quelques semaines — c'est un **parcours de 6-12 mois** qui transforme un débutant en pentester opérationnel. La clé : **pratiquer, documenter, recommencer**. Chaque machine que vous ne pouvez pas compromettre seul est une leçon. "Try Harder" n'est pas une insulte — c'est la méthode.
-
----
-*Article suivant : [Red Team vs Blue Team](../articles/red-team-blue-team)*

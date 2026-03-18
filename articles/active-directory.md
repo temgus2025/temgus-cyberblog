@@ -214,6 +214,3 @@ auditpol /set /subcategory:"Kerberos Authentication Service" /success:enable /fa
 ## Conclusion
 
 Active Directory est à la fois le point d'entrée le plus attaqué et le plus critique des environnements Windows. Une compromission du DC signifie une compromission totale du domaine. Les clés de la défense : **moindre privilège, surveillance des groupes privilégiés, journalisation exhaustive** et réponse rapide aux incidents.
-
----
-*Article suivant : [Sécurité mobile : Android et iOS](../articles/securite-mobile)*

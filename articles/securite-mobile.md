@@ -284,6 +284,3 @@ Données
 ## Conclusion
 
 La sécurité mobile repose sur trois axes : **mises à jour régulières, contrôle des permissions et communications chiffrées**. Signal + Bitwarden + un VPN couvrent la majorité des besoins de sécurité pour un utilisateur standard. Pour une protection maximale, les passkeys représentent l'avenir de l'authentification mobile.
-
----
-*Article suivant : [Dark Web : mythes et réalités](../articles/dark-web)*

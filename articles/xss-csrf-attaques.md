@@ -167,6 +167,3 @@ fetch('/api/action', {
 ## Conclusion
 
 XSS et CSRF sont évitables à 100% avec les bonnes pratiques : **échappement systématique des sorties, CSP stricte pour XSS, tokens CSRF + SameSite cookies pour CSRF**. Ces protections doivent être activées par défaut dans tout nouveau projet.
-
----
-*Article suivant : [HTTPS et certificats SSL/TLS](../articles/https-ssl-tls)*

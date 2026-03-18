@@ -259,6 +259,3 @@ Profil : le plus complet, le plus demandé en 2024
 ## Conclusion
 
 Red et Blue Team sont deux faces indissociables d'une cybersécurité efficace. Sans Red Team, le Blue Team ne sait pas contre quoi il se défend. Sans Blue Team, le Red Team n'a aucun impact. Le **Purple Team** représente l'avenir : attaque et défense qui s'informent mutuellement pour construire des organisations réellement résilientes.
-
----
-*Article suivant : [Anatomie d'un phishing kit](../articles/phishing-kit-anatomie)*

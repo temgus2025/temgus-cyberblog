@@ -253,6 +253,3 @@ Si vous êtes hacké :
 ## Conclusion
 
 La sécurité crypto repose sur un principe simple : **gardez vos clés privées hors ligne et secrètes**. Un hardware wallet + une seed phrase correctement sauvegardée protègent contre la grande majorité des attaques. N'entrez JAMAIS votre seed phrase en ligne, vérifiez toujours les contrats que vous signez et méfiez-vous de toute opportunité "trop belle pour être vraie".
-
----
-*Article suivant : [OSCP : préparer la certification](../articles/oscp-preparation)*

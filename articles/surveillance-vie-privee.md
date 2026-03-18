@@ -258,6 +258,3 @@ Niveau 3 — Haute valeur (lanceur d'alerte)
 ## Conclusion
 
 La vie privée n'est pas un luxe — c'est un droit fondamental. Dans une société de surveillance, se protéger demande des efforts mais reste possible. Commencez par les **gains faciles** : Firefox + uBlock Origin + Signal + Bitwarden. Ces quatre outils réduisent considérablement votre exposition. Ensuite, adaptez votre niveau de protection à votre modèle de menace réel.
-
----
-*Article suivant : [Cryptomonnaies et sécurité](../articles/cryptomonnaies-securite)*

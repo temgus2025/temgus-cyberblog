@@ -220,6 +220,3 @@ Cas réels de désanonymisation :
 ## Conclusion
 
 Le Dark Web est un **outil neutre** — comme Internet lui-même. Il est utilisé par des criminels, mais aussi par des journalistes, des militants des droits de l'homme et des citoyens sous régimes autoritaires. Tor reste la technologie d'anonymat la plus éprouvée pour protéger la vie privée en ligne. L'important est de comprendre ses capacités réelles et ses limites, sans mythifier ni diaboliser.
-
----
-*Retour à l'accueil : [Temgus.CyberBlog](../index.html)*

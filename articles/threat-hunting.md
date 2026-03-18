@@ -284,6 +284,3 @@ velociraptor artifact collect Windows.Persistence.PermanentWMIEvents
 ## Conclusion
 
 Le Threat Hunting transforme la sécurité d'une posture réactive en approche proactive. En combinant **hypothèses basées sur le renseignement**, **données de qualité (Sysmon, EDR)** et **framework MITRE ATT&CK**, vous pouvez découvrir des attaquants qui ont contourné vos défenses automatisées. C'est le niveau supérieur de la cyberdéfense.
-
----
-*Article suivant : [Société de surveillance et vie privée](../articles/surveillance-vie-privee)*

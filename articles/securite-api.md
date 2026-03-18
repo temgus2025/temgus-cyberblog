@@ -262,6 +262,3 @@ Infrastructure
 ## Conclusion
 
 La sécurité d'une API repose sur le principe **"ne jamais faire confiance au client"**. Validez tout, autorisez explicitement, limitez le débit et loguez tout. Les outils comme **OWASP ZAP** ou **Burp Suite** permettent d'auditer automatiquement vos APIs.
-
----
-*Article suivant : [Linux pour la sécurité](../articles/linux-securite)*

@@ -216,6 +216,3 @@ modsecurity_rules_file /etc/nginx/modsec/main.conf;
 ## Conclusion
 
 L'injection SQL est l'une des vulnérabilités les plus anciennes et pourtant encore très présente. La règle est simple : **jamais de concaténation de données utilisateur dans du SQL**. Les requêtes préparées règlent 99% des problèmes.
-
----
-*Article suivant : [Sécurité des conteneurs Docker](../articles/securite-docker)*

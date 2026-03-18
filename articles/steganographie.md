@@ -297,6 +297,3 @@ detect_lsb_stego("image_suspecte.png")
 ## Conclusion
 
 La stéganographie illustre que la sécurité ne se limite pas au visible — les données cachées peuvent être aussi dangereuses que les données chiffrées. Pour les défenseurs, les outils DLP modernes intègrent de plus en plus la détection stéganographique. Pour les curieux et les CTF players, c'est un domaine fascinant qui mêle mathématiques, perception humaine et créativité.
-
----
-*Article suivant : [Buffer Overflow : exploit development](../articles/buffer-overflow)*

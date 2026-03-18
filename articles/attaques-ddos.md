@@ -216,6 +216,3 @@ DNS pointe vers Cloudflare
 ## Conclusion
 
 Les attaques DDoS sont inévitables pour tout service en ligne à succès. La meilleure protection combine **CDN avec anti-DDoS intégré** (Cloudflare), **rate limiting** au niveau applicatif, et une **architecture distribuée** capable d'absorber les pics. Pour un blog comme le vôtre, Cloudflare gratuit suffit largement.
-
----
-*Article suivant : [Sécurité WiFi : WPA2, WPA3 et attaques](../articles/securite-wifi)*
