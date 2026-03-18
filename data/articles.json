@@ -1,22 +1,812 @@
 [
-  {"id":"intro-cybersecurite","titre":"Introduction à la cybersécurité : les bases essentielles","resume":"Comprendre les fondamentaux de la cybersécurité est indispensable dans un monde connecté. Découvrez les concepts clés pour protéger vos données.","categorie":"Sécurité réseau","tags":["débutant","fondamentaux","sécurité"],"niveau":"Débutant","date":"2025-03-01","lecture":5,"icone":"🔐","featured":true,"fichier":"articles/intro-cybersecurite.md"},
-  {"id":"comprendre-reseaux","titre":"Comprendre les réseaux : comment les ordinateurs communiquent","resume":"TCP/IP, DNS, routage — tout ce que vous devez savoir pour comprendre comment fonctionne Internet.","categorie":"Réseaux","tags":["réseau","TCP/IP","DNS"],"niveau":"Débutant","date":"2025-03-05","lecture":7,"icone":"🌐","featured":true,"fichier":"articles/comprendre-reseaux.md"},
-  {"id":"firewall-securite-reseau","titre":"Firewall et sécurité réseau : protection contre les attaques","resume":"Apprenez comment fonctionnent les pare-feu, les règles de filtrage et comment sécuriser votre infrastructure réseau.","categorie":"Sécurité réseau","tags":["firewall","réseau","protection","iptables"],"niveau":"Intermédiaire","date":"2025-03-10","lecture":6,"icone":"🧱","featured":false,"fichier":"articles/firewall-securite-reseau.md"},
-  {"id":"malwares-virus","titre":"Malwares et virus : comprendre les menaces","resume":"Types de malwares, vecteurs d'infection et méthodes de protection efficaces contre les logiciels malveillants.","categorie":"Malwares","tags":["malware","virus","ransomware"],"niveau":"Débutant","date":"2025-03-12","lecture":8,"icone":"🦠","featured":false,"fichier":"articles/malwares-virus.md"},
-  {"id":"phishing-arnaques","titre":"Phishing : reconnaître et éviter les pièges","resume":"Techniques d'hameçonnage modernes, comment les identifier et se protéger au quotidien.","categorie":"Bonnes pratiques","tags":["phishing","social engineering","email"],"niveau":"Débutant","date":"2025-03-15","lecture":5,"icone":"🎣","featured":false,"fichier":"articles/phishing-arnaques.md"},
-  {"id":"cryptographie-bases","titre":"Cryptographie : chiffrer ses données efficacement","resume":"Symétrique, asymétrique, hachage — les fondamentaux du chiffrement pour protéger vos communications.","categorie":"Cryptographie","tags":["crypto","chiffrement","RSA","AES"],"niveau":"Intermédiaire","date":"2025-03-18","lecture":10,"icone":"🔑","featured":false,"fichier":"articles/cryptographie-bases.md"},
-  {"id":"intro-pentest","titre":"Introduction au pentesting éthique","resume":"Méthodologie, outils et cadre légal pour tester la sécurité de vos systèmes comme un professionnel.","categorie":"Pentest","tags":["pentest","ethical hacking","Kali Linux"],"niveau":"Avancé","date":"2025-03-20","lecture":12,"icone":"💻","featured":false,"fichier":"articles/intro-pentest.md"},
-  {"id":"vpn-anonymat","titre":"VPN & anonymat en ligne : guide complet","resume":"Comment fonctionnent les VPN, leurs limites et les meilleures pratiques pour protéger votre vie privée.","categorie":"VPN & Anonymat","tags":["VPN","anonymat","Tor","vie privée"],"niveau":"Débutant","date":"2025-03-22","lecture":6,"icone":"🕵️","featured":false,"fichier":"articles/vpn-anonymat.md"},
-  {"id":"attaques-ddos","titre":"Attaques DDoS : comment ça fonctionne et comment s'en protéger","resume":"Comprendre les attaques par déni de service distribué, leurs types et les solutions pour en protéger son infrastructure.","categorie":"Sécurité réseau","tags":["DDoS","réseau","protection","Cloudflare"],"niveau":"Intermédiaire","date":"2025-04-01","lecture":8,"icone":"💥","featured":false,"fichier":"articles/attaques-ddos.md"},
-  {"id":"securite-wifi","titre":"Sécurité WiFi : WPA2, WPA3 et attaques courantes","resume":"Protocoles WiFi, attaques par dictionnaire, Evil Twin et comment sécuriser votre réseau sans fil.","categorie":"Sécurité réseau","tags":["WiFi","WPA2","WPA3","réseau sans fil"],"niveau":"Intermédiaire","date":"2025-04-03","lecture":7,"icone":"📶","featured":false,"fichier":"articles/securite-wifi.md"},
-  {"id":"mots-de-passe","titre":"Mots de passe : créer et gérer des mots de passe forts","resume":"Techniques de création de mots de passe robustes, gestionnaires de mots de passe et authentification à deux facteurs.","categorie":"Bonnes pratiques","tags":["mots de passe","Bitwarden","2FA","sécurité"],"niveau":"Débutant","date":"2025-04-05","lecture":6,"icone":"🔏","featured":false,"fichier":"articles/mots-de-passe.md"},
-  {"id":"ingenierie-sociale","titre":"Ingénierie sociale : manipuler l'humain pour contourner la sécurité","resume":"Pretexting, baiting, vishing — comment les attaquants exploitent la psychologie humaine et comment s'en défendre.","categorie":"Bonnes pratiques","tags":["ingénierie sociale","manipulation","phishing","formation"],"niveau":"Débutant","date":"2025-04-07","lecture":7,"icone":"🎭","featured":false,"fichier":"articles/ingenierie-sociale.md"},
-  {"id":"securite-api","titre":"Sécurité des APIs REST : les bonnes pratiques","resume":"OWASP API Top 10, authentification JWT, autorisation, rate limiting et validation des entrées pour sécuriser vos APIs.","categorie":"Sécurité réseau","tags":["API","REST","JWT","OWASP","développement"],"niveau":"Avancé","date":"2025-04-09","lecture":10,"icone":"🔌","featured":false,"fichier":"articles/securite-api.md"},
-  {"id":"linux-securite","titre":"Linux pour la sécurité : commandes essentielles","resume":"Maîtrisez les commandes Linux indispensables pour surveiller, durcir et auditer vos systèmes Unix.","categorie":"Pentest","tags":["Linux","commandes","audit","durcissement"],"niveau":"Intermédiaire","date":"2025-04-11","lecture":9,"icone":"🐧","featured":false,"fichier":"articles/linux-securite.md"},
-  {"id":"osint","titre":"OSINT : trouver des informations en source ouverte","resume":"Techniques et outils de renseignement en sources ouvertes pour la reconnaissance et la protection de votre empreinte numérique.","categorie":"Pentest","tags":["OSINT","reconnaissance","Google Dorks","Shodan"],"niveau":"Intermédiaire","date":"2025-04-13","lecture":8,"icone":"🔍","featured":false,"fichier":"articles/osint.md"},
-  {"id":"injection-sql","titre":"Injection SQL : comprendre et se protéger","resume":"Comment fonctionnent les injections SQL, les différents types d'attaques et les techniques pour sécuriser vos bases de données.","categorie":"Pentest","tags":["SQLi","injection SQL","base de données","OWASP"],"niveau":"Intermédiaire","date":"2025-04-15","lecture":9,"icone":"💉","featured":false,"fichier":"articles/injection-sql.md"},
-  {"id":"securite-docker","titre":"Sécurité des conteneurs Docker","resume":"Bonnes pratiques pour sécuriser vos images et conteneurs Docker : utilisateurs non-root, capabilities, secrets et audit.","categorie":"Sécurité réseau","tags":["Docker","conteneurs","DevSecOps","Trivy"],"niveau":"Avancé","date":"2025-04-17","lecture":11,"icone":"🐳","featured":false,"fichier":"articles/securite-docker.md"},
-  {"id":"active-directory","titre":"Active Directory : attaques et défense","resume":"Pass-the-Hash, Kerberoasting, DCSync, Golden Ticket — les attaques AD les plus courantes et comment s'en défendre.","categorie":"Pentest","tags":["Active Directory","Windows","Kerberos","BloodHound"],"niveau":"Avancé","date":"2025-04-19","lecture":13,"icone":"🏢","featured":false,"fichier":"articles/active-directory.md"},
-  {"id":"securite-mobile","titre":"Sécurité mobile : Android et iOS","resume":"Menaces mobiles, applications malveillantes, SIM swapping et meilleures pratiques pour sécuriser votre smartphone.","categorie":"Bonnes pratiques","tags":["mobile","Android","iOS","smartphone","sécurité"],"niveau":"Débutant","date":"2025-04-21","lecture":8,"icone":"📱","featured":false,"fichier":"articles/securite-mobile.md"},
-  {"id":"dark-web","titre":"Dark Web : mythes et réalités","resume":"Comment fonctionne vraiment le Dark Web, Tor, les usages légitimes et illicites, et comment naviguer en sécurité.","categorie":"VPN & Anonymat","tags":["dark web","Tor","anonymat","onion"],"niveau":"Intermédiaire","date":"2025-04-23","lecture":9,"icone":"🌑","featured":false,"fichier":"articles/dark-web.md"}
+  {
+    "id": "intro-cybersecurite",
+    "titre": "Introduction à la cybersécurité : les bases essentielles",
+    "resume": "Comprendre les fondamentaux de la cybersécurité. Découvrez les concepts clés pour protéger vos données.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "débutant",
+      "fondamentaux"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-03-01",
+    "lecture": 5,
+    "icone": "🔐",
+    "featured": true,
+    "fichier": "articles/intro-cybersecurite.md"
+  },
+  {
+    "id": "comprendre-reseaux",
+    "titre": "Comprendre les réseaux : comment les ordinateurs communiquent",
+    "resume": "TCP/IP, DNS, routage — tout ce que vous devez savoir sur Internet.",
+    "categorie": "Réseaux",
+    "tags": [
+      "réseau",
+      "TCP/IP",
+      "DNS"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-03-05",
+    "lecture": 7,
+    "icone": "🌐",
+    "featured": true,
+    "fichier": "articles/comprendre-reseaux.md"
+  },
+  {
+    "id": "firewall-securite-reseau",
+    "titre": "Firewall et sécurité réseau : protection contre les attaques",
+    "resume": "Fonctionnement des pare-feu, règles de filtrage et sécurisation de l'infrastructure réseau.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "firewall",
+      "réseau",
+      "iptables"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-03-10",
+    "lecture": 6,
+    "icone": "🧱",
+    "featured": false,
+    "fichier": "articles/firewall-securite-reseau.md"
+  },
+  {
+    "id": "malwares-virus",
+    "titre": "Malwares et virus : comprendre les menaces",
+    "resume": "Types de malwares, vecteurs d'infection et méthodes de protection efficaces.",
+    "categorie": "Malwares",
+    "tags": [
+      "malware",
+      "virus",
+      "ransomware"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-03-12",
+    "lecture": 8,
+    "icone": "🦠",
+    "featured": false,
+    "fichier": "articles/malwares-virus.md"
+  },
+  {
+    "id": "phishing-arnaques",
+    "titre": "Phishing : reconnaître et éviter les pièges",
+    "resume": "Techniques d'hameçonnage modernes et comment se protéger au quotidien.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "phishing",
+      "social engineering"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-03-15",
+    "lecture": 5,
+    "icone": "🎣",
+    "featured": false,
+    "fichier": "articles/phishing-arnaques.md"
+  },
+  {
+    "id": "cryptographie-bases",
+    "titre": "Cryptographie : chiffrer ses données efficacement",
+    "resume": "Symétrique, asymétrique, hachage — les fondamentaux du chiffrement.",
+    "categorie": "Cryptographie",
+    "tags": [
+      "crypto",
+      "chiffrement",
+      "RSA",
+      "AES"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-03-18",
+    "lecture": 10,
+    "icone": "🔑",
+    "featured": false,
+    "fichier": "articles/cryptographie-bases.md"
+  },
+  {
+    "id": "intro-pentest",
+    "titre": "Introduction au pentesting éthique",
+    "resume": "Méthodologie, outils et cadre légal pour tester la sécurité de vos systèmes.",
+    "categorie": "Pentest",
+    "tags": [
+      "pentest",
+      "ethical hacking",
+      "Kali Linux"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-03-20",
+    "lecture": 12,
+    "icone": "💻",
+    "featured": false,
+    "fichier": "articles/intro-pentest.md"
+  },
+  {
+    "id": "vpn-anonymat",
+    "titre": "VPN & anonymat en ligne : guide complet",
+    "resume": "Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.",
+    "categorie": "VPN & Anonymat",
+    "tags": [
+      "VPN",
+      "anonymat",
+      "Tor"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-03-22",
+    "lecture": 6,
+    "icone": "🕵️",
+    "featured": false,
+    "fichier": "articles/vpn-anonymat.md"
+  },
+  {
+    "id": "attaques-ddos",
+    "titre": "Attaques DDoS : comment ça fonctionne et comment s'en protéger",
+    "resume": "Comprendre les attaques par déni de service distribué et les solutions de protection.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "DDoS",
+      "réseau",
+      "Cloudflare"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-04-01",
+    "lecture": 8,
+    "icone": "💥",
+    "featured": false,
+    "fichier": "articles/attaques-ddos.md"
+  },
+  {
+    "id": "securite-wifi",
+    "titre": "Sécurité WiFi : WPA2, WPA3 et attaques courantes",
+    "resume": "Protocoles WiFi, attaques par dictionnaire, Evil Twin et sécurisation du réseau sans fil.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "WiFi",
+      "WPA2",
+      "WPA3"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-04-03",
+    "lecture": 7,
+    "icone": "📶",
+    "featured": false,
+    "fichier": "articles/securite-wifi.md"
+  },
+  {
+    "id": "mots-de-passe",
+    "titre": "Mots de passe : créer et gérer des mots de passe forts",
+    "resume": "Techniques de création, gestionnaires de mots de passe et authentification à deux facteurs.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "mots de passe",
+      "Bitwarden",
+      "2FA"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-04-05",
+    "lecture": 6,
+    "icone": "🔏",
+    "featured": false,
+    "fichier": "articles/mots-de-passe.md"
+  },
+  {
+    "id": "ingenierie-sociale",
+    "titre": "Ingénierie sociale : manipuler l'humain",
+    "resume": "Pretexting, baiting, vishing — exploitation de la psychologie humaine et défenses.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "ingénierie sociale",
+      "manipulation"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-04-07",
+    "lecture": 7,
+    "icone": "🎭",
+    "featured": false,
+    "fichier": "articles/ingenierie-sociale.md"
+  },
+  {
+    "id": "securite-api",
+    "titre": "Sécurité des APIs REST : les bonnes pratiques",
+    "resume": "OWASP API Top 10, JWT, rate limiting et validation des entrées.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "API",
+      "REST",
+      "JWT",
+      "OWASP"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-04-09",
+    "lecture": 10,
+    "icone": "🔌",
+    "featured": false,
+    "fichier": "articles/securite-api.md"
+  },
+  {
+    "id": "linux-securite",
+    "titre": "Linux pour la sécurité : commandes essentielles",
+    "resume": "Commandes Linux indispensables pour surveiller, durcir et auditer vos systèmes.",
+    "categorie": "Pentest",
+    "tags": [
+      "Linux",
+      "commandes",
+      "audit"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-04-11",
+    "lecture": 9,
+    "icone": "🐧",
+    "featured": false,
+    "fichier": "articles/linux-securite.md"
+  },
+  {
+    "id": "osint",
+    "titre": "OSINT : trouver des informations en source ouverte",
+    "resume": "Techniques et outils de renseignement en sources ouvertes.",
+    "categorie": "Pentest",
+    "tags": [
+      "OSINT",
+      "reconnaissance",
+      "Shodan"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-04-13",
+    "lecture": 8,
+    "icone": "🔍",
+    "featured": false,
+    "fichier": "articles/osint.md"
+  },
+  {
+    "id": "injection-sql",
+    "titre": "Injection SQL : comprendre et se protéger",
+    "resume": "Fonctionnement des injections SQL et techniques de protection des bases de données.",
+    "categorie": "Pentest",
+    "tags": [
+      "SQLi",
+      "base de données",
+      "OWASP"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-04-15",
+    "lecture": 9,
+    "icone": "💉",
+    "featured": false,
+    "fichier": "articles/injection-sql.md"
+  },
+  {
+    "id": "securite-docker",
+    "titre": "Sécurité des conteneurs Docker",
+    "resume": "Bonnes pratiques pour sécuriser vos images et conteneurs Docker.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Docker",
+      "conteneurs",
+      "DevSecOps"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-04-17",
+    "lecture": 11,
+    "icone": "🐳",
+    "featured": false,
+    "fichier": "articles/securite-docker.md"
+  },
+  {
+    "id": "active-directory",
+    "titre": "Active Directory : attaques et défense",
+    "resume": "Pass-the-Hash, Kerberoasting, DCSync — les attaques AD et comment s'en défendre.",
+    "categorie": "Pentest",
+    "tags": [
+      "Active Directory",
+      "Windows",
+      "Kerberos"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-04-19",
+    "lecture": 13,
+    "icone": "🏢",
+    "featured": false,
+    "fichier": "articles/active-directory.md"
+  },
+  {
+    "id": "securite-mobile",
+    "titre": "Sécurité mobile : Android et iOS",
+    "resume": "Menaces mobiles, applications malveillantes et meilleures pratiques.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "mobile",
+      "Android",
+      "iOS"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-04-21",
+    "lecture": 8,
+    "icone": "📱",
+    "featured": false,
+    "fichier": "articles/securite-mobile.md"
+  },
+  {
+    "id": "dark-web",
+    "titre": "Dark Web : mythes et réalités",
+    "resume": "Comment fonctionne le Dark Web, Tor, usages légitimes et illicites.",
+    "categorie": "VPN & Anonymat",
+    "tags": [
+      "dark web",
+      "Tor",
+      "anonymat"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-04-23",
+    "lecture": 9,
+    "icone": "🌑",
+    "featured": false,
+    "fichier": "articles/dark-web.md"
+  },
+  {
+    "id": "powershell-securite",
+    "titre": "PowerShell pour la sécurité : guide complet",
+    "resume": "Commandes PowerShell essentielles pour l'audit, le durcissement et la détection Windows.",
+    "categorie": "Pentest",
+    "tags": [
+      "PowerShell",
+      "Windows",
+      "sécurité",
+      "audit"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-05-01",
+    "lecture": 10,
+    "icone": "⚡",
+    "featured": false,
+    "fichier": "articles/powershell-securite.md"
+  },
+  {
+    "id": "threat-hunting",
+    "titre": "Threat Hunting : la chasse proactive aux menaces",
+    "resume": "Méthodologie, outils et techniques pour détecter les attaquants cachés dans votre réseau.",
+    "categorie": "Pentest",
+    "tags": [
+      "threat hunting",
+      "SIEM",
+      "MITRE ATT&CK",
+      "Sysmon"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-03",
+    "lecture": 11,
+    "icone": "🎯",
+    "featured": false,
+    "fichier": "articles/threat-hunting.md"
+  },
+  {
+    "id": "surveillance-vie-privee",
+    "titre": "Société de surveillance et vie privée numérique",
+    "resume": "Mécanismes de surveillance, tracking en ligne et outils pour protéger votre vie privée.",
+    "categorie": "VPN & Anonymat",
+    "tags": [
+      "vie privée",
+      "surveillance",
+      "RGPD",
+      "anonymat"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-05-05",
+    "lecture": 9,
+    "icone": "👁️",
+    "featured": false,
+    "fichier": "articles/surveillance-vie-privee.md"
+  },
+  {
+    "id": "cryptomonnaies-securite",
+    "titre": "Cryptomonnaies et sécurité : protéger vos actifs",
+    "resume": "Menaces crypto, sécurité des wallets, arnaques et bonnes pratiques pour protéger vos fonds.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "crypto",
+      "bitcoin",
+      "wallet",
+      "sécurité"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-05-07",
+    "lecture": 10,
+    "icone": "₿",
+    "featured": false,
+    "fichier": "articles/cryptomonnaies-securite.md"
+  },
+  {
+    "id": "oscp-preparation",
+    "titre": "OSCP : préparer et réussir la certification",
+    "resume": "Plan d'entraînement complet, ressources et méthodologie pour réussir l'OSCP en 6 mois.",
+    "categorie": "Pentest",
+    "tags": [
+      "OSCP",
+      "certification",
+      "pentesting",
+      "HackTheBox"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-09",
+    "lecture": 13,
+    "icone": "🏆",
+    "featured": false,
+    "fichier": "articles/oscp-preparation.md"
+  },
+  {
+    "id": "red-team-blue-team",
+    "titre": "Red Team vs Blue Team : les deux faces de la cybersécurité",
+    "resume": "Opérations offensives vs défensives, Purple Team et comment les deux se renforcent mutuellement.",
+    "categorie": "Pentest",
+    "tags": [
+      "red team",
+      "blue team",
+      "SOC",
+      "purple team"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-11",
+    "lecture": 12,
+    "icone": "⚔️",
+    "featured": false,
+    "fichier": "articles/red-team-blue-team.md"
+  },
+  {
+    "id": "phishing-kit-anatomie",
+    "titre": "Anatomie d'un phishing kit : comment fonctionnent les arnaques",
+    "resume": "Structure d'un phishing kit, techniques d'évasion, AiTM et outils de détection.",
+    "categorie": "Malwares",
+    "tags": [
+      "phishing",
+      "kit",
+      "AiTM",
+      "détection"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-13",
+    "lecture": 9,
+    "icone": "🎣",
+    "featured": false,
+    "fichier": "articles/phishing-kit-anatomie.md"
+  },
+  {
+    "id": "log4shell-vulnerabilites",
+    "titre": "Log4Shell et vulnérabilités critiques : les failles qui ont changé Internet",
+    "resume": "Log4Shell, EternalBlue, Heartbleed — analyse des vulnérabilités les plus impactantes.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Log4Shell",
+      "CVE",
+      "vulnérabilités",
+      "patch"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-05-15",
+    "lecture": 11,
+    "icone": "💣",
+    "featured": false,
+    "fichier": "articles/log4shell-vulnerabilites.md"
+  },
+  {
+    "id": "devsecops",
+    "titre": "DevSecOps : intégrer la sécurité dans le développement",
+    "resume": "SAST, DAST, SCA, secrets scanning — automatiser la sécurité dans votre pipeline CI/CD.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "DevSecOps",
+      "CI/CD",
+      "SAST",
+      "Semgrep"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-17",
+    "lecture": 12,
+    "icone": "🔧",
+    "featured": false,
+    "fichier": "articles/devsecops.md"
+  },
+  {
+    "id": "xss-csrf-attaques",
+    "titre": "XSS et CSRF : les attaques web les plus courantes",
+    "resume": "Cross-Site Scripting et Cross-Site Request Forgery : fonctionnement et protections.",
+    "categorie": "Pentest",
+    "tags": [
+      "XSS",
+      "CSRF",
+      "web",
+      "OWASP"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-05-19",
+    "lecture": 8,
+    "icone": "🕷️",
+    "featured": false,
+    "fichier": "articles/xss-csrf-attaques.md"
+  },
+  {
+    "id": "https-ssl-tls",
+    "titre": "HTTPS et certificats SSL/TLS : tout comprendre",
+    "resume": "TLS handshake, certificats Let's Encrypt, configuration optimale Nginx/Apache.",
+    "categorie": "Réseaux",
+    "tags": [
+      "HTTPS",
+      "TLS",
+      "SSL",
+      "Let's Encrypt"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-05-21",
+    "lecture": 9,
+    "icone": "🔒",
+    "featured": false,
+    "fichier": "articles/https-ssl-tls.md"
+  },
+  {
+    "id": "securite-cloud",
+    "titre": "Sécurité cloud : AWS, Azure et GCP",
+    "resume": "Misconfigurations cloud, IAM, buckets S3, sécurité réseau et audit de posture cloud.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "cloud",
+      "AWS",
+      "Azure",
+      "GCP",
+      "IAM"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-23",
+    "lecture": 10,
+    "icone": "☁️",
+    "featured": false,
+    "fichier": "articles/securite-cloud.md"
+  },
+  {
+    "id": "tunneling-pivoting",
+    "titre": "Tunneling et pivoting réseau",
+    "resume": "SSH tunneling, Chisel, Ligolo-ng et DNS tunneling pour se déplacer dans un réseau.",
+    "categorie": "Pentest",
+    "tags": [
+      "pivoting",
+      "tunneling",
+      "SSH",
+      "Chisel"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-25",
+    "lecture": 10,
+    "icone": "🕳️",
+    "featured": false,
+    "fichier": "articles/tunneling-pivoting.md"
+  },
+  {
+    "id": "siem-detection",
+    "titre": "SIEM et détection d'intrusion : voir tout ce qui se passe",
+    "resume": "ELK Stack, Suricata, Sigma rules et requêtes KQL pour détecter les intrusions.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "SIEM",
+      "ELK",
+      "Suricata",
+      "SOC",
+      "Sigma"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-27",
+    "lecture": 11,
+    "icone": "📊",
+    "featured": false,
+    "fichier": "articles/siem-detection.md"
+  },
+  {
+    "id": "zero-trust",
+    "titre": "Zero Trust Architecture : ne jamais faire confiance",
+    "resume": "Principes Zero Trust, Conditional Access, micro-segmentation et accès Just-In-Time.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Zero Trust",
+      "IAM",
+      "MFA",
+      "micro-segmentation"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-05-29",
+    "lecture": 10,
+    "icone": "🚫",
+    "featured": false,
+    "fichier": "articles/zero-trust.md"
+  },
+  {
+    "id": "email-spoofing-spf-dkim",
+    "titre": "Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie",
+    "resume": "Protection contre l'usurpation d'email avec SPF, DKIM et DMARC configurés correctement.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "email",
+      "SPF",
+      "DKIM",
+      "DMARC",
+      "spoofing"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-05-31",
+    "lecture": 8,
+    "icone": "📧",
+    "featured": false,
+    "fichier": "articles/email-spoofing-spf-dkim.md"
+  },
+  {
+    "id": "forensics-numerique",
+    "titre": "Forensics numérique : investigation après un incident",
+    "resume": "Acquisition de preuves, analyse RAM avec Volatility, timeline et rapport d'investigation.",
+    "categorie": "Pentest",
+    "tags": [
+      "forensics",
+      "Volatility",
+      "investigation",
+      "DFIR"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-06-02",
+    "lecture": 12,
+    "icone": "🔬",
+    "featured": false,
+    "fichier": "articles/forensics-numerique.md"
+  },
+  {
+    "id": "ransomware-anatomie",
+    "titre": "Ransomware : anatomie d'une attaque moderne",
+    "resume": "RaaS, double extorsion, phases d'attaque et défense contre les ransomwares modernes.",
+    "categorie": "Malwares",
+    "tags": [
+      "ransomware",
+      "RaaS",
+      "sauvegarde",
+      "incident"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-06-04",
+    "lecture": 13,
+    "icone": "🔒",
+    "featured": false,
+    "fichier": "articles/ransomware-anatomie.md"
+  },
+  {
+    "id": "securite-kubernetes",
+    "titre": "Sécurité Kubernetes : protéger vos clusters",
+    "resume": "RBAC, Pod Security, Network Policies, secrets et audit de sécurité K8s.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Kubernetes",
+      "K8s",
+      "conteneurs",
+      "RBAC"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-06-06",
+    "lecture": 12,
+    "icone": "⚙️",
+    "featured": false,
+    "fichier": "articles/securite-kubernetes.md"
+  },
+  {
+    "id": "steganographie",
+    "titre": "Stéganographie : l'art de cacher des données",
+    "resume": "LSB, steghide, stéganalyse et utilisations légales et malveillantes de la stéganographie.",
+    "categorie": "Cryptographie",
+    "tags": [
+      "stéganographie",
+      "LSB",
+      "CTF",
+      "forensics"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-06-08",
+    "lecture": 9,
+    "icone": "🖼️",
+    "featured": false,
+    "fichier": "articles/steganographie.md"
+  },
+  {
+    "id": "buffer-overflow",
+    "titre": "Buffer Overflow : comprendre et exploiter les débordements",
+    "resume": "Stack BOF, contrôle EIP, shellcode, JMP ESP et protections modernes (ASLR, DEP, canaries).",
+    "categorie": "Pentest",
+    "tags": [
+      "buffer overflow",
+      "BOF",
+      "OSCP",
+      "exploitation"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-06-10",
+    "lecture": 11,
+    "icone": "💻",
+    "featured": false,
+    "fichier": "articles/buffer-overflow.md"
+  },
+  {
+    "id": "ctf-competitions",
+    "titre": "CTF : les compétitions de hacking éthique",
+    "resume": "Web, Pwn, Reverse, Crypto, Forensics — guide complet pour débuter et progresser en CTF.",
+    "categorie": "Pentest",
+    "tags": [
+      "CTF",
+      "HackTheBox",
+      "TryHackMe",
+      "compétition"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-06-12",
+    "lecture": 10,
+    "icone": "🚩",
+    "featured": false,
+    "fichier": "articles/ctf-competitions.md"
+  },
+  {
+    "id": "rgpd-conformite",
+    "titre": "RGPD et conformité sécurité : obligations et mise en œuvre",
+    "resume": "Privacy by design, bases légales, droits des personnes et implémentation technique du RGPD.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "RGPD",
+      "conformité",
+      "vie privée",
+      "CNIL"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-06-14",
+    "lecture": 10,
+    "icone": "⚖️",
+    "featured": false,
+    "fichier": "articles/rgpd-conformite.md"
+  },
+  {
+    "id": "supply-chain-attacks",
+    "titre": "Attaques supply chain : compromettre par les fournisseurs",
+    "resume": "SolarWinds, XZ Utils, dependency confusion — comment les attaquants ciblent la chaîne d'approvisionnement.",
+    "categorie": "Malwares",
+    "tags": [
+      "supply chain",
+      "SolarWinds",
+      "dépendances",
+      "SBOM"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-06-16",
+    "lecture": 11,
+    "icone": "⛓️",
+    "featured": false,
+    "fichier": "articles/supply-chain-attacks.md"
+  },
+  {
+    "id": "bluetooth-nfc-securite",
+    "titre": "Bluetooth et NFC : sécurité des communications sans fil",
+    "resume": "BIAS, BlueBorne, relay attacks NFC, outils d'analyse et bonnes pratiques de protection.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Bluetooth",
+      "NFC",
+      "RFID",
+      "sans fil"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-06-18",
+    "lecture": 9,
+    "icone": "📡",
+    "featured": false,
+    "fichier": "articles/bluetooth-nfc-securite.md"
+  },
+  {
+    "id": "hardening-windows-server",
+    "titre": "Hardening Windows Server : durcissement complet",
+    "resume": "CIS Benchmark, désactivation SMBv1/NTLM, pare-feu, audit et LAPS — guide complet de sécurisation.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Windows Server",
+      "hardening",
+      "CIS Benchmark",
+      "PowerShell"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-06-20",
+    "lecture": 12,
+    "icone": "🏰",
+    "featured": false,
+    "fichier": "articles/hardening-windows-server.md"
+  }
 ]
