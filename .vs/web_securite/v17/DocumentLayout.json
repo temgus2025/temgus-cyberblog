@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:js\\article.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\serve.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:serve.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -34,11 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-19T13:50:59.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "serve.json",
               "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\serve.json",
               "RelativeDocumentMoniker": "serve.json",
@@ -46,12 +63,11 @@
               "RelativeToolTip": "serve.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-19T12:47:53.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-19T12:47:53.679Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "app.js",
               "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\app.js",
               "RelativeDocumentMoniker": "js\\app.js",
@@ -59,8 +75,7 @@
               "RelativeToolTip": "js\\app.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-19T12:47:24.924Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-19T12:47:24.924Z"
             },
             {
               "$type": "Document",
@@ -70,14 +85,14 @@
               "RelativeDocumentMoniker": "js\\article.js",
               "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\article.js",
               "RelativeToolTip": "js\\article.js",
-              "ViewState": "AgIAAGIBAAAAAAAAAAAwwGsBAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAHsBAAAAAAAAAAAgwJoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-03-19T12:46:34.696Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "articles.json",
               "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\data\\articles.json",
               "RelativeDocumentMoniker": "data\\articles.json",
@@ -85,12 +100,11 @@
               "RelativeToolTip": "data\\articles.json",
               "ViewState": "AgIAAAsDAAAAAAAAAAAkwCsDAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-19T12:46:02.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-19T12:46:02.543Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\index.html",
               "RelativeDocumentMoniker": "index.html",
@@ -98,12 +112,11 @@
               "RelativeToolTip": "index.html",
               "ViewState": "AgIAAHQAAAAAAAAAAAAYwJUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-03-19T12:40:01.529Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-19T12:40:01.529Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "article.html",
               "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\article.html",
               "RelativeDocumentMoniker": "article.html",
@@ -111,8 +124,7 @@
               "RelativeToolTip": "article.html",
               "ViewState": "AgIAAG8AAAAAAAAAAAAYwJAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-03-19T08:48:15.355Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-19T08:48:15.355Z"
             }
           ]
         }
