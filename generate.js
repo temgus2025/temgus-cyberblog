@@ -82,12 +82,14 @@ articles.forEach(article => {
 }
 </script>
 
-<!-- Redirection immédiate vers la vraie page -->
-<meta http-equiv="refresh" content="0; url=${articleUrl}">
-<script>window.location.replace("${articleUrl}");</script>
 </head>
-<body>
-  <p>Redirection en cours... <a href="${articleUrl}">Cliquez ici si la redirection ne fonctionne pas.</a></p>
+<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
+  <div style="font-size:48px">${article.icone}</div>
+  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">${article.titre}</h1>
+  <p style="color:#8892a4;max-width:500px">${desc}</p>
+  <a href="${articleUrl}" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
+    Lire l'article →
+  </a>
 </body>
 </html>`;
 
