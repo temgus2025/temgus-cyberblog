@@ -810,6 +810,576 @@
     "fichier": "articles/hardening-windows-server.md"
   },
   {
+    "id": "ia-cybersecurite-menaces",
+    "titre": "Intelligence Artificielle et cybersécurité : menaces et opportunités",
+    "resume": "Deepfakes, phishing IA, WormGPT, détection d'anomalies — comment l'IA transforme le paysage des cybermenaces.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "IA",
+      "deepfake",
+      "LLM",
+      "détection",
+      "UEBA"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-07-01",
+    "lecture": 10,
+    "icone": "🤖",
+    "featured": false,
+    "fichier": "articles/ia-cybersecurite-menaces.md"
+  },
+  {
+    "id": "securite-llm-applications",
+    "titre": "Sécuriser les applications basées sur les LLMs",
+    "resume": "Prompt injection, jailbreaking, OWASP LLM Top 10 — les vulnérabilités spécifiques aux applications IA et comment les corriger.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "LLM",
+      "prompt injection",
+      "OWASP",
+      "ChatGPT",
+      "sécurité IA"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-07-03",
+    "lecture": 11,
+    "icone": "🧠",
+    "featured": false,
+    "fichier": "articles/securite-llm-applications.md"
+  },
+  {
+    "id": "deepfakes-securite-entreprises",
+    "titre": "Deepfakes : la menace invisible pour la sécurité des entreprises",
+    "resume": "Fraude au président, usurpation d'identité vocale, contournement biométrique — comment les deepfakes menacent les organisations.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "deepfake",
+      "ingénierie sociale",
+      "fraude",
+      "biométrie",
+      "détection"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-07-05",
+    "lecture": 9,
+    "icone": "🎭",
+    "featured": false,
+    "fichier": "articles/deepfakes-securite-entreprises.md"
+  },
+  {
+    "id": "debuter-cybersecurite-guide",
+    "titre": "Débuter en cybersécurité : le guide complet pour se lancer",
+    "resume": "Prérequis, métiers, certifications, plateformes d'entraînement — tout ce qu'il faut savoir pour démarrer une carrière en cybersécurité.",
+    "categorie": "Carrière en cybersécurité",
+    "tags": [
+      "débutant",
+      "carrière",
+      "TryHackMe",
+      "certifications",
+      "formation"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-07-07",
+    "lecture": 10,
+    "icone": "🚀",
+    "featured": false,
+    "fichier": "articles/debuter-cybersecurite-guide.md"
+  },
+  {
+    "id": "salaires-metiers-cybersecurite",
+    "titre": "Salaires et métiers de la cybersécurité en 2025 : le guide complet",
+    "resume": "Analyste SOC, pentesteur, RSSI, consultant — salaires détaillés par métier et niveau en France et à l'international.",
+    "categorie": "Carrière en cybersécurité",
+    "tags": [
+      "salaire",
+      "métiers",
+      "RSSI",
+      "SOC",
+      "carrière"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-07-09",
+    "lecture": 8,
+    "icone": "💰",
+    "featured": false,
+    "fichier": "articles/salaires-metiers-cybersecurite.md"
+  },
+  {
+    "id": "cv-entretien-cybersecurite",
+    "titre": "Décrocher un poste en cybersécurité : CV, entretien et portfolio",
+    "resume": "Structure de CV, questions techniques d'entretien, construction du portfolio GitHub — le guide pour convaincre les recruteurs.",
+    "categorie": "Carrière en cybersécurité",
+    "tags": [
+      "CV",
+      "entretien",
+      "portfolio",
+      "recrutement",
+      "carrière"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-07-11",
+    "lecture": 9,
+    "icone": "💼",
+    "featured": false,
+    "fichier": "articles/cv-entretien-cybersecurite.md"
+  },
+  {
+    "id": "burp-suite-guide-complet",
+    "titre": "Burp Suite : le guide complet du pentesteur web",
+    "resume": "Proxy, Repeater, Intruder, Scanner, extensions — maîtrisez l'outil de référence pour le pentest web.",
+    "categorie": "Outils & Logiciels",
+    "tags": [
+      "Burp Suite",
+      "pentest web",
+      "proxy",
+      "scanner",
+      "PortSwigger"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-07-13",
+    "lecture": 11,
+    "icone": "🔧",
+    "featured": false,
+    "fichier": "articles/burp-suite-guide-complet.md"
+  },
+  {
+    "id": "nmap-guide-complet",
+    "titre": "Nmap : maîtriser le scanner réseau incontournable",
+    "resume": "SYN scan, NSE scripts, détection OS, évasion — guide complet de Nmap pour la reconnaissance réseau en pentest.",
+    "categorie": "Outils & Logiciels",
+    "tags": [
+      "Nmap",
+      "scan réseau",
+      "reconnaissance",
+      "NSE",
+      "pentest"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-07-15",
+    "lecture": 10,
+    "icone": "📡",
+    "featured": false,
+    "fichier": "articles/nmap-guide-complet.md"
+  },
+  {
+    "id": "actualites-ransomware-apt-2025",
+    "titre": "Ransomwares et groupes APT : bilan des menaces 2024-2025",
+    "resume": "LockBit, ALPHV, Volt Typhoon, Lazarus — analyse des cybermenaces majeures et des tendances de l'année 2024-2025.",
+    "categorie": "Actualités cyber",
+    "tags": [
+      "ransomware",
+      "APT",
+      "LockBit",
+      "threat intelligence",
+      "2025"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-07-17",
+    "lecture": 9,
+    "icone": "📰",
+    "featured": false,
+    "fichier": "articles/actualites-ransomware-apt-2025.md"
+  },
+  {
+    "id": "nis2-dora-reglementations-cyber",
+    "titre": "NIS2 et DORA : les nouvelles réglementations cyber qui changent tout",
+    "resume": "Obligations, sanctions, délais de notification — comprendre NIS2 et DORA et se mettre en conformité en 2025.",
+    "categorie": "Actualités cyber",
+    "tags": [
+      "NIS2",
+      "DORA",
+      "conformité",
+      "ANSSI",
+      "réglementation"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-07-19",
+    "lecture": 10,
+    "icone": "⚖️",
+    "featured": false,
+    "fichier": "articles/nis2-dora-reglementations-cyber.md"
+  },
+  {
+    "id": "agents-ia-securite",
+    "titre": "Agents IA autonomes : nouveaux risques pour la cybersécurité",
+    "resume": "AutoGPT, LangChain, injection de prompt indirecte — les agents IA autonomes créent des surfaces d'attaque inédites.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "agents IA",
+      "AutoGPT",
+      "LangChain",
+      "prompt injection",
+      "sécurité IA"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-01",
+    "lecture": 10,
+    "icone": "🤖",
+    "featured": false,
+    "fichier": "articles/agents-ia-securite.md"
+  },
+  {
+    "id": "ia-generative-ingenierie-sociale",
+    "titre": "IA générative et ingénierie sociale : l'arnaque 2.0",
+    "resume": "Phishing parfait, chatbots d'arnaque, fausses offres d'emploi — comment l'IA générative révolutionne les escroqueries.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "IA générative",
+      "ingénierie sociale",
+      "phishing",
+      "arnaque",
+      "ChatGPT"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-08-03",
+    "lecture": 8,
+    "icone": "🎭",
+    "featured": false,
+    "fichier": "articles/ia-generative-ingenierie-sociale.md"
+  },
+  {
+    "id": "automatiser-securite-ia",
+    "titre": "Automatiser sa sécurité avec l'IA : outils et stratégies",
+    "resume": "SOAR, détection d'anomalies ML, Darktrace, CrowdStrike Charlotte AI — comment l'IA renforce la défense.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "IA défensive",
+      "SOAR",
+      "détection anomalies",
+      "ML",
+      "SOC"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-05",
+    "lecture": 9,
+    "icone": "🛡️",
+    "featured": false,
+    "fichier": "articles/automatiser-securite-ia.md"
+  },
+  {
+    "id": "certifications-cybersecurite-2025",
+    "titre": "Certifications en cybersécurité : lesquelles choisir en 2025 ?",
+    "resume": "Security+, OSCP, CISSP, PNPT — guide complet et honnête des certifications par niveau et spécialisation.",
+    "categorie": "Carrière en cybersécurité",
+    "tags": [
+      "certifications",
+      "OSCP",
+      "Security+",
+      "CISSP",
+      "PNPT"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-08-07",
+    "lecture": 10,
+    "icone": "🏆",
+    "featured": false,
+    "fichier": "articles/certifications-cybersecurite-2025.md"
+  },
+  {
+    "id": "lab-cybersecurite-maison",
+    "titre": "Monter son lab cybersécurité à la maison : guide complet",
+    "resume": "VirtualBox, Proxmox, Active Directory lab, VulnHub — construire son environnement de pratique selon son budget.",
+    "categorie": "Carrière en cybersécurité",
+    "tags": [
+      "lab",
+      "VirtualBox",
+      "Proxmox",
+      "Active Directory",
+      "pratique"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-08-09",
+    "lecture": 11,
+    "icone": "🏠",
+    "featured": false,
+    "fichier": "articles/lab-cybersecurite-maison.md"
+  },
+  {
+    "id": "wireshark-guide-complet",
+    "titre": "Wireshark : analyser le trafic réseau comme un expert",
+    "resume": "Filtres d'affichage, Follow Stream, détection d'attaques, déchiffrement TLS — maîtrisez l'analyseur réseau de référence.",
+    "categorie": "Outils & Logiciels",
+    "tags": [
+      "Wireshark",
+      "analyse réseau",
+      "tshark",
+      "pcap",
+      "sniffing"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-11",
+    "lecture": 11,
+    "icone": "🦈",
+    "featured": false,
+    "fichier": "articles/wireshark-guide-complet.md"
+  },
+  {
+    "id": "metasploit-guide-pentesteur",
+    "titre": "Metasploit Framework : le guide du pentesteur",
+    "resume": "Modules, Meterpreter, msfvenom, post-exploitation — guide complet du framework d'exploitation le plus utilisé.",
+    "categorie": "Outils & Logiciels",
+    "tags": [
+      "Metasploit",
+      "msfvenom",
+      "Meterpreter",
+      "exploitation",
+      "pentest"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-13",
+    "lecture": 12,
+    "icone": "💣",
+    "featured": false,
+    "fichier": "articles/metasploit-guide-pentesteur.md"
+  },
+  {
+    "id": "john-hashcat-cracking",
+    "titre": "John the Ripper et Hashcat : cracker les mots de passe",
+    "resume": "Attaques dictionnaire, règles de mutation, GPU acceleration, wordlists — maîtrisez le cracking de mots de passe.",
+    "categorie": "Outils & Logiciels",
+    "tags": [
+      "Hashcat",
+      "John the Ripper",
+      "cracking",
+      "NTLM",
+      "wordlist"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-15",
+    "lecture": 10,
+    "icone": "🔓",
+    "featured": false,
+    "fichier": "articles/john-hashcat-cracking.md"
+  },
+  {
+    "id": "privilege-escalation-linux",
+    "titre": "Élévation de privilèges Linux : techniques et méthodes",
+    "resume": "SUID, sudo mal configuré, cron jobs, capabilities, LinPEAS — toutes les techniques de privesc Linux avec exemples.",
+    "categorie": "Pentest",
+    "tags": [
+      "privesc",
+      "Linux",
+      "SUID",
+      "sudo",
+      "GTFOBins"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-17",
+    "lecture": 12,
+    "icone": "⬆️",
+    "featured": false,
+    "fichier": "articles/privilege-escalation-linux.md"
+  },
+  {
+    "id": "privilege-escalation-windows",
+    "titre": "Élévation de privilèges Windows : techniques avancées",
+    "resume": "AlwaysInstallElevated, services vulnérables, tokens d'impersonation, GodPotato, WinPEAS — privesc Windows complet.",
+    "categorie": "Pentest",
+    "tags": [
+      "privesc",
+      "Windows",
+      "WinPEAS",
+      "GodPotato",
+      "SYSTEM"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-19",
+    "lecture": 13,
+    "icone": "🪟",
+    "featured": false,
+    "fichier": "articles/privilege-escalation-windows.md"
+  },
+  {
+    "id": "recon-web-enumeration",
+    "titre": "Reconnaissance web : énumération et cartographie des cibles",
+    "resume": "Gobuster, ffuf, Amass, Google Dorks, Shodan, WPScan — guide complet de la reconnaissance pour le pentest web.",
+    "categorie": "Pentest",
+    "tags": [
+      "recon",
+      "enumération",
+      "Gobuster",
+      "ffuf",
+      "OSINT"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-21",
+    "lecture": 11,
+    "icone": "🔎",
+    "featured": false,
+    "fichier": "articles/recon-web-enumeration.md"
+  },
+  {
+    "id": "architecture-reseau-securisee",
+    "titre": "Architecture réseau sécurisée : concevoir une infrastructure robuste",
+    "resume": "VLANs, DMZ, pfSense, règles de filtrage, IDS/IPS Suricata — concevoir une infrastructure réseau sécurisée.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "architecture réseau",
+      "VLAN",
+      "DMZ",
+      "pfSense",
+      "Suricata"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-23",
+    "lecture": 12,
+    "icone": "🏗️",
+    "featured": false,
+    "fichier": "articles/architecture-reseau-securisee.md"
+  },
+  {
+    "id": "vpn-entreprise-acces-distant",
+    "titre": "VPN d'entreprise et accès distant sécurisé : guide complet",
+    "resume": "OpenVPN, WireGuard, ZTNA, Tailscale, Cloudflare Zero Trust — sécuriser les accès distants de votre organisation.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "VPN",
+      "WireGuard",
+      "OpenVPN",
+      "ZTNA",
+      "Zero Trust"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-25",
+    "lecture": 11,
+    "icone": "🔐",
+    "featured": false,
+    "fichier": "articles/vpn-entreprise-acces-distant.md"
+  },
+  {
+    "id": "dns-securise-filtrage",
+    "titre": "DNS sécurisé : bloquer les menaces à la source",
+    "resume": "Pi-hole, NextDNS, DoH, DoT, DNSSEC, détection DNS tunneling — sécuriser et filtrer le DNS de votre réseau.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "DNS",
+      "Pi-hole",
+      "NextDNS",
+      "DoH",
+      "filtrage"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-27",
+    "lecture": 10,
+    "icone": "🌐",
+    "featured": false,
+    "fichier": "articles/dns-securise-filtrage.md"
+  },
+  {
+    "id": "analyse-malwares-debutants",
+    "titre": "Analyse de malwares : guide pour débutants",
+    "resume": "Analyse statique, sandbox, strings, pefile, Any.run, extraction d'IoCs — débuter en malware analysis en toute sécurité.",
+    "categorie": "Malwares",
+    "tags": [
+      "malware analysis",
+      "sandbox",
+      "Any.run",
+      "IoC",
+      "reverse engineering"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-29",
+    "lecture": 11,
+    "icone": "🔬",
+    "featured": false,
+    "fichier": "articles/analyse-malwares-debutants.md"
+  },
+  {
+    "id": "trojans-backdoors-anatomie",
+    "titre": "Trojans et backdoors : anatomie des accès persistants",
+    "resume": "C2, mécanismes de persistance, techniques d'évasion, RATs courants, détection — comprendre les backdoors modernes.",
+    "categorie": "Malwares",
+    "tags": [
+      "trojan",
+      "backdoor",
+      "RAT",
+      "C2",
+      "persistance"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-31",
+    "lecture": 10,
+    "icone": "🚪",
+    "featured": false,
+    "fichier": "articles/trojans-backdoors-anatomie.md"
+  },
+  {
+    "id": "securite-quotidien-pros-it",
+    "titre": "Sécurité au quotidien pour les professionnels IT : les bons réflexes",
+    "resume": "Gestion des secrets, SSH sécurisé, accès cloud, hygiène du code — les pratiques indispensables pour les pros IT.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "bonnes pratiques",
+      "SSH",
+      "secrets",
+      "cloud",
+      "hygiène"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-09-02",
+    "lecture": 9,
+    "icone": "✅",
+    "featured": false,
+    "fichier": "articles/securite-quotidien-pros-it.md"
+  },
+  {
+    "id": "securiser-maison-connectee",
+    "titre": "Sécuriser sa maison connectée : le guide complet",
+    "resume": "Routeur, Wi-Fi, IoT, mots de passe, MFA, sauvegardes — protéger son domicile numérique sans être expert.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "IoT",
+      "Wi-Fi",
+      "routeur",
+      "maison connectée",
+      "vie privée"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-09-04",
+    "lecture": 10,
+    "icone": "🏠",
+    "featured": false,
+    "fichier": "articles/securiser-maison-connectee.md"
+  },
+  {
+    "id": "infrastructures-critiques-cyberattaques",
+    "titre": "Infrastructures critiques sous attaque : eau, énergie, hôpitaux",
+    "resume": "Colonial Pipeline, Volt Typhoon, hôpitaux français — les cyberattaques contre les infrastructures critiques et comment s'en protéger.",
+    "categorie": "Actualités cyber",
+    "tags": [
+      "infrastructures critiques",
+      "OT",
+      "SCADA",
+      "ICS",
+      "OIV"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-09-06",
+    "lecture": 11,
+    "icone": "⚡",
+    "featured": false,
+    "fichier": "articles/infrastructures-critiques-cyberattaques.md"
+  },
+  {
+    "id": "nis2-dora-reglementations-cyber",
+    "titre": "NIS2 et DORA : les nouvelles réglementations cyber qui changent tout",
+    "resume": "Obligations, sanctions, délais de notification — comprendre NIS2 et DORA et se mettre en conformité en 2025.",
+    "categorie": "Actualités cyber",
+    "tags": [
+      "NIS2",
+      "DORA",
+      "conformité",
+      "ANSSI",
+      "réglementation"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-09-08",
+    "lecture": 10,
+    "icone": "⚖️",
+    "featured": false,
+    "fichier": "articles/nis2-dora-reglementations-cyber.md"
+  },
+  {
     "id": "securite-physique",
     "titre": "Sécurité physique : quand les hackers passent la porte",
     "resume": "Tailgating, lock picking, clonage de badges RFID, USB drop attacks — les techniques d'intrusion physique et comment s'en protéger.",
