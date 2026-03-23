@@ -1455,5 +1455,461 @@
     "icone": "🏭",
     "featured": false,
     "fichier": "articles/securite-ot-ics.md"
+  },
+  {
+    "id": "reverse-engineering",
+    "titre": "Reverse Engineering : analyser un binaire sans code source",
+    "resume": "Ghidra, analyse statique et dynamique, décompilation, crackmes et méthodologie complète pour reverser un binaire.",
+    "categorie": "Pentest",
+    "tags": [
+      "reverse engineering",
+      "Ghidra",
+      "binaire",
+      "malware",
+      "CTF"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-01",
+    "lecture": 12,
+    "icone": "🔍",
+    "featured": false,
+    "fichier": "articles/reverse-engineering.md"
+  },
+  {
+    "id": "bug-bounty",
+    "titre": "Bug Bounty : gagner de l'argent en hackant légalement",
+    "resume": "Plateformes, méthodologie de reconnaissance, IDOR, SSRF, subdomain takeover et rédiger un bon rapport.",
+    "categorie": "Pentest",
+    "tags": [
+      "bug bounty",
+      "HackerOne",
+      "YesWeHack",
+      "IDOR",
+      "SSRF"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-03",
+    "lecture": 11,
+    "icone": "💰",
+    "featured": false,
+    "fichier": "articles/bug-bounty.md"
+  },
+  {
+    "id": "threat-intelligence",
+    "titre": "Threat Intelligence : anticiper les cyberattaques",
+    "resume": "IOCs, MISP, sources OSINT, profiling d'acteurs APT et intégration dans un SIEM pour une sécurité prédictive.",
+    "categorie": "Pentest",
+    "tags": [
+      "threat intelligence",
+      "MISP",
+      "IOC",
+      "APT",
+      "MITRE ATT&CK"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-05",
+    "lecture": 11,
+    "icone": "🎯",
+    "featured": false,
+    "fichier": "articles/threat-intelligence.md"
+  },
+  {
+    "id": "hardening-linux",
+    "titre": "Hardening Linux : durcissement complet d'un serveur",
+    "resume": "SSH sécurisé, UFW, fail2ban, auditd, AppArmor, sysctl — guide complet de durcissement selon le CIS Benchmark.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "hardening",
+      "Linux",
+      "fail2ban",
+      "AppArmor",
+      "CIS Benchmark"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-07",
+    "lecture": 12,
+    "icone": "🐧",
+    "featured": false,
+    "fichier": "articles/hardening-linux.md"
+  },
+  {
+    "id": "evasion-av-edr",
+    "titre": "Évasion d'antivirus et EDR : techniques et contre-mesures",
+    "resume": "Détection par signatures, heuristiques, sandbox, obfuscation, AMSI et stratégies défensives contre l'évasion.",
+    "categorie": "Pentest",
+    "tags": [
+      "évasion",
+      "antivirus",
+      "EDR",
+      "AMSI",
+      "obfuscation"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-09",
+    "lecture": 10,
+    "icone": "👻",
+    "featured": false,
+    "fichier": "articles/evasion-av-edr.md"
+  },
+  {
+    "id": "anonymat-tails-whonix",
+    "titre": "Anonymat avancé : Tails OS et Whonix",
+    "resume": "Tails OS amnésique, Whonix Gateway/Workstation, OPSEC comportementale et SecureDrop pour un anonymat maximal.",
+    "categorie": "VPN & Anonymat",
+    "tags": [
+      "Tails",
+      "Whonix",
+      "anonymat",
+      "Tor",
+      "OPSEC"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-11",
+    "lecture": 10,
+    "icone": "🎭",
+    "featured": false,
+    "fichier": "articles/anonymat-tails-whonix.md"
+  },
+  {
+    "id": "carriere-cybersecurite",
+    "titre": "Carrière en cybersécurité : guide complet pour se lancer",
+    "resume": "Métiers, salaires, certifications (OSCP, CISSP), formations gratuites et feuille de route par profil.",
+    "categorie": "Carrière en cybersécurité",
+    "tags": [
+      "carrière",
+      "OSCP",
+      "certifications",
+      "reconversion",
+      "SOC"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-08-13",
+    "lecture": 11,
+    "icone": "🎓",
+    "featured": false,
+    "fichier": "articles/carriere-cybersecurite.md"
+  },
+  {
+    "id": "ia-cybersecurite",
+    "titre": "Intelligence Artificielle et cybersécurité : opportunités et menaces",
+    "resume": "IA générative pour le phishing, deepfakes, détection d'anomalies ML, LLM pour l'analyse de logs et prompt injection.",
+    "categorie": "Intelligence Artificielle & Sécurité",
+    "tags": [
+      "IA",
+      "machine learning",
+      "deepfake",
+      "ChatGPT",
+      "détection"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-15",
+    "lecture": 11,
+    "icone": "🤖",
+    "featured": false,
+    "fichier": "articles/ia-cybersecurite.md"
+  },
+  {
+    "id": "kerberos-avance",
+    "titre": "Attaques Kerberos avancées : Kerberoasting et Golden Ticket",
+    "resume": "Kerberoasting, AS-REP Roasting, Pass-the-Ticket, Golden Ticket et Diamond Ticket — attaques et défenses AD.",
+    "categorie": "Pentest",
+    "tags": [
+      "Kerberos",
+      "Kerberoasting",
+      "Golden Ticket",
+      "Active Directory",
+      "Mimikatz"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-17",
+    "lecture": 12,
+    "icone": "🎫",
+    "featured": false,
+    "fichier": "articles/kerberos-avance.md"
+  },
+  {
+    "id": "securite-databases",
+    "titre": "Sécurité des bases de données : protéger vos données sensibles",
+    "resume": "Injection SQL avancée, sécurisation MySQL/PostgreSQL, TDE, chiffrement des colonnes et audit des accès.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "base de données",
+      "MySQL",
+      "PostgreSQL",
+      "TDE",
+      "SQL injection"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-19",
+    "lecture": 10,
+    "icone": "🗄️",
+    "featured": false,
+    "fichier": "articles/securite-databases.md"
+  },
+  {
+    "id": "pentest-web-avance",
+    "titre": "Pentest Web avancé : au-delà de l'OWASP Top 10",
+    "resume": "SSRF critique, prototype pollution, HTTP request smuggling, désérialisation et chaînage de vulnérabilités.",
+    "categorie": "Pentest",
+    "tags": [
+      "pentest web",
+      "SSRF",
+      "prototype pollution",
+      "request smuggling",
+      "déserialisation"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-21",
+    "lecture": 11,
+    "icone": "🕸️",
+    "featured": false,
+    "fichier": "articles/pentest-web-avance.md"
+  },
+  {
+    "id": "outils-securite-essentiels",
+    "titre": "Les 20 outils de cybersécurité indispensables en 2024",
+    "resume": "Nmap, Burp Suite, Metasploit, BloodHound, Volatility — guide pratique avec commandes essentielles.",
+    "categorie": "Outils & Logiciels",
+    "tags": [
+      "Nmap",
+      "Burp Suite",
+      "Metasploit",
+      "Wireshark",
+      "outils"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-08-23",
+    "lecture": 10,
+    "icone": "🧰",
+    "featured": false,
+    "fichier": "articles/outils-securite-essentiels.md"
+  },
+  {
+    "id": "actualites-cyber-2024",
+    "titre": "Cybersécurité 2024 : les incidents majeurs de l'année",
+    "resume": "Change Healthcare, XZ Utils backdoor, Snowflake, Operation Endgame — bilan des cyberincidents marquants de 2024.",
+    "categorie": "Actualités cyber",
+    "tags": [
+      "actualités",
+      "2024",
+      "ransomware",
+      "supply chain",
+      "APT"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-08-25",
+    "lecture": 10,
+    "icone": "📰",
+    "featured": false,
+    "fichier": "articles/actualites-cyber-2024.md"
+  },
+  {
+    "id": "purple-team-exercices",
+    "titre": "Exercices Purple Team : attaque et défense en collaboration",
+    "resume": "Atomic Red Team, MITRE ATT&CK, planification d'exercices et métriques pour améliorer la détection.",
+    "categorie": "Pentest",
+    "tags": [
+      "purple team",
+      "red team",
+      "blue team",
+      "MITRE ATT&CK",
+      "Atomic Red Team"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-27",
+    "lecture": 10,
+    "icone": "💜",
+    "featured": false,
+    "fichier": "articles/purple-team-exercices.md"
+  },
+  {
+    "id": "incident-response",
+    "titre": "Réponse aux incidents : gérer une cyberattaque en temps réel",
+    "resume": "Cycle NIST, playbook ransomware, outils forensiques, communication de crise et rapport post-incident.",
+    "categorie": "Pentest",
+    "tags": [
+      "incident response",
+      "CSIRT",
+      "ransomware",
+      "forensics",
+      "NIST"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-08-29",
+    "lecture": 11,
+    "icone": "🚨",
+    "featured": false,
+    "fichier": "articles/incident-response.md"
+  },
+  {
+    "id": "cryptographie-avancee",
+    "titre": "Cryptographie avancée : PKI, certificats et post-quantique",
+    "resume": "PKI, certificats X.509, Certificate Transparency, CRYSTALS-Kyber et migration vers la cryptographie post-quantique.",
+    "categorie": "Cryptographie",
+    "tags": [
+      "PKI",
+      "certificats",
+      "TLS",
+      "post-quantique",
+      "Kyber"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-08-31",
+    "lecture": 12,
+    "icone": "🔐",
+    "featured": false,
+    "fichier": "articles/cryptographie-avancee.md"
+  },
+  {
+    "id": "forensics-memoire-avance",
+    "titre": "Forensics mémoire avancé : Volatility 3 et analyse d'incidents",
+    "resume": "Acquisition mémoire, Volatility 3, détection de process hollowing, extraction de credentials et artefacts cryptographiques.",
+    "categorie": "Pentest",
+    "tags": [
+      "forensics",
+      "Volatility",
+      "mémoire",
+      "malware",
+      "DFIR"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-09-02",
+    "lecture": 11,
+    "icone": "🔬",
+    "featured": false,
+    "fichier": "articles/forensics-memoire-avance.md"
+  },
+  {
+    "id": "securite-mobile-avance",
+    "titre": "Sécurité mobile avancée : pentest Android et iOS",
+    "resume": "Analyse d'APK, Frida, SSL pinning bypass, OWASP Mobile Top 10 et techniques de pentest iOS/Android.",
+    "categorie": "Pentest",
+    "tags": [
+      "Android",
+      "iOS",
+      "Frida",
+      "pentest mobile",
+      "APK"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-09-04",
+    "lecture": 12,
+    "icone": "📱",
+    "featured": false,
+    "fichier": "articles/securite-mobile-avance.md"
+  },
+  {
+    "id": "securite-api-graphql",
+    "titre": "Sécurité des APIs GraphQL : vulnérabilités et protections",
+    "resume": "Introspection, batching attacks, injection GraphQL, IDOR et protections : depth limiting, rate limiting, autorisation.",
+    "categorie": "Pentest",
+    "tags": [
+      "GraphQL",
+      "API",
+      "introspection",
+      "batching",
+      "injection"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-09-06",
+    "lecture": 10,
+    "icone": "⬡",
+    "featured": false,
+    "fichier": "articles/securite-api-graphql.md"
+  },
+  {
+    "id": "securite-conteneurs-docker-avance",
+    "titre": "Sécurité avancée des conteneurs : escapes et hardening",
+    "resume": "Container escape techniques, socket Docker, capabilities, seccomp, AppArmor et Falco pour sécuriser Docker.",
+    "categorie": "Sécurité réseau",
+    "tags": [
+      "Docker",
+      "container escape",
+      "seccomp",
+      "Falco",
+      "Trivy"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-09-08",
+    "lecture": 11,
+    "icone": "🐳",
+    "featured": false,
+    "fichier": "articles/securite-conteneurs-docker-avance.md"
+  },
+  {
+    "id": "attaques-navigateurs",
+    "titre": "Attaques sur les navigateurs web : exploitation et défense",
+    "resume": "BeEF framework, DOM Clobbering, Clickjacking, extensions malveillantes, Cache Poisoning et Content Security Policy.",
+    "categorie": "Pentest",
+    "tags": [
+      "navigateur",
+      "BeEF",
+      "XSS",
+      "clickjacking",
+      "CSP"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-09-10",
+    "lecture": 11,
+    "icone": "🌐",
+    "featured": false,
+    "fichier": "articles/attaques-navigateurs.md"
+  },
+  {
+    "id": "malware-c2-frameworks",
+    "titre": "Frameworks C2 : comprendre les infrastructures de commande et contrôle",
+    "resume": "Cobalt Strike, Sliver, Havoc, Malleable C2, détection du beaconing et défense contre les infrastructures C2.",
+    "categorie": "Malwares",
+    "tags": [
+      "C2",
+      "Cobalt Strike",
+      "Sliver",
+      "beaconing",
+      "Red Team"
+    ],
+    "niveau": "Avancé",
+    "date": "2025-09-12",
+    "lecture": 12,
+    "icone": "📡",
+    "featured": false,
+    "fichier": "articles/malware-c2-frameworks.md"
+  },
+  {
+    "id": "biometrie-authentification",
+    "titre": "Biométrie et authentification moderne : FIDO2 et Passkeys",
+    "resume": "FIDO2, WebAuthn, Passkeys, biométrie avancée, hiérarchie MFA et implémentation de l'authentification sans mot de passe.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "FIDO2",
+      "passkeys",
+      "biométrie",
+      "WebAuthn",
+      "MFA"
+    ],
+    "niveau": "Intermédiaire",
+    "date": "2025-09-14",
+    "lecture": 11,
+    "icone": "👆",
+    "featured": false,
+    "fichier": "articles/biometrie-authentification.md"
+  },
+  {
+    "id": "facteur-humain-sensibilisation",
+    "titre": "Le facteur humain en cybersécurité : former et sensibiliser",
+    "resume": "Principes de Cialdini, simulation de phishing, programme de sensibilisation et culture de cybersécurité organisationnelle.",
+    "categorie": "Bonnes pratiques",
+    "tags": [
+      "sensibilisation",
+      "phishing",
+      "formation",
+      "culture sécurité",
+      "facteur humain"
+    ],
+    "niveau": "Débutant",
+    "date": "2025-09-16",
+    "lecture": 11,
+    "icone": "🧠",
+    "featured": false,
+    "fichier": "articles/facteur-humain-sensibilisation.md"
   }
 ]
