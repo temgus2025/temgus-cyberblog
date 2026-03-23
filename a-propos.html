@@ -1,558 +1,610 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ===== GOOGLE ANALYTICS ===== -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-CRVR89FWBH');
-</script>
+    <!-- ===== GOOGLE ANALYTICS ===== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-CRVR89FWBH');
+    </script>
 
-<!-- SEO -->
-<title>À propos — Temgus.CyberBlog</title>
-<meta name="description" content="À propos de Temgus, auteur du blog cybersécurité. Expert en sécurité offensive, réseaux et pentesting. Blog francophone dédié à la cybersécurité.">
-<meta name="author" content="Temgus">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/a-propos.html">
+    <!-- SEO -->
+    <title>À propos — Temgus.CyberBlog</title>
+    <meta name="description" content="À propos de Temgus, auteur du blog cybersécurité. Expert en sécurité offensive, réseaux et pentesting. Blog francophone dédié à la cybersécurité.">
+    <meta name="author" content="Temgus">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/a-propos.html">
 
-<!-- Open Graph -->
-<meta property="og:type" content="profile">
-<meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/a-propos.html">
-<meta property="og:title" content="À propos de Temgus — CyberBlog">
-<meta property="og:description" content="Passionné de cybersécurité depuis plus de 5 ans, je partage mes connaissances pour rendre la sécurité informatique accessible à tous.">
-<meta property="og:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:site_name" content="Temgus.CyberBlog">
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/a-propos.html">
+    <meta property="og:title" content="À propos de Temgus — CyberBlog">
+    <meta property="og:description" content="Passionné de cybersécurité depuis plus de 5 ans, je partage mes connaissances pour rendre la sécurité informatique accessible à tous.">
+    <meta property="og:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Temgus.CyberBlog">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@temgus">
-<meta name="twitter:title" content="À propos — Temgus.CyberBlog">
-<meta name="twitter:description" content="Passionné de cybersécurité — Blog francophone sur la sécurité informatique et les réseaux.">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@temgus">
+    <meta name="twitter:title" content="À propos — Temgus.CyberBlog">
+    <meta name="twitter:description" content="Passionné de cybersécurité — Blog francophone sur la sécurité informatique et les réseaux.">
 
-<!-- Schema.org Person -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Temgus",
-  "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html",
-  "sameAs": [
-    "https://github.com/temgus2025"
-  ],
-  "knowsAbout": ["Cybersécurité", "Pentesting", "Réseaux", "Cryptographie", "Active Directory"],
-  "description": "Passionné de cybersécurité et réseaux, auteur du blog Temgus.CyberBlog"
-}
-</script>
-<link rel="stylesheet" href="css/style.css">
-<style>
-  .about-hero {
-    position: relative;
-    padding: 120px 48px 60px;
-    text-align: center;
-    z-index: 1;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(0,212,255,0.04) 0%, transparent 100%);
-    animation: fadeUp 0.5s ease both;
-  }
+    <!-- Schema.org Person -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Temgus",
+          "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html",
+          "sameAs": [
+            "https://github.com/temgus2025"
+          ],
+          "knowsAbout": ["Cybersécurité", "Pentesting", "Réseaux", "Cryptographie", "Active Directory"],
+          "description": "Passionné de cybersécurité et réseaux, auteur du blog Temgus.CyberBlog"
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-hero {
+            position: relative;
+            padding: 120px 48px 60px;
+            text-align: center;
+            z-index: 1;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(0,212,255,0.04) 0%, transparent 100%);
+            animation: fadeUp 0.5s ease both;
+        }
 
-  .about-hero h1 {
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 12px;
-  }
+            .about-hero h1 {
+                font-size: clamp(32px, 4vw, 52px);
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 12px;
+            }
 
-  .about-hero .sub {
-    font-size: 16px;
-    color: var(--muted);
-    font-family: monospace;
-    letter-spacing: 2px;
-  }
+            .about-hero .sub {
+                font-size: 16px;
+                color: var(--muted);
+                font-family: monospace;
+                letter-spacing: 2px;
+            }
 
-  .about-layout {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 60px 48px;
-    position: relative;
-    z-index: 1;
-  }
+        .about-layout {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 48px;
+            position: relative;
+            z-index: 1;
+        }
 
-  /* Carte auteur */
-  .author-card {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 36px;
-    margin-bottom: 48px;
-    animation: fadeUp 0.5s 0.1s ease both;
-  }
+        /* Carte auteur */
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 36px;
+            margin-bottom: 48px;
+            animation: fadeUp 0.5s 0.1s ease both;
+        }
 
-  .author-avatar-lg {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--cyan), var(--green));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--bg);
-    flex-shrink: 0;
-    position: relative;
-  }
+        .author-avatar-lg {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--bg);
+            flex-shrink: 0;
+            position: relative;
+        }
 
-  .author-avatar-lg::after {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1px dashed rgba(0,212,255,0.4);
-    animation: spin 20s linear infinite;
-  }
+            .author-avatar-lg::after {
+                content: '';
+                position: absolute;
+                inset: -6px;
+                border-radius: 50%;
+                border: 1px dashed rgba(0,212,255,0.4);
+                animation: spin 20s linear infinite;
+            }
 
-  .author-info h2 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 4px;
-  }
+        .author-info h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
 
-  .author-role {
-    font-family: monospace;
-    font-size: 12px;
-    color: var(--cyan);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
+        .author-role {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
 
-  .author-bio {
-    font-size: 15px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
+        .author-bio {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
 
-  /* Sections */
-  .about-section {
-    margin-bottom: 48px;
-    animation: fadeUp 0.5s 0.2s ease both;
-  }
+        /* Sections */
+        .about-section {
+            margin-bottom: 48px;
+            animation: fadeUp 0.5s 0.2s ease both;
+        }
 
-  .about-section h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
+            .about-section h2 {
+                font-size: 22px;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid var(--border);
+            }
 
-  .about-section h2 span {
-    font-family: monospace;
-    font-size: 13px;
-    color: var(--cyan);
-    opacity: 0.7;
-    margin-right: 8px;
-  }
+                .about-section h2 span {
+                    font-family: monospace;
+                    font-size: 13px;
+                    color: var(--cyan);
+                    opacity: 0.7;
+                    margin-right: 8px;
+                }
 
-  .about-section p {
-    font-size: 15px;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 14px;
-  }
+            .about-section p {
+                font-size: 15px;
+                color: var(--muted);
+                line-height: 1.8;
+                margin-bottom: 14px;
+            }
 
-  /* Skills */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-  }
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
 
-  .skill-pill {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(0,212,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: var(--text);
-    transition: border-color 0.2s;
-  }
+        .skill-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,212,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text);
+            transition: border-color 0.2s;
+        }
 
-  .skill-pill:hover { border-color: rgba(0,212,255,0.35); }
+            .skill-pill:hover {
+                border-color: rgba(0,212,255,0.35);
+            }
 
-  .skill-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
 
-  .dot-cyan   { background: var(--cyan); }
-  .dot-green  { background: var(--green); }
-  .dot-orange { background: #ff9944; }
-  .dot-red    { background: #ff4444; }
+        .dot-cyan {
+            background: var(--cyan);
+        }
 
-  /* Timeline */
-  .timeline {
-    position: relative;
-    padding-left: 28px;
-  }
+        .dot-green {
+            background: var(--green);
+        }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 6px;
-    bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
+        .dot-orange {
+            background: #ff9944;
+        }
 
-  .timeline-item {
-    position: relative;
-    margin-bottom: 28px;
-  }
+        .dot-red {
+            background: #ff4444;
+        }
 
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -25px;
-    top: 6px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--cyan);
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 8px rgba(0,212,255,0.5);
-  }
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
 
-  .timeline-date {
-    font-family: monospace;
-    font-size: 11px;
-    color: var(--cyan);
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
+            .timeline::before {
+                content: '';
+                position: absolute;
+                left: 6px;
+                top: 6px;
+                bottom: 0;
+                width: 1px;
+                background: var(--border);
+            }
 
-  .timeline-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 4px;
-  }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 28px;
+        }
 
-  .timeline-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -25px;
+                top: 6px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--cyan);
+                border: 2px solid var(--bg);
+                box-shadow: 0 0 8px rgba(0,212,255,0.5);
+            }
 
-  /* Contact */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-  }
+        .timeline-date {
+            font-family: monospace;
+            font-size: 11px;
+            color: var(--cyan);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
 
-  .contact-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    text-decoration: none;
-    color: var(--text);
-    transition: all 0.2s;
-  }
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
 
-  .contact-card:hover {
-    border-color: rgba(0,212,255,0.4);
-    transform: translateY(-2px);
-  }
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
 
-  .contact-icon {
-    font-size: 22px;
-    flex-shrink: 0;
-  }
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+        }
 
-  .contact-info small {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: block;
-    margin-bottom: 2px;
-  }
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+        }
 
-  .contact-info span {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--cyan);
-  }
+            .contact-card:hover {
+                border-color: rgba(0,212,255,0.4);
+                transform: translateY(-2px);
+            }
 
-  /* Stats */
-  .stats-row {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
+        .contact-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
 
-  .stat-box {
-    flex: 1;
-    min-width: 120px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-  }
+        .contact-info small {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 2px;
+        }
 
-  .stat-box .num {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--cyan);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
+        .contact-info span {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--cyan);
+        }
 
-  .stat-box .lbl {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
 
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .stat-box {
+            flex: 1;
+            min-width: 120px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
 
-  @media (max-width: 768px) {
-    .author-card { flex-direction: column; text-align: center; }
-    .about-layout { padding: 40px 20px; }
-    .about-hero { padding: 100px 20px 40px; }
-  }
-</style>
+            .stat-box .num {
+                font-size: 32px;
+                font-weight: 700;
+                color: var(--cyan);
+                line-height: 1;
+                margin-bottom: 6px;
+            }
+
+            .stat-box .lbl {
+                font-size: 12px;
+                color: var(--muted);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .author-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-layout {
+                padding: 40px 20px;
+            }
+
+            .about-hero {
+                padding: 100px 20px 40px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<canvas id="binary-canvas"></canvas>
+    <canvas id="binary-canvas"></canvas>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <a href="index.html" class="logo">Temgus.<span>CyberBlog</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="index.html#articles">Articles</a></li>
-    <li><a href="index.html#categories">Catégories</a></li>
-    <li><a href="a-propos.html" class="active">À propos</a></li>
-  </ul>
-  <a href="index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Accueil</a>
-</nav>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#articles">Articles</a></li>
+            <li><a href="index.html#categories">Catégories</a></li>
+            <li><a href="a-propos.html" class="active">À propos</a></li>
+        </ul>
+        <a href="index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Accueil</a>
+    </nav>
 
-<!-- HERO -->
-<div class="about-hero">
-  <div style="font-family:monospace;font-size:12px;color:var(--cyan);letter-spacing:3px;margin-bottom:12px">// WHOAMI</div>
-  <h1>À propos de Temgus</h1>
-  <p class="sub">Passionné de cybersécurité · Auteur · Formateur</p>
-</div>
-
-<!-- CONTENU -->
-<div class="about-layout">
-
-  <!-- Carte auteur -->
-  <div class="author-card">
-    <div class="author-avatar-lg">TG</div>
-    <div class="author-info">
-      <h2>Temgus</h2>
-      <div class="author-role">// Expert Cybersécurité & Réseaux</div>
-      <p class="author-bio">
-        Passionné de cybersécurité depuis plus de 5 ans, je partage mes connaissances
-        techniques à travers ce blog pour rendre la sécurité informatique accessible
-        à tous — que vous soyez débutant ou professionnel. Mon objectif : vulgariser
-        sans simplifier à l'excès.
-      </p>
+    <!-- HERO -->
+    <div class="about-hero">
+        <div style="font-family:monospace;font-size:12px;color:var(--cyan);letter-spacing:3px;margin-bottom:12px">// WHOAMI</div>
+        <h1>À propos de Temgus</h1>
+        <p class="sub">Passionné de cybersécurité · Auteur · Formateur</p>
     </div>
-  </div>
 
-  <!-- Stats -->
-  <div class="about-section">
-    <h2><span>// 01</span> Le blog en chiffres</h2>
-    <div class="stats-row" id="blog-stats">
-      <div class="stat-box">
-        <div class="num" id="stat-articles">—</div>
-        <div class="lbl">Articles</div>
-      </div>
-      <div class="stat-box">
-        <div class="num" id="stat-cats">—</div>
-        <div class="lbl">Catégories</div>
-      </div>
-      <div class="stat-box">
-        <div class="num">100%</div>
-        <div class="lbl">Gratuit</div>
-      </div>
-      <div class="stat-box">
-        <div class="num">FR</div>
-        <div class="lbl">En français</div>
-      </div>
-    </div>
-  </div>
+    <!-- CONTENU -->
+    <div class="about-layout">
 
-  <!-- À propos du blog -->
-  <div class="about-section">
-    <h2><span>// 02</span> À propos du blog</h2>
-    <p>
-      <strong style="color:#fff">Temgus.CyberBlog</strong> est un blog dédié à la cybersécurité
-      et aux réseaux, entièrement rédigé en français. L'objectif est de couvrir les sujets
-      fondamentaux comme les avancées techniques de la discipline, avec un langage accessible
-      et des exemples concrets.
-    </p>
-    <p>
-      Chaque article est accompagné d'exemples de code, de commandes pratiques et de cas
-      réels pour vous permettre de mettre en pratique les concepts abordés. Le blog couvre
-      aussi bien les aspects défensifs (Blue Team, SIEM, durcissement) qu'offensifs
-      (pentesting, Red Team, OSCP).
-    </p>
-    <p>
-      Ce blog est hébergé gratuitement sur <strong style="color:var(--cyan)">GitHub Pages</strong>
-      et son code source est disponible publiquement. Il est construit entièrement en
-      HTML/CSS/JavaScript vanilla, sans framework ni base de données.
-    </p>
-  </div>
-
-  <!-- Compétences -->
-  <div class="about-section">
-    <h2><span>// 03</span> Domaines couverts</h2>
-    <div class="skills-grid">
-      <div class="skill-pill"><span class="skill-dot dot-cyan"></span> Pentesting</div>
-      <div class="skill-pill"><span class="skill-dot dot-cyan"></span> Red Team / Blue Team</div>
-      <div class="skill-pill"><span class="skill-dot dot-cyan"></span> Sécurité réseau</div>
-      <div class="skill-pill"><span class="skill-dot dot-green"></span> Forensics numériques</div>
-      <div class="skill-pill"><span class="skill-dot dot-green"></span> OSINT</div>
-      <div class="skill-pill"><span class="skill-dot dot-green"></span> Cryptographie</div>
-      <div class="skill-pill"><span class="skill-dot dot-orange"></span> Active Directory</div>
-      <div class="skill-pill"><span class="skill-dot dot-orange"></span> DevSecOps</div>
-      <div class="skill-pill"><span class="skill-dot dot-orange"></span> Cloud Security</div>
-      <div class="skill-pill"><span class="skill-dot dot-red"></span> Malware Analysis</div>
-      <div class="skill-pill"><span class="skill-dot dot-red"></span> CTF / HackTheBox</div>
-      <div class="skill-pill"><span class="skill-dot dot-red"></span> Threat Hunting</div>
-    </div>
-  </div>
-
-  <!-- Parcours -->
-  <div class="about-section">
-    <h2><span>// 04</span> Parcours</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date">2024 — Aujourd'hui</div>
-        <div class="timeline-title">Création de Temgus.CyberBlog</div>
-        <div class="timeline-desc">Lancement du blog pour partager mes connaissances en cybersécurité avec la communauté francophone.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2023</div>
-        <div class="timeline-title">Spécialisation en sécurité offensive</div>
-        <div class="timeline-desc">Approfondissement des techniques de pentesting, Red Team et exploitation de vulnérabilités.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2022</div>
-        <div class="timeline-title">Formation en cybersécurité</div>
-        <div class="timeline-desc">Formation intensive couvrant les fondamentaux de la sécurité réseau, la cryptographie et la sécurité des systèmes.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2020</div>
-        <div class="timeline-title">Premiers pas en sécurité informatique</div>
-        <div class="timeline-desc">Découverte de la cybersécurité via TryHackMe et HackTheBox. Premiers CTF et challenges de hacking éthique.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contact -->
-  <div class="about-section">
-    <h2><span>// 05</span> Me contacter</h2>
-    <p style="margin-bottom:20px">
-      Une question, une suggestion d'article, un partenariat ou juste envie d'échanger
-      sur la cybersécurité ? N'hésitez pas à me contacter !
-    </p>
-    <div class="contact-grid">
-      <a href="https://github.com/temgus2025" target="_blank" class="contact-card">
-        <span class="contact-icon">⌨️</span>
-        <div class="contact-info">
-          <small>GitHub</small>
-          <span>temgus2025</span>
+        <!-- Carte auteur -->
+        <div class="author-card">
+            <div class="author-avatar-lg">TG</div>
+            <div class="author-info">
+                <h2>Temgus</h2>
+                <div class="author-role">// Expert Cybersécurité & Réseaux</div>
+                <p class="author-bio">
+                    Passionné de cybersécurité depuis plus de 5 ans, je partage mes connaissances
+                    techniques à travers ce blog pour rendre la sécurité informatique accessible
+                    à tous — que vous soyez débutant ou professionnel. Mon objectif : vulgariser
+                    sans simplifier à l'excès.
+                </p>
+            </div>
         </div>
-      </a>
-      <a href="https://twitter.com/" target="_blank" class="contact-card">
-        <span class="contact-icon">𝕏</span>
-        <div class="contact-info">
-          <small>Twitter / X</small>
-          <span>@temgus</span>
+
+        <!-- Stats -->
+        <div class="about-section">
+            <h2><span>// 01</span> Le blog en chiffres</h2>
+            <div class="stats-row" id="blog-stats">
+                <div class="stat-box">
+                    <div class="num" id="stat-articles">—</div>
+                    <div class="lbl">Articles</div>
+                </div>
+                <div class="stat-box">
+                    <div class="num" id="stat-cats">—</div>
+                    <div class="lbl">Catégories</div>
+                </div>
+                <div class="stat-box">
+                    <div class="num">100%</div>
+                    <div class="lbl">Gratuit</div>
+                </div>
+                <div class="stat-box">
+                    <div class="num">FR</div>
+                    <div class="lbl">En français</div>
+                </div>
+            </div>
         </div>
-      </a>
-      <a href="https://linkedin.com/" target="_blank" class="contact-card">
-        <span class="contact-icon">💼</span>
-        <div class="contact-info">
-          <small>LinkedIn</small>
-          <span>Temgus</span>
+
+        <!-- À propos du blog -->
+        <div class="about-section">
+            <h2><span>// 02</span> À propos du blog</h2>
+            <p>
+                <strong style="color:#fff">Temgus.CyberBlog</strong> est un blog dédié à la cybersécurité
+                et aux réseaux, entièrement rédigé en français. L'objectif est de couvrir les sujets
+                fondamentaux comme les avancées techniques de la discipline, avec un langage accessible
+                et des exemples concrets.
+            </p>
+            <p>
+                Chaque article est accompagné d'exemples de code, de commandes pratiques et de cas
+                réels pour vous permettre de mettre en pratique les concepts abordés. Le blog couvre
+                aussi bien les aspects défensifs (Blue Team, SIEM, durcissement) qu'offensifs
+                (pentesting, Red Team, OSCP).
+            </p>
+            <p>
+                Ce blog est hébergé gratuitement sur <strong style="color:var(--cyan)">GitHub Pages</strong>
+                et son code source est disponible publiquement. Il est construit entièrement en
+                HTML/CSS/JavaScript vanilla, sans framework ni base de données.
+            </p>
         </div>
-      </a>
-      <a href="/cdn-cgi/l/email-protection#d6b5b9b8a2b7b5a296a2b3bbb1a3a5f8b0a4" class="contact-card">
-        <span class="contact-icon">📧</span>
-        <div class="contact-info">
-          <small>Email</small>
-          <span><span class="__cf_email__" data-cfemail="71121e1f051012053105141c1604025f1703">[email&#160;protected]</span></span>
+
+        <!-- Compétences -->
+        <div class="about-section">
+            <h2><span>// 03</span> Domaines couverts</h2>
+            <div class="skills-grid">
+                <div class="skill-pill"><span class="skill-dot dot-cyan"></span> Pentesting</div>
+                <div class="skill-pill"><span class="skill-dot dot-cyan"></span> Red Team / Blue Team</div>
+                <div class="skill-pill"><span class="skill-dot dot-cyan"></span> Sécurité réseau</div>
+                <div class="skill-pill"><span class="skill-dot dot-green"></span> Forensics numériques</div>
+                <div class="skill-pill"><span class="skill-dot dot-green"></span> OSINT</div>
+                <div class="skill-pill"><span class="skill-dot dot-green"></span> Cryptographie</div>
+                <div class="skill-pill"><span class="skill-dot dot-orange"></span> Active Directory</div>
+                <div class="skill-pill"><span class="skill-dot dot-orange"></span> DevSecOps</div>
+                <div class="skill-pill"><span class="skill-dot dot-orange"></span> Cloud Security</div>
+                <div class="skill-pill"><span class="skill-dot dot-red"></span> Malware Analysis</div>
+                <div class="skill-pill"><span class="skill-dot dot-red"></span> CTF / HackTheBox</div>
+                <div class="skill-pill"><span class="skill-dot dot-red"></span> Threat Hunting</div>
+            </div>
         </div>
-      </a>
+
+        <!-- Parcours -->
+        <div class="about-section">
+            <h2><span>// 04</span> Parcours</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024 — Aujourd'hui</div>
+                    <div class="timeline-title">Création de Temgus.CyberBlog</div>
+                    <div class="timeline-desc">Lancement du blog pour partager mes connaissances en cybersécurité avec la communauté francophone.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-title">Spécialisation en sécurité offensive</div>
+                    <div class="timeline-desc">Approfondissement des techniques de pentesting, Red Team et exploitation de vulnérabilités.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-title">Formation en cybersécurité</div>
+                    <div class="timeline-desc">Formation intensive couvrant les fondamentaux de la sécurité réseau, la cryptographie et la sécurité des systèmes.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-title">Premiers pas en sécurité informatique</div>
+                    <div class="timeline-desc">Découverte de la cybersécurité via TryHackMe et HackTheBox. Premiers CTF et challenges de hacking éthique.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="about-section">
+            <h2><span>// 05</span> Me contacter</h2>
+            <p style="margin-bottom:20px">
+                Une question, une suggestion d'article, un partenariat ou juste envie d'échanger
+                sur la cybersécurité ? N'hésitez pas à me contacter !
+            </p>
+            <div class="contact-grid">
+                <a href="https://github.com/temgus2025" target="_blank" class="contact-card">
+                    <span class="contact-icon">⌨️</span>
+                    <div class="contact-info">
+                        <small>GitHub</small>
+                        <span>temgus2025</span>
+                    </div>
+                </a>
+                <a href="https://twitter.com/" target="_blank" class="contact-card">
+                    <span class="contact-icon">𝕏</span>
+                    <div class="contact-info">
+                        <small>Twitter / X</small>
+                        <span>@temgus</span>
+                    </div>
+                </a>
+                <a href="https://linkedin.com/" target="_blank" class="contact-card">
+                    <span class="contact-icon">💼</span>
+                    <div class="contact-info">
+                        <small>LinkedIn</small>
+                        <span>Temgus</span>
+                    </div>
+                </a>
+                <a href="/cdn-cgi/l/email-protection#d6b5b9b8a2b7b5a296a2b3bbb1a3a5f8b0a4" class="contact-card">
+                    <span class="contact-icon">📧</span>
+                    <div class="contact-info">
+                        <small>Email</small>
+                        <span><span class="__cf_email__" data-cfemail="71121e1f051012053105141c1604025f1703">[email&#160;protected]</span></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div style="background:rgba(255,170,0,0.05);border:1px solid rgba(255,170,0,0.2);border-radius:8px;padding:20px;margin-top:16px">
+            <div style="font-family:monospace;font-size:11px;color:#ffaa44;letter-spacing:1px;margin-bottom:8px">⚠️ DISCLAIMER</div>
+            <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0">
+                Tous les articles de ce blog sont rédigés à des fins <strong style="color:#fff">éducatives et informatives</strong>.
+                Les techniques présentées ne doivent être utilisées que sur des systèmes vous appartenant
+                ou pour lesquels vous avez une autorisation explicite et écrite. Toute utilisation
+                malveillante est illégale et contraire à l'éthique.
+            </p>
+        </div>
+
     </div>
-  </div>
 
-  <!-- Disclaimer -->
-  <div style="background:rgba(255,170,0,0.05);border:1px solid rgba(255,170,0,0.2);border-radius:8px;padding:20px;margin-top:16px">
-    <div style="font-family:monospace;font-size:11px;color:#ffaa44;letter-spacing:1px;margin-bottom:8px">⚠️ DISCLAIMER</div>
-    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0">
-      Tous les articles de ce blog sont rédigés à des fins <strong style="color:#fff">éducatives et informatives</strong>.
-      Les techniques présentées ne doivent être utilisées que sur des systèmes vous appartenant
-      ou pour lesquels vous avez une autorisation explicite et écrite. Toute utilisation
-      malveillante est illégale et contraire à l'éthique.
-    </p>
-  </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+                <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+            </div>
+            <div class="footer-links">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="a-propos.html">Contact</a>
+                <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
 
-</div>
+    <script src="js/app.js"></script>
+    <script>
+        fetch('data/articles.json')
+            .then(r => r.json())
+            .then(articles => {
+                document.getElementById('stat-articles').textContent = articles.length;
+                const cats = new Set(articles.map(a => a.categorie));
+                document.getElementById('stat-cats').textContent = cats.size;
+            })
+            .catch(() => {
+                document.getElementById('stat-articles').textContent = '76';
+                document.getElementById('stat-cats').textContent = '7';
+            });
+    </script>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
-      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
-    </div>
-    <div class="footer-links">
-      <a href="#">Mentions légales</a>
-      <a href="a-propos.html">Contact</a>
-      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
-    </div>
-  </div>
-</footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/app.js"></script>
-<script>
-// Charger les stats depuis articles.json
-fetch('data/articles.json')
-  .then(r => r.json())
-  .then(article
+</body>
+</html>
