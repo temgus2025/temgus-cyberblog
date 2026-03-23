@@ -33,6 +33,11 @@ async function chargerArticle() {
     updateSEO(article);
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('article-main').classList.remove('hidden');
+
+    // Afficher les commentaires Giscus
+    const giscus = document.getElementById('giscus-container');
+    if (giscus) giscus.classList.remove('hidden');
+
     window.scrollTo(0, 0);
 
   } catch (err) {
@@ -48,13 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
   chargerArticle();
 
   // Recharger l'article quand le hash change (navigation suivant/précédent)
-  // On ignore le premier hashchange qui peut se déclencher au chargement
-  let premierChargement = true;
   window.addEventListener('hashchange', () => {
-    if (premierChargement) { premierChargement = false; return; }
     chargerArticle();
   });
-  setTimeout(() => { premierChargement = false; }, 500);
 });
 
 // ─── Hero de l'article ────────────────────────────────────
@@ -113,9 +114,7 @@ function afficherSidebarInfo(article) {
     .map(t => `<span class="tag-pill">${t}</span>`)
     .join('');
 
-  const card = document.getElementById('info-card');
-  card.innerHTML = '';
-  card.innerHTML = `
+  document.getElementById('info-card').innerHTML = `
     <div class="info-row">
       <span class="info-label">Catégorie</span>
       <span class="info-value" style="color:var(--cyan)">${article.categorie}</span>
@@ -141,19 +140,6 @@ function afficherSidebarInfo(article) {
       <div class="tags-list">${tagsHTML}</div>
     </div>
     <div class="info-divider"></div>
-    <div class="info-row">
-      <span class="info-label">Partager</span>
-    </div>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://temgus2025.github.io/temgus-cyberblog/pages/' + article.id + '.html')}"
-       target="_blank" rel="noopener noreferrer"
-       style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1877f2;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;margin-top:4px;transition:background .2s"
-       onmouseover="this.style.background='#1464d8'" onmouseout="this.style.background='#1877f2'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-        <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-      </svg>
-      Partager sur Facebook
-    </a>
-    <div class="info-divider"></div>
     <a href="index.html" class="btn-outline" style="text-align:center;font-size:13px;padding:9px 16px;justify-content:center">
       ← Tous les articles
     </a>
@@ -165,27 +151,6 @@ function afficherNavigation(articles, actuel) {
   const idx = articles.findIndex(a => a.id === actuel.id);
   const prev = articles[idx + 1]; // Plus ancien
   const next = articles[idx - 1]; // Plus récent
-
-  // Bouton Facebook visible sur mobile (avant la navigation)
-  const shareUrl = encodeURIComponent('https://temgus2025.github.io/temgus-cyberblog/pages/' + actuel.id + '.html');
-  const navEl = document.getElementById('article-nav');
-  navEl.insertAdjacentHTML('beforebegin', `
-    <div class="share-mobile" style="text-align:center;padding:24px 20px 0;display:none">
-      <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}"
-         target="_blank" rel="noopener noreferrer"
-         style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1877f2;color:#fff;border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;text-decoration:none">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-        Partager sur Facebook
-      </a>
-    </div>
-  `);
-
-  // Afficher uniquement sur mobile
-  const shareMobile = document.querySelector('.share-mobile');
-  if (window.innerWidth < 1024) shareMobile.style.display = 'block';
-  window.addEventListener('resize', () => {
-    shareMobile.style.display = window.innerWidth < 1024 ? 'block' : 'none';
-  });
 
   let html = '';
 
