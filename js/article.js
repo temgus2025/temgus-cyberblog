@@ -10,6 +10,14 @@
 
 // ─── Point d'entrée ───────────────────────────────────────
 async function chargerArticle() {
+  // Restaurer l'article après retour OAuth Giscus
+  const savedHash = sessionStorage.getItem('giscus_hash');
+  if (savedHash && !window.location.hash) {
+    window.location.hash = savedHash;
+    sessionStorage.removeItem('giscus_hash');
+    return;
+  }
+
   const id = window.location.hash.replace('#', '');
   if (!id) return afficherErreur();
 
@@ -51,6 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initProgressBar();
   chargerArticle();
+
+  // Sauvegarder le hash avant redirection OAuth Giscus
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link && (
+      link.href.includes('giscus.app') ||
+      link.href.includes('github.com/login') ||
+      link.href.includes('github.com/apps/giscus')
+    )) {
+      sessionStorage.setItem('giscus_hash', window.location.hash);
+    }
+  });
 
   // Recharger l'article quand le hash change (navigation suivant/précédent)
   window.addEventListener('hashchange', () => {
