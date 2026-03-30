@@ -261,3 +261,34 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3
   .hero-stats { gap: 24px; }
   .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
 }
+
+    .share-linkedin:hover {
+        background: #0958a8;
+        transform: translateY(-2px);
+    }
+
+.share-twitter {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+    .share-twitter:hover {
+        background: #111111;
+        transform: translateY(-2px);
+    }
+
+@media (max-width: 600px) {
+    .share-section {
+        padding: 30px 20px;
+    }
+
+    .share-buttons {
+        flex-direction: column;
+    }
+
+    .share-btn {
+        justify-content: center;
+    }
+}
+
