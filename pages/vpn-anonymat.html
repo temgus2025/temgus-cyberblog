@@ -1,62 +1,220 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>VPN & anonymat en ligne : guide complet — Temgus.CyberBlog</title>
 <meta name="description" content="Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.">
-<meta name="keywords" content="VPN, anonymat, Tor, cybersécurité, sécurité informatique">
 <meta name="author" content="Temgus">
+<meta name="keywords" content="VPN, anonymat, Tor, cybersécurité, VPN & Anonymat">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html">
-<meta property="og:title" content="VPN & anonymat en ligne : guide complet — Temgus.CyberBlog">
+<meta property="og:title" content="VPN & anonymat en ligne : guide complet">
 <meta property="og:description" content="Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.">
 <meta property="og:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Temgus.CyberBlog">
 <meta property="article:author" content="Temgus">
 <meta property="article:published_time" content="2025-03-22">
-<meta property="article:tag" content="VPN, anonymat, Tor">
+<meta property="article:section" content="VPN & Anonymat">
 
-<!-- ===== TWITTER CARD ===== -->
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
-<meta name="twitter:title" content="VPN & anonymat en ligne : guide complet — Temgus.CyberBlog">
+<meta name="twitter:title" content="VPN & anonymat en ligne : guide complet">
 <meta name="twitter:description" content="Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
 
-<!-- ===== SCHEMA.ORG ===== -->
+<!-- Schema.org Article -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "VPN & anonymat en ligne : guide complet",
   "description": "Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.",
-  "datePublished": "2025-03-22",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "author": {"@type": "Person", "name": "Temgus"},
   "publisher": {"@type": "Person", "name": "Temgus"},
-  "url": "https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html",
+  "datePublished": "2025-03-22",
   "inLanguage": "fr",
-  "keywords": "VPN, anonymat, Tor",
-  "timeRequired": "PT6M"
+  "url": "https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html",
+  "keywords": "VPN, anonymat, Tor"
 }
 </script>
 
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🕵️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">VPN & anonymat en ligne : guide complet</h1>
-  <p style="color:#8892a4;max-width:500px">Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#vpn-anonymat" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
-  </a>
+<body>
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ÉTAT CHARGEMENT -->
+<div id="loading" class="loading-screen">
+  <div class="loading-spinner"></div>
+  <p>Chargement de l'article...</p>
+</div>
+
+<!-- ARTICLE -->
+<main id="article-main" class="hidden">
+
+  <!-- HERO ARTICLE -->
+  <div class="article-hero" id="article-hero">
+    <div class="article-hero-content">
+      <div class="article-meta-top">
+        <span class="article-categorie">VPN & Anonymat</span>
+        <span class="article-niveau">Débutant</span>
+      </div>
+      <h1 id="article-titre">VPN & anonymat en ligne : guide complet</h1>
+      <div class="article-meta-bar">
+        <span>📅 2025-03-22</span>
+        <span>⏱ 6 min de lecture</span>
+        <span>✍️ Temgus</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENU -->
+  <div class="article-layout">
+
+    <!-- SIDEBAR gauche : Table des matières -->
+    <aside class="toc-sidebar" id="toc-sidebar">
+      <div class="toc-title">// Sommaire</div>
+      <nav id="toc-nav"></nav>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <article class="article-content" id="article-content">
+      <!-- Contenu chargé dynamiquement -->
+    </article>
+
+    <!-- SIDEBAR droite -->
+    <aside class="article-info-sidebar">
+      <div class="info-card">
+        <div class="info-title">// Infos article</div>
+        <div class="info-item"><strong>Catégorie</strong><span>VPN & Anonymat</span></div>
+        <div class="info-item"><strong>Niveau</strong><span>Débutant</span></div>
+        <div class="info-item"><strong>Lecture</strong><span>6 min</span></div>
+        <div class="info-item"><strong>Date</strong><span>2025-03-22</span></div>
+        <div class="info-tags"><span class="tag">VPN</span> <span class="tag">anonymat</span> <span class="tag">Tor</span></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- NAVIGATION articles -->
+  <div class="article-nav">
+    <a href="../pages/intro-pentest.html" class="nav-prev">← Introduction au pentesting éthique...</a>
+    <a href="../pages/attaques-ddos.html" class="nav-next">Attaques DDoS : comment ça fonctionne et comment s... →</a>
+  </div>
+
+  <!-- COMMENTAIRES GISCUS -->
+  <div style="max-width:860px;margin:0 auto;padding:40px 48px 60px">
+    <div style="font-family:monospace;font-size:12px;color:var(--cyan);letter-spacing:3px;margin-bottom:20px">// COMMENTAIRES</div>
+    <script src="https://giscus.app/client.js"
+      data-repo="temgus2025/temgus-cyberblog"
+      data-repo-id="R_kgDORp2caw"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORp2ca84C5Gvn"
+      data-mapping="og:title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="dark_dimmed"
+      data-lang="fr"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Librairies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+// Chargement du fichier Markdown
+const articleId = 'vpn-anonymat';
+const fichierMd = '../pages/vpn-anonymat.md';
+
+async function loadArticle() {
+  try {
+    document.getElementById('loading').style.display = 'flex';
+    const response = await fetch(fichierMd);
+    if (!response.ok) throw new Error('Article non trouvé');
+    const markdown = await response.text();
+    
+    // Rendu Markdown
+    const content = marked.parse(markdown);
+    document.getElementById('article-content').innerHTML = content;
+    
+    // Highlight code
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+    
+    // Table des matières
+    const headings = document.querySelectorAll('#article-content h2, #article-content h3');
+    const toc = document.getElementById('toc-nav');
+    headings.forEach((h, i) => {
+      h.id = 'section-' + i;
+      const a = document.createElement('a');
+      a.href = '#section-' + i;
+      a.textContent = h.textContent;
+      a.className = h.tagName === 'H3' ? 'toc-h3' : 'toc-h2';
+      toc.appendChild(a);
+    });
+    
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('article-main').classList.remove('hidden');
+  } catch(e) {
+    document.getElementById('loading').style.display = 'none';
+    console.error(e);
+  }
+}
+
+loadArticle();
+</script>
+<script src="../js/app.js"></script>
 </body>
 </html>

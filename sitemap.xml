@@ -13,625 +13,619 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#intro-cybersecurite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/intro-cybersecurite.html</loc>
     <lastmod>2025-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#comprendre-reseaux</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/comprendre-reseaux.html</loc>
     <lastmod>2025-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#firewall-securite-reseau</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/firewall-securite-reseau.html</loc>
     <lastmod>2025-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#malwares-virus</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/malwares-virus.html</loc>
     <lastmod>2025-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#phishing-arnaques</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/phishing-arnaques.html</loc>
     <lastmod>2025-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#cryptographie-bases</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-bases.html</loc>
     <lastmod>2025-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#intro-pentest</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/intro-pentest.html</loc>
     <lastmod>2025-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#vpn-anonymat</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html</loc>
     <lastmod>2025-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#attaques-ddos</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/attaques-ddos.html</loc>
     <lastmod>2025-04-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-wifi</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-wifi.html</loc>
     <lastmod>2025-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#mots-de-passe</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/mots-de-passe.html</loc>
     <lastmod>2025-04-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#ingenierie-sociale</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/ingenierie-sociale.html</loc>
     <lastmod>2025-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-api</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-api.html</loc>
     <lastmod>2025-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#linux-securite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/linux-securite.html</loc>
     <lastmod>2025-04-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#osint</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/osint.html</loc>
     <lastmod>2025-04-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#injection-sql</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/injection-sql.html</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-docker</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-docker.html</loc>
     <lastmod>2025-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#active-directory</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/active-directory.html</loc>
     <lastmod>2025-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-mobile</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile.html</loc>
     <lastmod>2025-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#dark-web</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/dark-web.html</loc>
     <lastmod>2025-04-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#powershell-securite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/powershell-securite.html</loc>
     <lastmod>2025-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#threat-hunting</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/threat-hunting.html</loc>
     <lastmod>2025-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#surveillance-vie-privee</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/surveillance-vie-privee.html</loc>
     <lastmod>2025-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#cryptomonnaies-securite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/cryptomonnaies-securite.html</loc>
     <lastmod>2025-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#oscp-preparation</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/oscp-preparation.html</loc>
     <lastmod>2025-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#red-team-blue-team</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/red-team-blue-team.html</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#phishing-kit-anatomie</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/phishing-kit-anatomie.html</loc>
     <lastmod>2025-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#log4shell-vulnerabilites</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/log4shell-vulnerabilites.html</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#devsecops</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/devsecops.html</loc>
     <lastmod>2025-05-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#xss-csrf-attaques</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/xss-csrf-attaques.html</loc>
     <lastmod>2025-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#https-ssl-tls</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/https-ssl-tls.html</loc>
     <lastmod>2025-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-cloud</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-cloud.html</loc>
     <lastmod>2025-05-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#tunneling-pivoting</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/tunneling-pivoting.html</loc>
     <lastmod>2025-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#siem-detection</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/siem-detection.html</loc>
     <lastmod>2025-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#zero-trust</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/zero-trust.html</loc>
     <lastmod>2025-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#email-spoofing-spf-dkim</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/email-spoofing-spf-dkim.html</loc>
     <lastmod>2025-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#forensics-numerique</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/forensics-numerique.html</loc>
     <lastmod>2025-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#ransomware-anatomie</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/ransomware-anatomie.html</loc>
     <lastmod>2025-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-kubernetes</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-kubernetes.html</loc>
     <lastmod>2025-06-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#steganographie</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/steganographie.html</loc>
     <lastmod>2025-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#buffer-overflow</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/buffer-overflow.html</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#ctf-competitions</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/ctf-competitions.html</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#rgpd-conformite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/rgpd-conformite.html</loc>
     <lastmod>2025-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#supply-chain-attacks</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/supply-chain-attacks.html</loc>
     <lastmod>2025-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#bluetooth-nfc-securite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/bluetooth-nfc-securite.html</loc>
     <lastmod>2025-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#hardening-windows-server</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/hardening-windows-server.html</loc>
     <lastmod>2025-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#ia-cybersecurite-menaces</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite-menaces.html</loc>
     <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-llm-applications</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-llm-applications.html</loc>
     <lastmod>2025-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#deepfakes-securite-entreprises</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/deepfakes-securite-entreprises.html</loc>
     <lastmod>2025-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#debuter-cybersecurite-guide</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/debuter-cybersecurite-guide.html</loc>
     <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#salaires-metiers-cybersecurite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/salaires-metiers-cybersecurite.html</loc>
     <lastmod>2025-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#cv-entretien-cybersecurite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/cv-entretien-cybersecurite.html</loc>
     <lastmod>2025-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#burp-suite-guide-complet</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/burp-suite-guide-complet.html</loc>
     <lastmod>2025-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#nmap-guide-complet</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/nmap-guide-complet.html</loc>
     <lastmod>2025-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#actualites-ransomware-apt-2025</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/actualites-ransomware-apt-2025.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#nis2-dora-reglementations-cyber</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/nis2-dora-reglementations-cyber.html</loc>
     <lastmod>2025-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#agents-ia-securite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/agents-ia-securite.html</loc>
     <lastmod>2025-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#ia-generative-ingenierie-sociale</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/ia-generative-ingenierie-sociale.html</loc>
     <lastmod>2025-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#automatiser-securite-ia</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/automatiser-securite-ia.html</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#certifications-cybersecurite-2025</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/certifications-cybersecurite-2025.html</loc>
     <lastmod>2025-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#lab-cybersecurite-maison</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/lab-cybersecurite-maison.html</loc>
     <lastmod>2025-08-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#wireshark-guide-complet</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/wireshark-guide-complet.html</loc>
     <lastmod>2025-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#metasploit-guide-pentesteur</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/metasploit-guide-pentesteur.html</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#john-hashcat-cracking</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/john-hashcat-cracking.html</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#privilege-escalation-linux</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-linux.html</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#privilege-escalation-windows</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-windows.html</loc>
     <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#recon-web-enumeration</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/recon-web-enumeration.html</loc>
     <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#architecture-reseau-securisee</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/architecture-reseau-securisee.html</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#vpn-entreprise-acces-distant</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/vpn-entreprise-acces-distant.html</loc>
     <lastmod>2025-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#dns-securise-filtrage</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/dns-securise-filtrage.html</loc>
     <lastmod>2025-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#analyse-malwares-debutants</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/analyse-malwares-debutants.html</loc>
     <lastmod>2025-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#trojans-backdoors-anatomie</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/trojans-backdoors-anatomie.html</loc>
     <lastmod>2025-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-quotidien-pros-it</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-quotidien-pros-it.html</loc>
     <lastmod>2025-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securiser-maison-connectee</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securiser-maison-connectee.html</loc>
     <lastmod>2025-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#infrastructures-critiques-cyberattaques</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/infrastructures-critiques-cyberattaques.html</loc>
     <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-physique</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-physique.html</loc>
     <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#cybercriminalite-dark-web</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/cybercriminalite-dark-web.html</loc>
     <lastmod>2025-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-microservices</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-microservices.html</loc>
     <lastmod>2025-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-ot-ics</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-ot-ics.html</loc>
     <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#reverse-engineering</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/reverse-engineering.html</loc>
     <lastmod>2025-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#bug-bounty</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/bug-bounty.html</loc>
     <lastmod>2025-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#threat-intelligence</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/threat-intelligence.html</loc>
     <lastmod>2025-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#hardening-linux</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/hardening-linux.html</loc>
     <lastmod>2025-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#evasion-av-edr</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/evasion-av-edr.html</loc>
     <lastmod>2025-08-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#anonymat-tails-whonix</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/anonymat-tails-whonix.html</loc>
     <lastmod>2025-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#carriere-cybersecurite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/carriere-cybersecurite.html</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#ia-cybersecurite</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite.html</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#kerberos-avance</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/kerberos-avance.html</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-databases</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-databases.html</loc>
     <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#pentest-web-avance</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/pentest-web-avance.html</loc>
     <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#outils-securite-essentiels</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/outils-securite-essentiels.html</loc>
     <lastmod>2025-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#actualites-cyber-2024</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/actualites-cyber-2024.html</loc>
     <lastmod>2025-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#purple-team-exercices</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/purple-team-exercices.html</loc>
     <lastmod>2025-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#incident-response</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/incident-response.html</loc>
     <lastmod>2025-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#cryptographie-avancee</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-avancee.html</loc>
     <lastmod>2025-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#forensics-memoire-avance</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/forensics-memoire-avance.html</loc>
     <lastmod>2025-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-mobile-avance</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile-avance.html</loc>
     <lastmod>2025-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-api-graphql</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-api-graphql.html</loc>
     <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#securite-conteneurs-docker-avance</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/securite-conteneurs-docker-avance.html</loc>
     <lastmod>2025-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#attaques-navigateurs</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/attaques-navigateurs.html</loc>
     <lastmod>2025-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#malware-c2-frameworks</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/malware-c2-frameworks.html</loc>
     <lastmod>2025-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#biometrie-authentification</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/biometrie-authentification.html</loc>
     <lastmod>2025-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://temgus2025.github.io/temgus-cyberblog/article.html#facteur-humain-sensibilisation</loc>
+    <loc>https://temgus2025.github.io/temgus-cyberblog/pages/facteur-humain-sensibilisation.html</loc>
     <lastmod>2025-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
