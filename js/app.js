@@ -142,7 +142,7 @@ function renderFeatured() {
   const grid = document.getElementById('featured-grid');
 
   let html = `
-    <a href="article.html#${main.id}" class="featured-card">
+    <a href="pages/${main.id}.html" class="featured-card">
       <div class="card-img">
         <span class="card-badge">À la une</span>
         <span class="card-icon-lg">${main.icone}</span>
@@ -166,7 +166,7 @@ function renderFeatured() {
     html += `<div style="display:flex;flex-direction:column;gap:16px">`;
     rest.forEach(a => {
       html += `
-        <a href="article.html#${a.id}" class="featured-card" style="flex:1">
+        <a href="pages/${a.id}.html" class="featured-card" style="flex:1">
           <div class="card-img sm">
             <span class="card-badge green">Populaire</span>
             <span class="card-icon-md">${a.icone}</span>
@@ -211,7 +211,7 @@ function renderArticles() {
   noResults.classList.add('hidden');
 
   grid.innerHTML = articles.map(a => `
-    <a href="article.html#${a.id}" class="article-card">
+    <a href="pages/${a.id}.html" class="article-card">
       <div class="article-img ${getBg(a.categorie)}">
         <span class="article-icon">${a.icone}</span>
       </div>
