@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Hardening Windows Server : durcissement complet — Temgus.CyberBlog</title>
 <meta name="description" content="CIS Benchmark, désactivation SMBv1/NTLM, pare-feu, audit et LAPS — guide complet de sécurisation.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-windows-server.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-windows-server.html">
 <meta property="og:title" content="Hardening Windows Server : durcissement complet — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Hardening Windows Server : durcissement complet — Temgus.CyberBlog">
 <meta name="twitter:description" content="CIS Benchmark, désactivation SMBv1/NTLM, pare-feu, audit et LAPS — guide complet de sécurisation.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,597 @@
   "headline": "Hardening Windows Server : durcissement complet",
   "description": "CIS Benchmark, désactivation SMBv1/NTLM, pare-feu, audit et LAPS — guide complet de sécurisation.",
   "datePublished": "2025-06-20",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/hardening-windows-server.html",
   "inLanguage": "fr",
   "keywords": "Windows Server, hardening, CIS Benchmark, PowerShell",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🏰</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Hardening Windows Server : durcissement complet</h1>
-  <p style="color:#8892a4;max-width:500px">CIS Benchmark, désactivation SMBv1/NTLM, pare-feu, audit et LAPS — guide complet de sécurisation.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#hardening-windows-server" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🏰</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Hardening Windows Server : durcissement complet</div>
+      <div class="meta-details">
+        <span>📅 2025-06-20</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-durcir-windows-server-">Pourquoi durcir Windows Server ?</a></li>
+<li><a href="#-tape-1-mises-jour-et-patches">Étape 1 : Mises à jour et patches</a></li>
+<li><a href="#-tape-2-comptes-et-authentification">Étape 2 : Comptes et authentification</a></li>
+<li><a href="#-tape-3-d-sactiver-les-protocoles-obsol-tes">Étape 3 : Désactiver les protocoles obsolètes</a></li>
+<li><a href="#-tape-4-services-et-fonctionnalit-s">Étape 4 : Services et fonctionnalités</a></li>
+<li><a href="#-tape-5-pare-feu-windows">Étape 5 : Pare-feu Windows</a></li>
+<li><a href="#-tape-6-audit-et-journalisation">Étape 6 : Audit et journalisation</a></li>
+<li><a href="#-tape-7-powershell-s-curis-">Étape 7 : PowerShell sécurisé</a></li>
+<li><a href="#-tape-8-rdp-s-curis-">Étape 8 : RDP sécurisé</a></li>
+<li><a href="#-tape-9-laps-local-administrator-password-solution-">Étape 9 : LAPS (Local Administrator Password Solution)</a></li>
+<li><a href="#v-rification-avec-cis-cat">Vérification avec CIS-CAT</a></li>
+<li><a href="#script-de-hardening-automatis-">Script de hardening automatisé</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Hardening Windows Server : durcissement complet</h1>
+
+<p>Un Windows Server fraîchement installé est loin d'être sécurisé par défaut. Le hardening (durcissement) consiste à réduire la surface d'attaque en désactivant les services inutiles, en configurant les politiques de sécurité et en appliquant les meilleures pratiques. Ce guide suit le CIS Benchmark Windows Server.</p>
+
+<h2 id="pourquoi-durcir-windows-server-">Pourquoi durcir Windows Server ?</h2>
+
+<pre><code>Un Windows Server par défaut expose :
+<p>→ SMBv1 activé (EternalBlue !)</p>
+<p>→ NTLM activé (Pass-the-Hash)</p>
+<p>→ Télémétrie Microsoft activée</p>
+<p>→ Services inutiles en cours d'exécution</p>
+<p>→ Comptes locaux avec mots de passe faibles</p>
+<p>→ PowerShell sans journalisation</p>
+<p>→ Pas de pare-feu configuré</p>
+<p>→ RDP exposé sur tous les ports</code></pre>
+
+<h2 id="-tape-1-mises-jour-et-patches">Étape 1 : Mises à jour et patches</h2>
+
+<pre><code class="language-powershell"># Vérifier les mises à jour manquantes
+<p>Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 10</p>
+
+<h1>Installer toutes les mises à jour</h1>
+<p>Install-Module PSWindowsUpdate</p>
+<p>Get-WindowsUpdate -AcceptAll -AutoReboot</p>
+
+<h1>Configurer Windows Update automatique</h1>
+<p>$WUSettings = (New-Object -ComObject "Microsoft.Update.AutoUpdate").Settings</p>
+<p>$WUSettings.NotificationLevel = 4  # Auto download and install</p>
+<p>$WUSettings.Save()</p>
+
+<h1>Vérifier les mises à jour critiques manquantes avec MBSA ou WSUS</code></pre></h1>
+
+<h2 id="-tape-2-comptes-et-authentification">Étape 2 : Comptes et authentification</h2>
+
+<pre><code class="language-powershell"># Renommer le compte Administrateur par défaut
+<p>Rename-LocalUser -Name "Administrateur" -NewName "Admin_$(Get-Random -Maximum 9999)"</p>
+
+<h1>Désactiver le compte Invité</h1>
+<p>Disable-LocalUser -Name "Invité"</p>
+
+<h1>Politique de mots de passe forte</h1>
+<h1>Via Group Policy Management ou localement :</h1>
+<p>net accounts /minpwlen:14       # Minimum 14 caractères</p>
+<p>net accounts /maxpwage:90       # Expiration 90 jours</p>
+<p>net accounts /minpwage:1        # Minimum 1 jour entre changements</p>
+<p>net accounts /uniquepw:24       # Mémoriser 24 mots de passe</p>
+<p>net accounts /lockoutthreshold:5 # Verrouillage après 5 tentatives</p>
+<p>net accounts /lockoutduration:30  # Durée verrouillage 30 min</p>
+
+<h1>Configurer via Security Policy (plus complet)</h1>
+<p>secedit /export /cfg security_policy.cfg</p>
+<h1>Modifier security_policy.cfg puis :</h1>
+<p>secedit /configure /db secedit.sdb /cfg security_policy.cfg</p>
+
+<h1>Vérifier les comptes locaux actifs</h1>
+<p>Get-LocalUser | Where-Object {$_.Enabled -eq $true} | Select-Object Name, LastLogon, PasswordLastSet</code></pre>
+
+<h2 id="-tape-3-d-sactiver-les-protocoles-obsol-tes">Étape 3 : Désactiver les protocoles obsolètes</h2>
+
+<pre><code class="language-powershell"># Désactiver SMBv1 (EternalBlue)
+<p>Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart</p>
+<p>Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force</p>
+<p>Set-SmbClientConfiguration -EnableSMB1Protocol $false -Force</p>
+
+<h1>Désactiver Telnet (si présent)</h1>
+<p>Disable-WindowsOptionalFeature -Online -FeatureName TelnetClient</p>
+
+<h1>Désactiver LLMNR (Link-Local Multicast Name Resolution) - utilisé pour Responder</h1>
+<h1>Via GPO : Computer Configuration → Admin Templates → Network → DNS Client</h1>
+<h1>"Turn off multicast name resolution" → Enabled</h1>
+<p>Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" <code></p>
+<p>-Name "EnableMulticast" -Value 0 -Type DWord</p>
+
+<h1>Désactiver NetBIOS sur toutes les interfaces</h1>
+<p>$adapters = Get-WmiObject Win32_NetworkAdapterConfiguration</p>
+<p>foreach ($adapter in $adapters) {</p>
+<p>$adapter.SetTCPIPNetBIOS(2)  # 2 = Disable NetBIOS</p>
+<p>}</p>
+
+<h1>Désactiver WPAD (Web Proxy Auto Discovery) - risque de poisoning</h1>
+<p>Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Wpad" </code></p>
+<p>-Name "WpadOverride" -Value 1</p>
+
+<h1>Désactiver NTLM version 1</h1>
+<p>Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" <code></p>
+<p>-Name "LmCompatibilityLevel" -Value 5</p>
+<h1>5 = Refuser authentification LM et NTLMv1</code></pre></h1>
+
+<h2 id="-tape-4-services-et-fonctionnalit-s">Étape 4 : Services et fonctionnalités</h2>
+
+<pre><code class="language-powershell"># Désactiver les services inutiles
+<p>$services_to_disable = @(</p>
+<p>"Fax",           # Service de fax</p>
+<p>"XboxGipSvc",    # Gaming Xbox</p>
+<p>"XblAuthManager",</p>
+<p>"WMPNetworkSvc", # Windows Media Player réseau</p>
+<p>"RemoteRegistry", # Registre distant (risque)</p>
+<p>"SSDPSRV",       # UPnP (risque découverte réseau)</p>
+<p>"upnphost"       # UPnP host</p>
+<p>)</p>
+
+<p>foreach ($service in $services_to_disable) {</p>
+<p>if (Get-Service -Name $service -ErrorAction SilentlyContinue) {</p>
+<p>Stop-Service -Name $service -Force -ErrorAction SilentlyContinue</p>
+<p>Set-Service -Name $service -StartupType Disabled</p>
+<p>Write-Host "Désactivé : $service"</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Désactiver les fonctionnalités Windows inutiles</h1>
+<p>$features_to_disable = @(</p>
+<p>"Internet-Explorer-Optional-amd64",</p>
+<p>"WorkFolders-Client",</p>
+<p>"WindowsMediaPlayer",</p>
+<p>"Printing-PrintToPDFServices-Features"</p>
+<p>)</p>
+
+<p>foreach ($feature in $features_to_disable) {</p>
+<p>Disable-WindowsOptionalFeature -Online -FeatureName $feature -NoRestart -ErrorAction SilentlyContinue</p>
+<p>}</code></pre>
+
+<h2 id="-tape-5-pare-feu-windows">Étape 5 : Pare-feu Windows</h2>
+
+<pre><code class="language-powershell"># Activer le pare-feu sur tous les profils
+<p>Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True</p>
+
+<h1>Politique par défaut : bloquer les connexions entrantes</h1>
+<p>Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultInboundAction Block</p>
+<p>Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultOutboundAction Allow</p>
+
+<h1>Autoriser seulement ce qui est nécessaire</h1>
+<h1>RDP seulement depuis le réseau d'administration</h1>
+<p>New-NetFirewallRule -DisplayName "RDP Admin Only" </code></p>
+<p>-Direction Inbound -Protocol TCP -LocalPort 3389 <code></p>
+<p>-RemoteAddress "10.0.0.0/8" -Action Allow</p>
+
+<h1>WinRM (PowerShell Remoting) seulement depuis admin</h1>
+<p>New-NetFirewallRule -DisplayName "WinRM Admin Only" </code></p>
+<p>-Direction Inbound -Protocol TCP -LocalPort 5985,5986 <code></p>
+<p>-RemoteAddress "10.0.0.0/8" -Action Allow</p>
+
+<h1>Bloquer explicitement les ports dangereux</h1>
+<p>New-NetFirewallRule -DisplayName "Block Telnet" </code></p>
+<p>-Direction Inbound -Protocol TCP -LocalPort 23 -Action Block</p>
+
+<p>New-NetFirewallRule -DisplayName "Block SMBv1 External" <code></p>
+<p>-Direction Inbound -Protocol TCP -LocalPort 445 </code></p>
+<p>-RemoteAddress Internet -Action Block</p>
+
+<h1>Vérifier les règles actives</h1>
+<p>Get-NetFirewallRule | Where-Object {$_.Enabled -eq "True" -and $_.Direction -eq "Inbound"} |</p>
+<p>Select-Object DisplayName, Action, Protocol | Format-Table</code></pre>
+
+<h2 id="-tape-6-audit-et-journalisation">Étape 6 : Audit et journalisation</h2>
+
+<pre><code class="language-powershell"># Activer l'audit avancé (catégories détaillées)
+<h1>Via auditpol.exe</h1>
+
+<h1>Logon/Logoff</h1>
+<p>auditpol /set /subcategory:"Logon" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Logoff" /success:enable</p>
+<p>auditpol /set /subcategory:"Account Lockout" /failure:enable</p>
+
+<h1>Credential Validation</h1>
+<p>auditpol /set /subcategory:"Credential Validation" /success:enable /failure:enable</p>
+
+<h1>Process Creation (voir quels programmes sont lancés)</h1>
+<p>auditpol /set /subcategory:"Process Creation" /success:enable</p>
+
+<h1>Object Access (fichiers sensibles)</h1>
+<p>auditpol /set /subcategory:"File System" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Registry" /failure:enable</p>
+
+<h1>Policy Changes</h1>
+<p>auditpol /set /subcategory:"Audit Policy Change" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Security Group Management" /success:enable</p>
+
+<h1>Configurer la taille et rétention des logs</h1>
+<p>wevtutil sl Security /ms:1073741824  # 1GB pour le log Security</p>
+<p>wevtutil sl System /ms:102400000     # 100MB pour System</p>
+<p>wevtutil sl Application /ms:102400000</p>
+
+<h1>Centraliser les logs vers un SIEM</h1>
+<h1>Windows Event Forwarding (WEF)</h1>
+<p>winrm quickconfig -q</p>
+<p>wecutil cs subscription.xml  # Configuration de la collecte</code></pre>
+
+<h2 id="-tape-7-powershell-s-curis-">Étape 7 : PowerShell sécurisé</h2>
+
+<pre><code class="language-powershell"># Configurer l'ExecutionPolicy
+<p>Set-ExecutionPolicy AllSigned -Scope LocalMachine</p>
+<h1>AllSigned = seulement les scripts signés par une CA de confiance</h1>
+
+<h1>Activer la journalisation PowerShell complète</h1>
+<p>$LogPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell"</p>
+
+<h1>ScriptBlock Logging (log tout le code PowerShell exécuté)</h1>
+<p>Set-ItemProperty -Path "$LogPath\ScriptBlockLogging" -Name "EnableScriptBlockLogging" -Value 1</p>
+
+<h1>Module Logging (log les modules chargés)</h1>
+<p>Set-ItemProperty -Path "$LogPath\ModuleLogging" -Name "EnableModuleLogging" -Value 1</p>
+
+<h1>Transcription (log de tout ce qui se passe dans la console)</h1>
+<p>Set-ItemProperty -Path "$LogPath\Transcription" -Name "EnableTranscripting" -Value 1</p>
+<p>Set-ItemProperty -Path "$LogPath\Transcription" -Name "OutputDirectory" -Value "C:\PSLogs"</p>
+<p>Set-ItemProperty -Path "$LogPath\Transcription" -Name "EnableInvocationHeader" -Value 1</p>
+
+<h1>Configurer PowerShell Constrained Language Mode (limiter les capacités)</h1>
+<h1>Via GPO : AppLocker ou WDAC</code></pre></h1>
+
+<h2 id="-tape-8-rdp-s-curis-">Étape 8 : RDP sécurisé</h2>
+
+<pre><code class="language-powershell"># Si RDP est nécessaire, le sécuriser correctement
+
+<h1>Changer le port par défaut (3389 → port non standard)</h1>
+<p>Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" <code></p>
+<p>-Name "PortNumber" -Value 13389  # Port personnalisé</p>
+
+<h1>Activer NLA (Network Level Authentication)</h1>
+<p>Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" </code></p>
+<p>-Name "UserAuthentication" -Value 1</p>
+
+<h1>Limiter les tentatives de connexion RDP</h1>
+<h1>Via GPO : Account Lockout Policy</h1>
+
+<h1>Activer la journalisation des sessions RDP</h1>
+<p>Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" <code></p>
+<p>-Name "fLogonDisabled" -Value 0</p>
+
+<h1>Désactiver le clipboard et partage de fichiers RDP (si non nécessaire)</h1>
+<p>Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" </code></p>
+<p>-Name "fDisableClip" -Value 1</code></pre>
+
+<h2 id="-tape-9-laps-local-administrator-password-solution-">Étape 9 : LAPS (Local Administrator Password Solution)</h2>
+
+<pre><code class="language-powershell"># LAPS gère automatiquement les mots de passe des comptes admins locaux
+<h1>Mot de passe unique par machine, stocké dans Active Directory</h1>
+
+<h1>Installer LAPS (Windows LAPS intégré dans Windows Server 2022)</h1>
+<h1>Ancienne version :</h1>
+<h1>Install-Module LAPS -Scope AllUsers</h1>
+
+<h1>Configuration LAPS</h1>
+<p>Set-AdmPwdComputerSelfPermission -Identity "Computers"</p>
+<p>Set-AdmPwdReadPasswordPermission -Identity "Computers" -AllowedPrincipals "Domain Admins"</p>
+
+<h1>Configurer via GPO :</h1>
+<h1>Computer Config → Admin Templates → LAPS</h1>
+<h1>Enable : Mot de passe complexe, 14 chars min, expiration 30 jours</h1>
+
+<h1>Récupérer le mot de passe admin d'un poste (depuis AD)</h1>
+<p>Get-AdmPwdPassword -ComputerName "SERVEUR01"</code></pre>
+
+<h2 id="v-rification-avec-cis-cat">Vérification avec CIS-CAT</h2>
+
+<pre><code class="language-bash"># CIS-CAT Lite - Outil d'audit gratuit contre le CIS Benchmark
+<h1>https://www.cisecurity.org/cis-benchmarks/</h1>
+
+<h1>Lancer l'audit</h1>
+<p>.\CISCAT_Lite.bat -xccdf CIS_Microsoft_Windows_Server_2022_Benchmark_v2.0.0-xccdf.xml \</p>
+<p>-profile "Level 1 - Member Server"</p>
+
+<h1>Score &gt; 80% = bonne configuration</h1>
+<h1>Chaque non-conformité est documentée avec la correction</h1>
+
+<h1>Alternative gratuite : Microsoft Security Compliance Toolkit</h1>
+<h1>https://www.microsoft.com/en-us/download/details.aspx?id=55319</code></pre></h1>
+
+<h2 id="script-de-hardening-automatis-">Script de hardening automatisé</h2>
+
+<pre><code class="language-powershell"># hardening.ps1 - Script de durcissement rapide
+<h1>À adapter selon votre environnement !</h1>
+
+<p>Write-Host "=== Hardening Windows Server ===" -ForegroundColor Cyan</p>
+
+<h1>1. SMBv1</h1>
+<p>Write-Host "[1] Désactivation SMBv1..."</p>
+<p>Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart</p>
+<p>Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force</p>
+
+<h1>2. LLMNR</h1>
+<p>Write-Host "[2] Désactivation LLMNR..."</p>
+<p>New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" <code></p>
+<p>-Name "EnableMulticast" -Value 0 -PropertyType DWord -Force</p>
+
+<h1>3. NTLMv1</h1>
+<p>Write-Host "[3] Désactivation NTLMv1..."</p>
+<p>Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" </code></p>
+<p>-Name "LmCompatibilityLevel" -Value 5</p>
+
+<h1>4. Pare-feu</h1>
+<p>Write-Host "[4] Configuration pare-feu..."</p>
+<p>Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True</p>
+<p>Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultInboundAction Block</p>
+
+<h1>5. Audit</h1>
+<p>Write-Host "[5] Activation audit..."</p>
+<p>auditpol /set /subcategory:"Logon" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Credential Validation" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Process Creation" /success:enable</p>
+
+<h1>6. PowerShell logging</h1>
+<p>Write-Host "[6] Journalisation PowerShell..."</p>
+<p>$LogPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging"</p>
+<p>New-Item -Path $LogPath -Force | Out-Null</p>
+<p>Set-ItemProperty -Path $LogPath -Name "EnableScriptBlockLogging" -Value 1</p>
+
+<p>Write-Host "=== Hardening terminé ===" -ForegroundColor Green</p>
+<p>Write-Host "Redémarrage recommandé pour appliquer tous les changements."</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le hardening Windows Server est un processus continu, pas une action ponctuelle. Référencez-vous au <strong>CIS Benchmark Windows Server</strong> et au <strong>DISA STIG</strong> pour avoir une liste exhaustive et priorisée. Automatisez avec des scripts PowerShell et vérifiez régulièrement la conformité avec CIS-CAT. Un serveur bien durci réduit de 80% la surface d'attaque exploitable par les attaquants.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#hardening-windows-server" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/bluetooth-nfc-securite.html" class="nav-prev">← Bluetooth et NFC : sécurité des communications sans fil</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite-menaces.html" class="nav-next">Intelligence Artificielle et cybersécurité : menaces et opportunités →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

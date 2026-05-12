@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité des conteneurs Docker — Temgus.CyberBlog</title>
 <meta name="description" content="Bonnes pratiques pour sécuriser vos images et conteneurs Docker.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-docker.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-docker.html">
 <meta property="og:title" content="Sécurité des conteneurs Docker — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité des conteneurs Docker — Temgus.CyberBlog">
 <meta name="twitter:description" content="Bonnes pratiques pour sécuriser vos images et conteneurs Docker.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,562 @@
   "headline": "Sécurité des conteneurs Docker",
   "description": "Bonnes pratiques pour sécuriser vos images et conteneurs Docker.",
   "datePublished": "2025-04-17",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-docker.html",
   "inLanguage": "fr",
   "keywords": "Docker, conteneurs, DevSecOps",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🐳</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité des conteneurs Docker</h1>
-  <p style="color:#8892a4;max-width:500px">Bonnes pratiques pour sécuriser vos images et conteneurs Docker.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-docker" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🐳</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité des conteneurs Docker</div>
+      <div class="meta-details">
+        <span>📅 2025-04-17</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-risques-sp-cifiques-docker">Les risques spécifiques à Docker</a></li>
+<li><a href="#s-curiser-les-images-docker">Sécuriser les images Docker</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-utiliser-des-images-officielles-et-minimales">1. Utiliser des images officielles et minimales</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-ne-jamais-stocker-de-secrets-dans-les-images">2. Ne jamais stocker de secrets dans les images</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-utiliser-un-utilisateur-non-root">3. Utiliser un utilisateur non-root</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-dockerfile-multi-stage-pour-r-duire-la-surface-d-attaque">4. Dockerfile multi-stage pour réduire la surface d'attaque</a></li>
+<li><a href="#s-curiser-le-runtime-docker">Sécuriser le runtime Docker</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#limiter-les-ressources-et-capacit-s">Limiter les ressources et capacités</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#s-curiser-le-docker-daemon">Sécuriser le Docker daemon</a></li>
+<li><a href="#docker-compose-s-curis-">Docker Compose sécurisé</a></li>
+<li><a href="#audit-et-scanning-d-images">Audit et scanning d'images</a></li>
+<li><a href="#checklist-s-curit-docker">Checklist sécurité Docker</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité des conteneurs Docker</h1>
+
+<p>Docker a révolutionné le déploiement d'applications. Mais des conteneurs mal configurés peuvent exposer vos systèmes à de sérieux risques. Ce guide couvre les meilleures pratiques pour sécuriser vos environnements Docker.</p>
+
+<h2 id="les-risques-sp-cifiques-docker">Les risques spécifiques à Docker</h2>
+
+<pre><code>Sans précautions, Docker peut exposer :
+<p>→ L'hôte entier si le conteneur est compromis</p>
+<p>→ Des secrets dans les images (mots de passe, clés API)</p>
+<p>→ Des données sensibles via les volumes</p>
+<p>→ L'API Docker daemon (accès root sur l'hôte !)</p>
+<p>→ Le réseau interne via des conteneurs interconnectés</code></pre>
+
+<h2 id="s-curiser-les-images-docker">Sécuriser les images Docker</h2>
+
+<h3 id="1-utiliser-des-images-officielles-et-minimales">1. Utiliser des images officielles et minimales</h3>
+
+<pre><code class="language-dockerfile"># ❌ À éviter
+<p>FROM ubuntu:latest           # Image lourde, beaucoup de surface d'attaque</p>
+<p>FROM ubuntu                  # "latest" peut changer et casser la reproductibilité</p>
+
+<h1>✅ Recommandé</h1>
+<p>FROM python:3.11-slim        # Version slim = moins de paquets = moins de vulnérabilités</p>
+<p>FROM node:20-alpine          # Alpine Linux = image ultra-légère (~5MB)</p>
+<p>FROM scratch                 # Image vide pour les binaires statiques (Go, Rust)</p>
+
+<h1>Toujours épingler la version exacte</h1>
+<p>FROM python:3.11.4-slim-bookworm  # Version exacte reproductible</code></pre>
+
+<h3 id="2-ne-jamais-stocker-de-secrets-dans-les-images">2. Ne jamais stocker de secrets dans les images</h3>
+
+<pre><code class="language-dockerfile"># ❌ DANGEREUX - Le secret est dans les layers de l'image
+<p>FROM python:3.11-slim</p>
+<p>ENV DATABASE_PASSWORD="MonMotDePasse123"</p>
+<p>RUN pip install -r requirements.txt</p>
+
+<h1>❌ DANGEREUX - Même si supprimé ensuite, il reste dans un layer intermédiaire</h1>
+<p>RUN echo "secret_key=abc123" &gt; /app/config.ini &amp;&amp; \</p>
+<p># ... faire quelque chose ... &amp;&amp; \</p>
+<p>rm /app/config.ini   # Le secret reste dans le layer précédent !</p>
+
+<h1>✅ CORRECT - Injecter les secrets au runtime</h1>
+<h1>docker run -e DATABASE_PASSWORD="secret" mon_image</h1>
+<h1>ou avec Docker secrets / Kubernetes secrets</code></pre></h1>
+
+<h3 id="3-utiliser-un-utilisateur-non-root">3. Utiliser un utilisateur non-root</h3>
+
+<pre><code class="language-dockerfile">FROM python:3.11-slim
+
+<p>WORKDIR /app</p>
+<p>COPY requirements.txt .</p>
+<p>RUN pip install --no-cache-dir -r requirements.txt</p>
+
+<p>COPY . .</p>
+
+<h1>Créer un utilisateur non-root</h1>
+<p>RUN addgroup --system appgroup &amp;&amp; \</p>
+<p>adduser --system --ingroup appgroup appuser</p>
+
+<h1>Changer la propriété des fichiers</h1>
+<p>RUN chown -R appuser:appgroup /app</p>
+
+<h1>Basculer vers l'utilisateur non-root</h1>
+<p>USER appuser</p>
+
+<h1>Si le conteneur est compromis, l'attaquant n'a pas les droits root</h1>
+<p>EXPOSE 8000</p>
+<p>CMD ["python", "app.py"]</code></pre>
+
+<h3 id="4-dockerfile-multi-stage-pour-r-duire-la-surface-d-attaque">4. Dockerfile multi-stage pour réduire la surface d'attaque</h3>
+
+<pre><code class="language-dockerfile"># Stage 1 : Build (avec tous les outils de compilation)
+<p>FROM node:20 AS builder</p>
+<p>WORKDIR /build</p>
+<p>COPY package*.json .</p>
+<p>RUN npm ci</p>
+<p>COPY . .</p>
+<p>RUN npm run build</p>
+
+<h1>Stage 2 : Production (image minimale sans les outils de build)</h1>
+<p>FROM node:20-alpine AS production</p>
+<p>WORKDIR /app</p>
+
+<h1>Copier seulement le nécessaire depuis le stage de build</h1>
+<p>COPY --from=builder /build/dist ./dist</p>
+<p>COPY --from=builder /build/node_modules ./node_modules</p>
+
+<h1>L'image finale ne contient pas : npm, les sources, les tests, etc.</h1>
+<p>USER node</p>
+<p>EXPOSE 3000</p>
+<p>CMD ["node", "dist/server.js"]</code></pre>
+
+<h2 id="s-curiser-le-runtime-docker">Sécuriser le runtime Docker</h2>
+
+<h3 id="limiter-les-ressources-et-capacit-s">Limiter les ressources et capacités</h3>
+
+<pre><code class="language-bash"># Limiter CPU et mémoire
+<p>docker run \</p>
+<p>--memory="512m" \</p>
+<p>--cpus="0.5" \</p>
+<p>--memory-swap="512m" \    # Désactiver le swap</p>
+<p>mon_image</p>
+
+<h1>Supprimer toutes les capabilities Linux inutiles</h1>
+<p>docker run \</p>
+<p>--cap-drop=ALL \           # Supprimer TOUTES les capabilities</p>
+<p>--cap-add=NET_BIND_SERVICE \ # Réajouter seulement ce qui est nécessaire</p>
+<p>mon_image</p>
+
+<h1>Système de fichiers en lecture seule</h1>
+<p>docker run \</p>
+<p>--read-only \</p>
+<p>--tmpfs /tmp \             # /tmp en mémoire (si nécessaire)</p>
+<p>mon_image</p>
+
+<h1>Empêcher l'élévation de privilèges</h1>
+<p>docker run \</p>
+<p>--security-opt no-new-privileges \</p>
+<p>mon_image</p>
+
+<h1>Exemple complet sécurisé</h1>
+<p>docker run \</p>
+<p>--name webapp \</p>
+<p>--user 1000:1000 \</p>
+<p>--memory="256m" \</p>
+<p>--cpus="0.25" \</p>
+<p>--cap-drop=ALL \</p>
+<p>--cap-add=NET_BIND_SERVICE \</p>
+<p>--read-only \</p>
+<p>--tmpfs /tmp:noexec,nosuid,size=50m \</p>
+<p>--security-opt no-new-privileges \</p>
+<p>--network webapp-net \</p>
+<p>-p 127.0.0.1:8080:8080 \  # Exposer seulement sur localhost</p>
+<p>mon_image</code></pre>
+
+<h3 id="s-curiser-le-docker-daemon">Sécuriser le Docker daemon</h3>
+
+<pre><code class="language-bash"># ❌ DANGEREUX - Socket Docker exposée sur le réseau
+<p>docker run -v /var/run/docker.sock:/var/run/docker.sock mon_image</p>
+<h1>Quiconque peut accéder au socket Docker a les droits root sur l'hôte !</h1>
+
+<h1>✅ Activer TLS sur le daemon Docker</h1>
+<h1>/etc/docker/daemon.json</h1>
+<p>{</p>
+<p>"tls": true,</p>
+<p>"tlscert": "/etc/docker/server-cert.pem",</p>
+<p>"tlskey": "/etc/docker/server-key.pem",</p>
+<p>"tlscacert": "/etc/docker/ca.pem",</p>
+<p>"hosts": ["tcp://0.0.0.0:2376", "unix:///var/run/docker.sock"],</p>
+<p>"userns-remap": "default",         # User namespace remapping</p>
+<p>"no-new-privileges": true,</p>
+<p>"icc": false,                       # Désactiver la communication inter-conteneurs par défaut</p>
+<p>"log-driver": "json-file",</p>
+<p>"log-opts": {</p>
+<p>"max-size": "10m",</p>
+<p>"max-file": "3"</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="docker-compose-s-curis-">Docker Compose sécurisé</h2>
+
+<pre><code class="language-yaml"># docker-compose.yml sécurisé
+<p>version: '3.8'</p>
+
+<p>services:</p>
+<p>webapp:</p>
+<p>image: mon_image:1.2.3         # Tag fixe, jamais "latest"</p>
+<p>user: "1000:1000"              # Utilisateur non-root</p>
+<p>read_only: true                # Système de fichiers en lecture seule</p>
+<p>tmpfs:</p>
+<p>- /tmp:noexec,nosuid</p>
+<p>cap_drop:</p>
+<p>- ALL</p>
+<p>cap_add:</p>
+<p>- NET_BIND_SERVICE</p>
+<p>security_opt:</p>
+<p>- no-new-privileges:true</p>
+<p>mem_limit: 256m</p>
+<p>cpus: 0.25</p>
+<p>environment:</p>
+<p>- NODE_ENV=production</p>
+<p>secrets:</p>
+<p>- db_password              # Utiliser Docker secrets</p>
+<p>networks:</p>
+<p>- frontend</p>
+<p>ports:</p>
+<p>- "127.0.0.1:8080:8080"   # Seulement localhost</p>
+<p>healthcheck:</p>
+<p>test: ["CMD", "curl", "-f", "http://localhost:8080/health"]</p>
+<p>interval: 30s</p>
+<p>timeout: 10s</p>
+<p>retries: 3</p>
+
+<p>database:</p>
+<p>image: postgres:15-alpine</p>
+<p>user: "postgres"</p>
+<p>volumes:</p>
+<p>- db_data:/var/lib/postgresql/data</p>
+<p>environment:</p>
+<p>POSTGRES_PASSWORD_FILE: /run/secrets/db_password</p>
+<p>secrets:</p>
+<p>- db_password</p>
+<p>networks:</p>
+<p>- backend                  # Pas accessible depuis frontend !</p>
+<p># Pas de ports exposés → accessible seulement depuis le réseau interne</p>
+
+<p>networks:</p>
+<p>frontend:</p>
+<p>driver: bridge</p>
+<p>backend:</p>
+<p>driver: bridge</p>
+<p>internal: true               # Réseau interne, pas d'accès Internet</p>
+
+<p>volumes:</p>
+<p>db_data:</p>
+
+<p>secrets:</p>
+<p>db_password:</p>
+<p>file: ./secrets/db_password.txt</code></pre>
+
+<h2 id="audit-et-scanning-d-images">Audit et scanning d'images</h2>
+
+<pre><code class="language-bash"># Trivy - Scanner de vulnérabilités (recommandé)
+<p>trivy image python:3.11-slim</p>
+<p>trivy image mon_image:latest</p>
+<p>trivy fs .                      # Scanner le répertoire courant</p>
+
+<h1>Docker Bench Security - Audit de la configuration Docker</h1>
+<p>docker run --rm --net host --pid host --userns host --cap-add audit_control \</p>
+<p>-v /etc:/etc:ro \</p>
+<p>-v /lib/systemd/system:/lib/systemd/system:ro \</p>
+<p>-v /usr/bin/containerd:/usr/bin/containerd:ro \</p>
+<p>-v /usr/bin/runc:/usr/bin/runc:ro \</p>
+<p>-v /usr/lib/systemd:/usr/lib/systemd:ro \</p>
+<p>-v /var/lib:/var/lib:ro \</p>
+<p>-v /var/run/docker.sock:/var/run/docker.sock:ro \</p>
+<p>docker/docker-bench-security</p>
+
+<h1>Hadolint - Linter pour Dockerfile</h1>
+<p>hadolint Dockerfile</p>
+<p>docker run --rm -i hadolint/hadolint &lt; Dockerfile</p>
+
+<h1>Dive - Analyser les layers d'une image</h1>
+<p>dive mon_image:latest</p>
+<h1>Montre ce que chaque layer ajoute et identifie les fichiers sensibles</code></pre></h1>
+
+<h2 id="checklist-s-curit-docker">Checklist sécurité Docker</h2>
+
+<pre><code>Images
+<p>✅ Images officielles avec version épinglée</p>
+<p>✅ Images slim ou alpine</p>
+<p>✅ Build multi-stage</p>
+<p>✅ Pas de secrets dans les images</p>
+<p>✅ Scan régulier avec Trivy</p>
+<p>✅ .dockerignore pour exclure les fichiers sensibles</p>
+
+<p>Runtime</p>
+<p>✅ Utilisateur non-root (USER dans Dockerfile)</p>
+<p>✅ --cap-drop=ALL avec caps minimales</p>
+<p>✅ --read-only si possible</p>
+<p>✅ --security-opt no-new-privileges</p>
+<p>✅ Limites mémoire et CPU</p>
+<p>✅ Ports exposés seulement sur localhost si possible</p>
+
+<p>Réseau</p>
+<p>✅ Réseaux séparés (frontend/backend)</p>
+<p>✅ Réseaux internes pour les bases de données</p>
+<p>✅ Pas d'exposition du socket Docker</p>
+<p>✅ TLS sur le daemon si accès réseau</p>
+
+<p>Secrets</p>
+<p>✅ Docker Secrets ou variables d'environnement au runtime</p>
+<p>✅ HashiCorp Vault pour les environnements enterprise</p>
+<p>✅ Jamais de secrets dans les images ou docker-compose.yml en clair</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité Docker repose sur la <strong>défense en profondeur</strong> : images minimales, utilisateurs non-root, capabilities réduites, réseaux segmentés et secrets gérés séparément. Ces pratiques réduisent considérablement la surface d'attaque et limitent l'impact d'un conteneur compromis.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-docker" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/injection-sql.html" class="nav-prev">← Injection SQL : comprendre et se protéger</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/active-directory.html" class="nav-next">Active Directory : attaques et défense →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

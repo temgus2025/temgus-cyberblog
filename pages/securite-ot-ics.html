@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité des environnements OT/ICS : protéger les infrastructures critiques — Temgus.CyberBlog</title>
 <meta name="description" content="SCADA, Modbus, Stuxnet, Ukraine Power Grid — sécuriser les systèmes industriels et infrastructures critiques contre les cyberattaques.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-ot-ics.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-ot-ics.html">
 <meta property="og:title" content="Sécurité des environnements OT/ICS : protéger les infrastructures critiques — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité des environnements OT/ICS : protéger les infrastructures critiques — Temgus.CyberBlog">
 <meta name="twitter:description" content="SCADA, Modbus, Stuxnet, Ukraine Power Grid — sécuriser les systèmes industriels et infrastructures critiques contre les cyberattaques.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,559 @@
   "headline": "Sécurité des environnements OT/ICS : protéger les infrastructures critiques",
   "description": "SCADA, Modbus, Stuxnet, Ukraine Power Grid — sécuriser les systèmes industriels et infrastructures critiques contre les cyberattaques.",
   "datePublished": "2025-07-07",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-ot-ics.html",
   "inLanguage": "fr",
   "keywords": "OT, ICS, SCADA, Modbus, Stuxnet, infrastructures critiques",
-  "timeRequired": "PT13M"
+  "timeRequired": "PT13M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🏭</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité des environnements OT/ICS : protéger les infrastructures critiques</h1>
-  <p style="color:#8892a4;max-width:500px">SCADA, Modbus, Stuxnet, Ukraine Power Grid — sécuriser les systèmes industriels et infrastructures critiques contre les cyberattaques.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-ot-ics" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🏭</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité industrielle</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité des environnements OT/ICS : protéger les infrastructures critiques</div>
+      <div class="meta-details">
+        <span>📅 2025-07-07</span>
+        <span>⏱ 13 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#ot-vs-it-des-mondes-diff-rents">OT vs IT — Des mondes différents</a></li>
+<li><a href="#architecture-des-syst-mes-industriels">Architecture des systèmes industriels</a></li>
+<li><a href="#protocoles-industriels-vuln-rables">Protocoles industriels vulnérables</a></li>
+<li><a href="#attaques-r-elles-sur-les-ics">Attaques réelles sur les ICS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#stuxnet-2010-l-attaque-qui-a-tout-chang-">Stuxnet (2010) — L'attaque qui a tout changé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ukraine-power-grid-2015-et-2016-">Ukraine Power Grid (2015 et 2016)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#oldsmar-water-treatment-2021-">Oldsmar Water Treatment (2021)</a></li>
+<li><a href="#d-fense-des-environnements-ot">Défense des environnements OT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#segmentation-r-seau">Segmentation réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tection-d-anomalies-ics">Détection d'anomalies ICS</a></li>
+<li><a href="#cadres-et-standards-ics">Cadres et standards ICS</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité des environnements OT/ICS : protéger les infrastructures critiques</h1>
+
+<p>Les systèmes OT (Operational Technology) et ICS (Industrial Control Systems) contrôlent les centrales électriques, les usines, les réseaux d'eau et les pipelines. Une cyberattaque sur ces systèmes peut avoir des conséquences physiques catastrophiques — pannes électriques, contamination de l'eau, explosions industrielles.</p>
+
+<h2 id="ot-vs-it-des-mondes-diff-rents">OT vs IT — Des mondes différents</h2>
+
+<pre><code>Informatique classique (IT) :
+<p>Priorité : Confidentialité &gt; Intégrité &gt; Disponibilité</p>
+<p>Cycle de vie : 3-5 ans (mise à jour facile)</p>
+<p>Tolérance aux pannes : Redémarrage acceptable</p>
+<p>Objectif : Traiter l'information</p>
+
+<p>Technologie opérationnelle (OT) :</p>
+<p>Priorité : Disponibilité &gt; Intégrité &gt; Confidentialité</p>
+<p>Cycle de vie : 20-30 ans (impossible à patcher facilement)</p>
+<p>Tolérance aux pannes : ZÉRO — une panne = conséquences physiques</p>
+<p>Objectif : Contrôler des processus physiques</p>
+
+<p>Exemple concret :</p>
+<p>Un patch Windows sur un serveur IT → Redémarrage 5 min → OK</p>
+<p>Un patch sur un automate industriel → Arrêt de production → Millions de pertes</code></pre>
+
+<h2 id="architecture-des-syst-mes-industriels">Architecture des systèmes industriels</h2>
+
+<pre><code>Modèle Purdue (référence ICS) :
+
+<p>Niveau 4-5 : Réseau entreprise (IT)</p>
+<p>├── ERP, emails, Internet</p>
+<p>│</p>
+<p>Niveau 3 : Operations Zone (DEMILITARIZED ZONE)</p>
+<p>├── Historian (collecte données)</p>
+<p>├── Remote Access</p>
+<p>│</p>
+<p>Niveau 2 : Supervisory Control</p>
+<p>├── SCADA (Supervisory Control and Data Acquisition)</p>
+<p>├── HMI (Human Machine Interface)</p>
+<p>│</p>
+<p>Niveau 1 : Local Control</p>
+<p>├── PLC (Programmable Logic Controller)</p>
+<p>├── RTU (Remote Terminal Unit)</p>
+<p>│</p>
+<p>Niveau 0 : Process</p>
+<p>└── Capteurs, actionneurs, vannes, pompes, moteurs</p>
+
+<p>Principe : Isolation stricte entre niveaux</p>
+<p>La réalité : Ces niveaux sont de plus en plus interconnectés</p>
+<p>→ IT/OT Convergence = augmentation massive des risques</code></pre>
+
+<h2 id="protocoles-industriels-vuln-rables">Protocoles industriels vulnérables</h2>
+
+<pre><code class="language-python"># Protocoles conçus SANS sécurité (années 70-80)
+
+<p>protocoles_industriels = {</p>
+<p>"Modbus": {</p>
+<p>"description": "Protocole de communication série",</p>
+<p>"port": 502,</p>
+<p>"vulnerabilités": [</p>
+<p>"Aucune authentification",</p>
+<p>"Aucun chiffrement",</p>
+<p>"Commandes acceptées de n'importe qui sur le réseau"</p>
+<p>],</p>
+<p>"impact": "Lire/écrire directement sur les registres d'un automate"</p>
+<p>},</p>
+<p>"DNP3": {</p>
+<p>"description": "Protocole SCADA (réseaux électriques, eau)",</p>
+<p>"vulnerabilités": [</p>
+<p>"Authentification optionnelle souvent désactivée",</p>
+<p>"Replay attacks possibles"</p>
+<p>]</p>
+<p>},</p>
+<p>"EtherNet/IP": {</p>
+<p>"description": "Ethernet industriel",</p>
+<p>"port": 44818,</p>
+<p>"vulnerabilités": [</p>
+<p>"Peut exposer des automates sur Internet",</p>
+<p>"Commandes CIP non authentifiées"</p>
+<p>]</p>
+<p>},</p>
+<p>"OPC-UA": {</p>
+<p>"description": "Standard moderne (2008)",</p>
+<p>"statut": "Meilleure sécurité mais pas parfait",</p>
+<p>"vulnerabilités": ["Mauvaises configurations TLS fréquentes"]</p>
+<p>}</p>
+<p>}</code></pre>
+
+<pre><code class="language-bash"># Scanner des équipements industriels exposés sur Internet avec Shodan
+<h1>shodan.io — moteur de recherche pour l'IoT/ICS</h1>
+
+<h1>Recherches Shodan pour systèmes ICS :</h1>
+<h1>port:502 → Modbus exposé sur Internet (des milliers !)</h1>
+<h1>port:102 → Siemens S7</h1>
+<h1>"SCADA" country:FR</h1>
+<h1>"Wonderware" OR "Ignition" OR "WinCC"</h1>
+
+<h1>Ces systèmes NE devraient JAMAIS être sur Internet</h1>
+<h1>Pourtant des milliers le sont</h1>
+
+<h1>Tester la communication Modbus (avec autorisation)</h1>
+<p>pip install pymodbus</p>
+
+<p>from pymodbus.client import ModbusTcpClient</p>
+
+<p>client = ModbusTcpClient('192.168.1.100', port=502)</p>
+<p>client.connect()</p>
+
+<h1>Lire les coils (sorties numériques)</h1>
+<p>result = client.read_coils(0, 10)</p>
+<p>print(f"Coils: {result.bits}")</p>
+
+<h1>Lire les registres holding</h1>
+<p>result = client.read_holding_registers(0, 10)</p>
+<p>print(f"Registres: {result.registers}")</p>
+
+<h1>DANGER : Écrire sur un registre = modifier un processus physique</h1>
+<h1>client.write_register(0, 1337)  # Ne JAMAIS faire sans autorisation !</code></pre></h1>
+
+<h2 id="attaques-r-elles-sur-les-ics">Attaques réelles sur les ICS</h2>
+
+<h3 id="stuxnet-2010-l-attaque-qui-a-tout-chang-">Stuxnet (2010) — L'attaque qui a tout changé</h3>
+
+<pre><code>Cible : Centrifugeuses d'enrichissement d'uranium iraniennes (Natanz)
+<p>Auteurs : NSA + Unité 8200 israélienne (jamais officiellement confirmé)</p>
+<p>Sophistication : ★★★★★ (jamais vu avant)</p>
+
+<p>Mécanisme :</p>
+<li>Propagation via clés USB (air gap bypass)</li>
+<li>Exploitation de 4 zero-days Windows simultanément</li>
+<li>Ciblage TRÈS spécifique : seulement les automates Siemens S7-315</li>
+<li>Modification discrète de la vitesse des centrifugeuses</li>
+<li>Affichage de données normales aux opérateurs (rootkit ICS)</li>
+<li>Les centrifugeuses s'autodétruisaient progressivement</li>
+
+<p>Impact :</p>
+<p>→ 1 000 centrifugeuses détruites</p>
+<p>→ Programme nucléaire iranien retardé de 2 ans</p>
+<p>→ Changement de paradigme : cyberattaque = effet physique réel</code></pre>
+
+<h3 id="ukraine-power-grid-2015-et-2016-">Ukraine Power Grid (2015 et 2016)</h3>
+
+<pre><code>Attaque 2015 (BlackEnergy) :
+<p>→ Phishing ciblé sur les opérateurs</p>
+<p>→ Accès aux systèmes SCADA des centrales</p>
+<p>→ Coupure de courant : 230 000 foyers pendant 6h</p>
+<p>→ Effacement des firmware des équipements de terrain</p>
+
+<p>Attaque 2016 (Industroyer/Crashoverride) :</p>
+<p>→ Malware conçu spécifiquement pour les protocoles ICS</p>
+<p>→ Supporte Modbus, IEC 104, IEC 61850, OPC DA</p>
+<p>→ Attaque automatisée sans intervention humaine</p>
+<p>→ Coupure de courant à Kiev</p>
+
+<p>Leçon : Les systèmes ICS peuvent être attaqués</p>
+<p>sans connaissance profonde des processus physiques</code></pre>
+
+<h3 id="oldsmar-water-treatment-2021-">Oldsmar Water Treatment (2021)</h3>
+
+<pre><code>Incident :
+<p>→ Quelqu'un a accédé à distance à l'interface HMI d'une usine de traitement d'eau en Floride</p>
+<p>→ A tenté d'augmenter la concentration de NaOH (soude) de 111ppm à 11 100ppm</p>
+<p>→ Un opérateur vigilant a remarqué le curseur bouger seul et a annulé</p>
+
+<p>Vecteur d'attaque :</p>
+<p>→ TeamViewer installé sur le poste de contrôle</p>
+<p>→ Mot de passe partagé entre plusieurs employés</p>
+<p>→ Windows 7 non supporté</p>
+<p>→ Connexion directe Internet sans VPN</p>
+
+<p>Si non détecté :</p>
+<p>→ Empoisonnement de l'eau potable de 15 000 habitants</code></pre>
+
+<h2 id="d-fense-des-environnements-ot">Défense des environnements OT</h2>
+
+<h3 id="segmentation-r-seau">Segmentation réseau</h3>
+
+<pre><code>Architecture recommandée (NIST SP 800-82) :
+
+<p>Internet</p>
+<p>↓ [Firewall strict]</p>
+<p>Zone IT (DMZ)</p>
+<p>↓ [Firewall unidirectionnel]</p>
+<p>Zone OT Niveau 3 (Historian, Remote Access)</p>
+<p>↓ [Data Diode = communication physiquement unidirectionnelle]</p>
+<p>Zone OT Niveau 2 (SCADA, HMI)</p>
+<p>↓ [Isolation physique si possible]</p>
+<p>Zone OT Niveau 1 (PLC, RTU)</p>
+<p>↓</p>
+<p>Processus physique</p>
+
+<p>Data Diode (Diode de données) :</p>
+<p>→ Hardware qui ne peut physiquement transmettre que dans UN sens</p>
+<p>→ Les données sortent mais rien ne peut entrer</p>
+<p>→ Solution ultime pour les infrastructures critiques</p>
+<p>→ Exemples : Waterfall Security, Owl Cyber Defense</code></pre>
+
+<h3 id="d-tection-d-anomalies-ics">Détection d'anomalies ICS</h3>
+
+<pre><code class="language-python"># Les IDS/IPS classiques ne comprennent pas les protocoles ICS
+<h1>Solutions spécialisées : Claroty, Dragos, Nozomi Networks, Fortinet FortiOT</h1>
+
+<h1>Principe de la détection par baseline comportementale :</h1>
+<h1>Dans un environnement industriel, les communications sont TRÈS répétitives</h1>
+<h1>Un automate lit les mêmes registres toutes les 100ms depuis des années</h1>
+<h1>Toute déviation = anomalie potentielle</h1>
+
+<p>class ICSAnomalyDetector:</p>
+<p>def __init__(self):</p>
+<p>self.baseline = {}  # Communications habituelles</p>
+
+<p>def apprendre_baseline(self, communications, jours=30):</p>
+<p>"""Apprendre le comportement normal sur 30 jours"""</p>
+<p>for comm in communications:</p>
+<p>cle = f"{comm['src']}→{comm['dst']}:{comm['fonction']}"</p>
+<p>if cle not in self.baseline:</p>
+<p>self.baseline[cle] = {</p>
+<p>'count': 0,</p>
+<p>'registres': set(),</p>
+<p>'valeurs_min': {},</p>
+<p>'valeurs_max': {}</p>
+<p>}</p>
+<p>self.baseline[cle]['count'] += 1</p>
+<p>self.baseline[cle]['registres'].add(comm['registre'])</p>
+
+<p>def detecter_anomalie(self, communication):</p>
+<p>cle = f"{communication['src']}→{communication['dst']}:{communication['fonction']}"</p>
+
+<p>alertes = []</p>
+
+<p># Nouvelle paire source/destination jamais vue</p>
+<p>if cle not in self.baseline:</p>
+<p>alertes.append(f"CRITIQUE: Communication inconnue {cle}")</p>
+
+<p># Accès à un registre inhabituel</p>
+<p>elif communication['registre'] not in self.baseline[cle]['registres']:</p>
+<p>alertes.append(f"ALERTE: Accès registre inhabituel {communication['registre']}")</p>
+
+<p># Valeur hors plage normale (ex: température, pression)</p>
+<p>elif 'valeur' in communication:</p>
+<p>val = communication['valeur']</p>
+<p>min_val = self.baseline[cle]['valeurs_min'].get(communication['registre'], val)</p>
+<p>max_val = self.baseline[cle]['valeurs_max'].get(communication['registre'], val)</p>
+<p>if val &lt; min_val <em> 0.8 or val &gt; max_val </em> 1.2:</p>
+<p>alertes.append(f"ALERTE: Valeur anormale {val} (normal: {min_val}-{max_val})")</p>
+
+<p>return alertes</code></pre>
+
+<h2 id="cadres-et-standards-ics">Cadres et standards ICS</h2>
+
+<pre><code>Standards de référence :
+
+<p>IEC 62443 :</p>
+<p>→ Standard international pour la cybersécurité industrielle</p>
+<p>→ Couvre : politique, procédures, système, composants</p>
+<p>→ Niveaux de sécurité SL1 à SL4</p>
+
+<p>NIST SP 800-82 :</p>
+<p>→ Guide for ICS Security (USA)</p>
+<p>→ Très complet et gratuit</p>
+<p>→ Référence mondiale</p>
+
+<p>NERC CIP :</p>
+<p>→ Obligatoire pour les opérateurs du réseau électrique en Amérique du Nord</p>
+<p>→ CIP-005 : Electronic Security Perimeters</p>
+<p>→ CIP-007 : Systems Security Management</p>
+
+<p>En France :</p>
+<p>→ ANSSI Guide "Maîtriser la SSI pour les systèmes industriels"</p>
+<p>→ Directive NIS2 (obligation pour opérateurs d'importance vitale)</p>
+<p>→ LPM (Loi de Programmation Militaire) pour les OIV</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité OT/ICS est un domaine où les enjeux dépassent la simple perte de données — une attaque réussie peut couper l'électricité d'une ville, contaminer l'eau potable ou provoquer une explosion industrielle. La convergence IT/OT impose de traiter ces environnements avec la même rigueur que les systèmes IT, tout en respectant leurs contraintes spécifiques : disponibilité absolue, protocoles legacy et cycle de vie de 20-30 ans.</p>
+
+<p>---</p>
+<p><em>Catégorie : Sécurité industrielle</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-ot-ics" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-microservices.html" class="nav-prev">← Sécurité des microservices : protéger une architecture distribuée</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/reverse-engineering.html" class="nav-next">Reverse Engineering : analyser un binaire sans code source →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

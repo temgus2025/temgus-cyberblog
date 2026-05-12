@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>DevSecOps : intégrer la sécurité dans le développement — Temgus.CyberBlog</title>
 <meta name="description" content="SAST, DAST, SCA, secrets scanning — automatiser la sécurité dans votre pipeline CI/CD.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/devsecops.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/devsecops.html">
 <meta property="og:title" content="DevSecOps : intégrer la sécurité dans le développement — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="DevSecOps : intégrer la sécurité dans le développement — Temgus.CyberBlog">
 <meta name="twitter:description" content="SAST, DAST, SCA, secrets scanning — automatiser la sécurité dans votre pipeline CI/CD.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,602 @@
   "headline": "DevSecOps : intégrer la sécurité dans le développement",
   "description": "SAST, DAST, SCA, secrets scanning — automatiser la sécurité dans votre pipeline CI/CD.",
   "datePublished": "2025-05-17",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/devsecops.html",
   "inLanguage": "fr",
   "keywords": "DevSecOps, CI/CD, SAST, Semgrep",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔧</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">DevSecOps : intégrer la sécurité dans le développement</h1>
-  <p style="color:#8892a4;max-width:500px">SAST, DAST, SCA, secrets scanning — automatiser la sécurité dans votre pipeline CI/CD.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#devsecops" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔧</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">DevSecOps : intégrer la sécurité dans le développement</div>
+      <div class="meta-details">
+        <span>📅 2025-05-17</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-devsecops-">Pourquoi DevSecOps ?</a></li>
+<li><a href="#le-pipeline-devsecops">Le pipeline DevSecOps</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sast-static-application-security-testing">SAST — Static Application Security Testing</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sca-software-composition-analysis">SCA — Software Composition Analysis</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#secrets-scanning">Secrets Scanning</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dast-dynamic-application-security-testing">DAST — Dynamic Application Security Testing</a></li>
+<li><a href="#infrastructure-as-code-security">Infrastructure as Code Security</a></li>
+<li><a href="#pipeline-devsecops-complet">Pipeline DevSecOps complet</a></li>
+<li><a href="#m-triques-devsecops">Métriques DevSecOps</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>DevSecOps : intégrer la sécurité dans le cycle de développement</h1>
+
+<p>Le DevSecOps représente l'évolution naturelle du DevOps : intégrer la sécurité à <strong>chaque étape</strong> du cycle de développement logiciel plutôt que de la traiter comme un audit de fin de projet. L'objectif : "shift left" — détecter les problèmes de sécurité le plus tôt possible.</p>
+
+<h2 id="pourquoi-devsecops-">Pourquoi DevSecOps ?</h2>
+
+<pre><code>Coût de correction d'une vulnérabilité selon sa détection :
+
+<p>Phase de conception     → 1x   (le moins cher)</p>
+<p>Phase de développement  → 6x</p>
+<p>Phase de test           → 15x</p>
+<p>Phase de production     → 100x (le plus cher)</p>
+
+<p>Source : IBM System Sciences Institute</p>
+
+<p>Conclusion : détecter tôt = économiser massivement</code></pre>
+
+<h2 id="le-pipeline-devsecops">Le pipeline DevSecOps</h2>
+
+<pre><code>CODE → BUILD → TEST → DEPLOY → OPERATE
+<p>↓       ↓       ↓       ↓        ↓</p>
+<p>SAST    SCA    DAST   IAST    Runtime</p>
+<p>+               +    Security</p>
+<p>Secrets         Pentest</p>
+<p>Scan</code></pre>
+
+<h3 id="sast-static-application-security-testing">SAST — Static Application Security Testing</h3>
+
+<p>Analyse le <strong>code source</strong> sans l'exécuter.</p>
+
+<pre><code class="language-yaml"># .github/workflows/sast.yml
+<p>name: SAST Security Scan</p>
+
+<p>on: [push, pull_request]</p>
+
+<p>jobs:</p>
+<p>semgrep:</p>
+<p>runs-on: ubuntu-latest</p>
+<p>steps:</p>
+<p>- uses: actions/checkout@v3</p>
+
+<p>- name: Semgrep SAST</p>
+<p>uses: returntocorp/semgrep-action@v1</p>
+<p>with:</p>
+<p>config: &gt;-</p>
+<p>p/security-audit</p>
+<p>p/owasp-top-ten</p>
+<p>p/python</p>
+<p>p/javascript</p>
+
+<p>- name: Upload SARIF results</p>
+<p>uses: github/codeql-action/upload-sarif@v2</p>
+<p>with:</p>
+<p>sarif_file: semgrep.sarif</code></pre>
+
+<pre><code class="language-python"># Exemples de ce que SAST détecte automatiquement
+
+<h1>❌ Injection SQL (Semgrep détecte)</h1>
+<p>def get_user(username):</p>
+<p>query = f"SELECT * FROM users WHERE name = '{username}'"  # FLAGGED</p>
+<p>return db.execute(query)</p>
+
+<h1>❌ Secret hardcodé (détecté par TruffleHog, GitLeaks)</h1>
+<p>API_KEY = "sk-prod-abc123def456"  # FLAGGED</p>
+
+<h1>❌ Path traversal</h1>
+<p>def read_file(filename):</p>
+<p>with open(f"/data/{filename}") as f:  # FLAGGED - pas de validation</p>
+<p>return f.read()</p>
+
+<h1>❌ Algorithme cryptographique faible</h1>
+<p>import md5  # FLAGGED - MD5 est cassé</p>
+<p>hash = md5.new(password).hexdigest()</code></pre>
+
+<h3 id="sca-software-composition-analysis">SCA — Software Composition Analysis</h3>
+
+<p>Analyse les <strong>dépendances tierces</strong> pour détecter les vulnérabilités connues (CVE).</p>
+
+<pre><code class="language-bash"># npm audit (Node.js)
+<p>npm audit</p>
+<p>npm audit fix</p>
+<p>npm audit --json &gt; audit-results.json</p>
+
+<h1>Snyk (multi-langage)</h1>
+<p>snyk test</p>
+<p>snyk monitor</p>
+<p>snyk test --severity-threshold=high</p>
+
+<h1>Safety (Python)</h1>
+<p>pip install safety</p>
+<p>safety check</p>
+<p>safety check -r requirements.txt</p>
+
+<h1>OWASP Dependency-Check</h1>
+<p>dependency-check.sh --project "MonApp" --scan /path/to/project</p>
+
+<h1>Trivy (conteneurs + code)</h1>
+<p>trivy fs .</p>
+<p>trivy image mon-image:latest</code></pre>
+
+<pre><code class="language-yaml"># GitHub Dependabot - Mises à jour automatiques des dépendances
+<h1>.github/dependabot.yml</h1>
+<p>version: 2</p>
+<p>updates:</p>
+<p>- package-ecosystem: "npm"</p>
+<p>directory: "/"</p>
+<p>schedule:</p>
+<p>interval: "weekly"</p>
+<p>open-pull-requests-limit: 10</p>
+<p>reviewers:</p>
+<p>- "security-team"</p>
+
+<p>- package-ecosystem: "pip"</p>
+<p>directory: "/"</p>
+<p>schedule:</p>
+<p>interval: "daily"  # Plus fréquent pour les dépendances critiques</code></pre>
+
+<h3 id="secrets-scanning">Secrets Scanning</h3>
+
+<pre><code class="language-bash"># TruffleHog - Détecter les secrets dans Git history
+<p>trufflehog git https://github.com/votre-org/votre-repo</p>
+
+<h1>GitLeaks - Pre-commit hook</h1>
+<p>gitleaks git --source . --verbose</p>
+<p>gitleaks protect --staged  # Avant chaque commit</p>
+
+<h1>Configuration .gitleaks.toml</h1>
+<p>[[rules]]</p>
+<p>id = "generic-api-key"</p>
+<p>description = "Generic API Key"</p>
+<p>regex = '''(?i)(api[_-]?key|apikey|api[_-]?secret)['":\s=]+([a-z0-9_\-]{20,})'''</p>
+<p>entropy = 3.5</p>
+
+<h1>GitHub Secret Scanning (automatique sur repos publics)</h1>
+<h1>Détecte automatiquement : AWS keys, GitHub tokens, Stripe keys, etc.</h1>
+<h1>Alerte immédiate + révocation automatique dans certains cas</code></pre></h1>
+
+<h3 id="dast-dynamic-application-security-testing">DAST — Dynamic Application Security Testing</h3>
+
+<p>Teste l'application <strong>en cours d'exécution</strong>.</p>
+
+<pre><code class="language-yaml"># OWASP ZAP dans CI/CD
+<h1>.github/workflows/dast.yml</h1>
+<p>name: DAST with OWASP ZAP</p>
+
+<p>on:</p>
+<p>push:</p>
+<p>branches: [main]</p>
+
+<p>jobs:</p>
+<p>zap_scan:</p>
+<p>runs-on: ubuntu-latest</p>
+<p>steps:</p>
+<p>- name: ZAP Baseline Scan</p>
+<p>uses: zaproxy/action-baseline@v0.7.0</p>
+<p>with:</p>
+<p>target: 'https://staging.votre-app.com'</p>
+<p>rules_file_name: '.zap/rules.tsv'</p>
+<p>cmd_options: '-a'</p>
+
+<p>- name: Upload ZAP Report</p>
+<p>uses: actions/upload-artifact@v3</p>
+<p>with:</p>
+<p>name: ZAP Report</p>
+<p>path: report_html.html</code></pre>
+
+<h2 id="infrastructure-as-code-security">Infrastructure as Code Security</h2>
+
+<pre><code class="language-python"># Checkov - Scanner les fichiers Terraform, CloudFormation, K8s
+<h1>pip install checkov</h1>
+<p>checkov -d ./terraform/</p>
+<p>checkov -f k8s-deployment.yaml</p>
+
+<h1>Exemple de vulnérabilités détectées par Checkov</h1>
+
+<h1>❌ Bucket S3 public</h1>
+<p>resource "aws_s3_bucket" "data" {</p>
+<p>bucket = "mon-bucket"</p>
+<p>acl    = "public-read"  # FLAGGED : CKV_AWS_20</p>
+<p>}</p>
+
+<h1>❌ Security group trop permissif</h1>
+<p>resource "aws_security_group" "web" {</p>
+<p>ingress {</p>
+<p>from_port   = 22</p>
+<p>to_port     = 22</p>
+<p>protocol    = "tcp"</p>
+<p>cidr_blocks = ["0.0.0.0/0"]  # FLAGGED : SSH ouvert sur Internet</p>
+<p>}</p>
+<p>}</p>
+
+<h1>✅ Version corrigée</h1>
+<p>resource "aws_security_group" "web" {</p>
+<p>ingress {</p>
+<p>from_port   = 22</p>
+<p>to_port     = 22</p>
+<p>protocol    = "tcp"</p>
+<p>cidr_blocks = ["10.0.0.0/8"]  # Seulement réseau interne</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="pipeline-devsecops-complet">Pipeline DevSecOps complet</h2>
+
+<pre><code class="language-yaml"># .github/workflows/devsecops.yml
+<p>name: DevSecOps Pipeline</p>
+
+<p>on:</p>
+<p>push:</p>
+<p>branches: ['*']</p>
+<p>pull_request:</p>
+<p>branches: [main]</p>
+
+<p>jobs:</p>
+<p># Étape 1 : Qualité et sécurité du code</p>
+<p>sast:</p>
+<p>runs-on: ubuntu-latest</p>
+<p>steps:</p>
+<p>- uses: actions/checkout@v3</p>
+<p>with:</p>
+<p>fetch-depth: 0  # Pour GitLeaks (analyse l'historique complet)</p>
+
+<p>- name: Secret Scanning (GitLeaks)</p>
+<p>uses: gitleaks/gitleaks-action@v2</p>
+<p>env:</p>
+<p>GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</p>
+
+<p>- name: SAST (Semgrep)</p>
+<p>uses: returntocorp/semgrep-action@v1</p>
+<p>with:</p>
+<p>config: p/owasp-top-ten</p>
+
+<p># Étape 2 : Dépendances</p>
+<p>sca:</p>
+<p>runs-on: ubuntu-latest</p>
+<p>steps:</p>
+<p>- uses: actions/checkout@v3</p>
+
+<p>- name: Dependency Scan (Snyk)</p>
+<p>uses: snyk/actions/node@master</p>
+<p>env:</p>
+<p>SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}</p>
+<p>with:</p>
+<p>args: --severity-threshold=high</p>
+
+<p># Étape 3 : Build et scan image</p>
+<p>build:</p>
+<p>needs: [sast, sca]</p>
+<p>runs-on: ubuntu-latest</p>
+<p>steps:</p>
+<p>- uses: actions/checkout@v3</p>
+
+<p>- name: Build Docker image</p>
+<p>run: docker build -t mon-app:${{ github.sha }} .</p>
+
+<p>- name: Scan image (Trivy)</p>
+<p>uses: aquasecurity/trivy-action@master</p>
+<p>with:</p>
+<p>image-ref: 'mon-app:${{ github.sha }}'</p>
+<p>format: 'sarif'</p>
+<p>exit-code: '1'</p>
+<p>severity: 'CRITICAL,HIGH'</p>
+
+<p>- name: Push image</p>
+<p>if: github.ref == 'refs/heads/main'</p>
+<p>run: docker push mon-app:${{ github.sha }}</p>
+
+<p># Étape 4 : Deploy et DAST (sur staging uniquement)</p>
+<p>dast:</p>
+<p>needs: [build]</p>
+<p>runs-on: ubuntu-latest</p>
+<p>if: github.ref == 'refs/heads/main'</p>
+<p>steps:</p>
+<p>- name: Deploy to staging</p>
+<p>run: # Deploy script</p>
+
+<p>- name: DAST Scan (OWASP ZAP)</p>
+<p>uses: zaproxy/action-full-scan@v0.4.0</p>
+<p>with:</p>
+<p>target: 'https://staging.mon-app.com'</p>
+
+<p># Étape 5 : Deploy en production si tout passe</p>
+<p>deploy_prod:</p>
+<p>needs: [dast]</p>
+<p>runs-on: ubuntu-latest</p>
+<p>environment: production</p>
+<p>steps:</p>
+<p>- name: Deploy to production</p>
+<p>run: # Deploy prod script</code></pre>
+
+<h2 id="m-triques-devsecops">Métriques DevSecOps</h2>
+
+<pre><code class="language-python"># KPIs importants à suivre
+
+<p>metrics = {</p>
+<p># Détection</p>
+<p>"MTTD": "Mean Time To Detect (heure)",</p>
+<p># → Combien de temps pour détecter une vuln ?</p>
+
+<p>"vulnerabilities_per_build": "Nombre de vulns détectées par build",</p>
+<p># → Tendance à la baisse = progrès</p>
+
+<p>"false_positive_rate": "Taux de faux positifs (%)",</p>
+<p># → Trop élevé = les devs ignorent les alertes</p>
+
+<p># Remédiation</p>
+<p>"MTTR": "Mean Time To Remediate (jours)",</p>
+<p># → Par sévérité : critique &lt; 1 jour, high &lt; 7 jours</p>
+
+<p>"patch_compliance": "% de vulns critiques corrigées dans les délais",</p>
+
+<p># Couverture</p>
+<p>"sast_coverage": "% du code analysé par SAST",</p>
+<p>"dependency_coverage": "% des dépendances scannées",</p>
+
+<p># Coût</p>
+<p>"security_debt": "Nombre de vulns non corrigées × leur âge",</p>
+<p>}</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>DevSecOps transforme la sécurité d'un obstacle de fin de projet en <strong>compagnon du développement</strong>. L'automatisation est la clé : SAST dans l'IDE, SCA sur chaque commit, secrets scanning dans Git, DAST sur le staging. Quand les développeurs ont des feedbacks de sécurité en secondes plutôt qu'en semaines, ils corrigent naturellement les problèmes avant qu'ils n'arrivent en production.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#devsecops" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/log4shell-vulnerabilites.html" class="nav-prev">← Log4Shell et vulnérabilités critiques : les failles qui ont changé Internet</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/xss-csrf-attaques.html" class="nav-next">XSS et CSRF : les attaques web les plus courantes →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

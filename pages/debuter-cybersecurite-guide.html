@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Débuter en cybersécurité : le guide complet pour se lancer — Temgus.CyberBlog</title>
 <meta name="description" content="Prérequis, métiers, certifications, plateformes d'entraînement — tout ce qu'il faut savoir pour démarrer une carrière en cybersécurité.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/debuter-cybersecurite-guide.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/debuter-cybersecurite-guide.html">
 <meta property="og:title" content="Débuter en cybersécurité : le guide complet pour se lancer — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Débuter en cybersécurité : le guide complet pour se lancer — Temgus.CyberBlog">
 <meta name="twitter:description" content="Prérequis, métiers, certifications, plateformes d'entraînement — tout ce qu'il faut savoir pour démarrer une carrière en cybersécurité.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,365 @@
   "headline": "Débuter en cybersécurité : le guide complet pour se lancer",
   "description": "Prérequis, métiers, certifications, plateformes d'entraînement — tout ce qu'il faut savoir pour démarrer une carrière en cybersécurité.",
   "datePublished": "2025-07-07",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/debuter-cybersecurite-guide.html",
   "inLanguage": "fr",
   "keywords": "débutant, carrière, TryHackMe, certifications, formation",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🚀</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Débuter en cybersécurité : le guide complet pour se lancer</h1>
-  <p style="color:#8892a4;max-width:500px">Prérequis, métiers, certifications, plateformes d'entraînement — tout ce qu'il faut savoir pour démarrer une carrière en cybersécurité.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#debuter-cybersecurite-guide" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🚀</div>
+    <div class="meta-info">
+      <div class="meta-category">Carrière en cybersécurité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Débuter en cybersécurité : le guide complet pour se lancer</div>
+      <div class="meta-details">
+        <span>📅 2025-07-07</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-choisir-la-cybers-curit-">Pourquoi choisir la cybersécurité ?</a></li>
+<li><a href="#les-pr-requis">Les prérequis</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#bases-informatiques-indispensables">Bases informatiques indispensables</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mindset">Mindset</a></li>
+<li><a href="#les-diff-rents-m-tiers">Les différents métiers</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#c-t-offensif-red-team-">Côté offensif (Red Team)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#c-t-d-fensif-blue-team-">Côté défensif (Blue Team)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#transverse">Transverse</a></li>
+<li><a href="#le-parcours-recommand-pour-d-buter">Le parcours recommandé pour débuter</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-1-les-bases-3-6-mois-">Étape 1 — Les bases (3-6 mois)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-2-la-cybers-curit-6-12-mois-">Étape 2 — La cybersécurité (6-12 mois)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-3-la-sp-cialisation-12-24-mois-">Étape 3 — La spécialisation (12-24 mois)</a></li>
+<li><a href="#les-ressources-gratuites-indispensables">Les ressources gratuites indispensables</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#plateformes-d-entra-nement">Plateformes d'entraînement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#certifications-accessibles">Certifications accessibles</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cha-nes-youtube-fran-aises">Chaînes YouTube françaises</a></li>
+<li><a href="#construire-son-portfolio">Construire son portfolio</a></li>
+<li><a href="#les-erreurs-viter">Les erreurs à éviter</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Débuter en cybersécurité : le guide complet pour se lancer</h1>
+
+<p>La cybersécurité est l'un des domaines les plus porteurs de l'informatique. La demande en professionnels qualifiés dépasse largement l'offre, les salaires sont attractifs et le travail est intellectuellement stimulant. Mais par où commencer ?</p>
+
+<h2 id="pourquoi-choisir-la-cybers-curit-">Pourquoi choisir la cybersécurité ?</h2>
+
+<ul><li><strong>Pénurie mondiale</strong> : 3,5 millions de postes non pourvus dans le monde en 2025</li><li><strong>Salaires attractifs</strong> : 45 000 € à 80 000 € en France selon l'expérience</li><li><strong>Télétravail</strong> largement répandu dans le secteur</li><li><strong>Domaine en constante évolution</strong> : on n'arrête jamais d'apprendre</li><li><strong>Impact réel</strong> : vous protégez des organisations et des personnes</li></ul>
+
+<h2 id="les-pr-requis">Les prérequis</h2>
+
+<p>Contrairement aux idées reçues, vous n'avez pas besoin d'être un génie de la programmation. En revanche, il faut :</p>
+
+<h3 id="bases-informatiques-indispensables">Bases informatiques indispensables</h3>
+<ul><li><strong>Réseaux</strong> : TCP/IP, DNS, HTTP, routage, pare-feu</li><li><strong>Systèmes</strong> : Linux (incontournable), Windows Server</li><li><strong>Programmation</strong> : Python pour automatiser, Bash pour les scripts</li><li><strong>Bases de données</strong> : SQL basique</li></ul>
+
+<h3 id="mindset">Mindset</h3>
+<ul><li><strong>Curiosité</strong> : envie de comprendre comment les choses fonctionnent</li><li><strong>Persévérance</strong> : certains problèmes résistent longtemps</li><li><strong>Éthique</strong> : la ligne entre hacker éthique et criminel est légale, pas technique</li></ul>
+
+<h2 id="les-diff-rents-m-tiers">Les différents métiers</h2>
+
+<h3 id="c-t-offensif-red-team-">Côté offensif (Red Team)</h3>
+<ul><li><strong>Pentesteur</strong> : teste la sécurité des systèmes avec autorisation</li><li><strong>Bug bounty hunter</strong> : trouve des vulnérabilités pour des primes</li><li><strong>Red teamer</strong> : simule des attaquants avancés (APT)</li></ul>
+
+<h3 id="c-t-d-fensif-blue-team-">Côté défensif (Blue Team)</h3>
+<ul><li><strong>Analyste SOC</strong> : surveille et répond aux alertes de sécurité</li><li><strong>Incident responder</strong> : gère les crises après une compromission</li><li><strong>Threat hunter</strong> : cherche proactivement les attaquants cachés</li><li><strong>Forensic analyst</strong> : analyse les preuves numériques</li></ul>
+
+<h3 id="transverse">Transverse</h3>
+<ul><li><strong>RSSI</strong> (Responsable Sécurité SI) : pilote la stratégie sécurité</li><li><strong>Consultant en sécurité</strong> : accompagne les entreprises</li><li><strong>Auditeur</strong> : évalue la conformité et la maturité sécurité</li><li><strong>DevSecOps</strong> : intègre la sécurité dans le développement</li></ul>
+
+<h2 id="le-parcours-recommand-pour-d-buter">Le parcours recommandé pour débuter</h2>
+
+<h3 id="-tape-1-les-bases-3-6-mois-">Étape 1 — Les bases (3-6 mois)</h3>
+<li><strong>Linux</strong> : installez Ubuntu ou Kali, apprenez la ligne de commande</li>
+<li><strong>Réseaux</strong> : comprenez TCP/IP, DNS, HTTP (ressource : cours Cisco NetAcad)</li>
+<li><strong>Python</strong> : apprenez les bases avec des projets simples</li>
+<li><strong>Certification CompTIA A+</strong> ou <strong>Network+</strong> si vous débutez en informatique</li>
+
+<h3 id="-tape-2-la-cybers-curit-6-12-mois-">Étape 2 — La cybersécurité (6-12 mois)</h3>
+<li><strong>TryHackMe</strong> : plateforme idéale pour débutants, parcours guidés</li>
+<li><strong>Certification CompTIA Security+</strong> : reconnue mondialement, idéale en premier</li>
+<li><strong>Mettre en place un lab</strong> : une VM Kali Linux + des machines vulnérables (VulnHub)</li>
+
+<h3 id="-tape-3-la-sp-cialisation-12-24-mois-">Étape 3 — La spécialisation (12-24 mois)</h3>
+<ul><li><strong>Offensif</strong> : HackTheBox, OSCP</li><li><strong>Défensif</strong> : Blue Team Labs Online, certifications SOC (CompTIA CySA+)</li><li><strong>Cloud</strong> : AWS Security Specialty, AZ-500 Azure</li></ul>
+
+<h2 id="les-ressources-gratuites-indispensables">Les ressources gratuites indispensables</h2>
+
+<h3 id="plateformes-d-entra-nement">Plateformes d'entraînement</h3>
+<ul><li><strong>TryHackMe</strong> : parfait pour débuter (gratuit + premium)</li><li><strong>HackTheBox</strong> : plus avancé, très réputé</li><li><strong>PicoCTF</strong> : CTF pour débutants</li><li><strong>OverTheWire</strong> : wargames progressifs</li></ul>
+
+<h3 id="certifications-accessibles">Certifications accessibles</h3>
+<p>| Certification | Niveau | Prix | Reconnue |</p>
+<p>|--------------|--------|------|----------|</p>
+<p>| CompTIA Security+ | Débutant | ~350€ | ⭐⭐⭐⭐⭐ |</p>
+<p>| eJPT (eLearnSecurity) | Débutant | ~200€ | ⭐⭐⭐ |</p>
+<p>| CEH | Intermédiaire | ~1000€ | ⭐⭐⭐⭐ |</p>
+<p>| OSCP | Avancé | ~1400€ | ⭐⭐⭐⭐⭐ |</p>
+
+<h3 id="cha-nes-youtube-fran-aises">Chaînes YouTube françaises</h3>
+<ul><li><strong>Hafnium</strong> : cybersécurité en français</li><li><strong>Processus Thibault</strong> : pentesting et CTF</li><li><strong>MrBruh</strong> : actualités cyber</li></ul>
+
+<h2 id="construire-son-portfolio">Construire son portfolio</h2>
+
+<p>Les employeurs veulent des preuves de vos compétences, pas seulement des diplômes.</p>
+
+<ul><li><strong>GitHub</strong> : publiez vos scripts, vos outils</li><li><strong>Blog technique</strong> : documentez vos CTF et apprentissages</li><li><strong>Write-ups</strong> : rédigez des solutions de CTF</li><li><strong>Bug bounty</strong> : même une small finding sur HackerOne ou Bugcrowd compte</li><li><strong>Certifications</strong> : elles prouvent votre niveau de façon objective</li></ul>
+
+<h2 id="les-erreurs-viter">Les erreurs à éviter</h2>
+
+<ul><li>❌ Attendre d'être "prêt" pour commencer les labs pratiques</li><li>❌ Collectionner les cours sans pratiquer</li><li>❌ Ignorer les bases réseau et système</li><li>❌ Se limiter à un seul domaine trop tôt</li><li>❌ Négliger le cadre légal et l'éthique</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cybersécurité est accessible à tous ceux qui ont de la motivation et de la rigueur. Le chemin peut sembler long, mais chaque étape apporte des compétences concrètes et valorisables. Commencez par TryHackMe aujourd'hui — dans six mois, vous serez surpris de vos progrès.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#debuter-cybersecurite-guide" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/deepfakes-securite-entreprises.html" class="nav-prev">← Deepfakes : la menace invisible pour la sécurité des entreprises</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/salaires-metiers-cybersecurite.html" class="nav-next">Salaires et métiers de la cybersécurité en 2025 : le guide complet →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

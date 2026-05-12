@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>HTTPS et certificats SSL/TLS : tout comprendre — Temgus.CyberBlog</title>
 <meta name="description" content="TLS handshake, certificats Let's Encrypt, configuration optimale Nginx/Apache.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/https-ssl-tls.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/https-ssl-tls.html">
 <meta property="og:title" content="HTTPS et certificats SSL/TLS : tout comprendre — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="HTTPS et certificats SSL/TLS : tout comprendre — Temgus.CyberBlog">
 <meta name="twitter:description" content="TLS handshake, certificats Let's Encrypt, configuration optimale Nginx/Apache.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,532 @@
   "headline": "HTTPS et certificats SSL/TLS : tout comprendre",
   "description": "TLS handshake, certificats Let's Encrypt, configuration optimale Nginx/Apache.",
   "datePublished": "2025-05-21",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/https-ssl-tls.html",
   "inLanguage": "fr",
   "keywords": "HTTPS, TLS, SSL, Let's Encrypt",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔒</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">HTTPS et certificats SSL/TLS : tout comprendre</h1>
-  <p style="color:#8892a4;max-width:500px">TLS handshake, certificats Let's Encrypt, configuration optimale Nginx/Apache.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#https-ssl-tls" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔒</div>
+    <div class="meta-info">
+      <div class="meta-category">Réseaux</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">HTTPS et certificats SSL/TLS : tout comprendre</div>
+      <div class="meta-details">
+        <span>📅 2025-05-21</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#http-vs-https">HTTP vs HTTPS</a></li>
+<li><a href="#comment-tls-fonctionne">Comment TLS fonctionne</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-tls-handshake">Le TLS Handshake</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#tls-1-3-le-standard-moderne">TLS 1.3 — Le standard moderne</a></li>
+<li><a href="#les-certificats-ssl-tls">Les certificats SSL/TLS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#anatomie-d-un-certificat">Anatomie d'un certificat</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#types-de-certificats">Types de certificats</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#let-s-encrypt-certificats-gratuits">Let's Encrypt — Certificats gratuits</a></li>
+<li><a href="#configuration-tls-optimale">Configuration TLS optimale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#nginx">Nginx</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#apache">Apache</a></li>
+<li><a href="#v-rifier-et-auditer-votre-configuration-tls">Vérifier et auditer votre configuration TLS</a></li>
+<li><a href="#erreurs-tls-courantes">Erreurs TLS courantes</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>HTTPS et certificats SSL/TLS : tout comprendre</h1>
+
+<p>HTTPS protège des milliards de communications chaque jour. Mais comment fonctionne-t-il vraiment ? Qu'est-ce qu'un certificat SSL ? Comment le configurer correctement ? Ce guide démystifie TLS de bout en bout.</p>
+
+<h2 id="http-vs-https">HTTP vs HTTPS</h2>
+
+<pre><code>HTTP (non chiffré) :
+<p>Navigateur → [Texte en clair] → Serveur</p>
+<p>→ N'importe qui sur le réseau peut lire vos données</p>
+<p>→ Un attaquant sur le WiFi voit tout : login, mot de passe, données</p>
+
+<p>HTTPS (chiffré) :</p>
+<p>Navigateur → [Données chiffrées AES-256] → Serveur</p>
+<p>→ Même intercepté, le trafic est illisible</p>
+<p>→ L'identité du serveur est vérifiée (certificat)</code></pre>
+
+<h2 id="comment-tls-fonctionne">Comment TLS fonctionne</h2>
+
+<h3 id="le-tls-handshake">Le TLS Handshake</h3>
+
+<pre><code>Client (navigateur)              Serveur
+
+<li>ClientHello →</li>
+<p>(versions TLS supportées, cipher suites, random)</p>
+
+<p>← 2. ServerHello</p>
+<p>(version choisie, cipher suite)</p>
+
+<p>← 3. Certificate</p>
+<p>(certificat SSL du serveur)</p>
+
+<p>← 4. ServerHelloDone</p>
+
+<li>ClientKeyExchange →</li>
+<p>(Pre-master secret chiffré avec la clé publique du serveur)</p>
+
+<li>ChangeCipherSpec →  ← 6. ChangeCipherSpec</li>
+<p>(on passe au chiffrement)</p>
+
+<li>Finished →          ← 7. Finished</li>
+
+<p>=== CONNEXION CHIFFRÉE ÉTABLIE ===</p>
+
+<li>Application Data ↔ Application Data</li>
+<p>(tout est chiffré avec AES-256)</code></pre>
+
+<h3 id="tls-1-3-le-standard-moderne">TLS 1.3 — Le standard moderne</h3>
+
+<pre><code class="language-bash"># TLS 1.2 vs TLS 1.3
+<h1>TLS 1.2 : 2 aller-retours avant la connexion chiffrée</h1>
+<h1>TLS 1.3 : 1 seul aller-retour (0-RTT possible pour les reconnexions)</h1>
+
+<h1>Vérifier la version TLS utilisée</h1>
+<p>curl -vI https://exemple.com 2&gt;&amp;1 | grep "TLS\|SSL"</p>
+<h1>TLSv1.3 (OUT), TLS handshake...</h1>
+
+<h1>Avec OpenSSL</h1>
+<p>echo | openssl s_client -connect exemple.com:443 2&gt;/dev/null | grep "Protocol"</p>
+<h1>Protocol : TLSv1.3</h1>
+
+<h1>Tester la configuration TLS</h1>
+<h1>https://www.ssllabs.com/ssltest/ (Qualys SSL Labs)</h1>
+<h1>Score A+ = configuration optimale</code></pre></h1>
+
+<h2 id="les-certificats-ssl-tls">Les certificats SSL/TLS</h2>
+
+<h3 id="anatomie-d-un-certificat">Anatomie d'un certificat</h3>
+
+<pre><code class="language-bash"># Voir le certificat d'un site
+<p>openssl s_client -connect google.com:443 -showcerts 2&gt;/dev/null | \</p>
+<p>openssl x509 -noout -text</p>
+
+<h1>Informations importantes :</h1>
+<h1>Subject: CN=*.google.com (pour qui le certificat est émis)</h1>
+<h1>Issuer: C=US, O=Google Trust Services LLC (qui a signé)</h1>
+<h1>Validity:</h1>
+<h1>  Not Before: Oct  2 08:27:05 2023 GMT</h1>
+<h1>  Not After : Dec 25 08:27:04 2023 GMT</h1>
+<h1>Subject Alternative Name: *.google.com, google.com</h1>
+<h1>Public Key Algorithm: id-ecPublicKey (ECDSA P-256)</code></pre></h1>
+
+<h3 id="types-de-certificats">Types de certificats</h3>
+
+<pre><code>DV (Domain Validation) - Validation de domaine :
+<p>→ Vérifie uniquement que vous contrôlez le domaine</p>
+<p>→ Délivré en minutes (Let's Encrypt)</p>
+<p>→ Cadenas vert standard</p>
+<p>→ Gratuit avec Let's Encrypt</p>
+<p>→ Suffisant pour la plupart des sites</p>
+
+<p>OV (Organization Validation) - Validation d'organisation :</p>
+<p>→ Vérifie l'identité de l'organisation</p>
+<p>→ Affiché dans les détails du certificat</p>
+<p>→ Délai : 1-3 jours</p>
+<p>→ ~100-300€/an</p>
+<p>→ Recommandé pour les sites d'entreprise</p>
+
+<p>EV (Extended Validation) - Validation étendue :</p>
+<p>→ Vérification approfondie de l'organisation</p>
+<p>→ Ancien "barre verte" (supprimé en 2019 dans les navigateurs)</p>
+<p>→ Délai : 1-2 semaines</p>
+<p>→ ~300-1000€/an</p>
+<p>→ Utilisé par les banques, grandes entreprises</code></pre>
+
+<h3 id="let-s-encrypt-certificats-gratuits">Let's Encrypt — Certificats gratuits</h3>
+
+<pre><code class="language-bash"># Certbot - L'outil officiel Let's Encrypt
+
+<h1>Installation sur Ubuntu/Debian</h1>
+<p>sudo apt install certbot python3-certbot-nginx</p>
+
+<h1>Obtenir un certificat pour Nginx</h1>
+<p>sudo certbot --nginx -d exemple.com -d www.exemple.com</p>
+
+<h1>Ou en mode standalone (sans serveur web)</h1>
+<p>sudo certbot certonly --standalone -d exemple.com</p>
+
+<h1>Renouvellement automatique (certificats valides 90 jours)</h1>
+<p>sudo certbot renew --dry-run  # Test</p>
+<h1>Ajouter au cron ou systemd timer pour renouvellement automatique</h1>
+
+<h1>Avec acme.sh (alternative légère)</h1>
+<p>curl https://get.acme.sh | sh</p>
+<p>acme.sh --issue -d exemple.com --webroot /var/www/html</p>
+<p>acme.sh --install-cert -d exemple.com \</p>
+<p>--cert-file /etc/ssl/certs/exemple.com.crt \</p>
+<p>--key-file /etc/ssl/private/exemple.com.key \</p>
+<p>--reloadcmd "systemctl reload nginx"</code></pre>
+
+<h2 id="configuration-tls-optimale">Configuration TLS optimale</h2>
+
+<h3 id="nginx">Nginx</h3>
+
+<pre><code class="language-nginx">server {
+<p>listen 443 ssl http2;</p>
+<p>server_name exemple.com;</p>
+
+<p># Certificats</p>
+<p>ssl_certificate     /etc/letsencrypt/live/exemple.com/fullchain.pem;</p>
+<p>ssl_certificate_key /etc/letsencrypt/live/exemple.com/privkey.pem;</p>
+
+<p># Protocoles - Seulement TLS 1.2 et 1.3</p>
+<p>ssl_protocols TLSv1.2 TLSv1.3;</p>
+
+<p># Cipher suites sécurisées</p>
+<p>ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384;</p>
+<p>ssl_prefer_server_ciphers off;  # TLS 1.3 gère ça lui-même</p>
+
+<p># HSTS - Forcer HTTPS pour 1 an</p>
+<p>add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;</p>
+
+<p># Session TLS</p>
+<p>ssl_session_timeout 1d;</p>
+<p>ssl_session_cache shared:MozTLS:10m;</p>
+<p>ssl_session_tickets off;  # Désactiver pour perfect forward secrecy</p>
+
+<p># OCSP Stapling (vérification de révocation rapide)</p>
+<p>ssl_stapling on;</p>
+<p>ssl_stapling_verify on;</p>
+<p>resolver 1.1.1.1 8.8.8.8 valid=300s;</p>
+
+<p># Headers de sécurité</p>
+<p>add_header X-Frame-Options DENY;</p>
+<p>add_header X-Content-Type-Options nosniff;</p>
+<p>add_header Content-Security-Policy "default-src 'self'";</p>
+<p>}</p>
+
+<h1>Redirection HTTP → HTTPS</h1>
+<p>server {</p>
+<p>listen 80;</p>
+<p>server_name exemple.com www.exemple.com;</p>
+<p>return 301 https://$host$request_uri;</p>
+<p>}</code></pre>
+
+<h3 id="apache">Apache</h3>
+
+<pre><code class="language-apache">&lt;VirtualHost *:443&gt;
+<p>SSLEngine on</p>
+<p>SSLCertificateFile      /etc/letsencrypt/live/exemple.com/cert.pem</p>
+<p>SSLCertificateKeyFile   /etc/letsencrypt/live/exemple.com/privkey.pem</p>
+<p>SSLCertificateChainFile /etc/letsencrypt/live/exemple.com/chain.pem</p>
+
+<p># Protocoles modernes uniquement</p>
+<p>SSLProtocol             all -SSLv3 -TLSv1 -TLSv1.1</p>
+<p>SSLHonorCipherOrder     off</p>
+<p>SSLSessionTickets       off</p>
+
+<p># HSTS</p>
+<p>Header always set Strict-Transport-Security "max-age=63072000"</p>
+<p>&lt;/VirtualHost&gt;</code></pre>
+
+<h2 id="v-rifier-et-auditer-votre-configuration-tls">Vérifier et auditer votre configuration TLS</h2>
+
+<pre><code class="language-bash"># testssl.sh - Audit complet en ligne de commande
+<p>./testssl.sh https://exemple.com</p>
+
+<h1>Nmap - Détecter les protocoles TLS</h1>
+<p>nmap --script ssl-enum-ciphers -p 443 exemple.com</p>
+
+<h1>OpenSSL - Tests manuels</h1>
+<h1>Tester TLS 1.0 (doit être refusé)</h1>
+<p>openssl s_client -connect exemple.com:443 -tls1</p>
+<h1>Tester TLS 1.3 (doit fonctionner)</h1>
+<p>openssl s_client -connect exemple.com:443 -tls1_3</p>
+
+<h1>Vérifier l'expiration du certificat</h1>
+<p>echo | openssl s_client -servername exemple.com -connect exemple.com:443 2&gt;/dev/null | \</p>
+<p>openssl x509 -noout -dates</p>
+
+<h1>Script de monitoring d'expiration</h1>
+<p>#!/bin/bash</p>
+<p>DOMAIN="exemple.com"</p>
+<p>EXPIRY=$(echo | openssl s_client -servername $DOMAIN -connect $DOMAIN:443 2&gt;/dev/null | \</p>
+<p>openssl x509 -noout -enddate | cut -d= -f2)</p>
+<p>EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s)</p>
+<p>NOW_EPOCH=$(date +%s)</p>
+<p>DAYS=$(( ($EXPIRY_EPOCH - $NOW_EPOCH) / 86400 ))</p>
+
+<p>if [ $DAYS -lt 30 ]; then</p>
+<p>echo "ALERTE: Certificat $DOMAIN expire dans $DAYS jours !"</p>
+<p># Envoyer une notification</p>
+<p>fi</code></pre>
+
+<h2 id="erreurs-tls-courantes">Erreurs TLS courantes</h2>
+
+<pre><code>NET::ERR_CERT_DATE_INVALID
+<p>→ Certificat expiré → Renouveler avec certbot renew</p>
+
+<p>NET::ERR_CERT_AUTHORITY_INVALID</p>
+<p>→ Certificat auto-signé ou chaîne incomplète</p>
+<p>→ Vérifier ssl_certificate (doit inclure fullchain, pas seulement cert)</p>
+
+<p>SSL_ERROR_RX_RECORD_TOO_LONG</p>
+<p>→ HTTP servi sur port HTTPS ou configuration nginx incorrecte</p>
+
+<p>Mixed Content Warning</p>
+<p>→ Page HTTPS charge des ressources HTTP</p>
+<p>→ Mettre à jour les URLs vers HTTPS</p>
+<p>→ Content-Security-Policy: upgrade-insecure-requests</p>
+
+<p>HSTS Preload</p>
+<p>→ Pour être sur la liste preload des navigateurs</p>
+<p>→ https://hstspreload.org (vérifier puis soumettre)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>TLS est la fondation de la sécurité web. Avec Let's Encrypt, <strong>n'importe quel site peut avoir HTTPS gratuitement en quelques minutes</strong>. La configuration optimale selon Mozilla SSL Configuration Generator + un score A+ sur Qualys SSL Labs = vous êtes dans le top 10% des sites les mieux configurés.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#https-ssl-tls" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/xss-csrf-attaques.html" class="nav-prev">← XSS et CSRF : les attaques web les plus courantes</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-cloud.html" class="nav-next">Sécurité cloud : AWS, Azure et GCP →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

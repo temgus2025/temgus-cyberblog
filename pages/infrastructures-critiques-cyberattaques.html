@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Infrastructures critiques sous attaque : eau, énergie, hôpitaux — Temgus.CyberBlog</title>
 <meta name="description" content="Colonial Pipeline, Volt Typhoon, hôpitaux français — les cyberattaques contre les infrastructures critiques et comment s'en protéger.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/infrastructures-critiques-cyberattaques.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/infrastructures-critiques-cyberattaques.html">
 <meta property="og:title" content="Infrastructures critiques sous attaque : eau, énergie, hôpitaux — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Infrastructures critiques sous attaque : eau, énergie, hôpitaux — Temgus.CyberBlog">
 <meta name="twitter:description" content="Colonial Pipeline, Volt Typhoon, hôpitaux français — les cyberattaques contre les infrastructures critiques et comment s'en protéger.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,398 @@
   "headline": "Infrastructures critiques sous attaque : eau, énergie, hôpitaux",
   "description": "Colonial Pipeline, Volt Typhoon, hôpitaux français — les cyberattaques contre les infrastructures critiques et comment s'en protéger.",
   "datePublished": "2025-09-06",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/infrastructures-critiques-cyberattaques.html",
   "inLanguage": "fr",
   "keywords": "infrastructures critiques, OT, SCADA, ICS, OIV",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⚡</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Infrastructures critiques sous attaque : eau, énergie, hôpitaux</h1>
-  <p style="color:#8892a4;max-width:500px">Colonial Pipeline, Volt Typhoon, hôpitaux français — les cyberattaques contre les infrastructures critiques et comment s'en protéger.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#infrastructures-critiques-cyberattaques" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⚡</div>
+    <div class="meta-info">
+      <div class="meta-category">Actualités cyber</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Infrastructures critiques sous attaque : eau, énergie, hôpitaux</div>
+      <div class="meta-details">
+        <span>📅 2025-09-06</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-les-infrastructures-critiques-sont-cibl-es">Pourquoi les infrastructures critiques sont ciblées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#valeur-strat-gique">Valeur stratégique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#valeur-financi-re">Valeur financière</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#vuln-rabilit-des-syst-mes-ot">Vulnérabilité des systèmes OT</a></li>
+<li><a href="#incidents-marquants-r-cents">Incidents marquants récents</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaque-contre-colonial-pipeline-2021-">Attaque contre Colonial Pipeline (2021)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaque-contre-l-eau-de-oldsmar-floride-2021-">Attaque contre l'eau de Oldsmar, Floride (2021)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaques-contre-les-h-pitaux-europ-ens">Attaques contre les hôpitaux européens</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#volt-typhoon-et-les-infrastructures-am-ricaines">Volt Typhoon et les infrastructures américaines</a></li>
+<li><a href="#les-sp-cificit-s-des-syst-mes-ot">Les spécificités des systèmes OT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#protocoles-industriels-non-s-curis-s">Protocoles industriels non sécurisés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#convergence-it-ot-le-probl-me">Convergence IT/OT — Le problème</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#contraintes-sp-cifiques">Contraintes spécifiques</a></li>
+<li><a href="#cadre-r-glementaire-fran-ais">Cadre réglementaire français</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-op-rateurs-d-importance-vitale-oiv-">Les Opérateurs d'Importance Vitale (OIV)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#nis2-et-les-infrastructures-critiques">NIS2 et les infrastructures critiques</a></li>
+<li><a href="#bonnes-pratiques-pour-s-curiser-les-infrastructures-critiques">Bonnes pratiques pour sécuriser les infrastructures critiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#segmentation-r-seau-stricte">Segmentation réseau stricte</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#inventaire-des-actifs-ot">Inventaire des actifs OT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#surveillance-du-r-seau-ot">Surveillance du réseau OT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#gestion-des-acc-s-distants">Gestion des accès distants</a></li>
+<li><a href="#plan-de-continuit-et-r-silience">Plan de continuité et résilience</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Infrastructures critiques sous attaque : eau, énergie, hôpitaux</h1>
+
+<p>Les infrastructures critiques — réseaux électriques, systèmes de distribution d'eau, hôpitaux, transports — sont devenues des cibles prioritaires des cyberattaquants étatiques et criminels. Les conséquences d'une attaque réussie peuvent être catastrophiques pour des populations entières.</p>
+
+<h2 id="pourquoi-les-infrastructures-critiques-sont-cibl-es">Pourquoi les infrastructures critiques sont ciblées</h2>
+
+<h3 id="valeur-strat-gique">Valeur stratégique</h3>
+<p>Pour les États, compromettre l'infrastructure critique d'un adversaire offre un levier de pression considérable en cas de conflit. La cyber-guerre précède et accompagne désormais les conflits conventionnels.</p>
+
+<h3 id="valeur-financi-re">Valeur financière</h3>
+<p>Pour les groupes criminels, les infrastructures critiques paient souvent les rançons — une interruption de service peut coûter des millions par heure.</p>
+
+<h3 id="vuln-rabilit-des-syst-mes-ot">Vulnérabilité des systèmes OT</h3>
+<p>Les systèmes de contrôle industriels (SCADA, ICS) ont été conçus pour la disponibilité et la longévité, pas pour la sécurité. Beaucoup tournent sur des OS obsolètes, sans correctifs, avec des protocoles non chiffrés.</p>
+
+<h2 id="incidents-marquants-r-cents">Incidents marquants récents</h2>
+
+<h3 id="attaque-contre-colonial-pipeline-2021-">Attaque contre Colonial Pipeline (2021)</h3>
+<p>Le groupe DarkSide a chiffré les systèmes IT de Colonial Pipeline, l'un des plus grands opérateurs d'oléoducs américains. La compagnie a arrêté préventivement les opérations OT, provoquant des pénuries de carburant sur toute la côte Est américaine. Rançon payée : 4,4 millions de dollars.</p>
+
+<p><strong>Vecteur initial</strong> : compte VPN sans MFA avec credentials compromis.</p>
+
+<h3 id="attaque-contre-l-eau-de-oldsmar-floride-2021-">Attaque contre l'eau de Oldsmar, Floride (2021)</h3>
+<p>Un attaquant a pris le contrôle du système de traitement d'eau d'Oldsmar et tenté d'augmenter la concentration de soude caustique à 111 fois le niveau normal. Un opérateur vigilant a détecté la manipulation en temps réel.</p>
+
+<p><strong>Vecteur</strong> : TeamViewer accessible publiquement avec des credentials partagés.</p>
+
+<h3 id="attaques-contre-les-h-pitaux-europ-ens">Attaques contre les hôpitaux européens</h3>
+<p>En France, les hôpitaux de Corbeil-Essonnes (2022), Versailles (2022) et Cannes (2024) ont été victimes de ransomwares. Ces attaques ont forcé des déprogrammations d'opérations, des transferts de patients et des retours aux procédures papier.</p>
+
+<h3 id="volt-typhoon-et-les-infrastructures-am-ricaines">Volt Typhoon et les infrastructures américaines</h3>
+<p>Le groupe APT chinois Volt Typhoon a infiltré des infrastructures critiques américaines (eau, énergie, transport) sans déclencher d'actions destructives — une stratégie de pré-positionnement pour un conflit futur.</p>
+
+<h2 id="les-sp-cificit-s-des-syst-mes-ot">Les spécificités des systèmes OT</h2>
+
+<h3 id="protocoles-industriels-non-s-curis-s">Protocoles industriels non sécurisés</h3>
+
+<pre><code>Modbus TCP  : pas d'authentification, pas de chiffrement
+<p>DNP3        : authentification optionnelle et faible</p>
+<p>OPC-UA      : plus récent, meilleure sécurité</p>
+<p>BACnet      : bâtiments, peu sécurisé</p>
+<p>Profinet    : automatisme industriel</code></pre>
+
+<h3 id="convergence-it-ot-le-probl-me">Convergence IT/OT — Le problème</h3>
+
+<p>Historiquement, les réseaux OT (Operational Technology) étaient <strong>air-gappés</strong> — physiquement isolés d'Internet. La modernisation et la télémaintenance ont créé des connexions entre les réseaux IT et OT, exposant les systèmes industriels.</p>
+
+<pre><code>❌ Architecture convergée non sécurisée
+<p>Internet → IT → OT → SCADA → Processus physique</p>
+
+<p>✅ Architecture correcte</p>
+<p>Internet → DMZ → IT</p>
+<p>↓ (accès contrôlé, unidirectionnel si possible)</p>
+<p>OT → SCADA → Processus physique</code></pre>
+
+<h3 id="contraintes-sp-cifiques">Contraintes spécifiques</h3>
+<ul><li><strong>Disponibilité avant tout</strong> : on ne peut pas redémarrer une centrale nucléaire pour patcher</li><li><strong>Systèmes legacy</strong> : Windows XP toujours présent dans certaines installations</li><li><strong>Temps réel</strong> : les correctifs peuvent perturber les opérations</li><li><strong>Longévité</strong> : équipements conçus pour 20-30 ans</li></ul>
+
+<h2 id="cadre-r-glementaire-fran-ais">Cadre réglementaire français</h2>
+
+<h3 id="les-op-rateurs-d-importance-vitale-oiv-">Les Opérateurs d'Importance Vitale (OIV)</h3>
+<p>La France a désigné environ 250 OIV dans 12 secteurs (énergie, eau, santé, transport...). Ces organisations doivent respecter des règles de sécurité définies par l'ANSSI et sont soumises à des audits réguliers.</p>
+
+<h3 id="nis2-et-les-infrastructures-critiques">NIS2 et les infrastructures critiques</h3>
+<p>La directive NIS2 renforce les obligations des opérateurs d'infrastructures critiques, notamment sur la gestion des incidents, la sécurité de la chaîne d'approvisionnement et les tests de résilience.</p>
+
+<h2 id="bonnes-pratiques-pour-s-curiser-les-infrastructures-critiques">Bonnes pratiques pour sécuriser les infrastructures critiques</h2>
+
+<h3 id="segmentation-r-seau-stricte">Segmentation réseau stricte</h3>
+<pre><code>Niveau 4 : Réseau d'entreprise (IT)
+<p>↓ Firewall + DMZ</p>
+<p>Niveau 3 : Supervision et gestion des opérations</p>
+<p>↓ Firewall + Data Diode (sens unique)</p>
+<p>Niveau 2 : Contrôle des processus (DCS, SCADA)</p>
+<p>↓ Firewall</p>
+<p>Niveau 1 : Contrôle local (automates, capteurs)</p>
+<p>Niveau 0 : Processus physique</code></pre>
+
+<h3 id="inventaire-des-actifs-ot">Inventaire des actifs OT</h3>
+<p>Vous ne pouvez pas protéger ce que vous ne connaissez pas. Un inventaire exhaustif de tous les équipements OT, avec versions firmware et connexions, est la première étape.</p>
+
+<h3 id="surveillance-du-r-seau-ot">Surveillance du réseau OT</h3>
+<pre><code class="language-bash"># Outils spécialisés OT
+<h1>Claroty, Nozomi Networks, Dragos — solutions commerciales</h1>
+<h1>Zeek + plugins OT pour les protocoles industriels (Modbus, DNP3)</h1>
+
+<h1>Détecter les anomalies :</h1>
+<h1>- Nouveaux équipements sur le réseau</h1>
+<h1>- Communications inhabituelles entre équipements</h1>
+<h1>- Modifications de configuration des automates</code></pre></h1>
+
+<h3 id="gestion-des-acc-s-distants">Gestion des accès distants</h3>
+<p>Les accès de maintenance à distance sont un vecteur majeur. Chaque accès doit être :</p>
+<ul><li>Authentifié (MFA obligatoire)</li><li>Enregistré et audité</li><li>Limité dans le temps (just-in-time access)</li><li>Supervisé en temps réel</li></ul>
+
+<h2 id="plan-de-continuit-et-r-silience">Plan de continuité et résilience</h2>
+
+<p>Une infrastructure critique doit fonctionner même en cas de cyberattaque :</p>
+<ul><li><strong>Mode dégradé manuel</strong> documenté et exercé régulièrement</li><li><strong>Isolation d'urgence</strong> : procédure pour déconnecter l'OT de l'IT en quelques minutes</li><li><strong>Sauvegardes hors ligne</strong> des configurations d'automates</li><li><strong>Exercices de crise</strong> réguliers (ex : ENTRAÎNEMENT CYBERSÉCURITÉ secteur santé)</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité des infrastructures critiques est un enjeu de sécurité nationale. Les attaques contre ces systèmes peuvent avoir des conséquences directes sur des vies humaines. L'approche doit combiner segmentation réseau rigoureuse, surveillance comportementale des réseaux OT et plans de continuité robustes. La menace est réelle — Volt Typhoon nous rappelle que des attaquants sont peut-être déjà dans ces réseaux, silencieusement.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#infrastructures-critiques-cyberattaques" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securiser-maison-connectee.html" class="nav-prev">← Sécuriser sa maison connectée : le guide complet</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-physique.html" class="nav-next">Sécurité physique : quand les hackers passent la porte →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

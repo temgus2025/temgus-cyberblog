@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Carrière en cybersécurité : guide complet pour se lancer — Temgus.CyberBlog</title>
 <meta name="description" content="Métiers, salaires, certifications (OSCP, CISSP), formations gratuites et feuille de route par profil.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/carriere-cybersecurite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/carriere-cybersecurite.html">
 <meta property="og:title" content="Carrière en cybersécurité : guide complet pour se lancer — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Carrière en cybersécurité : guide complet pour se lancer — Temgus.CyberBlog">
 <meta name="twitter:description" content="Métiers, salaires, certifications (OSCP, CISSP), formations gratuites et feuille de route par profil.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,476 @@
   "headline": "Carrière en cybersécurité : guide complet pour se lancer",
   "description": "Métiers, salaires, certifications (OSCP, CISSP), formations gratuites et feuille de route par profil.",
   "datePublished": "2025-08-13",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/carriere-cybersecurite.html",
   "inLanguage": "fr",
   "keywords": "carrière, OSCP, certifications, reconversion, SOC",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎓</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Carrière en cybersécurité : guide complet pour se lancer</h1>
-  <p style="color:#8892a4;max-width:500px">Métiers, salaires, certifications (OSCP, CISSP), formations gratuites et feuille de route par profil.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#carriere-cybersecurite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎓</div>
+    <div class="meta-info">
+      <div class="meta-category">Carrière en cybersécurité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Carrière en cybersécurité : guide complet pour se lancer</div>
+      <div class="meta-details">
+        <span>📅 2025-08-13</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#le-march-de-l-emploi-en-cybers-curit-">Le marché de l'emploi en cybersécurité</a></li>
+<li><a href="#les-m-tiers-de-la-cybers-curit-">Les métiers de la cybersécurité</a></li>
+<li><a href="#formations-et-certifications">Formations et certifications</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#certifications-par-niveau">Certifications par niveau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#formations-gratuites-en-ligne">Formations gratuites en ligne</a></li>
+<li><a href="#feuille-de-route-par-profil">Feuille de route par profil</a></li>
+<li><a href="#construire-son-portfolio">Construire son portfolio</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Carrière en cybersécurité : guide complet pour se lancer</h1>
+
+<p>La cybersécurité est l'un des secteurs les plus porteurs du numérique avec <strong>3,5 millions de postes non pourvus</strong> dans le monde en 2024. Que vous soyez étudiant, en reconversion ou professionnel IT souhaitant se spécialiser, ce guide vous donne une feuille de route claire.</p>
+
+<h2 id="le-march-de-l-emploi-en-cybers-curit-">Le marché de l'emploi en cybersécurité</h2>
+
+<pre><code>Chiffres clés 2024 :
+<p>→ 3,5 millions de postes non pourvus mondialement</p>
+<p>→ Salaire médian France : 48 000€/an (junior)</p>
+<p>→ Salaire médian France : 70 000€/an (confirmé 5 ans)</p>
+<p>→ Salaire médian France : 90 000€+/an (expert 10 ans)</p>
+<p>→ Taux de chômage du secteur : quasi nul</p>
+
+<p>Secteurs qui recrutent le plus :</p>
+<p>→ ESN/SSII (Capgemini, Thales, Sopra)</p>
+<p>→ Banque/Finance (BNP, Société Générale)</p>
+<p>→ Défense (Thalès, Airbus, MBDA)</p>
+<p>→ Cabinets de conseil (Wavestone, Deloitte)</p>
+<p>→ Éditeurs de sécurité (Orange Cyberdefense, Sekoia)</p>
+<p>→ Startups cybersécurité</code></pre>
+
+<h2 id="les-m-tiers-de-la-cybers-curit-">Les métiers de la cybersécurité</h2>
+
+<pre><code class="language-python">metiers_cyber = {
+
+<p># OFFENSIF</p>
+<p>"Pentester / Ethical Hacker": {</p>
+<p>"missions": "Tests d'intrusion, audits de sécurité",</p>
+<p>"salaire_junior": "38-45K€",</p>
+<p>"salaire_senior": "60-85K€",</p>
+<p>"certifications": ["OSCP", "CEH", "GPEN"],</p>
+<p>"compétences": ["Kali Linux", "Burp Suite", "Metasploit"]</p>
+<p>},</p>
+<p>"Red Team Operator": {</p>
+<p>"missions": "Simulation d'APT, exercices Red Team",</p>
+<p>"salaire_junior": "45-55K€",</p>
+<p>"salaire_senior": "70-100K€",</p>
+<p>"certifications": ["CRTO", "CRTE", "OSED"],</p>
+<p>"compétences": ["Cobalt Strike", "C2 development", "AD attacks"]</p>
+<p>},</p>
+<p>"Bug Bounty Hunter": {</p>
+<p>"missions": "Recherche de vulnérabilités en indépendant",</p>
+<p>"revenus": "Variable (0 à 500K€/an pour les meilleurs)",</p>
+<p>"certifications": ["Aucune obligatoire"],</p>
+<p>"compétences": ["Web hacking", "API testing", "Recon"]</p>
+<p>},</p>
+
+<p># DÉFENSIF</p>
+<p>"Analyste SOC": {</p>
+<p>"missions": "Surveillance, triage d'alertes, investigation",</p>
+<p>"salaire_junior": "32-40K€",</p>
+<p>"salaire_senior": "50-65K€",</p>
+<p>"certifications": ["BTL1", "Security+", "CySA+"],</p>
+<p>"compétences": ["SIEM", "EDR", "Threat intel"]</p>
+<p>},</p>
+<p>"Incident Responder / DFIR": {</p>
+<p>"missions": "Réponse aux incidents, forensics",</p>
+<p>"salaire_junior": "42-50K€",</p>
+<p>"salaire_senior": "65-90K€",</p>
+<p>"certifications": ["GCIH", "GCFE", "GCFA"],</p>
+<p>"compétences": ["Volatility", "Autopsy", "Malware analysis"]</p>
+<p>},</p>
+<p>"RSSI (Responsable Sécurité SI)": {</p>
+<p>"missions": "Stratégie sécurité, gouvernance, conformité",</p>
+<p>"salaire": "80-150K€",</p>
+<p>"certifications": ["CISSP", "CISM"],</p>
+<p>"compétences": ["Management", "Risque", "RGPD", "ISO 27001"]</p>
+<p>},</p>
+
+<p># TECHNIQUE/TRANSVERSE</p>
+<p>"DevSecOps Engineer": {</p>
+<p>"missions": "Intégrer sécurité dans CI/CD",</p>
+<p>"salaire_junior": "45-55K€",</p>
+<p>"salaire_senior": "70-95K€",</p>
+<p>"certifications": ["AWS Security", "CKS (Kubernetes)"],</p>
+<p>"compétences": ["Docker", "Kubernetes", "SAST/DAST", "IaC"]</p>
+<p>},</p>
+<p>"Threat Intelligence Analyst": {</p>
+<p>"missions": "Renseignement sur les menaces, profiling APT",</p>
+<p>"salaire_junior": "40-50K€",</p>
+<p>"salaire_senior": "60-80K€",</p>
+<p>"certifications": ["GCTI", "CPTIA"],</p>
+<p>"compétences": ["MISP", "MITRE ATT&amp;CK", "OSINT"]</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="formations-et-certifications">Formations et certifications</h2>
+
+<h3 id="certifications-par-niveau">Certifications par niveau</h3>
+
+<pre><code>Débutant :
+<p>→ CompTIA Security+    : 300$, examen QCM, reconnu globalement</p>
+<p>→ BTL1 (Blue Team Labs): Pratique, très bien pour SOC</p>
+<p>→ eJPT (eLearnSecurity): Pentest débutant, accessible</p>
+
+<p>Intermédiaire :</p>
+<p>→ OSCP (Offensive Security) : LA certification pentest</p>
+<p>→ CEH (EC-Council)          : Très connu mais critiqué (QCM)</p>
+<p>→ CySA+ (CompTIA)           : Blue team intermédiaire</p>
+<p>→ GCIH (GIAC)               : Incident handling</p>
+
+<p>Avancé :</p>
+<p>→ CRTO (Red Team Ops)  : Active Directory, Cobalt Strike</p>
+<p>→ OSED (Exploit Dev)   : Développement d'exploits</p>
+<p>→ CISSP                : Management sécurité (7-10 ans exp)</p>
+<p>→ CISM                 : Management sécurité</p>
+
+<p>Spécialisées :</p>
+<p>→ AWS Certified Security Specialty</p>
+<p>→ CKS (Certified Kubernetes Security)</p>
+<p>→ GREM (Reverse Engineering Malware)</code></pre>
+
+<h3 id="formations-gratuites-en-ligne">Formations gratuites en ligne</h3>
+
+<pre><code>Pratique :
+<p>→ TryHackMe (tryhackme.com)    : Parfait pour débutants</p>
+<p>→ HackTheBox (hackthebox.com)  : Intermédiaire/avancé</p>
+<p>→ PortSwigger Academy          : Web hacking complet</p>
+<p>→ Blue Team Labs Online        : Défensif</p>
+<p>→ Cybrary (cybrary.it)         : Cours vidéo</p>
+
+<p>Théorique :</p>
+<p>→ MOOC SecNum (ANSSI)          : Gratuit, certifié, français</p>
+<p>→ Coursera IBM Cybersecurity   : Gratuit en audit</p>
+<p>→ MIT OpenCourseWare           : Network Security</p>
+
+<p>CTF :</p>
+<p>→ CTFtime.org                  : Calendrier des compétitions</p>
+<p>→ PicoCTF                      : Parfait pour débutants</p>
+<p>→ Root-Me                      : Français, très complet</code></pre>
+
+<h2 id="feuille-de-route-par-profil">Feuille de route par profil</h2>
+
+<pre><code>Profil : Reconversion (aucune base IT)
+<p>Durée : 18-24 mois</p>
+
+<p>Mois 1-3 : Fondamentaux</p>
+<p>→ Réseaux (TCP/IP, DNS, HTTP)</p>
+<p>→ Linux (commandes, permissions, scripts bash)</p>
+<p>→ Programmation Python (bases)</p>
+<p>→ Ressource : TryHackMe Pre-Security path</p>
+
+<p>Mois 4-6 : Sécurité générale</p>
+<p>→ MOOC SecNum de l'ANSSI (gratuit)</p>
+<p>→ CompTIA Security+ (optionnel)</p>
+<p>→ TryHackMe SOC Level 1</p>
+
+<p>Mois 7-12 : Spécialisation</p>
+<p>→ Choisir offensif (OSCP) ou défensif (BTL1)</p>
+<p>→ HackTheBox / Blue Team Labs</p>
+<p>→ Premiers CTF</p>
+
+<p>Mois 13-18 : Certification + portfolio</p>
+<p>→ Passer la certification choisie</p>
+<p>→ Construire un portfolio (projets GitHub, writeups CTF)</p>
+<p>→ Stage / alternance</p>
+
+<p>Mois 18-24 : Premier emploi</p>
+<p>→ Candidatures ciblées</p>
+<p>→ LinkedIn optimisé</p>
+<p>→ Participer aux événements (Forum InCyber, SSI Hebdo)</code></pre>
+
+<h2 id="construire-son-portfolio">Construire son portfolio</h2>
+
+<pre><code>Ce qui impressionne un recruteur :
+
+<li>Blog technique (comme Temgus.CyberBlog !)</li>
+<p>→ Writeups de CTF</p>
+<p>→ Articles techniques</p>
+<p>→ Démos de vulnérabilités</p>
+
+<li>GitHub actif</li>
+<p>→ Scripts d'automatisation sécurité</p>
+<p>→ Tools de pentest maison</p>
+<p>→ Configurations de sécurité</p>
+
+<li>Certifications</li>
+<p>→ OSCP sur le CV = entretien garanti</p>
+<p>→ Certification pratique &gt; QCM</p>
+
+<li>Participation communautaire</li>
+<p>→ Compétitions CTF (CTFtime)</p>
+<p>→ Bug bounty (même les petits)</p>
+<p>→ Contributions open source</p>
+<p>→ Conférences (SSTIC, LeHack, Forum InCyber)</p>
+
+<li>Home Lab</li>
+<p>→ Créer un lab AD avec vulnerable machines</p>
+<p>→ Documenter et partager</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cybersécurité est un domaine où la <strong>pratique prime sur le diplôme</strong>. Un candidat avec OSCP, un blog actif et 50 machines HackTheBox compromises sera souvent préféré à un candidat avec un Master mais sans pratique. Commencez dès aujourd'hui sur TryHackMe ou Root-Me, construisez un portfolio visible et rejoignez la communauté — les opportunités viendront naturellement.</p>
+
+<p>---</p>
+<p><em>Catégorie : Carrière en cybersécurité</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#carriere-cybersecurite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/anonymat-tails-whonix.html" class="nav-prev">← Anonymat avancé : Tails OS et Whonix</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite.html" class="nav-next">Intelligence Artificielle et cybersécurité : opportunités et menaces →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

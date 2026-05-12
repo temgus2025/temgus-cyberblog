@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité mobile : Android et iOS — Temgus.CyberBlog</title>
 <meta name="description" content="Menaces mobiles, applications malveillantes et meilleures pratiques.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile.html">
 <meta property="og:title" content="Sécurité mobile : Android et iOS — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité mobile : Android et iOS — Temgus.CyberBlog">
 <meta name="twitter:description" content="Menaces mobiles, applications malveillantes et meilleures pratiques.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,543 @@
   "headline": "Sécurité mobile : Android et iOS",
   "description": "Menaces mobiles, applications malveillantes et meilleures pratiques.",
   "datePublished": "2025-04-21",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile.html",
   "inLanguage": "fr",
   "keywords": "mobile, Android, iOS",
-  "timeRequired": "PT8M"
+  "timeRequired": "PT8M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📱</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité mobile : Android et iOS</h1>
-  <p style="color:#8892a4;max-width:500px">Menaces mobiles, applications malveillantes et meilleures pratiques.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-mobile" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📱</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité mobile : Android et iOS</div>
+      <div class="meta-details">
+        <span>📅 2025-04-21</span>
+        <span>⏱ 8 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#android-vs-ios-architectures-de-s-curit-">Android vs iOS : architectures de sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ios-cosyst-me-ferm-">iOS — Écosystème fermé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#android-cosyst-me-ouvert">Android — Écosystème ouvert</a></li>
+<li><a href="#les-menaces-mobiles-courantes">Les menaces mobiles courantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-applications-malveillantes">1. Applications malveillantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-phishing-mobile">2. Phishing mobile</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-spyware-et-stalkerware">3. Spyware et stalkerware</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-attaques-via-r-seau">4. Attaques via réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-exploits-zero-day">5. Exploits zero-day</a></li>
+<li><a href="#s-curiser-votre-smartphone">Sécuriser votre smartphone</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#configuration-de-base">Configuration de base</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#gestion-des-permissions">Gestion des permissions</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#chiffrement-des-communications">Chiffrement des communications</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#authentification-mobile-s-curis-e">Authentification mobile sécurisée</a></li>
+<li><a href="#sim-swapping-une-menace-sous-estim-e">SIM Swapping : une menace sous-estimée</a></li>
+<li><a href="#analyse-d-une-app-android">Analyse d'une app Android</a></li>
+<li><a href="#checklist-s-curit-mobile">Checklist sécurité mobile</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité mobile : Android et iOS</h1>
+
+<p>Nos smartphones contiennent nos emails, photos, coordonnées bancaires, localisation et bien plus. Pourtant, la sécurité mobile est souvent négligée. Ce guide couvre les menaces spécifiques aux plateformes mobiles et les meilleures pratiques de protection.</p>
+
+<h2 id="android-vs-ios-architectures-de-s-curit-">Android vs iOS : architectures de sécurité</h2>
+
+<h3 id="ios-cosyst-me-ferm-">iOS — Écosystème fermé</h3>
+
+<pre><code>Avantages sécurité iOS :
+<p>✅ App Store contrôlé (revue manuelle d'Apple)</p>
+<p>✅ Mises à jour simultanées sur tous les appareils</p>
+<p>✅ Secure Enclave (puce dédiée aux secrets)</p>
+<p>✅ Sandbox strict entre les apps</p>
+<p>✅ Pas de sideloading par défaut</p>
+<p>✅ Chiffrement complet activé par défaut</p>
+
+<p>Limites :</p>
+<p>→ Dépendance totale à Apple</p>
+<p>→ Moins de contrôle utilisateur</p>
+<p>→ Sideloading possible depuis iOS 17 (Europe - DMA)</code></pre>
+
+<h3 id="android-cosyst-me-ouvert">Android — Écosystème ouvert</h3>
+
+<pre><code>Avantages sécurité Android :
+<p>✅ Android Security Bulletins mensuels</p>
+<p>✅ Google Play Protect (scan d'applications)</p>
+<p>✅ StrongBox (équivalent Secure Enclave sur Android 9+)</p>
+<p>✅ Verified Boot</p>
+<p>✅ Plus de contrôle utilisateur</p>
+
+<p>Défis :</p>
+<p>→ Fragmentation : des millions d'appareils sans mises à jour</p>
+<p>→ APKs depuis sources tierces (sideloading facile)</p>
+<p>→ Délai des mises à jour selon les fabricants</code></pre>
+
+<h2 id="les-menaces-mobiles-courantes">Les menaces mobiles courantes</h2>
+
+<h3 id="1-applications-malveillantes">1. Applications malveillantes</h3>
+
+<pre><code>Types d'apps malveillantes :
+<p>→ Faux antivirus (demandent des permissions excessives)</p>
+<p>→ Clones d'apps légitimes (WhatsApp, banking apps)</p>
+<p>→ Adwares (publicités agressives + collecte de données)</p>
+<p>→ Stalkerware (surveillance à l'insu de la victime)</p>
+<p>→ Apps dropper (sembent légitimes puis téléchargent un malware)</code></pre>
+
+<p><strong>Exemple de permissions suspectes :</strong></p>
+<pre><code>Application : "Lampe de poche"
+<p>Permissions demandées :</p>
+<p>❌ Accès aux contacts</p>
+<p>❌ Accès à la localisation</p>
+<p>❌ Accès aux SMS</p>
+<p>❌ Accès au microphone</p>
+<p>❌ Accès à la caméra</p>
+
+<p>Une lampe de poche n'a besoin d'AUCUNE de ces permissions !</code></pre>
+
+<h3 id="2-phishing-mobile">2. Phishing mobile</h3>
+
+<pre><code>Vecteurs spécifiques au mobile :
+<p>→ SMS phishing (smishing) : "Votre colis est bloqué"</p>
+<p>→ WhatsApp : messages de "contacts" compromis</p>
+<p>→ Notifications push frauduleuses</p>
+<p>→ QR codes malveillants</p>
+<p>→ Faux WiFi avec portail captif frauduleux</code></pre>
+
+<h3 id="3-spyware-et-stalkerware">3. Spyware et stalkerware</h3>
+
+<pre><code class="language-bash"># Signes d'infection par spyware :
+<p>→ Batterie qui se décharge anormalement vite</p>
+<p>→ Téléphone chaud sans utilisation</p>
+<p>→ Consommation data inhabituelle</p>
+<p>→ Apps inconnues dans la liste</p>
+<p>→ Le téléphone s'allume seul</p>
+
+<h1>Vérifier les apps suspectes Android</h1>
+<p>adb shell pm list packages -f</p>
+<h1>Comparer avec la liste des apps installées via l'interface</code></pre></h1>
+
+<h3 id="4-attaques-via-r-seau">4. Attaques via réseau</h3>
+
+<pre><code>Man-in-the-Middle sur WiFi public :
+<li>Attaquant crée un faux point d'accès "CafeWifi"</li>
+<li>Votre téléphone s'y connecte automatiquement</li>
+<li>Attaquant intercepte le trafic non chiffré</li>
+<li>Vol de cookies, credentials, données</li>
+
+<p>Protection : VPN toujours actif sur les réseaux publics</code></pre>
+
+<h3 id="5-exploits-zero-day">5. Exploits zero-day</h3>
+
+<p><strong>Pegasus</strong> (NSO Group) — l'exemple le plus célèbre :</p>
+<pre><code>Pegasus est un spyware capable de :
+<p>→ Lire tous les messages (WhatsApp, Signal, iMessage)</p>
+<p>→ Activer micro et caméra à distance</p>
+<p>→ Récupérer tous les fichiers</p>
+<p>→ Suivre la localisation en temps réel</p>
+<p>→ S'installer via "zero-click" (sans interaction utilisateur)</p>
+
+<p>Cibles : journalistes, activistes, chefs d'état</p>
+<p>Prix : millions de dollars par licence</code></pre>
+
+<h2 id="s-curiser-votre-smartphone">Sécuriser votre smartphone</h2>
+
+<h3 id="configuration-de-base">Configuration de base</h3>
+
+<pre><code>iOS :
+<p>✅ iOS à jour (Réglages → Général → MàJ logiciel)</p>
+<p>✅ Face ID / Touch ID activé</p>
+<p>✅ Code à 6 chiffres minimum (ou alphanumérique)</p>
+<p>✅ "Effacer données" après 10 tentatives</p>
+<p>✅ Chiffrement iCloud avec Advanced Data Protection</p>
+<p>✅ Localiser mon iPhone activé</p>
+<p>✅ Accès restrictions sur l'écran verrouillé</p>
+
+<p>Android :</p>
+<p>✅ Android à jour + patches sécurité récents</p>
+<p>✅ Empreinte / reconnaissance faciale</p>
+<p>✅ Chiffrement activé (Settings → Security)</p>
+<p>✅ Google Play Protect activé</p>
+<p>✅ Sources inconnues désactivées</p>
+<p>✅ Find My Device activé</p>
+<p>✅ Verrouillage SIM (code PIN SIM)</code></pre>
+
+<h3 id="gestion-des-permissions">Gestion des permissions</h3>
+
+<pre><code>Principe du moindre privilège pour les apps :
+
+<p>Android :</p>
+<p>Paramètres → Applications → [App] → Permissions</p>
+<p>→ N'accorder que les permissions nécessaires</p>
+<p>→ Préférer "Seulement pendant l'utilisation" pour localisation</p>
+<p>→ Refuser l'accès aux contacts/SMS si non nécessaire</p>
+
+<p>iOS :</p>
+<p>Réglages → Confidentialité → [Permission]</p>
+<p>→ Voir toutes les apps qui ont accès</p>
+<p>→ Révoquer les accès inutiles</p>
+<p>→ "Demander chaque fois" pour la localisation des apps peu utilisées</code></pre>
+
+<h3 id="chiffrement-des-communications">Chiffrement des communications</h3>
+
+<pre><code>Applications de messagerie par niveau de sécurité :
+
+<p>🔒🔒🔒 Maximum :</p>
+<p>→ Signal : chiffrement E2E, messages éphémères, open source</p>
+<p>→ Session : pas de numéro de téléphone requis, décentralisé</p>
+
+<p>🔒🔒 Bon :</p>
+<p>→ WhatsApp : E2E (protocole Signal) mais métadonnées collectées par Meta</p>
+<p>→ iMessage : E2E entre appareils Apple, SMS non chiffré sinon</p>
+
+<p>🔒 Acceptable :</p>
+<p>→ Telegram : E2E seulement dans "Secret Chats", pas par défaut !</p>
+<p>→ Messages standard : SMS/RCS non chiffrés</p>
+
+<p>❌ À éviter pour données sensibles :</p>
+<p>→ Facebook Messenger (sans mode secret)</p>
+<p>→ Snapchat (stockage serveur)</code></pre>
+
+<h3 id="authentification-mobile-s-curis-e">Authentification mobile sécurisée</h3>
+
+<pre><code>2FA sur mobile :
+
+<p>✅ Application TOTP (Aegis sur Android, Raivo sur iOS)</p>
+<p>→ Codes valides 30 secondes</p>
+<p>→ Fonctionne hors ligne</p>
+<p>→ Sauvegardez vos seeds TOTP !</p>
+
+<p>✅ Passkeys (FIDO2)</p>
+<p>→ Remplace les mots de passe par la biométrie</p>
+<p>→ Résistant au phishing</p>
+<p>→ Supporté par iOS 16+ et Android 9+</p>
+
+<p>⚠️ SMS 2FA</p>
+<p>→ Vulnérable au SIM swapping</p>
+<p>→ Mieux que rien, mais éviter pour les comptes critiques</p>
+
+<p>❌ Pas de 2FA</p>
+<p>→ À ne jamais faire pour email, banque, réseaux sociaux</code></pre>
+
+<h2 id="sim-swapping-une-menace-sous-estim-e">SIM Swapping : une menace sous-estimée</h2>
+
+<pre><code>Comment ça fonctionne :
+
+<li>L'attaquant collecte vos infos (nom, adresse, date naissance)</li>
+<p>via OSINT (réseaux sociaux, fuites de données)</p>
+<p>↓</p>
+<li>Appelle votre opérateur en se faisant passer pour vous</li>
+<p>"J'ai perdu mon téléphone, je veux transférer mon numéro"</p>
+<p>↓</p>
+<li>Convainc l'opérateur de porter votre numéro sur sa SIM</li>
+<p>↓</p>
+<li>Reçoit tous vos SMS, y compris les codes 2FA</li>
+<p>↓</p>
+<li>Réinitialise vos mots de passe via "SMS reçu"</li>
+<p>↓</p>
+<li>Accès à : email, banque, crypto, réseaux sociaux</code></pre></li>
+
+<p><strong>Protection :</strong></p>
+<pre><code>✅ Mettre un code PIN SIM chez votre opérateur
+<p>✅ Activer les alertes de changement de SIM</p>
+<p>✅ Utiliser TOTP au lieu de SMS pour le 2FA</p>
+<p>✅ Minimiser les informations personnelles en ligne</p>
+<p>✅ Utiliser un numéro virtuel pour les inscriptions (Google Voice)</code></pre>
+
+<h2 id="analyse-d-une-app-android">Analyse d'une app Android</h2>
+
+<pre><code class="language-bash"># Analyser une APK suspecte
+<h1>Extraire l'APK</h1>
+<p>adb shell pm path com.exemple.app</p>
+<p>adb pull /data/app/com.exemple.app/base.apk</p>
+
+<h1>Décompiler avec apktool</h1>
+<p>apktool d base.apk -o app_decompiled/</p>
+
+<h1>Analyser le code avec jadx</h1>
+<p>jadx base.apk</p>
+
+<h1>Vérifier les permissions déclarées</h1>
+<p>cat app_decompiled/AndroidManifest.xml | grep "uses-permission"</p>
+
+<h1>Analyser avec MobSF (Mobile Security Framework)</h1>
+<p>docker run -it --rm -p 8000:8000 opensecurity/mobile-security-framework-mobsf</p>
+<h1>Uploader l'APK sur http://localhost:8000</h1>
+<h1>Génère un rapport complet : permissions, API calls, secrets hardcodés, etc.</code></pre></h1>
+
+<h2 id="checklist-s-curit-mobile">Checklist sécurité mobile</h2>
+
+<pre><code>Système
+<p>✅ OS et apps à jour</p>
+<p>✅ Verrouillage biométrique + code fort</p>
+<p>✅ Chiffrement activé</p>
+<p>✅ Find my device activé</p>
+
+<p>Applications</p>
+<p>✅ Seulement depuis stores officiels</p>
+<p>✅ Permissions minimales accordées</p>
+<p>✅ Apps inutilisées supprimées</p>
+<p>✅ Play Protect / App Store review activé</p>
+
+<p>Communications</p>
+<p>✅ Signal pour les conversations sensibles</p>
+<p>✅ VPN sur les réseaux publics</p>
+<p>✅ 2FA TOTP sur tous les comptes importants</p>
+
+<p>Données</p>
+<p>✅ Sauvegarde chiffrée activée</p>
+<p>✅ Données sensibles pas dans les notes standard</p>
+<p>✅ Gestionnaire de mots de passe installé</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité mobile repose sur trois axes : <strong>mises à jour régulières, contrôle des permissions et communications chiffrées</strong>. Signal + Bitwarden + un VPN couvrent la majorité des besoins de sécurité pour un utilisateur standard. Pour une protection maximale, les passkeys représentent l'avenir de l'authentification mobile.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-mobile" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/active-directory.html" class="nav-prev">← Active Directory : attaques et défense</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/dark-web.html" class="nav-next">Dark Web : mythes et réalités →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

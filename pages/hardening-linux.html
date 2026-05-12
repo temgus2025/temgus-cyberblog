@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Hardening Linux : durcissement complet d'un serveur — Temgus.CyberBlog</title>
 <meta name="description" content="SSH sécurisé, UFW, fail2ban, auditd, AppArmor, sysctl — guide complet de durcissement selon le CIS Benchmark.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-linux.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-linux.html">
 <meta property="og:title" content="Hardening Linux : durcissement complet d'un serveur — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Hardening Linux : durcissement complet d'un serveur — Temgus.CyberBlog">
 <meta name="twitter:description" content="SSH sécurisé, UFW, fail2ban, auditd, AppArmor, sysctl — guide complet de durcissement selon le CIS Benchmark.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,572 @@
   "headline": "Hardening Linux : durcissement complet d'un serveur",
   "description": "SSH sécurisé, UFW, fail2ban, auditd, AppArmor, sysctl — guide complet de durcissement selon le CIS Benchmark.",
   "datePublished": "2025-08-07",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/hardening-linux.html",
   "inLanguage": "fr",
   "keywords": "hardening, Linux, fail2ban, AppArmor, CIS Benchmark",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🐧</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Hardening Linux : durcissement complet d'un serveur</h1>
-  <p style="color:#8892a4;max-width:500px">SSH sécurisé, UFW, fail2ban, auditd, AppArmor, sysctl — guide complet de durcissement selon le CIS Benchmark.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#hardening-linux" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🐧</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Hardening Linux : durcissement complet d'un serveur</div>
+      <div class="meta-details">
+        <span>📅 2025-08-07</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#-tape-1-mises-jour-et-packages">Étape 1 : Mises à jour et packages</a></li>
+<li><a href="#-tape-2-s-curiser-ssh">Étape 2 : Sécuriser SSH</a></li>
+<li><a href="#-tape-3-pare-feu-avec-ufw">Étape 3 : Pare-feu avec UFW</a></li>
+<li><a href="#-tape-4-fail2ban-protection-brute-force">Étape 4 : Fail2ban — Protection brute-force</a></li>
+<li><a href="#-tape-5-permissions-et-comptes">Étape 5 : Permissions et comptes</a></li>
+<li><a href="#-tape-6-audit-et-journalisation">Étape 6 : Audit et journalisation</a></li>
+<li><a href="#-tape-7-apparmor-selinux">Étape 7 : AppArmor / SELinux</a></li>
+<li><a href="#-tape-8-param-tres-kernel-sysctl-">Étape 8 : Paramètres kernel (sysctl)</a></li>
+<li><a href="#v-rification-avec-lynis">Vérification avec Lynis</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Hardening Linux : durcissement complet d'un serveur</h1>
+
+<p>Un serveur Linux fraîchement installé est loin d'être sécurisé par défaut. Le hardening consiste à réduire sa surface d'attaque en configurant correctement les services, les permissions et les politiques de sécurité. Ce guide suit les recommandations du CIS Benchmark Linux.</p>
+
+<h2 id="-tape-1-mises-jour-et-packages">Étape 1 : Mises à jour et packages</h2>
+
+<pre><code class="language-bash"># Ubuntu/Debian
+<p>apt update &amp;&amp; apt upgrade -y</p>
+<p>apt autoremove -y</p>
+
+<h1>CentOS/RHEL</h1>
+<p>yum update -y</p>
+
+<h1>Activer les mises à jour automatiques de sécurité (Ubuntu)</h1>
+<p>apt install unattended-upgrades -y</p>
+<p>dpkg-reconfigure --priority=low unattended-upgrades</p>
+
+<h1>Configurer /etc/apt/apt.conf.d/50unattended-upgrades</h1>
+<p>Unattended-Upgrade::Allowed-Origins {</p>
+<p>"${distro_id}:${distro_codename}-security";</p>
+<p>};</p>
+<p>Unattended-Upgrade::Automatic-Reboot "false";</p>
+<p>Unattended-Upgrade::Mail "admin@exemple.com";</code></pre>
+
+<h2 id="-tape-2-s-curiser-ssh">Étape 2 : Sécuriser SSH</h2>
+
+<pre><code class="language-bash"># /etc/ssh/sshd_config — Configuration sécurisée
+
+<h1>Changer le port par défaut (obscurité, mais réduit le bruit)</h1>
+<p>Port 2222</p>
+
+<h1>Désactiver l'authentification par mot de passe</h1>
+<p>PasswordAuthentication no</p>
+<p>PubkeyAuthentication yes</p>
+
+<h1>Désactiver la connexion root directe</h1>
+<p>PermitRootLogin no</p>
+
+<h1>Limiter les utilisateurs autorisés</h1>
+<p>AllowUsers deployer admin</p>
+
+<h1>Désactiver les protocoles obsolètes</h1>
+<p>Protocol 2</p>
+
+<h1>Timeout de session inactive (10 minutes)</h1>
+<p>ClientAliveInterval 600</p>
+<p>ClientAliveCountMax 0</p>
+
+<h1>Désactiver le forwarding X11 si non nécessaire</h1>
+<p>X11Forwarding no</p>
+
+<h1>Bannière de connexion</h1>
+<p>Banner /etc/ssh/banner.txt</p>
+
+<h1>Chiffrement fort uniquement</h1>
+<p>Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com</p>
+<p>MACs hmac-sha2-512,hmac-sha2-256</p>
+<p>KexAlgorithms curve25519-sha256,diffie-hellman-group14-sha256</p>
+
+<h1>Appliquer</h1>
+<p>systemctl restart sshd</p>
+
+<h1>Générer une clé SSH forte (côté client)</h1>
+<p>ssh-keygen -t ed25519 -C "admin@serveur" -f ~/.ssh/id_ed25519</p>
+<h1>Copier la clé publique sur le serveur</h1>
+<p>ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 2222 user@serveur</code></pre>
+
+<h2 id="-tape-3-pare-feu-avec-ufw">Étape 3 : Pare-feu avec UFW</h2>
+
+<pre><code class="language-bash"># UFW (Uncomplicated Firewall) — Simple et efficace
+
+<h1>Politique par défaut : tout bloquer en entrée</h1>
+<p>ufw default deny incoming</p>
+<p>ufw default allow outgoing</p>
+
+<h1>Autoriser SSH (sur le nouveau port)</h1>
+<p>ufw allow 2222/tcp</p>
+
+<h1>Autoriser HTTP/HTTPS si serveur web</h1>
+<p>ufw allow 80/tcp</p>
+<p>ufw allow 443/tcp</p>
+
+<h1>Limiter les tentatives SSH (anti brute-force)</h1>
+<p>ufw limit 2222/tcp</p>
+
+<h1>Activer</h1>
+<p>ufw enable</p>
+<p>ufw status verbose</p>
+
+<h1>Voir les règles numérotées (pour les supprimer)</h1>
+<p>ufw status numbered</p>
+
+<h1>Bloquer une IP suspecte</h1>
+<p>ufw deny from 185.220.101.5 to any</code></pre>
+
+<h2 id="-tape-4-fail2ban-protection-brute-force">Étape 4 : Fail2ban — Protection brute-force</h2>
+
+<pre><code class="language-bash"># Installation
+<p>apt install fail2ban -y</p>
+
+<h1>/etc/fail2ban/jail.local</h1>
+<p>[DEFAULT]</p>
+<p>bantime  = 3600      # Bannir 1 heure</p>
+<p>findtime  = 600      # Fenêtre de 10 minutes</p>
+<p>maxretry = 5         # 5 tentatives max</p>
+<p>banaction = ufw      # Utiliser UFW pour bannir</p>
+
+<p>[sshd]</p>
+<p>enabled = true</p>
+<p>port    = 2222</p>
+<p>filter  = sshd</p>
+<p>logpath = /var/log/auth.log</p>
+<p>maxretry = 3         # Plus strict pour SSH</p>
+
+<p>[nginx-http-auth]</p>
+<p>enabled = true</p>
+<p>port    = http,https</p>
+<p>logpath = /var/log/nginx/error.log</p>
+
+<h1>Démarrer</h1>
+<p>systemctl enable fail2ban</p>
+<p>systemctl start fail2ban</p>
+
+<h1>Vérifier les IPs bannies</h1>
+<p>fail2ban-client status sshd</p>
+
+<h1>Débannir une IP (si besoin)</h1>
+<p>fail2ban-client set sshd unbanip 192.168.1.100</code></pre>
+
+<h2 id="-tape-5-permissions-et-comptes">Étape 5 : Permissions et comptes</h2>
+
+<pre><code class="language-bash"># Supprimer ou désactiver les comptes inutiles
+<p>cat /etc/passwd | awk -F: '$3 &gt;= 1000 {print $1}'  # Utilisateurs humains</p>
+
+<h1>Vérifier les comptes avec shell</h1>
+<p>grep -v "nologin\|false" /etc/passwd</p>
+
+<h1>Désactiver un compte sans le supprimer</h1>
+<p>usermod -L -s /usr/sbin/nologin unused_user</p>
+
+<h1>Vérifier les fichiers SUID/SGID (élévation de privilèges potentielle)</h1>
+<p>find / -perm -4000 -type f 2&gt;/dev/null  # SUID</p>
+<p>find / -perm -2000 -type f 2&gt;/dev/null  # SGID</p>
+
+<h1>Supprimer le SUID sur les binaires non nécessaires</h1>
+<p>chmod u-s /usr/bin/at</p>
+<p>chmod u-s /usr/bin/newgrp</p>
+
+<h1>Sécuriser /etc/passwd et /etc/shadow</h1>
+<p>chmod 644 /etc/passwd</p>
+<p>chmod 600 /etc/shadow</p>
+<p>chown root:root /etc/passwd /etc/shadow</p>
+
+<h1>Politique de mots de passe (/etc/login.defs)</h1>
+<p>PASS_MAX_DAYS   90</p>
+<p>PASS_MIN_DAYS   1</p>
+<p>PASS_MIN_LEN    14</p>
+<p>PASS_WARN_AGE   7</p>
+
+<h1>Complexité des mots de passe (PAM)</h1>
+<p>apt install libpam-pwquality -y</p>
+<h1>/etc/security/pwquality.conf</h1>
+<p>minlen = 14</p>
+<p>dcredit = -1    # Au moins 1 chiffre</p>
+<p>ucredit = -1    # Au moins 1 majuscule</p>
+<p>lcredit = -1    # Au moins 1 minuscule</p>
+<p>ocredit = -1    # Au moins 1 caractère spécial</code></pre>
+
+<h2 id="-tape-6-audit-et-journalisation">Étape 6 : Audit et journalisation</h2>
+
+<pre><code class="language-bash"># Auditd — Journalisation avancée des événements système
+<p>apt install auditd audispd-plugins -y</p>
+
+<h1>/etc/audit/rules.d/audit.rules</h1>
+<h1>Surveiller les modifications des fichiers sensibles</h1>
+<p>-w /etc/passwd -p wa -k passwd_changes</p>
+<p>-w /etc/shadow -p wa -k shadow_changes</p>
+<p>-w /etc/sudoers -p wa -k sudoers_changes</p>
+<p>-w /etc/ssh/sshd_config -p wa -k sshd_config</p>
+
+<h1>Surveiller les connexions SSH</h1>
+<p>-w /var/log/auth.log -p wa -k auth_log</p>
+
+<h1>Surveiller les exécutions de commandes privilégiées</h1>
+<p>-a always,exit -F arch=b64 -S execve -F euid=0 -k root_commands</p>
+
+<h1>Surveiller les modifications de crontab</h1>
+<p>-w /var/spool/cron -p wa -k crontab</p>
+<p>-w /etc/cron.d -p wa -k cron_changes</p>
+
+<h1>Appliquer les règles</h1>
+<p>augenrules --load</p>
+<p>systemctl restart auditd</p>
+
+<h1>Chercher des événements suspects</h1>
+<p>ausearch -k passwd_changes</p>
+<p>ausearch -k root_commands | aureport -x --summary</code></pre>
+
+<h2 id="-tape-7-apparmor-selinux">Étape 7 : AppArmor / SELinux</h2>
+
+<pre><code class="language-bash"># AppArmor (Ubuntu/Debian) — Contrôle d'accès mandatory
+
+<h1>Vérifier le statut</h1>
+<p>aa-status</p>
+
+<h1>Mode enforce sur tous les profils</h1>
+<p>aa-enforce /etc/apparmor.d/*</p>
+
+<h1>Profil pour nginx</h1>
+<h1>/etc/apparmor.d/usr.sbin.nginx</h1>
+<p>/usr/sbin/nginx {</p>
+<p>capability net_bind_service,</p>
+<p>capability setuid,</p>
+<p>capability setgid,</p>
+
+<p>/etc/nginx/** r,</p>
+<p>/var/log/nginx/** w,</p>
+<p>/var/www/html/** r,</p>
+<p>/run/nginx.pid rw,</p>
+
+<p># Refuser tout le reste</p>
+<p>deny /etc/** w,</p>
+<p>deny /root/** rwx,</p>
+<p>}</p>
+
+<h1>Tester un profil (mode complain = log sans bloquer)</h1>
+<p>aa-complain /etc/apparmor.d/usr.sbin.nginx</p>
+<h1>Surveiller les logs pendant 24h puis passer en enforce</h1>
+<p>aa-enforce /etc/apparmor.d/usr.sbin.nginx</code></pre>
+
+<h2 id="-tape-8-param-tres-kernel-sysctl-">Étape 8 : Paramètres kernel (sysctl)</h2>
+
+<pre><code class="language-bash"># /etc/sysctl.d/99-hardening.conf
+
+<h1>Désactiver IPv6 si non utilisé</h1>
+<p>net.ipv6.conf.all.disable_ipv6 = 1</p>
+
+<h1>Protection contre les IP spoofing</h1>
+<p>net.ipv4.conf.all.rp_filter = 1</p>
+<p>net.ipv4.conf.default.rp_filter = 1</p>
+
+<h1>Désactiver le routage IP</h1>
+<p>net.ipv4.ip_forward = 0</p>
+
+<h1>Protection SYN flood</h1>
+<p>net.ipv4.tcp_syncookies = 1</p>
+<p>net.ipv4.tcp_max_syn_backlog = 2048</p>
+
+<h1>Ignorer les broadcasts ICMP (Smurf attack)</h1>
+<p>net.ipv4.icmp_echo_ignore_broadcasts = 1</p>
+
+<h1>Désactiver ICMP redirects</h1>
+<p>net.ipv4.conf.all.accept_redirects = 0</p>
+<p>net.ipv4.conf.all.send_redirects = 0</p>
+
+<h1>Protection ASLR (randomisation de l'espace d'adressage)</h1>
+<p>kernel.randomize_va_space = 2</p>
+
+<h1>Désactiver les core dumps</h1>
+<p>fs.suid_dumpable = 0</p>
+
+<h1>Appliquer sans redémarrage</h1>
+<p>sysctl -p /etc/sysctl.d/99-hardening.conf</code></pre>
+
+<h2 id="v-rification-avec-lynis">Vérification avec Lynis</h2>
+
+<pre><code class="language-bash"># Lynis — Outil d'audit de sécurité Linux open source
+<p>apt install lynis -y</p>
+
+<h1>Audit complet du système</h1>
+<p>lynis audit system</p>
+
+<h1>Score de 0 à 100</h1>
+<h1>&lt; 60 : Configuration dangereuse</h1>
+<h1>60-80 : Acceptable</h1>
+<h1>&gt; 80 : Bonne configuration</h1>
+
+<h1>Voir les suggestions</h1>
+<p>lynis audit system --tests-from-group authentication</p>
+<p>lynis audit system --tests-from-group networking</p>
+
+<h1>Rapport complet</h1>
+<p>cat /var/log/lynis.log | grep "Suggestion"</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le hardening Linux est un processus continu — pas une action ponctuelle. Référencez-vous au <strong>CIS Benchmark Linux</strong> pour une liste exhaustive et priorisée. Auditez régulièrement avec Lynis, surveillez vos logs avec auditd et maintenez vos packages à jour. Un serveur bien durci réduit considérablement la surface d'attaque exploitable.</p>
+
+<p>---</p>
+<p><em>Catégorie : Sécurité réseau</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#hardening-linux" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/threat-intelligence.html" class="nav-prev">← Threat Intelligence : anticiper les cyberattaques</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/evasion-av-edr.html" class="nav-next">Évasion d'antivirus et EDR : techniques et contre-mesures →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

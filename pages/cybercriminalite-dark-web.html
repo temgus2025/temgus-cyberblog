@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Cybercriminalité et dark web : comprendre l'écosystème — Temgus.CyberBlog</title>
 <meta name="description" content="Organisation de la cybercriminalité, marchés du dark web, stealers, groupes APT et opérations policières internationales.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/cybercriminalite-dark-web.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/cybercriminalite-dark-web.html">
 <meta property="og:title" content="Cybercriminalité et dark web : comprendre l'écosystème — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Cybercriminalité et dark web : comprendre l'écosystème — Temgus.CyberBlog">
 <meta name="twitter:description" content="Organisation de la cybercriminalité, marchés du dark web, stealers, groupes APT et opérations policières internationales.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,472 @@
   "headline": "Cybercriminalité et dark web : comprendre l'écosystème",
   "description": "Organisation de la cybercriminalité, marchés du dark web, stealers, groupes APT et opérations policières internationales.",
   "datePublished": "2025-07-03",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/cybercriminalite-dark-web.html",
   "inLanguage": "fr",
   "keywords": "cybercriminalité, dark web, Tor, APT, stealers",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🕸️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Cybercriminalité et dark web : comprendre l'écosystème</h1>
-  <p style="color:#8892a4;max-width:500px">Organisation de la cybercriminalité, marchés du dark web, stealers, groupes APT et opérations policières internationales.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cybercriminalite-dark-web" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🕸️</div>
+    <div class="meta-info">
+      <div class="meta-category">Cybercriminalité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Cybercriminalité et dark web : comprendre l'écosystème</div>
+      <div class="meta-details">
+        <span>📅 2025-07-03</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#l-cosyst-me-de-la-cybercriminalit-">L'écosystème de la cybercriminalité</a></li>
+<li><a href="#le-dark-web-d-mystification">Le Dark Web — Démystification</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#comment-fonctionne-tor">Comment fonctionne Tor</a></li>
+<li><a href="#les-march-s-du-dark-web">Les marchés du dark web</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#march-s-d-mantel-s">Marchés démantelés</a></li>
+<li><a href="#les-stealers-vol-de-donn-es-automatis-">Les stealers — Vol de données automatisé</a></li>
+<li><a href="#les-groupes-apt-cybercriminalit-tatique">Les groupes APT — Cybercriminalité étatique</a></li>
+<li><a href="#lutte-contre-la-cybercriminalit-">Lutte contre la cybercriminalité</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Cybercriminalité et dark web : comprendre l'écosystème</h1>
+
+<p>La cybercriminalité est devenue une industrie mondiale pesant plus de <strong>8 000 milliards de dollars</strong> en 2023. Comprendre comment fonctionne cet écosystème est essentiel pour mieux s'en défendre.</p>
+
+<h2 id="l-cosyst-me-de-la-cybercriminalit-">L'écosystème de la cybercriminalité</h2>
+
+<pre><code>Organisation de la cybercriminalité moderne :
+
+<p>Niveau 1 — Script Kiddies :</p>
+<p>→ Débutants qui utilisent des outils prêts à l'emploi</p>
+<p>→ Cibles faciles : sites non patchés, mots de passe faibles</p>
+
+<p>Niveau 2 — Cybercriminels intermédiaires :</p>
+<p>→ Acheteurs de Malware-as-a-Service, RaaS</p>
+<p>→ Campagnes de phishing ciblées</p>
+<p>→ Revendeurs de données volées</p>
+
+<p>Niveau 3 — Groupes criminels organisés :</p>
+<p>→ Structure professionnelle (RH, support, R&amp;D)</p>
+<p>→ Conti, LockBit, Cl0p, ALPHV</p>
+<p>→ Revenus : centaines de millions par an</p>
+
+<p>Niveau 4 — APT (Advanced Persistent Threats) :</p>
+<p>→ Groupes sponsorisés par des États</p>
+<p>→ APT28 (Russie), APT41 (Chine), Lazarus (Corée du Nord)</p>
+<p>→ Espionnage industriel, sabotage d'infrastructure</code></pre>
+
+<h2 id="le-dark-web-d-mystification">Le Dark Web — Démystification</h2>
+
+<pre><code>Internet se divise en 3 couches :
+
+<p>Surface Web (4%) :</p>
+<p>→ Google, Facebook, Wikipedia</p>
+<p>→ Indexé par les moteurs de recherche</p>
+
+<p>Deep Web (90%) :</p>
+<p>→ Bases de données privées, intranets</p>
+<p>→ Emails, dossiers médicaux, comptes bancaires</p>
+<p>→ Non indexé mais pas illégal</p>
+
+<p>Dark Web (6%) :</p>
+<p>→ Accessible seulement via Tor ou I2P</p>
+<p>→ Anonymat renforcé</p>
+<p>→ Usages légitimes ET illégaux</code></pre>
+
+<h3 id="comment-fonctionne-tor">Comment fonctionne Tor</h3>
+
+<pre><code>Réseau Tor = The Onion Router
+
+<p>Connexion normale :</p>
+<p>Vous → [Texte en clair] → Site web (FAI voit tout)</p>
+
+<p>Avec Tor :</p>
+<p>Vous → [Chiffré 3x] → Nœud 1 → Nœud 2 → Nœud 3 → Site web</p>
+
+<p>Chaque nœud ne connaît que son prédécesseur et successeur.</p>
+<p>Jamais la source ET la destination simultanément.</p>
+
+<p>Les .onion :</p>
+<p>→ Adresses accessibles uniquement via Tor</p>
+<p>→ Exemple : facebookwkhpilnemxj7asber7cybxd.onion (vrai Facebook)</p>
+<p>→ Serveur hébergé de façon anonyme</code></pre>
+
+<h2 id="les-march-s-du-dark-web">Les marchés du dark web</h2>
+
+<pre><code class="language-python">categories_marches = {
+<p>"données_volées": {</p>
+<p>"compte_netflix": "1-5$",</p>
+<p>"carte_bancaire_cvv": "5-20$",</p>
+<p>"dossier_médical": "50-200$",</p>
+<p>"passeport_scanné": "100-500$",</p>
+<p>"logs_stealer_1000_comptes": "10-50$"</p>
+<p>},</p>
+<p>"malwares": {</p>
+<p>"RedLine_Stealer_abonnement": "100-200$/mois",</p>
+<p>"Ransomware_affilié": "20-30% des rançons",</p>
+<p>"Botnet_location": "200-500$/semaine",</p>
+<p>"Zero-day_exploit": "10 000 - 500 000$"</p>
+<p>},</p>
+<p>"services": {</p>
+<p>"DDoS_1h": "20-100$",</p>
+<p>"Phishing_kit_Office365": "50-200$",</p>
+<p>"SIM_swap": "500-2000$"</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h3 id="march-s-d-mantel-s">Marchés démantelés</h3>
+
+<pre><code>Opérations policières majeures :
+
+<p>Silk Road (2013) :</p>
+<p>→ Ross Ulbricht arrêté</p>
+<p>→ 1 milliard de dollars saisi</p>
+
+<p>AlphaBay (2017) :</p>
+<p>→ 200 000 utilisateurs</p>
+<p>→ Démantelé par FBI/Europol</p>
+
+<p>Hansa (2017) :</p>
+<p>→ Europol a géré secrètement le site pendant 1 mois</p>
+<p>→ Collecte de preuves avant fermeture</p>
+
+<p>Genesis Market (2023) :</p>
+<p>→ 119 arrestations dans 17 pays</p>
+
+<p>Operation Cronos (2024) :</p>
+<p>→ Saisie des infrastructures LockBit</p>
+<p>→ 34 serveurs saisis, 200 crypto wallets gelés</p>
+
+<p>Operation Endgame (2024) :</p>
+<p>→ Démantèlement de botnets majeurs</p>
+<p>→ Plus grande opération anti-botnet de l'histoire</code></pre>
+
+<h2 id="les-stealers-vol-de-donn-es-automatis-">Les stealers — Vol de données automatisé</h2>
+
+<pre><code class="language-python"># Les stealers volent automatiquement depuis les navigateurs :
+<h1>mots de passe, cookies, historique, cartes bancaires, wallets crypto</h1>
+
+<p>donnees_volees = {</p>
+<p>"navigateurs": ["Chrome", "Firefox", "Edge", "Brave"],</p>
+<p>"types_données": [</p>
+<p>"Mots de passe sauvegardés",</p>
+<p>"Cookies de session (bypass 2FA !)",</p>
+<p>"Données autofill (cartes bancaires)",</p>
+<p>"Historique de navigation"</p>
+<p>],</p>
+<p>"crypto_wallets": ["MetaMask", "Exodus", "Electrum"],</p>
+<p>"applications": ["Discord tokens", "Telegram sessions", "Steam"]</p>
+<p>}</p>
+
+<h1>Exfiltration via Telegram Bot ou panel web</h1>
+<h1>Logs vendus sur Russian Market, 2easy</h1>
+<h1>Prix : 1-10$ par victime selon la valeur des données</h1>
+
+<h1>Protection :</h1>
+<h1>→ Ne jamais sauvegarder les mots de passe dans le navigateur</h1>
+<h1>→ Utiliser Bitwarden ou KeePassXC</h1>
+<h1>→ Activer les notifications de connexion inhabituelles</h1>
+<h1>→ Vérifier Have I Been Pwned régulièrement (haveibeenpwned.com)</code></pre></h1>
+
+<h2 id="les-groupes-apt-cybercriminalit-tatique">Les groupes APT — Cybercriminalité étatique</h2>
+
+<pre><code>Lazarus Group (Corée du Nord) :
+<p>Motivation : Financement du régime sous sanctions</p>
+<p>Attaques notables :</p>
+<p>→ Sony Pictures hack (2014)</p>
+<p>→ Bangladesh Bank heist (81M$, 2016)</p>
+<p>→ WannaCry (2017)</p>
+<p>→ Ronin Bridge hack (625M$, 2022)</p>
+<p>Spécialité : Vol de cryptomonnaies</p>
+
+<p>APT28 / Fancy Bear (Russie) :</p>
+<p>Motivation : Espionnage politique et militaire</p>
+<p>Attaques notables :</p>
+<p>→ DNC hack (élections US 2016)</p>
+<p>→ TV5Monde (2015)</p>
+<p>Spécialité : Influence politique, désinformation</p>
+
+<p>APT41 (Chine) :</p>
+<p>Motivation : Espionnage industriel + cybercriminalité</p>
+<p>Attaques notables :</p>
+<p>→ Equifax breach (145M dossiers, 2017)</p>
+<p>→ Vol de propriété intellectuelle massif</p>
+<p>Spécialité : R&amp;D industrielle, jeux vidéo</code></pre>
+
+<h2 id="lutte-contre-la-cybercriminalit-">Lutte contre la cybercriminalité</h2>
+
+<pre><code>Organismes de lutte :
+
+<p>Europol EC3 :</p>
+<p>→ Coordonne les enquêtes européennes</p>
+<p>→ Opérations : Chronos, Endgame, Genesis</p>
+
+<p>FBI Cyber Division :</p>
+<p>→ IC3 (Internet Crime Complaint Center)</p>
+<p>→ Signalement : ic3.gov</p>
+
+<p>ANSSI (France) :</p>
+<p>→ Signalement incidents : cert.ssi.gouv.fr</p>
+
+<p>Signaler en France :</p>
+<p>→ cybermalveillance.gouv.fr</p>
+<p>→ Plainte à la police/gendarmerie</p>
+<p>→ Pharos pour les contenus illicites</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cybercriminalité est une industrie organisée et professionnelle. Comprendre son fonctionnement — stealers, marchés dark web, groupes APT — permet d'anticiper les menaces. Les opérations récentes comme Cronos et Endgame prouvent que même les groupes les plus sophistiqués peuvent être démantelés. La vigilance individuelle et collective reste la meilleure défense.</p>
+
+<p>---</p>
+<p><em>Catégorie : Cybercriminalité</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cybercriminalite-dark-web" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-physique.html" class="nav-prev">← Sécurité physique : quand les hackers passent la porte</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-microservices.html" class="nav-next">Sécurité des microservices : protéger une architecture distribuée →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

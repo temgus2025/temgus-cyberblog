@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>VPN & anonymat en ligne : guide complet — Temgus.CyberBlog</title>
 <meta name="description" content="Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html">
 <meta property="og:title" content="VPN & anonymat en ligne : guide complet — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="VPN & anonymat en ligne : guide complet — Temgus.CyberBlog">
 <meta name="twitter:description" content="Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,502 @@
   "headline": "VPN & anonymat en ligne : guide complet",
   "description": "Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.",
   "datePublished": "2025-03-22",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/vpn-anonymat.html",
   "inLanguage": "fr",
   "keywords": "VPN, anonymat, Tor",
-  "timeRequired": "PT6M"
+  "timeRequired": "PT6M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🕵️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">VPN & anonymat en ligne : guide complet</h1>
-  <p style="color:#8892a4;max-width:500px">Comment fonctionnent les VPN, leurs limites et les meilleures pratiques.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#vpn-anonymat" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🕵️</div>
+    <div class="meta-info">
+      <div class="meta-category">VPN & Anonymat</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">VPN & anonymat en ligne : guide complet</div>
+      <div class="meta-details">
+        <span>📅 2025-03-22</span>
+        <span>⏱ 6 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-un-vpn-">Qu'est-ce qu'un VPN ?</a></li>
+<li><a href="#comment-fonctionne-un-vpn-techniquement-">Comment fonctionne un VPN techniquement ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-protocoles-vpn">Les protocoles VPN</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#wireguard-le-protocole-moderne">WireGuard — Le protocole moderne</a></li>
+<li><a href="#ce-qu-un-vpn-fait-vraiment">Ce qu'un VPN fait vraiment</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-ce-que-le-vpn-prot-ge">✅ Ce que le VPN protège</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-ce-que-le-vpn-ne-fait-pas">❌ Ce que le VPN ne fait PAS</a></li>
+<li><a href="#choisir-un-bon-vpn">Choisir un bon VPN</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-crit-res-essentiels">Les critères essentiels</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#comparatif-des-vpn-r-put-s">Comparatif des VPN réputés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-vpn-viter-absolument">Les VPN à éviter absolument</a></li>
+<li><a href="#monter-son-propre-serveur-vpn">Monter son propre serveur VPN</a></li>
+<li><a href="#tor-l-anonymat-pouss-l-extr-me">Tor : l'anonymat poussé à l'extrême</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#vpn-vs-tor">VPN vs Tor</a></li>
+<li><a href="#les-techniques-de-fingerprinting-conna-tre">Les techniques de fingerprinting à connaître</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#browser-fingerprinting">Browser Fingerprinting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dns-leaks">DNS Leaks</a></li>
+<li><a href="#bonnes-pratiques-d-anonymat-en-ligne">Bonnes pratiques d'anonymat en ligne</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>VPN & anonymat en ligne : guide complet</h1>
+
+<p>Un VPN (Virtual Private Network) est devenu un outil incontournable pour protéger sa vie privée en ligne. Mais que fait-il vraiment ? Quelles sont ses limites ? Et quand l'utiliser ? Ce guide répond à toutes ces questions.</p>
+
+<h2 id="qu-est-ce-qu-un-vpn-">Qu'est-ce qu'un VPN ?</h2>
+
+<p>Un VPN crée un <strong>tunnel chiffré</strong> entre votre appareil et un serveur VPN. Tout votre trafic internet passe par ce tunnel, ce qui a deux effets :</p>
+
+<li>Votre fournisseur d'accès (FAI) ne voit plus ce que vous faites</li>
+<li>Les sites que vous visitez voient l'IP du serveur VPN, pas la vôtre</li>
+
+<pre><code>SANS VPN :
+<p>Vous → [FAI voit tout] → Internet → Site web (voit votre IP)</p>
+
+<p>AVEC VPN :</p>
+<p>Vous → [Tunnel chiffré] → Serveur VPN → [Internet] → Site web</p>
+<p>FAI ne voit                              (voit l'IP du VPN)</p>
+<p>que du trafic chiffré</code></pre>
+
+<h2 id="comment-fonctionne-un-vpn-techniquement-">Comment fonctionne un VPN techniquement ?</h2>
+
+<h3 id="les-protocoles-vpn">Les protocoles VPN</h3>
+
+<p>| Protocole | Vitesse | Sécurité | Usage |</p>
+<p>|-----------|---------|----------|-------|</p>
+<p>| WireGuard | ⚡⚡⚡ Très rapide | 🔒🔒🔒 Excellente | Recommandé |</p>
+<p>| OpenVPN | ⚡⚡ Rapide | 🔒🔒🔒 Excellente | Standard |</p>
+<p>| IKEv2/IPSec | ⚡⚡⚡ Très rapide | 🔒🔒🔒 Excellente | Mobile |</p>
+<p>| L2TP/IPSec | ⚡⚡ Moyen | 🔒🔒 Bonne | Obsolète |</p>
+<p>| PPTP | ⚡⚡⚡ Rapide | 🔒 Mauvaise | ⛔ À éviter |</p>
+
+<h3 id="wireguard-le-protocole-moderne">WireGuard — Le protocole moderne</h3>
+
+<pre><code class="language-bash"># Installation WireGuard sur Linux
+<p>sudo apt install wireguard</p>
+
+<h1>Générer les clés</h1>
+<p>wg genkey | tee cle_privee | wg pubkey &gt; cle_publique</p>
+
+<h1>Configuration client (/etc/wireguard/wg0.conf)</h1>
+<p>[Interface]</p>
+<p>PrivateKey = [votre_cle_privee]</p>
+<p>Address = 10.0.0.2/24</p>
+<p>DNS = 1.1.1.1</p>
+
+<p>[Peer]</p>
+<p>PublicKey = [cle_publique_serveur]</p>
+<p>Endpoint = vpn.exemple.com:51820</p>
+<p>AllowedIPs = 0.0.0.0/0  # Tout le trafic passe par le VPN</p>
+
+<h1>Activer la connexion</h1>
+<p>sudo wg-quick up wg0</code></pre>
+
+<h2 id="ce-qu-un-vpn-fait-vraiment">Ce qu'un VPN fait vraiment</h2>
+
+<h3 id="-ce-que-le-vpn-prot-ge">✅ Ce que le VPN protège</h3>
+
+<ul><li><strong>Votre FAI</strong> ne peut plus voir vos sites visités</li><li><strong>Les réseaux WiFi publics</strong> ne peuvent plus intercepter vos données</li><li><strong>Votre adresse IP réelle</strong> est cachée des sites web</li><li><strong>La géolocalisation</strong> basée sur l'IP est contournée</li></ul>
+
+<h3 id="-ce-que-le-vpn-ne-fait-pas">❌ Ce que le VPN ne fait PAS</h3>
+
+<pre><code>Mythes courants sur les VPN :
+
+<p>❌ "Le VPN me rend complètement anonyme"</p>
+<p>→ FAUX : Les cookies, empreinte navigateur et comptes connectés</p>
+<p>vous identifient toujours</p>
+
+<p>❌ "Le VPN me protège des malwares"</p>
+<p>→ FAUX : Le VPN ne fait que chiffrer le trafic réseau</p>
+
+<p>❌ "Le VPN cache mon activité à Google/Facebook"</p>
+<p>→ FAUX : Si vous êtes connecté à ces services, ils vous voient</p>
+
+<p>❌ "Le VPN gratuit est aussi bien que le payant"</p>
+<p>→ FAUX : Les VPN gratuits revendent souvent vos données</code></pre>
+
+<h2 id="choisir-un-bon-vpn">Choisir un bon VPN</h2>
+
+<h3 id="les-crit-res-essentiels">Les critères essentiels</h3>
+
+<p><strong>1. Politique de non-journalisation (No-logs)</strong></p>
+
+<p>Le fournisseur ne conserve aucun log de votre activité. Vérifiez qu'elle a été <strong>auditée indépendamment</strong>.</p>
+
+<p><strong>2. Juridiction</strong></p>
+
+<p>Où est basée la société ? Les pays des <strong>"5 Eyes"</strong> (USA, UK, Canada, Australie, Nouvelle-Zélande) ont des lois de surveillance très étendues.</p>
+
+<p><strong>3. Kill Switch</strong></p>
+
+<p>Si le VPN se déconnecte, le Kill Switch coupe automatiquement Internet pour éviter que votre vraie IP ne soit exposée.</p>
+
+<p><strong>4. Protocoles modernes</strong></p>
+
+<p>Préférez WireGuard ou OpenVPN. Fuyez PPTP.</p>
+
+<h3 id="comparatif-des-vpn-r-put-s">Comparatif des VPN réputés</h3>
+
+<p>| VPN | Prix/mois | No-logs audité | Juridiction | Kill Switch |</p>
+<p>|-----|-----------|----------------|-------------|-------------|</p>
+<p>| Mullvad | 5€ | ✅ Oui | Suède | ✅ |</p>
+<p>| ProtonVPN | 4-10€ | ✅ Oui | Suisse | ✅ |</p>
+<p>| IVPN | 6€ | ✅ Oui | Gibraltar | ✅ |</p>
+<p>| ExpressVPN | 8€ | ✅ Oui | Îles Vierges | ✅ |</p>
+
+<p>> <strong>Mullvad</strong> accepte les paiements en espèces et crypto — idéal si vous voulez maximiser la confidentialité.</p>
+
+<h3 id="les-vpn-viter-absolument">Les VPN à éviter absolument</h3>
+
+<ul><li>VPN <strong>gratuits</strong> sans modèle économique clair</li><li>VPN basés en <strong>Chine</strong></li><li>VPN sans <strong>politique no-logs vérifiable</strong></li><li>Hola VPN (revend votre bande passante)</li></ul>
+
+<h2 id="monter-son-propre-serveur-vpn">Monter son propre serveur VPN</h2>
+
+<p>Pour un contrôle total, hébergez votre propre VPN :</p>
+
+<pre><code class="language-bash"># Installation automatique avec script officiel WireGuard
+<p>curl -O https://raw.githubusercontent.com/angristan/wireguard-install/master/wireguard-install.sh</p>
+<p>chmod +x wireguard-install.sh</p>
+<p>sudo ./wireguard-install.sh</p>
+
+<h1>Le script vous guide pour configurer :</h1>
+<h1>- Le port d'écoute</h1>
+<h1>- Les DNS</h1>
+<h1>- Les clients autorisés</code></pre></h1>
+
+<p><strong>Prérequis :</strong> un VPS (serveur privé virtuel) chez Hetzner, OVH ou DigitalOcean (~3-5€/mois).</p>
+
+<p><strong>Avantage :</strong> vous êtes le seul à avoir accès aux logs (qui n'existent pas si vous ne les activez pas).</p>
+
+<p><strong>Inconvénient :</strong> votre IP de serveur vous est associée — moins anonyme qu'un vrai VPN commercial.</p>
+
+<h2 id="tor-l-anonymat-pouss-l-extr-me">Tor : l'anonymat poussé à l'extrême</h2>
+
+<p>Tor est différent d'un VPN. Il fait transiter votre trafic à travers <strong>3 relais chiffrés</strong> gérés par des bénévoles dans le monde entier.</p>
+
+<pre><code>Vous → [Relais 1] → [Relais 2] → [Relais 3] → Internet
+<p>Entrée       Milieu       Sortie</p>
+<p>(guard)       (middle)      (exit)</p>
+
+<p>Chaque relais ne connaît que le relais précédent et suivant.</p>
+<p>Personne ne connaît à la fois la source ET la destination.</code></pre>
+
+<h3 id="vpn-vs-tor">VPN vs Tor</h3>
+
+<p>| Critère | VPN | Tor |</p>
+<p>|---------|-----|-----|</p>
+<p>| Vitesse | ⚡⚡⚡ Rapide | ⚡ Lent |</p>
+<p>| Anonymat | Moyen | Élevé |</p>
+<p>| Confiance requise | Fournisseur VPN | Réseau distribué |</p>
+<p>| Streaming | ✅ | ❌ |</p>
+<p>| Usage | Quotidien | Haute sensibilité |</p>
+
+<pre><code class="language-bash"># Installer Tor Browser
+<h1>https://www.torproject.org/download/</h1>
+
+<h1>Ou Tor en ligne de commande</h1>
+<p>sudo apt install tor</p>
+<p>sudo systemctl start tor</p>
+
+<h1>Utiliser curl via Tor (port SOCKS 9050)</h1>
+<p>curl --socks5-hostname localhost:9050 https://check.torproject.org/api/ip</code></pre>
+
+<h2 id="les-techniques-de-fingerprinting-conna-tre">Les techniques de fingerprinting à connaître</h2>
+
+<p>Même avec un VPN, vous pouvez être identifié par :</p>
+
+<h3 id="browser-fingerprinting">Browser Fingerprinting</h3>
+
+<p>Votre navigateur révèle des dizaines d'informations qui forment une empreinte unique :</p>
+
+<pre><code class="language-javascript">// Ce que les sites collectent sans cookies
+<ul><li>User-Agent (version navigateur/OS)</li><li>Résolution d'écran</li><li>Polices installées</li><li>Plugins actifs</li><li>Fuseau horaire</li><li>Paramètres de langue</li><li>Canvas fingerprint (rendu graphique unique)</li><li>WebGL fingerprint</code></pre></li></ul>
+
+<p><strong>Protection :</strong> utilisez Firefox avec uBlock Origin + Privacy Badger, ou le Tor Browser.</p>
+
+<h3 id="dns-leaks">DNS Leaks</h3>
+
+<p>Si votre VPN est mal configuré, vos requêtes DNS peuvent partir en dehors du tunnel.</p>
+
+<pre><code class="language-bash"># Tester les fuites DNS
+<h1>https://dnsleaktest.com</h1>
+
+<h1>Forcer les DNS via le VPN (Linux)</h1>
+<h1>Dans /etc/resolv.conf</h1>
+<p>nameserver 10.0.0.1  # DNS du VPN, pas de votre FAI</code></pre>
+
+<h2 id="bonnes-pratiques-d-anonymat-en-ligne">Bonnes pratiques d'anonymat en ligne</h2>
+
+<pre><code>Niveau 1 — Protection basique
+<p>✅ VPN commercial réputé</p>
+<p>✅ DNS chiffré (DoH/DoT) : 1.1.1.1 ou 9.9.9.9</p>
+<p>✅ HTTPS partout (extension HTTPS Everywhere)</p>
+<p>✅ Bloqueur de pubs (uBlock Origin)</p>
+
+<p>Niveau 2 — Protection intermédiaire</p>
+<p>✅ Firefox avec configuration durcie</p>
+<p>✅ Moteur de recherche privé (DuckDuckGo, Brave Search)</p>
+<p>✅ Email temporaire pour les inscriptions</p>
+<p>✅ Compartimentalisation (comptes séparés)</p>
+
+<p>Niveau 3 — Haute confidentialité</p>
+<p>✅ Tor Browser pour la navigation sensible</p>
+<p>✅ Système d'exploitation dédié (Tails OS)</p>
+<p>✅ Paiements en cash ou crypto</p>
+<p>✅ Aucun compte connecté pendant la navigation anonyme</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Un VPN est un outil précieux mais pas magique. Il protège votre trafic des regards indiscrets sur le réseau, mais ne vous rend pas invisible. Pour une vraie confidentialité, combinez VPN + navigateur durci + bonnes pratiques. Et si vous avez besoin d'anonymat sérieux, Tor reste la référence.</p>
+
+<p>---</p>
+<p><em>Articles connexes : <a href="../articles/intro-cybersecurite" target="_blank" rel="noopener">Introduction à la cybersécurité</a> | <a href="../articles/cryptographie-bases" target="_blank" rel="noopener">Cryptographie</a></em></p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#vpn-anonymat" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/intro-pentest.html" class="nav-prev">← Introduction au pentesting éthique</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/attaques-ddos.html" class="nav-next">Attaques DDoS : comment ça fonctionne et comment s'en protéger →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>CTF : les compétitions de hacking éthique — Temgus.CyberBlog</title>
 <meta name="description" content="Web, Pwn, Reverse, Crypto, Forensics — guide complet pour débuter et progresser en CTF.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/ctf-competitions.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/ctf-competitions.html">
 <meta property="og:title" content="CTF : les compétitions de hacking éthique — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="CTF : les compétitions de hacking éthique — Temgus.CyberBlog">
 <meta name="twitter:description" content="Web, Pwn, Reverse, Crypto, Forensics — guide complet pour débuter et progresser en CTF.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,570 @@
   "headline": "CTF : les compétitions de hacking éthique",
   "description": "Web, Pwn, Reverse, Crypto, Forensics — guide complet pour débuter et progresser en CTF.",
   "datePublished": "2025-06-12",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/ctf-competitions.html",
   "inLanguage": "fr",
   "keywords": "CTF, HackTheBox, TryHackMe, compétition",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🚩</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">CTF : les compétitions de hacking éthique</h1>
-  <p style="color:#8892a4;max-width:500px">Web, Pwn, Reverse, Crypto, Forensics — guide complet pour débuter et progresser en CTF.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ctf-competitions" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🚩</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">CTF : les compétitions de hacking éthique</div>
+      <div class="meta-details">
+        <span>📅 2025-06-12</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-un-ctf-">Qu'est-ce qu'un CTF ?</a></li>
+<li><a href="#les-cat-gories-de-challenges">Les catégories de challenges</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-web">1. Web</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-pwn-exploitation-binaire-">2. Pwn (Exploitation binaire)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-reverse-engineering">3. Reverse Engineering</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-cryptographie">4. Cryptographie</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-forensics">5. Forensics</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#6-osint">6. OSINT</a></li>
+<li><a href="#plateformes-ctf-recommand-es">Plateformes CTF recommandées</a></li>
+<li><a href="#construire-son-quipe-ctf">Construire son équipe CTF</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>CTF : les compétitions de hacking éthique</h1>
+
+<p>Les CTF (Capture The Flag) sont des compétitions de cybersécurité où les participants résolvent des challenges techniques pour trouver un "flag" (drapeau), une chaîne de texte prouvant qu'ils ont résolu le problème. C'est la meilleure façon d'apprendre la cybersécurité de façon pratique et ludique.</p>
+
+<h2 id="qu-est-ce-qu-un-ctf-">Qu'est-ce qu'un CTF ?</h2>
+
+<pre><code>Format typique :
+<p>→ Équipe de 1-4 personnes</p>
+<p>→ Durée : 24h à 72h</p>
+<p>→ Challenges dans différentes catégories</p>
+<p>→ Chaque challenge a un flag : CTF{th1s_is_the_flag}</p>
+<p>→ Soumettre le flag = points</p>
+<p>→ L'équipe avec le plus de points gagne</p>
+
+<p>Types de CTF :</p>
+<p>Jeopardy    : Challenges indépendants par catégorie (le plus courant)</p>
+<p>Attack/Defense : Les équipes attaquent ET défendent des services</p>
+<p>King of the Hill : Prendre et tenir le contrôle d'un serveur</code></pre>
+
+<h2 id="les-cat-gories-de-challenges">Les catégories de challenges</h2>
+
+<h3 id="1-web">1. Web</h3>
+
+<pre><code>Objectif : exploiter des vulnérabilités dans des applications web
+
+<p>Techniques courantes :</p>
+<p>→ SQL Injection</p>
+<p>→ XSS (Cross-Site Scripting)</p>
+<p>→ SSRF (Server-Side Request Forgery)</p>
+<p>→ XXE (XML External Entities)</p>
+<p>→ IDOR (Insecure Direct Object Reference)</p>
+<p>→ Authentication bypass</p>
+<p>→ JWT manipulation</p>
+<p>→ GraphQL injection</p>
+
+<p>Exemple de challenge web :</p>
+<p>"Un site de login vous attend. Trouvez le flag."</p>
+<p>→ Tester : admin' OR '1'='1' -- en username</p>
+<p>→ Ou analyser le JWT : changer le rôle "user" → "admin"</p>
+<p>→ Ou tester : /admin/../../../etc/passwd (path traversal)</code></pre>
+
+<pre><code class="language-bash"># Outils web CTF
+<p>burpsuite     # Proxy d'interception HTTP (essentiel)</p>
+<p>sqlmap        # Automatiser les SQLi</p>
+<p>ffuf          # Fuzzer (découvrir des endpoints cachés)</p>
+<p>wfuzz         # Fuzzer alternatif</p>
+<p>nikto         # Scanner de vulnérabilités web</p>
+
+<h1>Commandes utiles</h1>
+<p>ffuf -w wordlist.txt -u http://target.com/FUZZ</p>
+<p>curl -v -X POST http://target.com/login -d "user=admin'--&amp;pass=x"</p>
+<p>jwt_tool token.jwt -T  # Analyser et modifier les JWT</code></pre>
+
+<h3 id="2-pwn-exploitation-binaire-">2. Pwn (Exploitation binaire)</h3>
+
+<pre><code>Objectif : exploiter des binaires pour obtenir un shell ou lire un fichier
+
+<p>Techniques :</p>
+<p>→ Buffer Overflow (Stack BOF, Heap BOF)</p>
+<p>→ Format String vulnerability</p>
+<p>→ Return-Oriented Programming (ROP)</p>
+<p>→ Ret2libc, Ret2plt</p>
+<p>→ Heap exploitation (Use-after-free, double-free)</p>
+
+<p>Exemple de challenge pwn :</p>
+<p>"Ce binaire tourne sur le serveur nc ctf.example.com 9001"</p>
+<p>→ Télécharger le binaire</p>
+<p>→ Analyser avec Ghidra/IDA</p>
+<p>→ Trouver la vulnérabilité</p>
+<p>→ Écrire l'exploit</code></pre>
+
+<pre><code class="language-python"># Pwntools - Bibliothèque Python pour l'exploitation
+<p>from pwn import *</p>
+
+<h1>Connexion au serveur CTF</h1>
+<p>p = remote('ctf.example.com', 9001)</p>
+<h1>Ou en local :</h1>
+<h1>p = process('./vuln_binary')</h1>
+
+<h1>Analyser le binaire</h1>
+<p>elf = ELF('./vuln_binary')</p>
+<p>rop = ROP(elf)</p>
+
+<h1>Construire l'exploit</h1>
+<p>offset = 72</p>
+<p>rop.call('system', [next(elf.search(b'/bin/sh'))])</p>
+<p>payload = flat({offset: rop.chain()})</p>
+
+<p>p.sendline(payload)</p>
+<p>p.interactive()  # Shell interactif !</code></pre>
+
+<h3 id="3-reverse-engineering">3. Reverse Engineering</h3>
+
+<pre><code>Objectif : comprendre ce que fait un binaire sans code source
+
+<p>Techniques :</p>
+<p>→ Désassemblage (assembly x86/x64)</p>
+<p>→ Décompilation (reconstruire le C depuis le binaire)</p>
+<p>→ Analyse dynamique (suivre l'exécution pas à pas)</p>
+<p>→ Cracking de protections (licences, passwords)</p>
+<p>→ Analyse de malwares</p>
+<p>→ Désobfuscation</p>
+
+<p>Exemple :</p>
+<p>"Ce binaire affiche 'Wrong password'. Trouvez le bon."</p>
+<p>→ Ouvrir dans Ghidra</p>
+<p>→ Trouver la fonction de vérification</p>
+<p>→ Comprendre l'algorithme</p>
+<p>→ Extraire/calculer le bon mot de passe</code></pre>
+
+<pre><code class="language-bash"># Outils reverse engineering
+<p>ghidra          # NSA's reverse engineering tool (gratuit)</p>
+<p>ida-free        # Standard industrie (version gratuite limitée)</p>
+<p>radare2         # Multi-plateforme, CLI</p>
+<p>binary ninja    # Moderne, très lisible</p>
+<p>gdb + pwndbg   # Debugging dynamique</p>
+
+<h1>Analyse statique rapide</h1>
+<p>strings binaire | grep -i "flag\|password\|key"</p>
+<p>ltrace ./binaire    # Tracer les appels de librairies</p>
+<p>strace ./binaire    # Tracer les appels système</p>
+<p>objdump -d binaire  # Désassembler</p>
+
+<h1>Décompiler avec Ghidra (raccourci clavier)</h1>
+<h1>F → décompiler la fonction courante</h1>
+<h1>Ctrl+E → éditer le code C décompilé</h1>
+<h1>Clic droit → rename variable</code></pre></h1>
+
+<h3 id="4-cryptographie">4. Cryptographie</h3>
+
+<pre><code>Objectif : casser ou contourner des systèmes cryptographiques
+
+<p>Techniques :</p>
+<p>→ Chiffrement César, Vigenère, substitution</p>
+<p>→ RSA (factorisation, small exponent, padding oracle)</p>
+<p>→ AES (ECB penguin, padding oracle, bit flipping)</p>
+<p>→ Hash collisions</p>
+<p>→ Mauvaise génération de nombres aléatoires</p>
+<p>→ Timing attacks</p>
+
+<p>Exemple :</p>
+<p>"Message chiffré : KHOOR ZRUOG. Trouvez le texte clair."</p>
+<p>→ Décalage de 3 → HELLO WORLD (César)</p>
+
+<p>Exemple avancé :</p>
+<p>"RSA : n=77, e=3, c=34. Déchiffrez."</p>
+<p>→ Factoriser n : 77 = 7 × 11</p>
+<p>→ phi(n) = (7-1)(11-1) = 60</p>
+<p>→ d = e^-1 mod phi(n) = 3^-1 mod 60 = 20</p>
+<p>→ m = c^d mod n = 34^20 mod 77 = ?</code></pre>
+
+<pre><code class="language-python"># Outils crypto CTF
+
+<h1>CyberChef (en ligne) - couteau suisse du décodage</h1>
+<h1>https://gchq.github.io/CyberChef/</h1>
+
+<h1>Python pour RSA</h1>
+<p>from Crypto.PublicKey import RSA</p>
+<p>from Crypto.Util.number import *</p>
+
+<h1>Factoriser n avec factordb.com ou yafu</h1>
+<p>n = 77</p>
+<h1>Si n = p * q</h1>
+<p>p, q = 7, 11</p>
+<p>phi = (p-1) * (q-1)</p>
+<p>e = 3</p>
+<p>d = inverse(e, phi)</p>
+<p>c = 34</p>
+<p>m = pow(c, d, n)</p>
+<p>print(long_to_bytes(m))</p>
+
+<h1>RsaCtfTool - automatise beaucoup d'attaques RSA</h1>
+<p>python3 RsaCtfTool.py --publickey public.pem --uncipherfile cipher.txt</p>
+
+<h1>Hashcat pour les hashes</h1>
+<p>hashcat -m 0 hash.txt wordlist.txt  # MD5</p>
+<p>hashcat -m 1000 hash.txt wordlist.txt  # NTLM</code></pre>
+
+<h3 id="5-forensics">5. Forensics</h3>
+
+<pre><code>Objectif : analyser des fichiers, images disque, captures réseau
+
+<p>Techniques :</p>
+<p>→ Analyse de fichiers (strings, binwalk, exiftool)</p>
+<p>→ Stéganographie (steghide, zsteg, stegsolve)</p>
+<p>→ Analyse de captures réseau (Wireshark)</p>
+<p>→ Récupération de fichiers supprimés</p>
+<p>→ Analyse de mémoire (Volatility)</p>
+<p>→ Timeline forensique</p>
+
+<p>Exemple :</p>
+<p>"Cette image PNG contient un message caché."</p>
+<p>→ strings image.png | grep CTF</p>
+<p>→ zsteg image.png</p>
+<p>→ binwalk -e image.png</p>
+<p>→ stegsolve image.png (analyser les bits plans)</code></pre>
+
+<pre><code class="language-bash"># Workflow forensics CTF
+<p>file challenge.file        # Identifier le type réel</p>
+<p>strings challenge.file     # Chercher des strings lisibles</p>
+<p>exiftool challenge.file    # Métadonnées</p>
+<p>binwalk -e challenge.file  # Extraire les fichiers embarqués</p>
+<p>foremost challenge.file    # Récupération de fichiers</p>
+
+<h1>Images</h1>
+<p>zsteg image.png            # Stéganographie PNG</p>
+<p>steghide extract -sf image.jpg -p ""  # Pas de mot de passe</p>
+<p>stegsolve                  # Analyser les plans de bits (GUI)</p>
+
+<h1>Réseau (.pcap)</h1>
+<p>wireshark capture.pcap</p>
+<p>tshark -r capture.pcap -Y "http" -T fields -e http.request.uri</p>
+<p>strings capture.pcap | grep -i "flag\|CTF"</p>
+
+<h1>Mémoire</h1>
+<p>volatility -f mem.dmp imageinfo</p>
+<p>volatility -f mem.dmp --profile=Win10x64 filescan | grep -i flag</code></pre>
+
+<h3 id="6-osint">6. OSINT</h3>
+
+<pre><code>Objectif : trouver des informations en source ouverte
+
+<p>Exemples :</p>
+<p>→ "Où cette photo a-t-elle été prise ?" (géolocalisation)</p>
+<p>→ "Trouvez l'email de contact de cette personne"</p>
+<p>→ "À quelle date ce tweet a-t-il été posté ?"</p>
+<p>→ "Quel est le vrai nom derrière ce pseudonyme ?"</p>
+
+<p>Outils :</p>
+<p>→ Google Images reverse search</p>
+<p>→ Yandex (meilleur pour les visages)</p>
+<p>→ EXIF data (coordonnées GPS dans les photos)</p>
+<p>→ Wayback Machine (versions archivées de sites)</p>
+<p>→ Sherlock (recherche de pseudonymes)</p>
+<p>→ theHarvester (emails, sous-domaines)</code></pre>
+
+<h2 id="plateformes-ctf-recommand-es">Plateformes CTF recommandées</h2>
+
+<pre><code>Pour débuter :
+<p>→ PicoCTF (picoctf.org) : idéal lycéens/étudiants</p>
+<p>→ TryHackMe (tryhackme.com) : très guidé, excellent pour débutants</p>
+<p>→ OverTheWire (overthewire.org) : challenges Linux progressifs</p>
+
+<p>Niveau intermédiaire :</p>
+<p>→ HackTheBox (hackthebox.com) : machines réalistes</p>
+<p>→ CTFlearn (ctflearn.com) : challenges variés</p>
+<p>→ Root-Me (root-me.org) : français, très complet</p>
+
+<p>Niveau avancé :</p>
+<p>→ HackTheBox Pro Labs : Active Directory, enterprise</p>
+<p>→0xL4ugh, DaVinciCTF : nouvelles équipes</p>
+
+<p>Calendrier CTF :</p>
+<p>→ CTFtime.org : tous les CTF à venir dans le monde</p>
+<p>→ Signaler votre équipe et suivre votre progression</code></pre>
+
+<h2 id="construire-son-quipe-ctf">Construire son équipe CTF</h2>
+
+<pre><code class="language-python"># Composition idéale d'une équipe CTF de 4 personnes :
+
+<p>equipe = {</p>
+<p>"specialist_web": {</p>
+<p>"force": ["SQLi", "XSS", "SSRF", "Auth bypass"],</p>
+<p>"outils": ["Burp Suite", "sqlmap", "ffuf"]</p>
+<p>},</p>
+<p>"specialist_pwn": {</p>
+<p>"force": ["BOF", "ROP", "Heap exploitation"],</p>
+<p>"outils": ["pwntools", "gdb-pwndbg", "GEF"]</p>
+<p>},</p>
+<p>"specialist_crypto_reverse": {</p>
+<p>"force": ["RSA", "AES", "Ghidra", "IDA"],</p>
+<p>"outils": ["pycryptodome", "CyberChef", "RsaCtfTool"]</p>
+<p>},</p>
+<p>"specialist_forensics_misc": {</p>
+<p>"force": ["Volatility", "Wireshark", "Stéganographie"],</p>
+<p>"outils": ["Autopsy", "zsteg", "binwalk"]</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Communication d'équipe :</h1>
+<h1>→ CTFd (plateforme de gestion)</h1>
+<h1>→ Discord (communication en temps réel)</h1>
+<h1>→ Google Docs (partage de notes)</h1>
+<h1>→ GitHub (scripts et exploits partagés)</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les CTF sont la voie royale pour progresser en cybersécurité : on apprend en faisant, dans un cadre légal, avec des défis réalistes. Commencez par <strong>PicoCTF</strong> ou <strong>TryHackMe</strong>, progressez vers <strong>HackTheBox</strong>, et inscrivez-vous sur <strong>CTFtime.org</strong> pour rejoindre des compétitions mondiales. Chaque flag trouvé est une compétence réelle acquise.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ctf-competitions" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/buffer-overflow.html" class="nav-prev">← Buffer Overflow : comprendre et exploiter les débordements</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/rgpd-conformite.html" class="nav-next">RGPD et conformité sécurité : obligations et mise en œuvre →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

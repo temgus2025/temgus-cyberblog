@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Exercices Purple Team : attaque et défense en collaboration — Temgus.CyberBlog</title>
 <meta name="description" content="Atomic Red Team, MITRE ATT&CK, planification d'exercices et métriques pour améliorer la détection.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/purple-team-exercices.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/purple-team-exercices.html">
 <meta property="og:title" content="Exercices Purple Team : attaque et défense en collaboration — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Exercices Purple Team : attaque et défense en collaboration — Temgus.CyberBlog">
 <meta name="twitter:description" content="Atomic Red Team, MITRE ATT&CK, planification d'exercices et métriques pour améliorer la détection.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,446 @@
   "headline": "Exercices Purple Team : attaque et défense en collaboration",
   "description": "Atomic Red Team, MITRE ATT&CK, planification d'exercices et métriques pour améliorer la détection.",
   "datePublished": "2025-08-27",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/purple-team-exercices.html",
   "inLanguage": "fr",
   "keywords": "purple team, red team, blue team, MITRE ATT&CK, Atomic Red Team",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">💜</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Exercices Purple Team : attaque et défense en collaboration</h1>
-  <p style="color:#8892a4;max-width:500px">Atomic Red Team, MITRE ATT&CK, planification d'exercices et métriques pour améliorer la détection.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#purple-team-exercices" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">💜</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Exercices Purple Team : attaque et défense en collaboration</div>
+      <div class="meta-details">
+        <span>📅 2025-08-27</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-un-exercice-purple-team-">Qu'est-ce qu'un exercice Purple Team ?</a></li>
+<li><a href="#framework-mitre-att-ck-comme-r-f-rentiel-commun">Framework MITRE ATT&CK comme référentiel commun</a></li>
+<li><a href="#atomic-red-team-tests-att-ck-automatis-s">Atomic Red Team — Tests ATT&CK automatisés</a></li>
+<li><a href="#structure-d-un-exercice-purple-team">Structure d'un exercice Purple Team</a></li>
+<li><a href="#planning-d-exercice-purple-team-2-jours-">Planning d'exercice Purple Team (2 jours)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#jour-1-initial-access-execution">Jour 1 : Initial Access & Execution</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#jour-2-lateral-movement-impact">Jour 2 : Lateral Movement & Impact</a></li>
+<li><a href="#m-triques-d-un-exercice-purple-team">Métriques d'un exercice Purple Team</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Exercices Purple Team : attaque et défense en collaboration</h1>
+
+<p>Le Purple Team représente l'évolution naturelle des exercices de sécurité : Red Team et Blue Team travaillent ensemble en temps réel pour améliorer les capacités de détection et de réponse. C'est l'approche la plus efficace pour renforcer concrètement la posture de sécurité.</p>
+
+<h2 id="qu-est-ce-qu-un-exercice-purple-team-">Qu'est-ce qu'un exercice Purple Team ?</h2>
+
+<pre><code>Purple Team ≠ Red Team + Blue Team séparés
+
+<p>Approche traditionnelle (silotée) :</p>
+<p>Red Team attaque pendant 2 semaines → Rapport → Blue Team corrige</p>
+<p>Problème : délai long, pas d'apprentissage en temps réel</p>
+
+<p>Purple Team (collaborative) :</p>
+<p>Red Team exécute une technique → Blue Team observe en temps réel</p>
+<p>"Avez-vous détecté ça ?" → Oui/Non → Ajuster immédiatement</p>
+
+<p>Bénéfices :</p>
+<p>→ Règles de détection créées/améliorées immédiatement</p>
+<p>→ Blue Team comprend les techniques offensives</p>
+<p>→ Red Team comprend les capacités défensives</p>
+<p>→ ROI bien meilleur qu'un Red Team classique</p>
+<p>→ Transfert de compétences bidirectionnel</code></pre>
+
+<h2 id="framework-mitre-att-ck-comme-r-f-rentiel-commun">Framework MITRE ATT&CK comme référentiel commun</h2>
+
+<pre><code class="language-python"># Organiser les exercices selon ATT&amp;CK
+
+<p>exercice_purple = {</p>
+<p>"technique_id": "T1059.001",</p>
+<p>"technique_nom": "PowerShell",</p>
+<p>"tactique": "Execution",</p>
+
+<p>"test_red_team": {</p>
+<p>"commande": "powershell.exe -EncodedCommand [base64]",</p>
+<p>"outil": "Atomic Red Team",</p>
+<p>"atomic_id": "T1059.001-1"</p>
+<p>},</p>
+
+<p>"detection_attendue": {</p>
+<p>"source": "Windows Event Log",</p>
+<p>"event_id": 4104,</p>
+<p>"condition": "ScriptBlockText contains EncodedCommand",</p>
+<p>"alerte_siem": "Suspicious PowerShell Encoded Command"</p>
+<p>},</p>
+
+<p>"resultat": None,  # DÉTECTÉ ou NON_DÉTECTÉ → créer la règle</p>
+
+<p>"règle_sigma": """</p>
+<p>title: PowerShell Encoded Command</p>
+<p>detection:</p>
+<p>selection:</p>
+<p>EventID: 4104</p>
+<p>ScriptBlockText|contains: '-EncodedCommand'</p>
+<p>condition: selection</p>
+<p>level: high</p>
+<p>"""</p>
+<p>}</code></pre>
+
+<h2 id="atomic-red-team-tests-att-ck-automatis-s">Atomic Red Team — Tests ATT&CK automatisés</h2>
+
+<pre><code class="language-powershell"># Installer Atomic Red Team
+<p>Install-Module -Name invoke-atomicredteam,powershell-yaml -Scope CurrentUser</p>
+<p>Import-Module invoke-atomicredteam</p>
+
+<h1>Lister les tests disponibles pour une technique</h1>
+<p>Invoke-AtomicTest T1059.001 -ShowDetailsBrief</p>
+
+<h1>Exécuter un test spécifique</h1>
+<p>Invoke-AtomicTest T1059.001 -TestNumbers 1</p>
+
+<h1>Exécuter et nettoyer après</h1>
+<p>Invoke-AtomicTest T1059.001 -TestNumbers 1 -Cleanup</p>
+
+<h1>Tests populaires pour un exercice Purple Team</h1>
+<p>$techniques = @(</p>
+<p>"T1059.001",  # PowerShell</p>
+<p>"T1003.001",  # LSASS Dump</p>
+<p>"T1547.001",  # Registry Run Keys</p>
+<p>"T1078",      # Valid Accounts</p>
+<p>"T1486",      # Data Encrypted (ransomware)</p>
+<p>"T1562.001",  # Disable Security Tools</p>
+<p>"T1070.001",  # Clear Windows Event Logs</p>
+<p>"T1055",      # Process Injection</p>
+<p>"T1021.002",  # SMB Lateral Movement</p>
+<p>"T1071.001"   # Web Protocol C2</p>
+<p>)</p>
+
+<p>foreach ($tech in $techniques) {</p>
+<p>Write-Host "Test: $tech"</p>
+<p>Invoke-AtomicTest $tech -TestNumbers 1</p>
+<p>Start-Sleep -Seconds 30  # Laisser le temps au SIEM de détecter</p>
+<p>}</code></pre>
+
+<h2 id="structure-d-un-exercice-purple-team">Structure d'un exercice Purple Team</h2>
+
+<pre><code class="language-markdown">## Planning d'exercice Purple Team (2 jours)
+
+<h3 id="jour-1-initial-access-amp-execution">Jour 1 : Initial Access &amp; Execution</h3>
+
+<p>09h00 - Briefing et règles d'engagement</p>
+<p>09h30 - T1566.001 Spear Phishing (simulé)</p>
+<p>→ Red : Envoyer email phishing test</p>
+<p>→ Blue : A-t-il été intercepté ? Quels logs ?</p>
+<p>→ Action : Améliorer les règles email gateway</p>
+
+<p>10h30 - T1059.001 PowerShell malveillant</p>
+<p>→ Red : Exécuter script PS encodé</p>
+<p>→ Blue : Détecté ? Quel délai ?</p>
+<p>→ Action : Ajuster seuils SIEM</p>
+
+<p>11h30 - T1003.001 LSASS Dump</p>
+<p>→ Red : Mimikatz sekurlsa::logonpasswords</p>
+<p>→ Blue : EDR a-t-il bloqué ? Alerte SIEM ?</p>
+<p>→ Action : Règle Sysmon EventID 10</p>
+
+<p>14h00 - T1547.001 Registry Persistence</p>
+<p>→ Red : Ajouter clé Run dans HKCU</p>
+<p>→ Blue : Alerte sur modification registre ?</p>
+
+<p>15h00 - T1055 Process Injection</p>
+<p>→ Red : Injecter dans explorer.exe</p>
+<p>→ Blue : Sysmon EventID 8 détecté ?</p>
+
+<h3 id="jour-2-lateral-movement-amp-impact">Jour 2 : Lateral Movement &amp; Impact</h3>
+
+<p>09h00 - T1021.002 Pass-the-Hash via SMB</p>
+<p>10h00 - T1078 Utilisation compte légitime</p>
+<p>11h00 - T1486 Simulation chiffrement ransomware</p>
+<p>14h00 - T1070 Effacement des logs</p>
+<p>15h00 - Débriefing complet et rapport</code></pre>
+
+<h2 id="m-triques-d-un-exercice-purple-team">Métriques d'un exercice Purple Team</h2>
+
+<pre><code class="language-python">resultats_exercice = {
+<p>"techniques_testées": 20,</p>
+<p>"détectées": 14,</p>
+<p>"taux_détection": "70%",</p>
+
+<p>"par_catégorie": {</p>
+<p>"Initial Access": {"testées": 3, "détectées": 2, "taux": "67%"},</p>
+<p>"Execution": {"testées": 4, "détectées": 3, "taux": "75%"},</p>
+<p>"Persistence": {"testées": 3, "détectées": 1, "taux": "33%"},  # Faiblesse !</p>
+<p>"Lateral Movement": {"testées": 4, "détectées": 3, "taux": "75%"},</p>
+<p>"Impact": {"testées": 3, "détectées": 2, "taux": "67%"},</p>
+<p>"Defense Evasion": {"testées": 3, "détectées": 1, "taux": "33%"}  # Faiblesse !</p>
+<p>},</p>
+
+<p>"temps_détection_moyen": "4 minutes 23 secondes",</p>
+<p>"règles_créées": 6,</p>
+<p>"règles_améliorées": 4,</p>
+<p>"faux_positifs_réduits": 12,</p>
+
+<p>"actions_prioritaires": [</p>
+<p>"Améliorer la détection de la persistence (registry, scheduled tasks)",</p>
+<p>"Renforcer les règles d'évasion (obfuscation PS, LOLBins)",</p>
+<p>"Former l'équipe SOC sur les techniques de pivoting AD"</p>
+<p>]</p>
+<p>}</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les exercices Purple Team sont l'investissement sécurité avec le meilleur ROI. En quelques jours, vous identifiez précisément vos angles morts défensifs et créez des règles de détection adaptées à VOTRE environnement. Commencez petit : 5-10 techniques ATT&CK bien choisies valent mieux que 50 techniques survolées. L'objectif n'est pas de "tout tester" mais d'améliorer concrètement votre capacité de détection.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#purple-team-exercices" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-cyber-2024.html" class="nav-prev">← Cybersécurité 2024 : les incidents majeurs de l'année</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/incident-response.html" class="nav-next">Réponse aux incidents : gérer une cyberattaque en temps réel →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

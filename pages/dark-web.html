@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Dark Web : mythes et réalités — Temgus.CyberBlog</title>
 <meta name="description" content="Comment fonctionne le Dark Web, Tor, usages légitimes et illicites.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/dark-web.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/dark-web.html">
 <meta property="og:title" content="Dark Web : mythes et réalités — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Dark Web : mythes et réalités — Temgus.CyberBlog">
 <meta name="twitter:description" content="Comment fonctionne le Dark Web, Tor, usages légitimes et illicites.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,486 @@
   "headline": "Dark Web : mythes et réalités",
   "description": "Comment fonctionne le Dark Web, Tor, usages légitimes et illicites.",
   "datePublished": "2025-04-23",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/dark-web.html",
   "inLanguage": "fr",
   "keywords": "dark web, Tor, anonymat",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🌑</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Dark Web : mythes et réalités</h1>
-  <p style="color:#8892a4;max-width:500px">Comment fonctionne le Dark Web, Tor, usages légitimes et illicites.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#dark-web" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🌑</div>
+    <div class="meta-info">
+      <div class="meta-category">VPN & Anonymat</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Dark Web : mythes et réalités</div>
+      <div class="meta-details">
+        <span>📅 2025-04-23</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-trois-couches-d-internet">Les trois couches d'Internet</a></li>
+<li><a href="#comment-fonctionne-tor">Comment fonctionne Tor</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#services-onion">Services .onion</a></li>
+<li><a href="#les-usages-l-gitimes-du-dark-web">Les usages légitimes du Dark Web</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#journalisme-et-protection-des-sources">Journalisme et protection des sources</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#acc-s-l-information-dans-les-pays-censur-s">Accès à l'information dans les pays censurés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cybers-curit-et-threat-intelligence">Cybersécurité et threat intelligence</a></li>
+<li><a href="#les-r-alit-s-illicites-du-dark-web">Les réalités illicites du Dark Web</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#march-s-noirs-darknet-markets-">Marchés noirs (darknet markets)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#fuites-de-donn-es">Fuites de données</a></li>
+<li><a href="#comment-acc-der-au-dark-web-en-s-curit-">Comment accéder au Dark Web en sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#installation-du-tor-browser">Installation du Tor Browser</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#bonnes-pratiques-de-s-curit-sur-tor">Bonnes pratiques de sécurité sur Tor</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#tails-os-l-anonymat-ultime">Tails OS — L'anonymat ultime</a></li>
+<li><a href="#mythes-vs-r-alit-s">Mythes vs Réalités</a></li>
+<li><a href="#les-limites-de-l-anonymat-tor">Les limites de l'anonymat Tor</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Dark Web : mythes et réalités</h1>
+
+<p>Le Dark Web fait l'objet de nombreuses idées reçues — tantôt présenté comme un repaire exclusif de criminels, tantôt comme un outil de liberté indispensable. La réalité est plus nuancée. Ce guide démystifie le Dark Web, explique son fonctionnement technique et aborde ses usages légitimes et illicites.</p>
+
+<h2 id="les-trois-couches-d-internet">Les trois couches d'Internet</h2>
+
+<pre><code>SURFACE WEB (~4% du web)
+<p>━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<p>Indexé par Google, Bing, etc.</p>
+<p>Sites web classiques, réseaux sociaux, actualités</p>
+<p>→ Visible par tous, indexé, accessible sans configuration spéciale</p>
+
+<p>DEEP WEB (~90% du web)</p>
+<p>━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<p>Non indexé par les moteurs de recherche</p>
+<p>Emails, intranets d'entreprise, bases de données, espaces cloud privés</p>
+<p>→ Accessible avec un compte ou une URL directe</p>
+
+<p>DARK WEB (~6% du web)</p>
+<p>━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<p>Nécessite un logiciel spécial (Tor, I2P)</p>
+<p>Adresses .onion non résolvables sur Internet classique</p>
+<p>→ Anonymat technique by design</code></pre>
+
+<p>> <strong>Confusion fréquente :</strong> Deep Web ≠ Dark Web. Votre boîte email Gmail est sur le Deep Web. Le Dark Web nécessite Tor ou I2P pour y accéder.</p>
+
+<h2 id="comment-fonctionne-tor">Comment fonctionne Tor</h2>
+
+<p>Tor (The Onion Router) chiffre votre trafic en <strong>plusieurs couches</strong> (comme un oignon) et le fait transiter par 3 relais bénévoles.</p>
+
+<pre><code>VOTRE PC
+<p>│</p>
+<p>│ Chiffrement couche 1+2+3</p>
+<p>↓</p>
+<p>[Relais d'entrée / Guard]</p>
+<p>│ Déchiffre couche 1 → sait d'où vous venez</p>
+<p>│ Ne sait pas où vous allez</p>
+<p>↓</p>
+<p>[Relais du milieu]</p>
+<p>│ Déchiffre couche 2 → sait d'où vient le trafic</p>
+<p>│ Ne sait ni qui vous êtes ni où vous allez</p>
+<p>↓</p>
+<p>[Relais de sortie / Exit Node]</p>
+<p>│ Déchiffre couche 3 → sait où vous allez</p>
+<p>│ Ne sait pas qui vous êtes</p>
+<p>↓</p>
+<p>DESTINATION</p>
+<p>(voit l'IP du nœud de sortie, pas la vôtre)</code></pre>
+
+<h3 id="services-onion">Services .onion</h3>
+
+<p>Les sites .onion n'ont pas besoin de nœud de sortie — le serveur est aussi anonyme que le visiteur.</p>
+
+<pre><code># Exemples de sites .onion légitimes
+<p>ProtonMail : protonirockerxow.onion</p>
+<p>DuckDuckGo : 3g2upl4pq6kufc4m.onion</p>
+<p>BBC News   : bbcnewsd73hkzno2.onion</p>
+<p>The New York Times : nytimesn7cgmftshazwhfgzm2...onion</p>
+<p>Facebook   : facebookwkhpilnemxj7ascrwwlo6...onion</code></pre>
+
+<h2 id="les-usages-l-gitimes-du-dark-web">Les usages légitimes du Dark Web</h2>
+
+<h3 id="journalisme-et-protection-des-sources">Journalisme et protection des sources</h3>
+
+<pre><code>Des journalistes du monde entier utilisent le Dark Web pour :
+<p>→ Recevoir des documents sensibles de lanceurs d'alerte</p>
+<p>→ Communiquer avec des sources dans des pays autoritaires</p>
+<p>→ Protéger leur identité dans des enquêtes dangereuses</p>
+
+<p>SecureDrop (The Guardian, Washington Post, Le Monde) :</p>
+<p>→ Plateforme .onion pour soumettre des documents à des journalistes</p>
+<p>→ Complètement chiffré et anonyme</code></pre>
+
+<h3 id="acc-s-l-information-dans-les-pays-censur-s">Accès à l'information dans les pays censurés</h3>
+
+<pre><code>Pays qui bloquent l'accès à Internet :
+<p>→ Chine (Great Firewall)</p>
+<p>→ Iran, Russie, Belarus, Corée du Nord</p>
+
+<p>Pour les citoyens de ces pays, Tor permet :</p>
+<p>→ Accéder aux réseaux sociaux bloqués</p>
+<p>→ Lire des médias indépendants</p>
+<p>→ Communiquer librement</p>
+
+<p>C'est pourquoi 80% du financement de Tor Project</p>
+<p>vient du gouvernement américain (State Department) —</p>
+<p>c'est un outil de liberté d'expression.</code></pre>
+
+<h3 id="cybers-curit-et-threat-intelligence">Cybersécurité et threat intelligence</h3>
+
+<pre><code>Les professionnels de la sécurité surveillent le Dark Web pour :
+<p>→ Détecter les fuites de données de leur entreprise</p>
+<p>→ Identifier les outils malveillants émergents</p>
+<p>→ Surveiller les mentions de leur organisation</p>
+<p>→ Analyser les nouvelles techniques d'attaque</p>
+
+<p>Services de surveillance Dark Web :</p>
+<p>→ SpyCloud, Digital Shadows, Recorded Future</p>
+<p>→ Kela, Cybersixgill, Intel 471</code></pre>
+
+<h2 id="les-r-alit-s-illicites-du-dark-web">Les réalités illicites du Dark Web</h2>
+
+<h3 id="march-s-noirs-darknet-markets-">Marchés noirs (darknet markets)</h3>
+
+<pre><code>Produits illicites les plus vendus :
+<p>→ Drogues (60-70% du volume)</p>
+<p>→ Données volées (cartes bancaires, identités, credentials)</p>
+<p>→ Malwares et ransomwares as a Service</p>
+<p>→ Faux documents</p>
+<p>→ Armes (moins courant qu'on ne le croit)</p>
+
+<p>Marchés historiques tombés :</p>
+<p>→ Silk Road (2013) - fermé par le FBI</p>
+<p>→ AlphaBay (2017) - fermé par Europol + FBI</p>
+<p>→ Hansa (2017) - infiltré par la police néerlandaise</p>
+<p>→ DarkMarket (2021) - fermé par Europol</code></pre>
+
+<p>> Les forces de l'ordre ont démontré qu'aucun marché n'est inattaquable. Les opérateurs sont régulièrement arrêtés.</p>
+
+<h3 id="fuites-de-donn-es">Fuites de données</h3>
+
+<pre><code class="language-bash"># Ce qu'on trouve sur les forums du Dark Web :
+<p>→ Bases de données hackées (emails + mots de passe)</p>
+<p>→ Dumps de cartes bancaires</p>
+<p>→ Accès RDP compromis (revendus à des groupes ransomware)</p>
+<p>→ Logs de stealers (malwares qui volent les credentials)</p>
+
+<h1>Vérifier si vos données sont exposées</h1>
+<h1>https://haveibeenpwned.com (surface web)</h1>
+<h1>https://dehashed.com (agrégateur de fuites)</code></pre></h1>
+
+<h2 id="comment-acc-der-au-dark-web-en-s-curit-">Comment accéder au Dark Web en sécurité</h2>
+
+<p>> <strong>Note légale :</strong> Naviguer sur le Dark Web est légal dans la plupart des pays. Acheter ou vendre des produits illicites ne l'est pas.</p>
+
+<h3 id="installation-du-tor-browser">Installation du Tor Browser</h3>
+
+<pre><code class="language-bash"># Télécharger uniquement depuis le site officiel
+<h1>https://www.torproject.org/download/</h1>
+
+<h1>Vérifier la signature GPG (important !)</h1>
+<p>gpg --keyserver pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290</p>
+<p>gpg --verify tor-browser-linux64-13.0_en-US.tar.xz.asc</p>
+
+<h1>Lancer Tor Browser</h1>
+<p>./tor-browser_en-US/Browser/start-tor-browser.desktop</code></pre>
+
+<h3 id="bonnes-pratiques-de-s-curit-sur-tor">Bonnes pratiques de sécurité sur Tor</h3>
+
+<pre><code>✅ Utiliser UNIQUEMENT le Tor Browser (pas Firefox/Chrome configuré avec Tor)
+<p>✅ Ne jamais maximiser la fenêtre (révèle la résolution d'écran)</p>
+<p>✅ Ne jamais se connecter à vos vrais comptes via Tor</p>
+<p>✅ Ne jamais télécharger de fichiers (peuvent révéler votre IP)</p>
+<p>✅ Désactiver JavaScript sur les sites sensibles (NoScript)</p>
+<p>✅ Utiliser Tails OS pour un anonymat maximum</p>
+
+<p>❌ Ne jamais torrent via Tor (révèle votre IP)</p>
+<p>❌ Ne jamais installer de plugins dans Tor Browser</p>
+<p>❌ Ne pas utiliser votre vraie identité</p>
+<p>❌ Ne pas faire confiance aux nœuds de sortie (trafic non chiffré)</code></pre>
+
+<h3 id="tails-os-l-anonymat-ultime">Tails OS — L'anonymat ultime</h3>
+
+<pre><code>Tails (The Amnesic Incognito Live System) est un OS qui :
+<p>→ Démarre depuis une clé USB</p>
+<p>→ Route TOUT le trafic via Tor</p>
+<p>→ Ne laisse AUCUNE trace sur l'ordinateur</p>
+<p>→ Perd tout en mémoire à l'extinction</p>
+
+<p>Cas d'usage : journaliste, activiste, lanceur d'alerte</p>
+<p>Téléchargement : https://tails.boum.org</code></pre>
+
+<h2 id="mythes-vs-r-alit-s">Mythes vs Réalités</h2>
+
+<p>| Mythe | Réalité |</p>
+<p>|-------|---------|</p>
+<p>| "Le Dark Web est majoritairement criminel" | 50%+ du trafic Tor va vers des sites légaux |</p>
+<p>| "On y trouve des snuff films et du CSAM facilement" | Ces contenus existent mais sont traqués activement par les forces de l'ordre |</p>
+<p>| "Tor rend complètement anonyme" | Tor protège contre la surveillance de masse, pas contre une agence déterminée |</p>
+<p>| "Le Dark Web est inaccessible" | N'importe qui peut installer Tor Browser en 5 minutes |</p>
+<p>| "Toute activité y est illégale" | Naviguer est légal, certaines activités ne le sont pas |</p>
+
+<h2 id="les-limites-de-l-anonymat-tor">Les limites de l'anonymat Tor</h2>
+
+<pre><code>Tor ne vous protège pas contre :
+<p>→ Les erreurs humaines (se connecter à votre vrai email via Tor)</p>
+<p>→ Les malwares qui révèlent votre IP directement</p>
+<p>→ Une corrélation de trafic par un adversaire qui surveille les deux bouts</p>
+<p>→ Les failles dans les applications utilisées (navigateur, PDF reader)</p>
+<p>→ La métadonnée comportementale (façon d'écrire, horaires)</p>
+
+<p>Cas réels de désanonymisation :</p>
+<p>→ Ross Ulbricht (Silk Road) : erreur humaine, email personnel lié au projet</p>
+<p>→ Hector Monsegur (LulzSec) : connexion accidentelle sans Tor</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le Dark Web est un <strong>outil neutre</strong> — comme Internet lui-même. Il est utilisé par des criminels, mais aussi par des journalistes, des militants des droits de l'homme et des citoyens sous régimes autoritaires. Tor reste la technologie d'anonymat la plus éprouvée pour protéger la vie privée en ligne. L'important est de comprendre ses capacités réelles et ses limites, sans mythifier ni diaboliser.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#dark-web" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile.html" class="nav-prev">← Sécurité mobile : Android et iOS</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/powershell-securite.html" class="nav-next">PowerShell pour la sécurité : guide complet →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

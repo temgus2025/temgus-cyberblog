@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Réponse aux incidents : gérer une cyberattaque en temps réel — Temgus.CyberBlog</title>
 <meta name="description" content="Cycle NIST, playbook ransomware, outils forensiques, communication de crise et rapport post-incident.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/incident-response.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/incident-response.html">
 <meta property="og:title" content="Réponse aux incidents : gérer une cyberattaque en temps réel — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Réponse aux incidents : gérer une cyberattaque en temps réel — Temgus.CyberBlog">
 <meta name="twitter:description" content="Cycle NIST, playbook ransomware, outils forensiques, communication de crise et rapport post-incident.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,454 @@
   "headline": "Réponse aux incidents : gérer une cyberattaque en temps réel",
   "description": "Cycle NIST, playbook ransomware, outils forensiques, communication de crise et rapport post-incident.",
   "datePublished": "2025-08-29",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/incident-response.html",
   "inLanguage": "fr",
   "keywords": "incident response, CSIRT, ransomware, forensics, NIST",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🚨</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Réponse aux incidents : gérer une cyberattaque en temps réel</h1>
-  <p style="color:#8892a4;max-width:500px">Cycle NIST, playbook ransomware, outils forensiques, communication de crise et rapport post-incident.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#incident-response" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🚨</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Réponse aux incidents : gérer une cyberattaque en temps réel</div>
+      <div class="meta-details">
+        <span>📅 2025-08-29</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#le-cycle-de-r-ponse-aux-incidents-nist-">Le cycle de réponse aux incidents (NIST)</a></li>
+<li><a href="#playbooks-par-type-d-incident">Playbooks par type d'incident</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ransomware">Ransomware</a></li>
+<li><a href="#playbook-attaque-ransomware">Playbook : Attaque Ransomware</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tection-0-15-min-">DÉTECTION (0-15 min)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#confinement-imm-diat-15-30-min-">CONFINEMENT IMMÉDIAT (15-30 min)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-valuation-30-60-min-">ÉVALUATION (30-60 min)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-cision-critique">DÉCISION CRITIQUE</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#notification-l-gale">NOTIFICATION LÉGALE</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-radication">ÉRADICATION</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#restauration">RESTAURATION</a></li>
+<li><a href="#outils-de-r-ponse-aux-incidents">Outils de réponse aux incidents</a></li>
+<li><a href="#communication-de-crise">Communication de crise</a></li>
+<li><a href="#rapport-post-incident">Rapport post-incident</a></li>
+<li><a href="#r-sum-ex-cutif">Résumé exécutif</a></li>
+<li><a href="#chronologie">Chronologie</a></li>
+<li><a href="#cause-racine">Cause racine</a></li>
+<li><a href="#impact">Impact</a></li>
+<li><a href="#le-ons-apprises">Leçons apprises</a></li>
+<li><a href="#actions-correctives">Actions correctives</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Réponse aux incidents : gérer une cyberattaque en temps réel</h1>
+
+<p>Quand une cyberattaque se produit, chaque minute compte. Un plan de réponse aux incidents (IRP) bien préparé peut faire la différence entre une perturbation mineure et une catastrophe organisationnelle. Ce guide couvre le processus complet de gestion d'incident.</p>
+
+<h2 id="le-cycle-de-r-ponse-aux-incidents-nist-">Le cycle de réponse aux incidents (NIST)</h2>
+
+<pre><code>6 phases du NIST SP 800-61 :
+
+<li>PRÉPARATION</li>
+<p>→ Plan d'IRP documenté et testé</p>
+<p>→ Équipe CSIRT (Computer Security Incident Response Team)</p>
+<p>→ Outils préparés (forensics, communication)</p>
+<p>→ Exercices réguliers (tabletop, simulations)</p>
+
+<li>DÉTECTION ET ANALYSE</li>
+<p>→ Identifier et confirmer l'incident</p>
+<p>→ Classifier la sévérité</p>
+<p>→ Documenter les preuves initiales</p>
+
+<li>CONFINEMENT</li>
+<p>→ Court terme : stopper la propagation immédiate</p>
+<p>→ Long terme : stratégie de confinement sans perturber le business</p>
+
+<li>ÉRADICATION</li>
+<p>→ Supprimer la cause racine</p>
+<p>→ Nettoyer tous les systèmes compromis</p>
+
+<li>RECOVERY</li>
+<p>→ Restaurer les systèmes et opérations</p>
+<p>→ Vérifier que tout fonctionne normalement</p>
+
+<li>POST-INCIDENT</li>
+<p>→ Rapport d'incident complet</p>
+<p>→ Leçons apprises</p>
+<p>→ Amélioration des défenses</code></pre>
+
+<h2 id="playbooks-par-type-d-incident">Playbooks par type d'incident</h2>
+
+<h3 id="ransomware">Ransomware</h3>
+
+<pre><code class="language-markdown">## Playbook : Attaque Ransomware
+
+<h3 id="d-tection-0-15-min-">DÉTECTION (0-15 min)</h3>
+<p>Indicateurs :</p>
+<p>□ Alertes EDR sur chiffrement massif de fichiers</p>
+<p>□ Extensions de fichiers changées (.locked, .encrypted)</p>
+<p>□ Note de rançon (README.txt, !!! READ ME !!!)</p>
+<p>□ Shadow copies supprimées (Event ID 4688 vssadmin)</p>
+<p>□ Désactivation d'antivirus (Event ID 7045)</p>
+
+<h3 id="confinement-imm-diat-15-30-min-">CONFINEMENT IMMÉDIAT (15-30 min)</h3>
+<p>□ Isoler les machines affectées du réseau (PHYSIQUEMENT)</p>
+<p>□ NE PAS éteindre (préserver les preuves en RAM)</p>
+<p>□ Activer le war room (RSSI, IT, Direction, Juridique, Communication)</p>
+<p>□ Contacter l'assurance cyber IMMÉDIATEMENT</p>
+<p>□ Identifier le patient zéro (première machine touchée)</p>
+
+<h3 id="-valuation-30-60-min-">ÉVALUATION (30-60 min)</h3>
+<p>□ Périmètre : combien de machines affectées ?</p>
+<p>□ Sauvegardes : intactes ? Testées récemment ? Isolées ?</p>
+<p>□ Exfiltration : y a-t-il eu vol de données ?</p>
+<p>□ Identification du groupe ransomware (note de rançon, extension)</p>
+<p>→ ransomwhe.re, ID Ransomware pour identifier</p>
+
+<h3 id="d-cision-critique">DÉCISION CRITIQUE</h3>
+<p>Si sauvegardes OK → NE PAS PAYER, restaurer</p>
+<p>Si sauvegardes KO ET données critiques exfiltrées → Consulter juriste</p>
+<p>Groupes sanctionnés OFAC (LockBit, Evil Corp...) → Paiement ILLÉGAL</p>
+
+<h3 id="notification-l-gale">NOTIFICATION LÉGALE</h3>
+<p>□ ANSSI : cert.ssi.gouv.fr (obligatoire si OIV/OSE)</p>
+<p>□ CNIL : dans 72h si données personnelles (RGPD)</p>
+<p>□ Police nationale / Gendarmerie (plainte)</p>
+<p>□ Assurance cyber</p>
+
+<h3 id="-radication">ÉRADICATION</h3>
+<p>□ Identifier et supprimer tous les points de persistance</p>
+<p>□ Réinitialiser TOUS les comptes et credentials</p>
+<p>□ Patcher la vulnérabilité exploitée</p>
+<p>□ Réinstaller les systèmes compromis (ne pas faire confiance à un nettoyage)</p>
+
+<h3 id="restauration">RESTAURATION</h3>
+<p>□ Restaurer depuis sauvegardes propres UNIQUEMENT</p>
+<p>□ Vérifier l'intégrité avant restauration (hashes)</p>
+<p>□ Monitoring renforcé pendant 6 mois minimum</code></pre>
+
+<h2 id="outils-de-r-ponse-aux-incidents">Outils de réponse aux incidents</h2>
+
+<pre><code class="language-bash"># Collecte forensique rapide avec Velociraptor
+<p>velociraptor artifact collect Windows.KapeFiles.Targets \</p>
+<p>--args "Device=C:" \</p>
+<p>--output /tmp/forensics/</p>
+
+<h1>Collecte mémoire avec DumpIt</h1>
+<p>DumpIt.exe /output C:\memory.dmp</p>
+
+<h1>Analyse des connexions réseau actives</h1>
+<p>netstat -anob &gt; connexions.txt  # Windows</p>
+<p>ss -antp &gt; connexions.txt       # Linux</p>
+
+<h1>Timeline des fichiers modifiés récemment</h1>
+<p>find / -mtime -7 -type f 2&gt;/dev/null | grep -v /proc &gt; recent_files.txt</p>
+
+<h1>Processus suspects</h1>
+<p>ps aux --sort=-%cpu | head -20</p>
+<p>Get-Process | Sort-Object CPU -Descending | Select-Object -First 20</p>
+
+<h1>Persistence Windows</h1>
+<p>reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</p>
+<p>schtasks /query /fo LIST /v | findstr /i "task\|run\|status"</code></pre>
+
+<h2 id="communication-de-crise">Communication de crise</h2>
+
+<pre><code>Principes de communication :
+
+<p>Interne (priorité) :</p>
+<p>→ Direction informée EN PREMIER</p>
+<p>→ Canal sécurisé (pas les emails compromis !)</p>
+<p>→ Fréquence : toutes les heures en phase aiguë</p>
+
+<p>Externe (contrôlée) :</p>
+<p>→ Un seul porte-parole désigné</p>
+<p>→ Ne jamais confirmer l'ampleur avant d'avoir les faits</p>
+<p>→ "Nous avons détecté un incident de sécurité et avons activé</p>
+<p>nos procédures de réponse. Nous informerons dès que possible."</p>
+
+<p>À éviter absolument :</p>
+<p>→ Minimiser l'incident publiquement</p>
+<p>→ Mentir sur l'impact</p>
+<p>→ Communiquer des détails techniques qui aident l'attaquant</code></pre>
+
+<h2 id="rapport-post-incident">Rapport post-incident</h2>
+
+<pre><code class="language-markdown"># Rapport d'incident de sécurité
+
+<h2 id="r-sum-ex-cutif">Résumé exécutif</h2>
+<ul><li>Type d'incident : Ransomware LockBit 3.0</li><li>Date de détection : 15 mars 2025, 08h23</li><li>Date de résolution : 18 mars 2025, 17h00</li><li>Systèmes affectés : 23 serveurs, 150 postes de travail</li><li>Données exfiltrées : 2TB (données clients non sensibles)</li><li>Temps d'arrêt : 72 heures</li></ul>
+
+<h2 id="chronologie">Chronologie</h2>
+<p>[Timeline détaillée heure par heure]</p>
+
+<h2 id="cause-racine">Cause racine</h2>
+<p>Credentials Citrix VPN volés via phishing + absence de MFA</p>
+
+<h2 id="impact">Impact</h2>
+<ul><li>Opérations : 72h d'interruption partielle</li><li>Financier : 450 000€ (restauration + perte activité)</li><li>Réputation : 3 articles de presse, aucun client perdu</li></ul>
+
+<h2 id="le-ons-apprises">Leçons apprises</h2>
+<li>MFA n'était pas activé sur le VPN → Activé immédiatement</li>
+<li>Sauvegardes non testées depuis 6 mois → Procédure mensuelle</li>
+<li>Segmentation insuffisante → Plan de micro-segmentation lancé</li>
+
+<h2 id="actions-correctives">Actions correctives</h2>
+<p>[Plan d'action avec responsables et deadlines]</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Une réponse aux incidents efficace se prépare AVANT l'incident. Les organisations qui s'en sortent le mieux sont celles qui ont un plan documenté, une équipe formée et des sauvegardes testées. Comme pour la sécurité incendie : vous espérez ne jamais en avoir besoin, mais vous êtes content de l'avoir répété quand l'alerte sonne.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#incident-response" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/purple-team-exercices.html" class="nav-prev">← Exercices Purple Team : attaque et défense en collaboration</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-avancee.html" class="nav-next">Cryptographie avancée : PKI, certificats et post-quantique →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

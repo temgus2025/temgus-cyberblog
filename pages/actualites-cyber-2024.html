@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Cybersécurité 2024 : les incidents majeurs de l'année — Temgus.CyberBlog</title>
 <meta name="description" content="Change Healthcare, XZ Utils backdoor, Snowflake, Operation Endgame — bilan des cyberincidents marquants de 2024.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-cyber-2024.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-cyber-2024.html">
 <meta property="og:title" content="Cybersécurité 2024 : les incidents majeurs de l'année — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Cybersécurité 2024 : les incidents majeurs de l'année — Temgus.CyberBlog">
 <meta name="twitter:description" content="Change Healthcare, XZ Utils backdoor, Snowflake, Operation Endgame — bilan des cyberincidents marquants de 2024.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,445 @@
   "headline": "Cybersécurité 2024 : les incidents majeurs de l'année",
   "description": "Change Healthcare, XZ Utils backdoor, Snowflake, Operation Endgame — bilan des cyberincidents marquants de 2024.",
   "datePublished": "2025-08-25",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/actualites-cyber-2024.html",
   "inLanguage": "fr",
   "keywords": "actualités, 2024, ransomware, supply chain, APT",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📰</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Cybersécurité 2024 : les incidents majeurs de l'année</h1>
-  <p style="color:#8892a4;max-width:500px">Change Healthcare, XZ Utils backdoor, Snowflake, Operation Endgame — bilan des cyberincidents marquants de 2024.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#actualites-cyber-2024" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📰</div>
+    <div class="meta-info">
+      <div class="meta-category">Actualités cyber</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Cybersécurité 2024 : les incidents majeurs de l'année</div>
+      <div class="meta-details">
+        <span>📅 2025-08-25</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-grandes-attaques-de-2024">Les grandes attaques de 2024</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#change-healthcare-la-plus-grande-fuite-de-donn-es-m-dicales-us">Change Healthcare — La plus grande fuite de données médicales US</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#xz-utils-backdoor-l-attaque-supply-chain-quasi-parfaite">XZ Utils Backdoor — L'attaque supply chain quasi-parfaite</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#snowflake-campagne-de-vol-de-donn-es-massif">Snowflake — Campagne de vol de données massif</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#operation-endgame-la-plus-grande-op-ration-anti-botnet">Operation Endgame — La plus grande opération anti-botnet</a></li>
+<li><a href="#tendances-2024">Tendances 2024</a></li>
+<li><a href="#chiffres-cl-s-2024">Chiffres clés 2024</a></li>
+<li><a href="#ce-qu-il-faut-retenir-pour-2025">Ce qu'il faut retenir pour 2025</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Cybersécurité 2024 : les incidents majeurs qui ont marqué l'année</h1>
+
+<p>2024 a été une année record en matière de cyberincidents. Des attaques sur les infrastructures critiques aux brèches massives de données personnelles, retour sur les événements qui ont redéfini le paysage des menaces.</p>
+
+<h2 id="les-grandes-attaques-de-2024">Les grandes attaques de 2024</h2>
+
+<h3 id="change-healthcare-la-plus-grande-fuite-de-donn-es-m-dicales-us">Change Healthcare — La plus grande fuite de données médicales US</h3>
+
+<pre><code>Entreprise : Change Healthcare (filiale UnitedHealth Group)
+<p>Date : Février 2024</p>
+<p>Groupe : ALPHV/BlackCat (ransomware)</p>
+
+<p>Impact :</p>
+<p>→ 100+ millions de dossiers médicaux américains compromis</p>
+<p>→ Paralysie du traitement des prescriptions pendant des semaines</p>
+<p>→ Hôpitaux incapables de traiter les assurances</p>
+<p>→ Rançon payée : 22 millions de dollars</p>
+<p>→ Coût total estimé : 1,6 milliard de dollars</p>
+
+<p>Vecteur d'entrée :</p>
+<p>→ Credentials Citrix volés</p>
+<p>→ Pas de MFA sur le compte Citrix !</p>
+
+<p>Leçon : MFA sur TOUS les accès distants, pas d'exception</code></pre>
+
+<h3 id="xz-utils-backdoor-l-attaque-supply-chain-quasi-parfaite">XZ Utils Backdoor — L'attaque supply chain quasi-parfaite</h3>
+
+<pre><code>Bibliothèque : XZ Utils (compression, présente dans presque toutes les distros Linux)
+<p>Découverte : Mars 2024 par Andres Freund (ingénieur Microsoft)</p>
+<p>Attaquant : "Jia Tan" (pseudonyme, opération sur 2 ans)</p>
+
+<p>Timeline :</p>
+<p>2021 : Jia Tan commence à contribuer légitimement</p>
+<p>2022-2023 : Contributions de qualité, gagne la confiance</p>
+<p>Fév 2024 : Backdoor injectée dans XZ 5.6.0</p>
+<p>Mars 2024 : Découverte accidentelle (SSH 500ms plus lent)</p>
+
+<p>Impact si non découvert :</p>
+<p>→ Backdoor dans sshd sur des millions de serveurs</p>
+<p>→ Authentication SSH contournable à distance</p>
+<p>→ La pire supply chain attack de l'histoire</p>
+
+<p>Leçon : Les mainteneurs open source sous-staffés = cibles privilégiées</code></pre>
+
+<h3 id="snowflake-campagne-de-vol-de-donn-es-massif">Snowflake — Campagne de vol de données massif</h3>
+
+<pre><code>Plateforme : Snowflake (cloud data warehouse)
+<p>Date : Printemps 2024</p>
+<p>Groupe : UNC5537</p>
+
+<p>Impact :</p>
+<p>→ 165 entreprises clientes compromises</p>
+<p>→ Ticketmaster : 560 millions de comptes</p>
+<p>→ Santander Bank : données de millions de clients</p>
+<p>→ Advanced Auto Parts, LendingTree, et bien d'autres</p>
+
+<p>Vecteur :</p>
+<p>→ Pas de MFA sur les comptes Snowflake</p>
+<p>→ Credentials volés via des stealers (Lumma, Vidar)</p>
+<p>→ Logs de stealers achetés sur le dark web</p>
+
+<p>Leçon : MFA obligatoire partout, même les plateformes de données</code></pre>
+
+<h3 id="operation-endgame-la-plus-grande-op-ration-anti-botnet">Operation Endgame — La plus grande opération anti-botnet</h3>
+
+<pre><code>Date : Mai 2024
+<p>Coordinateurs : Europol, FBI, 7 pays</p>
+
+<p>Impact :</p>
+<p>→ Plus de 100 serveurs saisis dans 10 pays</p>
+<p>→ 4 personnes arrêtées</p>
+<p>→ Botnets démantelés : IcedID, SystemBC, Pikabot, Smokeloader, Bumblebee</p>
+
+<p>Ces botnets étaient utilisés pour :</p>
+<p>→ Distribuer des ransomwares</p>
+<p>→ Voler des credentials</p>
+<p>→ Spam massif</p>
+<p>→ DDoS</p>
+
+<p>Leçon : La coopération internationale fonctionne</code></pre>
+
+<h2 id="tendances-2024">Tendances 2024</h2>
+
+<pre><code class="language-python">tendances_2024 = {
+<p>"IA génératrice de menaces": {</p>
+<p>"exemples": [</p>
+<p>"WormGPT : LLM sans restrictions pour créer malwares",</p>
+<p>"FraudGPT : phishing automatisé ultra-personnalisé",</p>
+<p>"Deepfakes audio pour fraude CEO"</p>
+<p>],</p>
+<p>"impact": "Démocratisation des attaques sophistiquées"</p>
+<p>},</p>
+
+<p>"Attaques supply chain": {</p>
+<p>"exemples": [</p>
+<p>"XZ Utils backdoor",</p>
+<p>"Polyfill.io compromis (100K sites)",</p>
+<p>"PyPI packages malveillants (+500 en 2024)"</p>
+<p>],</p>
+<p>"impact": "Confiance dans les logiciels open source ébranlée"</p>
+<p>},</p>
+
+<p>"Ciblage des infra critiques": {</p>
+<p>"exemples": [</p>
+<p>"Volt Typhoon (Chine) : pré-positionnement dans infra US",</p>
+<p>"Salt Typhoon : backdoor dans équipements Cisco/télécoms US",</p>
+<p>"Attaques eau potable (Iran, Etats-Unis)"</p>
+<p>],</p>
+<p>"impact": "Géopolitique et cybersécurité indissociables"</p>
+<p>},</p>
+
+<p>"Ransomware malgré les saisies": {</p>
+<p>"stats": "65% des organisations touchées en 2024",</p>
+<p>"évolution": "Triple extorsion (chiffrement + vol + DDoS + pression clients)",</p>
+<p>"secteurs_les_plus_touchés": ["Santé", "Education", "Gouvernement"]</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="chiffres-cl-s-2024">Chiffres clés 2024</h2>
+
+<pre><code>Volume d'attaques :
+<p>→ 8,4 milliards de données exposées en 2024</p>
+<p>→ Une attaque ransomware toutes les 11 secondes</p>
+<p>→ 74% des brèches impliquent l'élément humain</p>
+
+<p>Coûts :</p>
+<p>→ Coût moyen d'une brèche : 4,88 millions de dollars (+10% vs 2023)</p>
+<p>→ Marché cybercriminalité : 9,5 trillions de dollars</p>
+<p>→ Rançon moyenne payée : 1,54 million de dollars</p>
+
+<p>Délais :</p>
+<p>→ Délai moyen de détection : 194 jours</p>
+<p>→ Délai moyen de confinement : 64 jours</p>
+<p>→ Total moyen exposition : 258 jours</code></pre>
+
+<h2 id="ce-qu-il-faut-retenir-pour-2025">Ce qu'il faut retenir pour 2025</h2>
+
+<pre><code>Les priorités de sécurité pour 2025 :
+
+<li>MFA sur TOUT</li>
+<p>→ La grande majorité des attaques auraient été évitées</p>
+<p>→ Passer au MFA FIDO2/passkeys (phishing-resistant)</p>
+
+<li>Sécuriser la supply chain</li>
+<p>→ SBOM (Software Bill of Materials)</p>
+<p>→ Vérifier les mainteneurs des dépendances critiques</p>
+<p>→ Sigstore/cosign pour les artefacts</p>
+
+<li>Se préparer à l'IA offensive</li>
+<p>→ Former les équipes à détecter les deepfakes</p>
+<p>→ Protocols de vérification pour les demandes urgentes</p>
+<p>→ Défenses IA contre les attaques IA</p>
+
+<li>Infrastructures critiques</li>
+<p>→ Segmentation OT/IT</p>
+<p>→ Plans de continuité testés régulièrement</p>
+<p>→ Coopération avec les autorités (ANSSI, CISA)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>2024 a confirmé que la cybercriminalité est une industrie mature, professionnelle et en croissance constante. La sophistication des attaques — supply chain sur deux ans (XZ), opérations APT de pré-positionnement (Volt Typhoon) — montre que nos adversaires jouent sur le long terme. La réponse doit être à la hauteur : investissement soutenu, formation continue et coopération internationale.</p>
+
+<p>---</p>
+<p><em>Catégorie : Actualités cyber</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#actualites-cyber-2024" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/outils-securite-essentiels.html" class="nav-prev">← Les 20 outils de cybersécurité indispensables en 2024</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/purple-team-exercices.html" class="nav-next">Exercices Purple Team : attaque et défense en collaboration →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

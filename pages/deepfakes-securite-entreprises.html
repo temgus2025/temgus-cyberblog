@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Deepfakes : la menace invisible pour la sécurité des entreprises — Temgus.CyberBlog</title>
 <meta name="description" content="Fraude au président, usurpation d'identité vocale, contournement biométrique — comment les deepfakes menacent les organisations.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/deepfakes-securite-entreprises.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/deepfakes-securite-entreprises.html">
 <meta property="og:title" content="Deepfakes : la menace invisible pour la sécurité des entreprises — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Deepfakes : la menace invisible pour la sécurité des entreprises — Temgus.CyberBlog">
 <meta name="twitter:description" content="Fraude au président, usurpation d'identité vocale, contournement biométrique — comment les deepfakes menacent les organisations.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,362 @@
   "headline": "Deepfakes : la menace invisible pour la sécurité des entreprises",
   "description": "Fraude au président, usurpation d'identité vocale, contournement biométrique — comment les deepfakes menacent les organisations.",
   "datePublished": "2025-07-05",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/deepfakes-securite-entreprises.html",
   "inLanguage": "fr",
   "keywords": "deepfake, ingénierie sociale, fraude, biométrie, détection",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎭</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Deepfakes : la menace invisible pour la sécurité des entreprises</h1>
-  <p style="color:#8892a4;max-width:500px">Fraude au président, usurpation d'identité vocale, contournement biométrique — comment les deepfakes menacent les organisations.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#deepfakes-securite-entreprises" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎭</div>
+    <div class="meta-info">
+      <div class="meta-category">Intelligence Artificielle & Sécurité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Deepfakes : la menace invisible pour la sécurité des entreprises</div>
+      <div class="meta-details">
+        <span>📅 2025-07-05</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-un-deepfake-">Qu'est-ce qu'un deepfake ?</a></li>
+<li><a href="#les-menaces-concr-tes">Les menaces concrètes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#fraude-au-pr-sident-bec-">Fraude au président (BEC)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-sinformation-et-manipulation">Désinformation et manipulation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#harc-lement-et-chantage">Harcèlement et chantage</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#contournement-de-l-authentification-biom-trique">Contournement de l'authentification biométrique</a></li>
+<li><a href="#comment-d-tecter-un-deepfake-">Comment détecter un deepfake ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#indices-visuels">Indices visuels</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#indices-audio">Indices audio</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#outils-de-d-tection">Outils de détection</a></li>
+<li><a href="#protection-pour-les-entreprises">Protection pour les entreprises</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#protocoles-de-v-rification">Protocoles de vérification</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#authentification-renforc-e">Authentification renforcée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sensibilisation-des-quipes">Sensibilisation des équipes</a></li>
+<li><a href="#le-cadre-l-gal">Le cadre légal</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Deepfakes : la menace invisible pour la sécurité des entreprises</h1>
+
+<p>Les deepfakes ne sont plus une curiosité technologique réservée aux laboratoires de recherche. Aujourd'hui accessibles avec un simple ordinateur, ils représentent une menace concrète pour les entreprises, les particuliers et les démocraties.</p>
+
+<h2 id="qu-est-ce-qu-un-deepfake-">Qu'est-ce qu'un deepfake ?</h2>
+
+<p>Un deepfake est un contenu synthétique — vidéo, audio ou image — généré par intelligence artificielle pour imiter une personne réelle de façon convaincante. Le terme vient de "deep learning" et "fake".</p>
+
+<p>Les technologies utilisées incluent :</p>
+<ul><li><strong>GANs</strong> (Generative Adversarial Networks) : deux réseaux neuronaux s'affrontent, l'un générant du contenu, l'autre le critiquant, jusqu'à produire un résultat réaliste</li><li><strong>Diffusion models</strong> : la technologie derrière Stable Diffusion, DALL-E</li><li><strong>Voice cloning</strong> : ElevenLabs, Tortoise TTS permettent de cloner une voix avec quelques minutes d'audio</li></ul>
+
+<h2 id="les-menaces-concr-tes">Les menaces concrètes</h2>
+
+<h3 id="fraude-au-pr-sident-bec-">Fraude au président (BEC)</h3>
+<p>La <strong>Business Email Compromise</strong> évolue vers la "Business Voice Compromise". En 2019, un dirigeant d'une entreprise britannique a transféré 220 000 € après avoir reçu un appel d'un "PDG" dont la voix avait été clonée par IA.</p>
+
+<p>Ces attaques se déroulent ainsi :</p>
+<li>L'attaquant collecte des enregistrements audio publics (conférences, interviews)</li>
+<li>Il clone la voix en quelques minutes</li>
+<li>Il appelle un employé avec accès aux finances</li>
+<li>L'employé, convaincu de parler à son dirigeant, effectue le virement</li>
+
+<h3 id="d-sinformation-et-manipulation">Désinformation et manipulation</h3>
+<p>Les deepfakes vidéo de personnalités politiques peuvent déclencher des crises diplomatiques ou influencer des élections. En 2022, une fausse vidéo du président ukrainien Zelensky appelant à la capitulation a circulé en ligne.</p>
+
+<h3 id="harc-lement-et-chantage">Harcèlement et chantage</h3>
+<p>Les deepfakes pornographiques non consentis touchent principalement les femmes et peuvent servir de levier de chantage ou de harcèlement.</p>
+
+<h3 id="contournement-de-l-authentification-biom-trique">Contournement de l'authentification biométrique</h3>
+<p>Des chercheurs ont démontré qu'il est possible de tromper certains systèmes de reconnaissance faciale avec des deepfakes, remettant en cause la fiabilité de la biométrie seule comme facteur d'authentification.</p>
+
+<h2 id="comment-d-tecter-un-deepfake-">Comment détecter un deepfake ?</h2>
+
+<h3 id="indices-visuels">Indices visuels</h3>
+<ul><li><strong>Clignement des yeux</strong> anormal ou absent</li><li><strong>Contours du visage</strong> flous ou qui bougent légèrement</li><li><strong>Éclairage incohérent</strong> entre le visage et l'environnement</li><li><strong>Artefacts</strong> au niveau des cheveux, oreilles, dents</li><li><strong>Mouvements de la bouche</strong> légèrement désynchronisés</li></ul>
+
+<h3 id="indices-audio">Indices audio</h3>
+<ul><li><strong>Respiration</strong> artificielle ou absente</li><li><strong>Prosodie</strong> légèrement robotique</li><li><strong>Bruits de fond</strong> incohérents</li><li><strong>Micro-pauses</strong> inhabituelles</li></ul>
+
+<h3 id="outils-de-d-tection">Outils de détection</h3>
+<ul><li><strong>Microsoft Video Authenticator</strong> : analyse les pixels et détecte les manipulations</li><li><strong>Deepware Scanner</strong> : outil en ligne gratuit</li><li><strong>FakeCatcher</strong> d'Intel : détecte les pulsations sanguines dans les vidéos (les deepfakes n'en ont pas)</li><li><strong>Hive Moderation</strong> : API de détection pour les entreprises</li></ul>
+
+<pre><code class="language-python"># Exemple d'utilisation d'une API de détection
+<p>import requests</p>
+
+<p>def detecter_deepfake(chemin_video):</p>
+<p>with open(chemin_video, 'rb') as f:</p>
+<p>response = requests.post(</p>
+<p>'https://api.deepware.ai/scan',</p>
+<p>files={'video': f},</p>
+<p>headers={'Authorization': 'Bearer YOUR_API_KEY'}</p>
+<p>)</p>
+<p>resultat = response.json()</p>
+<p>return resultat['fake_probability']</code></pre>
+
+<h2 id="protection-pour-les-entreprises">Protection pour les entreprises</h2>
+
+<h3 id="protocoles-de-v-rification">Protocoles de vérification</h3>
+<ul><li>Établir un <strong>mot de passe de sécurité</strong> verbal pour les demandes urgentes par téléphone</li><li>Imposer une <strong>double validation</strong> (email + appel) pour tout virement supérieur à un seuil défini</li><li>Former les équipes financières à rappeler sur un numéro connu et vérifié</li></ul>
+
+<h3 id="authentification-renforc-e">Authentification renforcée</h3>
+<ul><li>Ne jamais utiliser la biométrie seule pour les accès critiques</li><li>Combiner reconnaissance faciale + PIN + token physique (FIDO2)</li></ul>
+
+<h3 id="sensibilisation-des-quipes">Sensibilisation des équipes</h3>
+<ul><li>Former les employés à identifier les deepfakes</li><li>Simuler des attaques deepfake pour tester la vigilance</li><li>Créer une procédure claire de signalement</li></ul>
+
+<h2 id="le-cadre-l-gal">Le cadre légal</h2>
+
+<p>En France, créer un deepfake non consenti est punissable :</p>
+<ul><li><strong>Usurpation d'identité</strong> : article 226-4-1 du Code pénal (1 an, 15 000 €)</li><li><strong>Atteinte à la vie privée</strong> : article 226-1 (1 an, 45 000 €)</li><li><strong>Diffamation</strong> si le contenu nuit à la réputation</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les deepfakes représentent une évolution majeure des menaces d'ingénierie sociale. La meilleure défense reste la combinaison de sensibilisation humaine, de protocoles de vérification rigoureux et d'outils de détection automatisés. Dans un monde où "voir" ne signifie plus "croire", la vérification devient une compétence essentielle.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#deepfakes-securite-entreprises" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-llm-applications.html" class="nav-prev">← Sécuriser les applications basées sur les LLMs</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/debuter-cybersecurite-guide.html" class="nav-next">Débuter en cybersécurité : le guide complet pour se lancer →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

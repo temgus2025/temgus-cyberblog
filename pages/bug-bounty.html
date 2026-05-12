@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Bug Bounty : gagner de l'argent en hackant légalement — Temgus.CyberBlog</title>
 <meta name="description" content="Plateformes, méthodologie de reconnaissance, IDOR, SSRF, subdomain takeover et rédiger un bon rapport.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/bug-bounty.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/bug-bounty.html">
 <meta property="og:title" content="Bug Bounty : gagner de l'argent en hackant légalement — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Bug Bounty : gagner de l'argent en hackant légalement — Temgus.CyberBlog">
 <meta name="twitter:description" content="Plateformes, méthodologie de reconnaissance, IDOR, SSRF, subdomain takeover et rédiger un bon rapport.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,525 @@
   "headline": "Bug Bounty : gagner de l'argent en hackant légalement",
   "description": "Plateformes, méthodologie de reconnaissance, IDOR, SSRF, subdomain takeover et rédiger un bon rapport.",
   "datePublished": "2025-08-03",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/bug-bounty.html",
   "inLanguage": "fr",
   "keywords": "bug bounty, HackerOne, YesWeHack, IDOR, SSRF",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">💰</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Bug Bounty : gagner de l'argent en hackant légalement</h1>
-  <p style="color:#8892a4;max-width:500px">Plateformes, méthodologie de reconnaissance, IDOR, SSRF, subdomain takeover et rédiger un bon rapport.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#bug-bounty" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">💰</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Bug Bounty : gagner de l'argent en hackant légalement</div>
+      <div class="meta-details">
+        <span>📅 2025-08-03</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-le-bug-bounty-">Qu'est-ce que le bug bounty ?</a></li>
+<li><a href="#les-plateformes-principales">Les plateformes principales</a></li>
+<li><a href="#combien-peut-on-gagner-">Combien peut-on gagner ?</a></li>
+<li><a href="#m-thodologie-de-reconnaissance">Méthodologie de reconnaissance</a></li>
+<li><a href="#vuln-rabilit-s-les-plus-courantes-en-bug-bounty">Vulnérabilités les plus courantes en bug bounty</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#idor-insecure-direct-object-reference">IDOR — Insecure Direct Object Reference</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ssrf-server-side-request-forgery">SSRF — Server-Side Request Forgery</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#subdomain-takeover">Subdomain Takeover</a></li>
+<li><a href="#-crire-un-bon-rapport">Écrire un bon rapport</a></li>
+<li><a href="#titre">Titre</a></li>
+<li><a href="#s-v-rit-">Sévérité</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#-tapes-de-reproduction">Étapes de reproduction</a></li>
+<li><a href="#preuve-screenshots-vid-o-">Preuve (screenshots/vidéo)</a></li>
+<li><a href="#impact">Impact</a></li>
+<li><a href="#recommandation">Recommandation</a></li>
+<li><a href="#r-f-rences">Références</a></li>
+<li><a href="#conseils-pour-d-buter">Conseils pour débuter</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Bug Bounty : comment gagner de l'argent en hackant légalement</h1>
+
+<p>Le bug bounty est un programme par lequel des entreprises rémunèrent des chercheurs en sécurité pour trouver et signaler des vulnérabilités dans leurs systèmes. C'est l'une des façons les plus accessibles de monétiser ses compétences en cybersécurité tout en contribuant à un Internet plus sûr.</p>
+
+<h2 id="qu-est-ce-que-le-bug-bounty-">Qu'est-ce que le bug bounty ?</h2>
+
+<pre><code>Principe :
+<p>Entreprise publie un programme → Chercheurs trouvent des bugs</p>
+<p>→ Signalement responsable → Entreprise corrige → Chercheur payé</p>
+
+<p>Avantages pour l'entreprise :</p>
+<p>→ Des milliers de chercheurs testent en permanence</p>
+<p>→ Pay-per-bug (seulement si vulnérabilité confirmée)</p>
+<p>→ Moins cher qu'une équipe sécurité interne complète</p>
+<p>→ Amélioration continue de la sécurité</p>
+
+<p>Avantages pour le chercheur :</p>
+<p>→ Revenus supplémentaires (ou carrière complète)</p>
+<p>→ Pratique légale et éthique</p>
+<p>→ Reconnaissance publique (Hall of Fame)</p>
+<p>→ Apprentissage constant</p>
+<p>→ Pas de barrière à l'entrée</code></pre>
+
+<h2 id="les-plateformes-principales">Les plateformes principales</h2>
+
+<pre><code>HackerOne (hackerone.com) :
+<p>→ La plus grande plateforme</p>
+<p>→ Clients : Twitter, GitHub, Uber, DoD américain</p>
+<p>→ Plus de 3 000 programmes actifs</p>
+<p>→ Paiements : 100$ à 1 000 000$+</p>
+
+<p>Bugcrowd (bugcrowd.com) :</p>
+<p>→ Deuxième plus grande plateforme</p>
+<p>→ Clients : Tesla, Mastercard, Atlassian</p>
+<p>→ Bonne réputation pour les débutants</p>
+
+<p>YesWeHack (yeswehack.com) :</p>
+<p>→ Plateforme française/européenne</p>
+<p>→ Clients : OVH, BNP Paribas, Thalès</p>
+<p>→ Conforme RGPD, focus européen</p>
+<p>→ Excellent pour les chercheurs francophones</p>
+
+<p>Intigriti (intigriti.com) :</p>
+<p>→ Européen (Belgique)</p>
+<p>→ Clients : TUI, Coca-Cola, BMW</p>
+
+<p>Synack :</p>
+<p>→ Invitation seulement (plus sélectif)</p>
+<p>→ Meilleures rémunérations</p>
+<p>→ Clients gouvernementaux</p>
+
+<p>Open Bug Bounty (openbugbounty.org) :</p>
+<p>→ Sites sans programme officiel</p>
+<p>→ Pas de rémunération garantie</p>
+<p>→ Bon pour pratiquer et construire un profil</code></pre>
+
+<h2 id="combien-peut-on-gagner-">Combien peut-on gagner ?</h2>
+
+<pre><code class="language-python">remuneration_typique = {
+<p>"P1 - Critique": {</p>
+<p>"exemples": ["RCE", "SQLi critique", "Auth bypass total"],</p>
+<p>"fourchette": "5 000$ - 100 000$+",</p>
+<p>"record": "2 000 000$ (Apple, 2021)"</p>
+<p>},</p>
+<p>"P2 - Élevé": {</p>
+<p>"exemples": ["XSS stocké", "SSRF interne", "IDOR critique"],</p>
+<p>"fourchette": "1 000$ - 10 000$"</p>
+<p>},</p>
+<p>"P3 - Moyen": {</p>
+<p>"exemples": ["XSS réfléchi", "CSRF", "Fuite d'informations"],</p>
+<p>"fourchette": "100$ - 1 000$"</p>
+<p>},</p>
+<p>"P4 - Faible": {</p>
+<p>"exemples": ["Missing headers", "Rate limiting absent"],</p>
+<p>"fourchette": "50$ - 200$"</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Chercheurs professionnels :</h1>
+<h1>Top 10% sur HackerOne → 100 000$+/an</h1>
+<h1>Top 1% → 500 000$+/an</h1>
+
+<h1>Chercheurs débutants :</h1>
+<h1>Premiers bugs → 100$ - 500$</h1>
+<h1>Après 6 mois → 500$ - 2 000$/mois possible</code></pre></h1>
+
+<h2 id="m-thodologie-de-reconnaissance">Méthodologie de reconnaissance</h2>
+
+<pre><code class="language-bash"># 1. Cartographier le périmètre
+<p>cat scope.txt  # Lire attentivement ce qui est autorisé !</p>
+
+<h1>Sous-domaines</h1>
+<p>subfinder -d target.com -o subdomains.txt</p>
+<p>amass enum -passive -d target.com &gt;&gt; subdomains.txt</p>
+<p>assetfinder target.com &gt;&gt; subdomains.txt</p>
+
+<h1>Vérifier quels sous-domaines sont actifs</h1>
+<p>cat subdomains.txt | httpx -silent -o active_subs.txt</p>
+
+<h1>2. Fingerprinting technologique</h1>
+<p>whatweb https://target.com</p>
+<p>wappalyzer  # Extension navigateur</p>
+
+<h1>3. Découverte de chemins et endpoints</h1>
+<p>ffuf -w /usr/share/wordlists/dirb/common.txt -u https://target.com/FUZZ</p>
+<p>gobuster dir -u https://target.com -w wordlist.txt -x php,js,json</p>
+
+<h1>4. JavaScript mining (endpoints cachés dans le JS)</h1>
+<p>gau target.com | grep "\.js$" | tee js_files.txt</p>
+<p>cat js_files.txt | xargs -I{} curl -s {} | grep -oE '"(/[^"]+)"' | sort -u</p>
+
+<h1>5. Parameters discovery</h1>
+<p>paramspider -d target.com</p>
+<p>arjun -u https://target.com/api/endpoint</code></pre>
+
+<h2 id="vuln-rabilit-s-les-plus-courantes-en-bug-bounty">Vulnérabilités les plus courantes en bug bounty</h2>
+
+<h3 id="idor-insecure-direct-object-reference">IDOR — Insecure Direct Object Reference</h3>
+
+<pre><code class="language-http"># Scénario : accéder aux données d'un autre utilisateur
+<p>GET /api/user/profile?id=1234 HTTP/1.1</p>
+<p>Authorization: Bearer votre_token</p>
+
+<h1>Essayer d'accéder à l'utilisateur 1235</h1>
+<p>GET /api/user/profile?id=1235 HTTP/1.1</p>
+<p>Authorization: Bearer votre_token</p>
+
+<h1>Si vous recevez les données de l'autre utilisateur → IDOR !</h1>
+
+<h1>Autres patterns IDOR :</h1>
+<p>/api/invoices/INV-00123   → INV-00124</p>
+<p>/api/orders/order_abc123  → order_abc124</p>
+<p>/files/document_user1.pdf → document_user2.pdf</code></pre>
+
+<h3 id="ssrf-server-side-request-forgery">SSRF — Server-Side Request Forgery</h3>
+
+<pre><code class="language-http"># Le serveur fait une requête vers une URL que vous contrôlez
+<p>POST /api/webhook HTTP/1.1</p>
+<p>Content-Type: application/json</p>
+
+<p>{"url": "http://internal-service:8080/admin"}</p>
+
+<h1>Accéder aux métadonnées AWS (si hébergé sur AWS)</h1>
+<p>{"url": "http://169.254.169.254/latest/meta-data/iam/security-credentials/"}</p>
+
+<h1>Bypass de filtres SSRF :</h1>
+<p>http://127.0.0.1           → localhost</p>
+<p>http://0.0.0.0             → localhost</p>
+<p>http://[::1]               → IPv6 localhost</p>
+<p>http://127.1                → format court</p>
+<p>http://2130706433           → décimal</code></pre>
+
+<h3 id="subdomain-takeover">Subdomain Takeover</h3>
+
+<pre><code class="language-bash"># Un sous-domaine pointe vers un service externe non configuré
+
+<h1>Vérifier les CNAME</h1>
+<p>dig blog.target.com CNAME</p>
+<h1>blog.target.com → target.github.io</h1>
+
+<h1>Vérifier si le service est configuré</h1>
+<p>curl -I https://target.github.io</p>
+<h1>404 → Sous-domaine disponible à prendre !</h1>
+
+<h1>Vérifier avec can-i-take-over-xyz</h1>
+<h1>https://github.com/EdOverflow/can-i-take-over-xyz</h1>
+<h1>Liste de 100+ services vulnérables au takeover</h1>
+
+<h1>Créer le repo GitHub → Prendre le contrôle du sous-domaine</h1>
+<h1>Bounty typique : 500$ - 2 000$</code></pre></h1>
+
+<h2 id="-crire-un-bon-rapport">Écrire un bon rapport</h2>
+
+<pre><code class="language-markdown"># Template de rapport de vulnérabilité
+
+<h2 id="titre">Titre</h2>
+<p>IDOR permettant l'accès aux données de n'importe quel utilisateur via /api/user/profile</p>
+
+<h2 id="s-v-rit-">Sévérité</h2>
+<p>Élevée (CVSS 8.1)</p>
+
+<h2 id="description">Description</h2>
+<p>Une vulnérabilité IDOR a été identifiée dans l'endpoint /api/user/profile</p>
+<p>permettant à un utilisateur authentifié d'accéder aux données de tout</p>
+<p>autre utilisateur en modifiant le paramètre <code>id</code>.</p>
+
+<h2 id="-tapes-de-reproduction">Étapes de reproduction</h2>
+<li>Se connecter avec le compte test1@example.com</li>
+<li>Intercepter la requête GET /api/user/profile?id=YOUR_ID avec Burp Suite</li>
+<li>Modifier le paramètre id par celui d'un autre utilisateur</li>
+<li>Observer que les données de l'autre utilisateur sont retournées</li>
+
+<h2 id="preuve-screenshots-vid-o-">Preuve (screenshots/vidéo)</h2>
+<p>[Screenshot montrant les données de l'autre utilisateur]</p>
+
+<h2 id="impact">Impact</h2>
+<p>Un attaquant peut accéder aux données personnelles (nom, email, adresse,</p>
+<p>historique de commandes) de tous les utilisateurs de la plateforme.</p>
+<p>Cela représente une violation du RGPD avec des sanctions potentielles.</p>
+
+<h2 id="recommandation">Recommandation</h2>
+<p>Vérifier côté serveur que l'utilisateur authentifié est bien le propriétaire</p>
+<p>de la ressource demandée avant de retourner les données.</p>
+
+<h2 id="r-f-rences">Références</h2>
+<ul><li>OWASP API Security Top 10: API1 - Broken Object Level Authorization</code></pre></li></ul>
+
+<h2 id="conseils-pour-d-buter">Conseils pour débuter</h2>
+
+<pre><code>✅ Commencer par les programmes avec large scope
+<p>✅ Lire TOUTES les règles du programme avant de tester</p>
+<p>✅ Documenter chaque test (screenshots, requêtes Burp)</p>
+<p>✅ Apprendre de chaque rapport rejeté</p>
+<p>✅ Rejoindre des communautés (Discord HackerOne, Reddit r/bugbounty)</p>
+<p>✅ Suivre des chercheurs expérimentés sur Twitter</p>
+
+<p>❌ Ne jamais tester hors scope</p>
+<p>❌ Ne jamais divulguer publiquement avant fix</p>
+<p>❌ Ne jamais tester de façon destructive</p>
+<p>❌ Ne jamais accéder aux données réelles des utilisateurs</p>
+
+<p>Ressources :</p>
+<p>→ PortSwigger Web Security Academy (gratuit)</p>
+<p>→ HackTheBox Bug Bounty Hunter path</p>
+<p>→ Nahamsec sur YouTube</p>
+<p>→ InsiderPhD sur YouTube</p>
+<p>→ Bug Bounty Hunter's Methodology (Jason Haddix)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le bug bounty est accessible à tous — pas de diplôme requis, juste de la curiosité, de la méthode et de la persévérance. Commencez par PortSwigger Academy pour maîtriser les vulnérabilités web, puis attaquez les programmes débutant-friendly sur YesWeHack ou HackerOne. Votre premier bug payé sera une immense satisfaction — et le début d'une nouvelle aventure.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#bug-bounty" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/reverse-engineering.html" class="nav-prev">← Reverse Engineering : analyser un binaire sans code source</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/threat-intelligence.html" class="nav-next">Threat Intelligence : anticiper les cyberattaques →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

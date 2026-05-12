@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>RGPD et conformité sécurité : obligations et mise en œuvre — Temgus.CyberBlog</title>
 <meta name="description" content="Privacy by design, bases légales, droits des personnes et implémentation technique du RGPD.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/rgpd-conformite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/rgpd-conformite.html">
 <meta property="og:title" content="RGPD et conformité sécurité : obligations et mise en œuvre — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="RGPD et conformité sécurité : obligations et mise en œuvre — Temgus.CyberBlog">
 <meta name="twitter:description" content="Privacy by design, bases légales, droits des personnes et implémentation technique du RGPD.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,614 @@
   "headline": "RGPD et conformité sécurité : obligations et mise en œuvre",
   "description": "Privacy by design, bases légales, droits des personnes et implémentation technique du RGPD.",
   "datePublished": "2025-06-14",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/rgpd-conformite.html",
   "inLanguage": "fr",
   "keywords": "RGPD, conformité, vie privée, CNIL",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⚖️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">RGPD et conformité sécurité : obligations et mise en œuvre</h1>
-  <p style="color:#8892a4;max-width:500px">Privacy by design, bases légales, droits des personnes et implémentation technique du RGPD.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#rgpd-conformite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⚖️</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">RGPD et conformité sécurité : obligations et mise en œuvre</div>
+      <div class="meta-details">
+        <span>📅 2025-06-14</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-principes-fondamentaux-du-rgpd">Les principes fondamentaux du RGPD</a></li>
+<li><a href="#privacy-by-design-et-privacy-by-default">Privacy by Design et Privacy by Default</a></li>
+<li><a href="#les-bases-l-gales-du-rgpd">Les bases légales du RGPD</a></li>
+<li><a href="#mise-en-uvre-technique">Mise en œuvre technique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#chiffrement-et-pseudonymisation">Chiffrement et pseudonymisation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#gestion-du-consentement">Gestion du consentement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#droits-des-personnes">Droits des personnes</a></li>
+<li><a href="#registre-des-traitements-article-30-">Registre des traitements (Article 30)</a></li>
+<li><a href="#notification-de-violation-de-donn-es-article-33-34-">Notification de violation de données (Article 33/34)</a></li>
+<li><a href="#amendes-rgpd">Amendes RGPD</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>RGPD et conformité sécurité : obligations et mise en œuvre</h1>
+
+<p>Le RGPD (Règlement Général sur la Protection des Données) est entré en vigueur en mai 2018. Au-delà des amendes, il impose une vraie culture de la sécurité des données personnelles. Ce guide traduit les obligations légales en actions techniques concrètes.</p>
+
+<h2 id="les-principes-fondamentaux-du-rgpd">Les principes fondamentaux du RGPD</h2>
+
+<pre><code>6 principes clés (Article 5) :
+
+<li>LICÉITÉ, LOYAUTÉ, TRANSPARENCE</li>
+<p>→ Base légale pour chaque traitement</p>
+<p>→ Informer les personnes clairement</p>
+
+<li>LIMITATION DES FINALITÉS</li>
+<p>→ Collecter uniquement pour un but précis et déclaré</p>
+<p>→ Pas de réutilisation pour d'autres fins</p>
+
+<li>MINIMISATION DES DONNÉES</li>
+<p>→ Ne collecter QUE ce qui est nécessaire</p>
+<p>→ Pas de collecte "au cas où"</p>
+
+<li>EXACTITUDE</li>
+<p>→ Données à jour, possibilité de correction</p>
+
+<li>LIMITATION DE LA CONSERVATION</li>
+<p>→ Durées de conservation définies et respectées</p>
+<p>→ Suppression après la durée</p>
+
+<li>INTÉGRITÉ ET CONFIDENTIALITÉ</li>
+<p>→ Sécurité technique et organisationnelle appropriée</code></pre>
+
+<h2 id="privacy-by-design-et-privacy-by-default">Privacy by Design et Privacy by Default</h2>
+
+<pre><code class="language-python"># Privacy by Design : intégrer la vie privée dès la conception
+
+<h1>❌ Mauvaise approche</h1>
+<p>class UserProfile:</p>
+<p>def __init__(self, user_data):</p>
+<p># Stocker TOUT sans réfléchir</p>
+<p>self.name = user_data['name']</p>
+<p>self.email = user_data['email']</p>
+<p>self.phone = user_data['phone']</p>
+<p>self.address = user_data['address']</p>
+<p>self.birth_date = user_data['birth_date']</p>
+<p>self.ip_history = user_data.get('ip_history', [])</p>
+<p>self.browsing_history = user_data.get('browsing', [])</p>
+<p>self.location_history = user_data.get('locations', [])</p>
+<p># On stocke tout "au cas où"</p>
+
+<h1>✅ Bonne approche - Privacy by Design</h1>
+<p>class UserProfile:</p>
+<p>def __init__(self, user_data, purpose="newsletter"):</p>
+<p># Ne collecter que ce qui est NÉCESSAIRE pour la finalité</p>
+<p>if purpose == "newsletter":</p>
+<p># Pour une newsletter : seulement email + préférence langue</p>
+<p>self.email = user_data['email']</p>
+<p>self.language = user_data.get('language', 'fr')</p>
+<p># Pas besoin de nom, adresse, téléphone !</p>
+
+<p>elif purpose == "delivery":</p>
+<p># Pour une livraison : nom + adresse uniquement</p>
+<p>self.name = user_data['name']</p>
+<p>self.delivery_address = user_data['address']</p>
+<p># Pas besoin de date de naissance, historique nav !</p>
+
+<p># Pas de collecte des IP, tracking, comportement sans base légale explicite</code></pre>
+
+<h2 id="les-bases-l-gales-du-rgpd">Les bases légales du RGPD</h2>
+
+<pre><code class="language-python">bases_legales = {
+<p>"consentement": {</p>
+<p>"art": "Art. 6(1)(a)",</p>
+<p>"description": "Consentement libre, spécifique, éclairé et univoque",</p>
+<p>"exemple": "Newsletter : case à cocher non pré-cochée",</p>
+<p>"retrait": "Aussi facile que de donner le consentement"</p>
+<p>},</p>
+<p>"contrat": {</p>
+<p>"art": "Art. 6(1)(b)",</p>
+<p>"description": "Nécessaire à l'exécution d'un contrat",</p>
+<p>"exemple": "Adresse pour livraison d'une commande",</p>
+<p>"attention": "Pas de traitement supplémentaire 'lié'"</p>
+<p>},</p>
+<p>"obligation_legale": {</p>
+<p>"art": "Art. 6(1)(c)",</p>
+<p>"description": "Obligation légale du responsable",</p>
+<p>"exemple": "Facturation (conservation 10 ans), déclaration fiscale"</p>
+<p>},</p>
+<p>"interet_legitime": {</p>
+<p>"art": "Art. 6(1)(f)",</p>
+<p>"description": "Intérêt légitime sous conditions",</p>
+<p>"exemple": "Logs de sécurité, prévention de fraude",</p>
+<p>"condition": "Doit être mis en balance avec les droits des personnes"</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="mise-en-uvre-technique">Mise en œuvre technique</h2>
+
+<h3 id="chiffrement-et-pseudonymisation">Chiffrement et pseudonymisation</h3>
+
+<pre><code class="language-python">import hashlib
+<p>import secrets</p>
+<p>from cryptography.fernet import Fernet</p>
+
+<p>class DataProtection:</p>
+
+<p>def pseudonymise(self, identifier, salt=None):</p>
+<p>"""</p>
+<p>Pseudonymisation : remplace l'identifiant par un pseudonyme</p>
+<p>Le lien peut être rétabli avec la table de correspondance</p>
+<p>"""</p>
+<p>if not salt:</p>
+<p>salt = secrets.token_hex(16)</p>
+<p>pseudonym = hashlib.sha256(f"{identifier}{salt}".encode()).hexdigest()</p>
+<p># Stocker le lien identifier → pseudonym dans une table séparée et sécurisée</p>
+<p>return pseudonym, salt</p>
+
+<p>def anonymise(self, data):</p>
+<p>"""</p>
+<p>Anonymisation irréversible : plus aucun lien possible</p>
+<p>Les données anonymisées ne sont plus soumises au RGPD</p>
+<p>"""</p>
+<p># K-anonymity : regrouper les données pour qu'elles</p>
+<p># s'appliquent à au moins k individus</p>
+<p># Exemple : âge exact → tranche d'âge</p>
+<p>result = {}</p>
+<p>if 'age' in data:</p>
+<p>result['age_range'] = f"{(data['age'] // 10) <em> 10}-{(data['age'] // 10) </em> 10 + 9}"</p>
+<p>if 'zip_code' in data:</p>
+<p>result['region'] = data['zip_code'][:2]  # Département seulement</p>
+<p>return result</p>
+
+<p>def encrypt_personal_data(self, data, key=None):</p>
+<p>"""Chiffrement des données personnelles au repos"""</p>
+<p>if not key:</p>
+<p>key = Fernet.generate_key()</p>
+<p>f = Fernet(key)</p>
+<p>encrypted = f.encrypt(data.encode())</p>
+<p>return encrypted, key</code></pre>
+
+<h3 id="gestion-du-consentement">Gestion du consentement</h3>
+
+<pre><code class="language-javascript">// Gestionnaire de consentement RGPD-compliant
+
+<p>class ConsentManager {</p>
+<p>constructor() {</p>
+<p>this.consents = {};</p>
+<p>this.consentLog = []; // Audit trail obligatoire</p>
+<p>}</p>
+
+<p>requestConsent(purpose, description) {</p>
+<p>// Le consentement doit être :</p>
+<p>// ✅ Libre (pas de service conditionné au consentement marketing)</p>
+<p>// ✅ Spécifique (un consentement par finalité)</p>
+<p>// ✅ Éclairé (description claire)</p>
+<p>// ✅ Univoque (action positive, pas de case pré-cochée)</p>
+
+<p>return {</p>
+<p>purpose,</p>
+<p>description,</p>
+<p>timestamp: new Date().toISOString(),</p>
+<p>checkboxPreChecked: false, // JAMAIS pré-coché</p>
+<p>bundled: false // JAMAIS groupé avec d'autres consentements</p>
+<p>};</p>
+<p>}</p>
+
+<p>recordConsent(userId, purpose, given, proofOfConsent) {</p>
+<p>// Enregistrement pour preuve (Article 7 RGPD)</p>
+<p>this.consentLog.push({</p>
+<p>userId,</p>
+<p>purpose,</p>
+<p>given,</p>
+<p>timestamp: new Date().toISOString(),</p>
+<p>ipAddress: proofOfConsent.ip, // Pour preuve</p>
+<p>userAgent: proofOfConsent.userAgent,</p>
+<p>consentText: proofOfConsent.text // Texte exact présenté</p>
+<p>});</p>
+<p>this.consents[<code>${userId}_${purpose}</code>] = given;</p>
+<p>}</p>
+
+<p>withdrawConsent(userId, purpose) {</p>
+<p>// Le retrait doit être aussi simple que le don</p>
+<p>this.recordConsent(userId, purpose, false, { action: 'withdrawal' });</p>
+<p>// Déclencher la suppression des données traitées sur cette base</p>
+<p>this.deleteDataForPurpose(userId, purpose);</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h3 id="droits-des-personnes">Droits des personnes</h3>
+
+<pre><code class="language-python">class GDPRRightsHandler:
+
+<p>def handle_access_request(self, user_id):</p>
+<p>"""</p>
+<p>Droit d'accès (Art. 15) :</p>
+<p>Répondre dans 1 mois, données lisibles, format portable</p>
+<p>"""</p>
+<p>user_data = {</p>
+<p>'personal_data': self.get_all_user_data(user_id),</p>
+<p>'processing_purposes': self.get_purposes(user_id),</p>
+<p>'data_recipients': self.get_recipients(user_id),</p>
+<p>'retention_period': self.get_retention_info(),</p>
+<p>'rights_info': "Vous pouvez demander rectification, suppression ou portabilité"</p>
+<p>}</p>
+<p>return user_data</p>
+
+<p>def handle_erasure_request(self, user_id):</p>
+<p>"""</p>
+<p>Droit à l'effacement (Art. 17) - "Droit à l'oubli"</p>
+<p>Conditions : plus nécessaire, retrait consentement, opposition...</p>
+<p>Exceptions : obligation légale, intérêt public</p>
+<p>"""</p>
+<p># Vérifier si des exceptions s'appliquent</p>
+<p>if self.has_legal_retention_obligation(user_id):</p>
+<p>return {"status": "partial", "reason": "Obligation légale de conservation"}</p>
+
+<p># Supprimer de toutes les bases de données</p>
+<p>self.delete_from_main_db(user_id)</p>
+<p>self.delete_from_analytics(user_id)</p>
+<p>self.delete_from_backups_on_schedule(user_id)  # Backups : prochaine rotation</p>
+<p>self.notify_third_parties(user_id)  # Informer les destinataires</p>
+
+<p># Documenter la suppression</p>
+<p>self.log_erasure(user_id, datetime.now())</p>
+
+<p>return {"status": "success", "completion_date": "Dans les 30 jours pour les backups"}</p>
+
+<p>def handle_portability_request(self, user_id):</p>
+<p>"""</p>
+<p>Droit à la portabilité (Art. 20) :</p>
+<p>Format structuré, couramment utilisé, machine-readable (JSON/CSV)</p>
+<p>"""</p>
+<p>data = self.get_all_user_data(user_id)</p>
+<p>return {</p>
+<p>'format': 'JSON',</p>
+<p>'data': data,</p>
+<p>'export_date': datetime.now().isoformat()</p>
+<p>}</code></pre>
+
+<h2 id="registre-des-traitements-article-30-">Registre des traitements (Article 30)</h2>
+
+<pre><code class="language-python"># Tout responsable de traitement doit tenir un registre
+
+<p>registre_traitements = [</p>
+<p>{</p>
+<p>"nom": "Gestion des comptes utilisateurs",</p>
+<p>"finalite": "Permettre l'accès au service",</p>
+<p>"base_legale": "Contrat",</p>
+<p>"categories_donnees": ["Nom", "Email", "Mot de passe hashé"],</p>
+<p>"categories_personnes": "Utilisateurs du service",</p>
+<p>"destinataires": ["Équipe IT interne"],</p>
+<p>"pays_tiers": None,</p>
+<p>"duree_conservation": "Durée du compte + 3 ans après désactivation",</p>
+<p>"mesures_securite": "Chiffrement AES-256, HTTPS, 2FA disponible"</p>
+<p>},</p>
+<p>{</p>
+<p>"nom": "Analytics et statistiques",</p>
+<p>"finalite": "Améliorer le service",</p>
+<p>"base_legale": "Intérêt légitime",</p>
+<p>"categories_donnees": ["IP anonymisée", "Pages visitées", "Durée session"],</p>
+<p>"categories_personnes": "Visiteurs du site",</p>
+<p>"destinataires": ["Matomo (self-hosted)"],</p>
+<p>"pays_tiers": None,</p>
+<p>"duree_conservation": "13 mois",</p>
+<p>"mesures_securite": "IP anonymisée, pas de cookies tiers, hébergement EU"</p>
+<p>}</p>
+<p>]</code></pre>
+
+<h2 id="notification-de-violation-de-donn-es-article-33-34-">Notification de violation de données (Article 33/34)</h2>
+
+<pre><code class="language-python">class DataBreachNotification:
+
+<p>def assess_breach(self, breach_details):</p>
+<p>"""</p>
+<p>Évaluer si la violation doit être notifiée :</p>
+<p>- À la CNIL : dans 72h si risque pour les personnes</p>
+<p>- Aux personnes : si risque ÉLEVÉ pour leurs droits et libertés</p>
+<p>"""</p>
+<p>risk_score = 0</p>
+
+<p># Facteurs de risque</p>
+<p>if breach_details.get('data_encrypted'):</p>
+<p>risk_score -= 2  # Données chiffrées = risque réduit</p>
+<p>if breach_details.get('data_type') == 'health':</p>
+<p>risk_score += 3</p>
+<p>if breach_details.get('data_type') == 'financial':</p>
+<p>risk_score += 3</p>
+<p>if breach_details.get('affected_count') &gt; 1000:</p>
+<p>risk_score += 2</p>
+<p>if breach_details.get('sensitive_categories'):</p>
+<p>risk_score += 3</p>
+
+<p>return {</p>
+<p>'notify_cnil': risk_score &gt; 0,  # 72h max</p>
+<p>'notify_individuals': risk_score &gt; 3,</p>
+<p>'risk_level': 'high' if risk_score &gt; 3 else 'medium' if risk_score &gt; 0 else 'low'</p>
+<p>}</p>
+
+<p>def generate_cnil_notification(self, breach):</p>
+<p>"""Contenu requis par la CNIL"""</p>
+<p>return {</p>
+<p>'nature_violation': breach['type'],</p>
+<p>'categories_personnes': breach['affected_categories'],</p>
+<p>'nombre_approximatif': breach['affected_count'],</p>
+<p>'categories_donnees': breach['data_types'],</p>
+<p>'consequences_probables': breach['likely_consequences'],</p>
+<p>'mesures_prises': breach['measures_taken'],</p>
+<p>'contact_dpo': self.get_dpo_contact(),</p>
+<p>'date_constatation': breach['discovery_date']</p>
+<p>}</code></pre>
+
+<h2 id="amendes-rgpd">Amendes RGPD</h2>
+
+<pre><code>Niveaux d'amendes :
+
+<p>Niveau 1 (infractions mineures) :</p>
+<p>→ Max : 10 millions € ou 2% du CA mondial</p>
+<p>→ Exemples : registre des traitements absent, DPO non désigné</p>
+
+<p>Niveau 2 (infractions graves) :</p>
+<p>→ Max : 20 millions € ou 4% du CA mondial</p>
+<p>→ Exemples : violation des principes, base légale absente</p>
+
+<p>Amendes notables :</p>
+<p>→ Amazon (Luxembourg) : 746M€ (2021) - publicité ciblée sans consentement</p>
+<p>→ Instagram (Meta) : 405M€ (2022) - données enfants</p>
+<p>→ Facebook (Meta) : 390M€ (2023) - base légale publicité</p>
+<p>→ TikTok (Irlande) : 345M€ (2023) - données mineurs</p>
+<p>→ Google France : 150M€ (2022) - refus de cookies difficile</p>
+<p>→ Total 2023 (UE) : &gt;2 milliards d'euros d'amendes</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le RGPD n'est pas qu'un obstacle légal — c'est une opportunité de construire la confiance avec vos utilisateurs. En pratique : <strong>minimisez la collecte, chiffrez les données sensibles, documentez vos traitements, et préparez vos procédures de réponse aux droits et aux violations</strong>. La CNIL propose des guides pratiques gratuits pour chaque secteur sur cnil.fr.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#rgpd-conformite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ctf-competitions.html" class="nav-prev">← CTF : les compétitions de hacking éthique</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/supply-chain-attacks.html" class="nav-next">Attaques supply chain : compromettre par les fournisseurs →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

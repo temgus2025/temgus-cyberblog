@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Reverse Engineering : analyser un binaire sans code source — Temgus.CyberBlog</title>
 <meta name="description" content="Ghidra, analyse statique et dynamique, décompilation, crackmes et méthodologie complète pour reverser un binaire.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/reverse-engineering.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/reverse-engineering.html">
 <meta property="og:title" content="Reverse Engineering : analyser un binaire sans code source — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Reverse Engineering : analyser un binaire sans code source — Temgus.CyberBlog">
 <meta name="twitter:description" content="Ghidra, analyse statique et dynamique, décompilation, crackmes et méthodologie complète pour reverser un binaire.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,547 @@
   "headline": "Reverse Engineering : analyser un binaire sans code source",
   "description": "Ghidra, analyse statique et dynamique, décompilation, crackmes et méthodologie complète pour reverser un binaire.",
   "datePublished": "2025-08-01",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/reverse-engineering.html",
   "inLanguage": "fr",
   "keywords": "reverse engineering, Ghidra, binaire, malware, CTF",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔍</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Reverse Engineering : analyser un binaire sans code source</h1>
-  <p style="color:#8892a4;max-width:500px">Ghidra, analyse statique et dynamique, décompilation, crackmes et méthodologie complète pour reverser un binaire.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#reverse-engineering" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔍</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Reverse Engineering : analyser un binaire sans code source</div>
+      <div class="meta-details">
+        <span>📅 2025-08-01</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-faire-du-reverse-engineering-">Pourquoi faire du reverse engineering ?</a></li>
+<li><a href="#les-niveaux-d-analyse">Les niveaux d'analyse</a></li>
+<li><a href="#outils-essentiels">Outils essentiels</a></li>
+<li><a href="#anatomie-d-un-ex-cutable">Anatomie d'un exécutable</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#format-elf-linux-">Format ELF (Linux)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#format-pe-windows-">Format PE (Windows)</a></li>
+<li><a href="#workflow-d-analyse-d-un-malware">Workflow d'analyse d'un malware</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-1-triage-initial">Étape 1 : Triage initial</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-2-analyse-statique-avec-ghidra">Étape 2 : Analyse statique avec Ghidra</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-3-analyse-dynamique">Étape 3 : Analyse dynamique</a></li>
+<li><a href="#anti-analyse-et-contournements">Anti-analyse et contournements</a></li>
+<li><a href="#crackme-exercice-pratique">Crackme — Exercice pratique</a></li>
+<li><a href="#ressources-pour-apprendre">Ressources pour apprendre</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Reverse Engineering : analyser un binaire sans code source</h1>
+
+<p>Le reverse engineering (rétro-ingénierie) consiste à analyser un programme compilé pour comprendre son fonctionnement sans avoir accès au code source. C'est une compétence fondamentale pour l'analyse de malwares, la recherche de vulnérabilités et les CTF.</p>
+
+<h2 id="pourquoi-faire-du-reverse-engineering-">Pourquoi faire du reverse engineering ?</h2>
+
+<pre><code>Cas d'usage légitimes :
+<p>→ Analyse de malwares (comprendre ce que fait un virus)</p>
+<p>→ Recherche de vulnérabilités (bug bounty, pentest)</p>
+<p>→ CTF (Capture The Flag)</p>
+<p>→ Interopérabilité (comprendre un protocole propriétaire)</p>
+<p>→ Récupération de code perdu</p>
+<p>→ Vérification de sécurité d'un logiciel tiers</p>
+
+<p>Cadre légal :</p>
+<p>→ Toujours obtenir une autorisation pour les logiciels commerciaux</p>
+<p>→ Exception : analyse de malwares (légal en sécurité défensive)</p>
+<p>→ CTF et logiciels open source : aucune restriction</code></pre>
+
+<h2 id="les-niveaux-d-analyse">Les niveaux d'analyse</h2>
+
+<pre><code>Analyse statique (sans exécuter le programme) :
+<p>→ Désassemblage : binaire → assembly</p>
+<p>→ Décompilation : assembly → pseudo-code C</p>
+<p>→ Analyse des strings, imports, exports</p>
+<p>→ Sûr car le programme ne s'exécute pas</p>
+
+<p>Analyse dynamique (en exécutant le programme) :</p>
+<p>→ Debugging : suivre l'exécution instruction par instruction</p>
+<p>→ Tracing : surveiller les appels système</p>
+<p>→ Memory analysis : inspecter la mémoire en temps réel</p>
+<p>→ Risqué : nécessite un environnement isolé (VM)</code></pre>
+
+<h2 id="outils-essentiels">Outils essentiels</h2>
+
+<pre><code class="language-bash"># Analyse statique
+<p>file malware.exe           # Type de fichier</p>
+<p>strings malware.exe        # Chaînes lisibles</p>
+<p>objdump -d malware.elf     # Désassemblage Linux</p>
+<p>readelf -a malware.elf     # En-têtes ELF</p>
+
+<h1>Ghidra (NSA, gratuit) — Le meilleur décompilateur gratuit</h1>
+<h1>Télécharger : https://ghidra-sre.org</h1>
+<p>./ghidraRun</p>
+
+<h1>IDA Free — Standard industrie (version gratuite limitée)</h1>
+<h1>Binary Ninja — Moderne et très lisible</h1>
+
+<h1>Analyse dynamique</h1>
+<p>gdb malware.elf            # Debugger Linux</p>
+<p>x64dbg / OllyDbg           # Debugger Windows</p>
+<p>strace ./malware           # Syscalls Linux</p>
+<p>ltrace ./malware           # Appels de librairies</code></pre>
+
+<h2 id="anatomie-d-un-ex-cutable">Anatomie d'un exécutable</h2>
+
+<h3 id="format-elf-linux-">Format ELF (Linux)</h3>
+
+<pre><code>Structure d'un fichier ELF :
+
+<p>┌─────────────────┐</p>
+<p>│   ELF Header    │ Magic bytes: 7f 45 4c 46 (\x7fELF)</p>
+<p>├─────────────────┤ Architecture, point d'entrée</p>
+<p>│ Program Headers │ Segments chargés en mémoire</p>
+<p>├─────────────────┤</p>
+<p>│    .text        │ Code exécutable</p>
+<p>├─────────────────┤</p>
+<p>│    .data        │ Variables initialisées</p>
+<p>├─────────────────┤</p>
+<p>│    .rodata      │ Constantes (strings)</p>
+<p>├─────────────────┤</p>
+<p>│    .bss         │ Variables non initialisées</p>
+<p>├─────────────────┤</p>
+<p>│ Section Headers │ Métadonnées des sections</p>
+<p>└─────────────────┘</code></pre>
+
+<pre><code class="language-bash"># Analyser un ELF avec readelf
+<p>readelf -h malware.elf     # Header</p>
+<p>readelf -S malware.elf     # Sections</p>
+<p>readelf -d malware.elf     # Dépendances dynamiques</p>
+
+<h1>Voir les imports (fonctions utilisées)</h1>
+<p>objdump -d -j .plt malware.elf | grep "call"</p>
+
+<h1>Extraire les strings intéressantes</h1>
+<p>strings -n 8 malware.elf | grep -E "(http|/tmp|passwd|exec)"</code></pre>
+
+<h3 id="format-pe-windows-">Format PE (Windows)</h3>
+
+<pre><code class="language-python"># Analyser un PE avec pefile
+<p>import pefile</p>
+
+<p>pe = pefile.PE('malware.exe')</p>
+
+<h1>Informations générales</h1>
+<p>print(f"Machine: {hex(pe.FILE_HEADER.Machine)}")</p>
+<p>print(f"Timestamp: {pe.FILE_HEADER.TimeDateStamp}")</p>
+<p>print(f"Point d'entrée: {hex(pe.OPTIONAL_HEADER.AddressOfEntryPoint)}")</p>
+
+<h1>Imports (DLLs et fonctions utilisées)</h1>
+<p>for entry in pe.DIRECTORY_ENTRY_IMPORT:</p>
+<p>print(f"\nDLL: {entry.dll.decode()}")</p>
+<p>for imp in entry.imports:</p>
+<p>print(f"  → {imp.name.decode() if imp.name else 'Ordinal'}")</p>
+
+<h1>Sections</h1>
+<p>for section in pe.sections:</p>
+<p>print(f"Section: {section.Name.decode().strip()}")</p>
+<p>print(f"  Virtual Size: {section.Misc_VirtualSize}")</p>
+<p>print(f"  Entropy: {section.get_entropy():.2f}")  # &gt; 7 = probablement packé/chiffré</p>
+
+<h1>Exports (fonctions exposées)</h1>
+<p>if hasattr(pe, 'DIRECTORY_ENTRY_EXPORT'):</p>
+<p>for exp in pe.DIRECTORY_ENTRY_EXPORT.symbols:</p>
+<p>print(f"Export: {exp.name.decode()}")</code></pre>
+
+<h2 id="workflow-d-analyse-d-un-malware">Workflow d'analyse d'un malware</h2>
+
+<h3 id="-tape-1-triage-initial">Étape 1 : Triage initial</h3>
+
+<pre><code class="language-bash"># Dans une VM isolée (snapshots activés !)
+
+<h1>1. Identifier le fichier</h1>
+<p>file suspicious.exe</p>
+<h1>suspicious.exe: PE32 executable (GUI) Intel 80386, for MS Windows</h1>
+
+<h1>2. Hash pour recherche sur VirusTotal</h1>
+<p>md5sum suspicious.exe</p>
+<p>sha256sum suspicious.exe</p>
+<h1>Chercher le hash sur virustotal.com</h1>
+
+<h1>3. Strings intéressantes</h1>
+<p>strings suspicious.exe | grep -iE "(http|ftp|cmd|powershell|reg|temp)"</p>
+
+<h1>4. Entropy des sections</h1>
+<p>python3 -c "</p>
+<p>import pefile</p>
+<p>pe = pefile.PE('suspicious.exe')</p>
+<p>for s in pe.sections:</p>
+<p>print(f'{s.Name.decode().strip()}: entropy={s.get_entropy():.2f}')</p>
+<p>"</p>
+<h1>Entropy &gt; 7 = code chiffré ou packé (UPX, custom packer)</code></pre></h1>
+
+<h3 id="-tape-2-analyse-statique-avec-ghidra">Étape 2 : Analyse statique avec Ghidra</h3>
+
+<pre><code>Dans Ghidra :
+<li>File → New Project → Import File</li>
+<li>Analyser le binaire (Auto Analysis)</li>
+<li>Navigation :</li>
+<p>→ Symbol Tree → Functions → chercher "main", "WinMain"</p>
+<p>→ Imports → voir les API Windows utilisées</p>
+
+<p>APIs Windows suspectes à surveiller :</p>
+<p>→ CreateRemoteThread    → Injection dans un processus</p>
+<p>→ VirtualAllocEx        → Allocation mémoire distante</p>
+<p>→ WriteProcessMemory    → Écriture dans un processus</p>
+<p>→ RegSetValueEx         → Persistance via registre</p>
+<p>→ WinExec / ShellExecute → Exécution de commandes</p>
+<p>→ WSAConnect / connect  → Connexions réseau</p>
+<p>→ CryptEncrypt          → Chiffrement (ransomware ?)</code></pre>
+
+<h3 id="-tape-3-analyse-dynamique">Étape 3 : Analyse dynamique</h3>
+
+<pre><code class="language-bash"># Linux - Tracer les syscalls
+<p>strace -f -e trace=network,file ./malware 2&gt;&amp;1 | tee strace.log</p>
+<h1>-f : suivre les processus fils</h1>
+<h1>-e trace=network : seulement les appels réseau et fichiers</h1>
+
+<h1>Surveiller les connexions réseau</h1>
+<p>tcpdump -i lo -w capture.pcap &amp;</p>
+<p>./malware</p>
+<h1>Analyser capture.pcap avec Wireshark</h1>
+
+<h1>Windows - Process Monitor (Sysinternals)</h1>
+<h1>Filtrer sur le PID du malware :</h1>
+<h1>→ Accès fichiers (persistance dans AppData ?)</h1>
+<h1>→ Clés de registre modifiées (Run keys ?)</h1>
+<h1>→ Connexions réseau (C2 ?)</code></pre></h1>
+
+<h2 id="anti-analyse-et-contournements">Anti-analyse et contournements</h2>
+
+<pre><code class="language-python"># Techniques courantes pour détecter les analystes
+
+<h1>1. Détection de VM</h1>
+<p>import ctypes, os</p>
+
+<p>def is_running_in_vm():</p>
+<p># Vérifier les processus typiques de VM</p>
+<p>vm_processes = ['vmtoolsd.exe', 'vboxservice.exe', 'wireshark.exe', 'procmon.exe']</p>
+<p>for proc in os.popen('tasklist').read().lower().split('\n'):</p>
+<p>for vm_proc in vm_processes:</p>
+<p>if vm_proc in proc:</p>
+<p>return True</p>
+<p>return False</p>
+
+<h1>2. Sleep bombing (ralentir l'analyse)</h1>
+<p>import time</p>
+<p>time.sleep(300)  # Dormir 5 minutes → les sandbox ont un timeout !</p>
+
+<h1>3. Obfuscation des strings</h1>
+<p>def deobfuscate(encoded, key=0x42):</p>
+<p>return ''.join(chr(ord(c) ^ key) for c in encoded)</p>
+
+<h1>Contournements pour l'analyste :</h1>
+<h1>→ Patcher le jump de détection VM dans le debugger</h1>
+<h1>→ Modifier le sleep() pour retourner immédiatement</h1>
+<h1>→ Utiliser des breakpoints conditionnels</code></pre></h1>
+
+<h2 id="crackme-exercice-pratique">Crackme — Exercice pratique</h2>
+
+<pre><code class="language-c">// Programme C vulnérable (à reverser)
+<p>// Objectif : trouver le bon mot de passe sans lire le code</p>
+
+<p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;string.h&gt;</p>
+
+<p>int check_password(char *input) {</p>
+<p>char secret[] = {0x54, 0x65, 0x6d, 0x67, 0x75, 0x73, 0x00}; // "Temgus"</p>
+<p>return strcmp(input, secret) == 0;</p>
+<p>}</p>
+
+<p>int main() {</p>
+<p>char input[32];</p>
+<p>printf("Password: ");</p>
+<p>scanf("%31s", input);</p>
+<p>if (check_password(input)) {</p>
+<p>printf("Access granted!\n");</p>
+<p>} else {</p>
+<p>printf("Wrong password.\n");</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+
+<p>// Dans Ghidra, vous verriez :</p>
+<p>// → La comparaison avec les bytes {54 65 6d 67 75 73}</p>
+<p>// → Convertir en ASCII → "Temgus"</p>
+<p>// → Mot de passe trouvé !</code></pre>
+
+<h2 id="ressources-pour-apprendre">Ressources pour apprendre</h2>
+
+<pre><code>Plateformes de pratique :
+<p>→ crackmes.one          : challenges de crackme</p>
+<p>→ reversing.kr          : challenges progressifs</p>
+<p>→ HackTheBox Reversing  : challenges réels</p>
+<p>→ CTFtime.org           : compétitions avec épreuves RE</p>
+
+<p>Cours gratuits :</p>
+<p>→ OpenSecurityTraining2 : cours RE complets</p>
+<p>→ Malware Unicorn       : ateliers gratuits</p>
+<p>→ Dr. Josh Stroschein   : YouTube</p>
+
+<p>Certifications :</p>
+<p>→ GREM (GIAC Reverse Engineering Malware)</p>
+<p>→ CREA (Certified Reverse Engineering Analyst)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le reverse engineering est l'une des compétences les plus valorisées en cybersécurité offensive et défensive. Commencez par des crackmes simples sur crackmes.one, apprenez les bases de l'assembly x86/x64, maîtrisez Ghidra — et progressivement vous serez capable d'analyser des malwares réels. C'est un domaine qui demande de la patience mais qui est extrêmement gratifiant.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#reverse-engineering" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-ot-ics.html" class="nav-prev">← Sécurité des environnements OT/ICS : protéger les infrastructures critiques</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/bug-bounty.html" class="nav-next">Bug Bounty : gagner de l'argent en hackant légalement →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

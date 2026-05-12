@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité des microservices : protéger une architecture distribuée — Temgus.CyberBlog</title>
 <meta name="description" content="API Gateway, mTLS, JWT inter-services, secrets management avec Vault et service mesh Istio pour sécuriser vos microservices.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-microservices.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-microservices.html">
 <meta property="og:title" content="Sécurité des microservices : protéger une architecture distribuée — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité des microservices : protéger une architecture distribuée — Temgus.CyberBlog">
 <meta name="twitter:description" content="API Gateway, mTLS, JWT inter-services, secrets management avec Vault et service mesh Istio pour sécuriser vos microservices.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,563 @@
   "headline": "Sécurité des microservices : protéger une architecture distribuée",
   "description": "API Gateway, mTLS, JWT inter-services, secrets management avec Vault et service mesh Istio pour sécuriser vos microservices.",
   "datePublished": "2025-07-05",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-microservices.html",
   "inLanguage": "fr",
   "keywords": "microservices, API Gateway, mTLS, Istio, Vault",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔗</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité des microservices : protéger une architecture distribuée</h1>
-  <p style="color:#8892a4;max-width:500px">API Gateway, mTLS, JWT inter-services, secrets management avec Vault et service mesh Istio pour sécuriser vos microservices.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-microservices" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔗</div>
+    <div class="meta-info">
+      <div class="meta-category">Architecture & Cloud</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité des microservices : protéger une architecture distribuée</div>
+      <div class="meta-details">
+        <span>📅 2025-07-05</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-les-microservices-sont-un-d-fi-s-curit-">Pourquoi les microservices sont un défi sécurité</a></li>
+<li><a href="#vecteurs-d-attaque-sp-cifiques">Vecteurs d'attaque spécifiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaque-sur-l-api-gateway">Attaque sur l'API Gateway</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#jwt-et-authentification-inter-services">JWT et authentification inter-services</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#injection-dans-les-messages-queues">Injection dans les messages queues</a></li>
+<li><a href="#service-mesh-s-curit-transparente">Service Mesh — Sécurité transparente</a></li>
+<li><a href="#secrets-management-dans-les-microservices">Secrets management dans les microservices</a></li>
+<li><a href="#observabilit-s-curit-">Observabilité sécurité</a></li>
+<li><a href="#checklist-s-curit-microservices">Checklist sécurité microservices</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité des microservices : protéger une architecture distribuée</h1>
+
+<p>Les microservices ont révolutionné le développement logiciel mais ont multiplié la surface d'attaque. Là où une application monolithique avait une seule entrée, une architecture microservices peut en avoir des dizaines. Ce guide couvre les vecteurs d'attaque spécifiques et les meilleures pratiques de sécurité.</p>
+
+<h2 id="pourquoi-les-microservices-sont-un-d-fi-s-curit-">Pourquoi les microservices sont un défi sécurité</h2>
+
+<pre><code>Architecture monolithique :
+<p>[Client] → [Application unique] → [BDD]</p>
+<p>→ 1 surface d'attaque</p>
+<p>→ 1 périmètre à sécuriser</p>
+
+<p>Architecture microservices :</p>
+<p>[Client] → [API Gateway] → [Service Auth]</p>
+<p>→ [Service Utilisateurs] → [BDD Users]</p>
+<p>→ [Service Commandes]   → [BDD Orders]</p>
+<p>→ [Service Paiement]    → [BDD Payment]</p>
+<p>→ [Service Email]</p>
+<p>→ [Message Queue]</p>
+<p>→ [Service Notifications]</p>
+
+<p>→ Dizaines de surfaces d'attaque</p>
+<p>→ Communications inter-services à sécuriser</p>
+<p>→ Chaque service = cible potentielle</p>
+<p>→ Compromission d'un service = pivot possible</code></pre>
+
+<h2 id="vecteurs-d-attaque-sp-cifiques">Vecteurs d'attaque spécifiques</h2>
+
+<h3 id="attaque-sur-l-api-gateway">Attaque sur l'API Gateway</h3>
+
+<pre><code class="language-python"># L'API Gateway est la porte d'entrée unique — cible prioritaire
+
+<h1>1. Bypass de l'API Gateway (accès direct aux services internes)</h1>
+<h1>Si les services internes sont accessibles directement :</h1>
+<p>curl http://service-paiement:8080/api/process  # Bypass Gateway !</p>
+
+<h1>Protection : isolation réseau stricte</h1>
+<h1>Les services internes NE DOIVENT PAS être accessibles depuis Internet</h1>
+<h1>Kubernetes NetworkPolicy :</h1>
+<p>"""</p>
+<p>apiVersion: networking.k8s.io/v1</p>
+<p>kind: NetworkPolicy</p>
+<p>metadata:</p>
+<p>name: deny-external-access</p>
+<p>spec:</p>
+<p>podSelector:</p>
+<p>matchLabels:</p>
+<p>tier: internal</p>
+<p>ingress:</p>
+<p>- from:</p>
+<p>- podSelector:</p>
+<p>matchLabels:</p>
+<p>role: api-gateway  # Seulement depuis la gateway</p>
+<p>"""</p>
+
+<h1>2. Rate limiting bypass</h1>
+<h1>Sans rate limiting : brute force possible sur tous les endpoints</h1>
+<h1>Configuration Kong API Gateway :</h1>
+<p>"""</p>
+<p>plugins:</p>
+<p>- name: rate-limiting</p>
+<p>config:</p>
+<p>minute: 100          # 100 requêtes/minute par IP</p>
+<p>hour: 1000</p>
+<p>policy: redis        # Stockage distribué</p>
+<p>fault_tolerant: true</p>
+<p>"""</code></pre>
+
+<h3 id="jwt-et-authentification-inter-services">JWT et authentification inter-services</h3>
+
+<pre><code class="language-python">import jwt
+<p>from datetime import datetime, timedelta</p>
+
+<h1>❌ Erreur courante : pas d'authentification inter-services</h1>
+<h1>Service A appelle Service B sans vérification</h1>
+<p>response = requests.get('http://service-users/api/users/123')</p>
+<h1>N'importe quel service compromis peut appeler n'importe quel autre !</h1>
+
+<h1>✅ Authentification service-to-service avec JWT</h1>
+<p>def creer_service_token(service_name, secret_key):</p>
+<p>payload = {</p>
+<p>'iss': service_name,          # Émetteur</p>
+<p>'aud': 'microservices',       # Audience</p>
+<p>'iat': datetime.utcnow(),</p>
+<p>'exp': datetime.utcnow() + timedelta(minutes=5),  # Courte durée</p>
+<p>'scope': ['read:users'],      # Permissions minimales</p>
+<p>}</p>
+<p>return jwt.encode(payload, secret_key, algorithm='RS256')</p>
+
+<h1>Utilisation</h1>
+<p>token = creer_service_token('service-commandes', PRIVATE_KEY)</p>
+<p>headers = {'Authorization': f'Bearer {token}'}</p>
+<p>response = requests.get('http://service-users/api/users/123', headers=headers)</p>
+
+<h1>✅ Encore mieux : mTLS (mutual TLS)</h1>
+<h1>Chaque service a un certificat client</h1>
+<h1>Authentification mutuelle = les deux parties se vérifient</code></pre></h1>
+
+<h3 id="injection-dans-les-messages-queues">Injection dans les messages queues</h3>
+
+<pre><code class="language-python"># Les message queues (RabbitMQ, Kafka) sont souvent oubliées
+<h1>Un attaquant qui accède à la queue peut injecter des messages malveillants</h1>
+
+<h1>❌ Consommateur vulnérable</h1>
+<p>def process_message(message):</p>
+<p>data = json.loads(message)</p>
+<p>user_id = data['user_id']</p>
+<p>action = data['action']</p>
+<p>os.system(f"process_user {user_id} {action}")  # Injection commande !</p>
+
+<h1>✅ Consommateur sécurisé</h1>
+<p>import bleach</p>
+<p>from pydantic import BaseModel, validator</p>
+
+<p>class UserMessage(BaseModel):</p>
+<p>user_id: int  # Validation de type</p>
+<p>action: str</p>
+
+<p>@validator('action')</p>
+<p>def validate_action(cls, v):</p>
+<p>allowed = ['activate', 'deactivate', 'delete']</p>
+<p>if v not in allowed:</p>
+<p>raise ValueError(f'Action non autorisée: {v}')</p>
+<p>return v</p>
+
+<p>@validator('user_id')</p>
+<p>def validate_user_id(cls, v):</p>
+<p>if v &lt;= 0 or v &gt; 1000000:</p>
+<p>raise ValueError('user_id invalide')</p>
+<p>return v</p>
+
+<p>def process_message_secure(message):</p>
+<p>try:</p>
+<p>data = UserMessage(**json.loads(message))</p>
+<p># Traitement sécurisé avec données validées</p>
+<p>handle_user_action(data.user_id, data.action)</p>
+<p>except ValueError as e:</p>
+<p>logger.warning(f"Message malformé rejeté: {e}")</code></pre>
+
+<h2 id="service-mesh-s-curit-transparente">Service Mesh — Sécurité transparente</h2>
+
+<pre><code class="language-yaml"># Istio Service Mesh — Sécurité automatique entre tous les services
+
+<h1>mTLS automatique entre tous les services</h1>
+<p>apiVersion: security.istio.io/v1beta1</p>
+<p>kind: PeerAuthentication</p>
+<p>metadata:</p>
+<p>name: default</p>
+<p>namespace: production</p>
+<p>spec:</p>
+<p>mtls:</p>
+<p>mode: STRICT  # mTLS obligatoire pour toutes les communications</p>
+
+<p>---</p>
+<h1>Autorisation fine : Service A peut appeler Service B uniquement sur /api/users</h1>
+<p>apiVersion: security.istio.io/v1beta1</p>
+<p>kind: AuthorizationPolicy</p>
+<p>metadata:</p>
+<p>name: service-users-policy</p>
+<p>namespace: production</p>
+<p>spec:</p>
+<p>selector:</p>
+<p>matchLabels:</p>
+<p>app: service-users</p>
+<p>rules:</p>
+<p>- from:</p>
+<p>- source:</p>
+<p>principals: ["cluster.local/ns/production/sa/service-commandes"]</p>
+<p>- to:</p>
+<p>- operation:</p>
+<p>methods: ["GET"]</p>
+<p>paths: ["/api/users/*"]</p>
+<p># Tout autre accès = refusé</code></pre>
+
+<h2 id="secrets-management-dans-les-microservices">Secrets management dans les microservices</h2>
+
+<pre><code class="language-python"># ❌ Mauvaise pratique : secrets en variables d'environnement
+<h1>docker-compose.yml</h1>
+<p>"""</p>
+<p>services:</p>
+<p>service-paiement:</p>
+<p>environment:</p>
+<p>- DB_PASSWORD=SuperSecret123  # Visible dans les logs, ps aux, etc.</p>
+<p>- STRIPE_KEY=sk_live_abc123</p>
+<p>"""</p>
+
+<h1>✅ Bonne pratique : HashiCorp Vault</h1>
+<p>import hvac</p>
+
+<p>def get_secret(secret_path):</p>
+<p>client = hvac.Client(url='http://vault:8200')</p>
+<p>client.auth.approle.login(</p>
+<p>role_id=os.environ['VAULT_ROLE_ID'],</p>
+<p>secret_id=os.environ['VAULT_SECRET_ID']</p>
+<p>)</p>
+<p>secret = client.secrets.kv.v2.read_secret_version(path=secret_path)</p>
+<p>return secret['data']['data']</p>
+
+<h1>Rotation automatique des secrets</h1>
+<h1>Audit trail de tous les accès aux secrets</h1>
+<h1>Révocation immédiate si compromission</h1>
+
+<h1>Configuration Vault</h1>
+<p>"""</p>
+<p>path "secret/data/service-paiement/*" {</p>
+<p>capabilities = ["read"]  # Lecture seulement</p>
+<p>}</p>
+<p>"""</p>
+
+<h1>Utilisation</h1>
+<p>db_config = get_secret('service-paiement/database')</p>
+<p>stripe_config = get_secret('service-paiement/stripe')</code></pre>
+
+<h2 id="observabilit-s-curit-">Observabilité sécurité</h2>
+
+<pre><code class="language-python"># Centraliser les logs de sécurité de tous les microservices
+
+<p>import structlog</p>
+<p>from opentelemetry import trace</p>
+
+<p>logger = structlog.get_logger()</p>
+<p>tracer = trace.get_tracer(__name__)</p>
+
+<p>def process_payment(user_id, amount, card_token):</p>
+<p>with tracer.start_as_current_span("process_payment") as span:</p>
+<p>span.set_attribute("user.id", user_id)</p>
+<p>span.set_attribute("payment.amount", amount)</p>
+<p># Ne JAMAIS logger les données sensibles (card_token, CVV)</p>
+
+<p>logger.info(</p>
+<p>"payment_initiated",</p>
+<p>user_id=user_id,</p>
+<p>amount=amount,</p>
+<p>service="payment-service",</p>
+<p>trace_id=span.get_span_context().trace_id</p>
+<p>)</p>
+
+<p>try:</p>
+<p>result = stripe.charge(card_token, amount)</p>
+<p>logger.info("payment_success", user_id=user_id, amount=amount)</p>
+<p>return result</p>
+<p>except stripe.CardError as e:</p>
+<p>logger.warning("payment_failed", user_id=user_id, reason=str(e))</p>
+<p>raise</p>
+
+<h1>Alertes sur comportements anormaux :</h1>
+<h1>→ Service appelant des endpoints inhabituels</h1>
+<h1>→ Volume de requêtes anormal</h1>
+<h1>→ Erreurs d'authentification répétées entre services</code></pre></h1>
+
+<h2 id="checklist-s-curit-microservices">Checklist sécurité microservices</h2>
+
+<pre><code>Architecture :
+<p>✅ API Gateway comme unique point d'entrée</p>
+<p>✅ Services internes inaccessibles depuis Internet</p>
+<p>✅ Network segmentation (Kubernetes NetworkPolicy)</p>
+<p>✅ Service mesh avec mTLS (Istio, Linkerd)</p>
+
+<p>Authentification :</p>
+<p>✅ JWT ou mTLS pour les communications inter-services</p>
+<p>✅ Principe du moindre privilège par service</p>
+<p>✅ Rotation régulière des credentials</p>
+<p>✅ Service accounts dédiés par service</p>
+
+<p>Secrets :</p>
+<p>✅ HashiCorp Vault ou AWS Secrets Manager</p>
+<p>✅ Jamais de secrets en variables d'environnement</p>
+<p>✅ Jamais de secrets dans le code ou les images Docker</p>
+<p>✅ Audit trail des accès aux secrets</p>
+
+<p>Runtime :</p>
+<p>✅ Scan des images Docker (Trivy)</p>
+<p>✅ Policies de sécurité des pods (non-root, read-only FS)</p>
+<p>✅ Rate limiting à l'API Gateway</p>
+<p>✅ Centralisation et corrélation des logs de sécurité</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité des microservices nécessite une approche <strong>defense-in-depth</strong> : chaque service doit être sécurisé individuellement (moindre privilège, validation des entrées) ET les communications entre services doivent être authentifiées et chiffrées (mTLS, JWT). Un service mesh comme Istio automatise une grande partie de cette sécurité de façon transparente pour les développeurs.</p>
+
+<p>---</p>
+<p><em>Catégorie : Architecture & Cloud</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-microservices" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cybercriminalite-dark-web.html" class="nav-prev">← Cybercriminalité et dark web : comprendre l'écosystème</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-ot-ics.html" class="nav-next">Sécurité des environnements OT/ICS : protéger les infrastructures critiques →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

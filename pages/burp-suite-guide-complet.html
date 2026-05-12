@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Burp Suite : le guide complet du pentesteur web — Temgus.CyberBlog</title>
 <meta name="description" content="Proxy, Repeater, Intruder, Scanner, extensions — maîtrisez l'outil de référence pour le pentest web.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/burp-suite-guide-complet.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/burp-suite-guide-complet.html">
 <meta property="og:title" content="Burp Suite : le guide complet du pentesteur web — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Burp Suite : le guide complet du pentesteur web — Temgus.CyberBlog">
 <meta name="twitter:description" content="Proxy, Repeater, Intruder, Scanner, extensions — maîtrisez l'outil de référence pour le pentest web.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,397 @@
   "headline": "Burp Suite : le guide complet du pentesteur web",
   "description": "Proxy, Repeater, Intruder, Scanner, extensions — maîtrisez l'outil de référence pour le pentest web.",
   "datePublished": "2025-07-13",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/burp-suite-guide-complet.html",
   "inLanguage": "fr",
   "keywords": "Burp Suite, pentest web, proxy, scanner, PortSwigger",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔧</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Burp Suite : le guide complet du pentesteur web</h1>
-  <p style="color:#8892a4;max-width:500px">Proxy, Repeater, Intruder, Scanner, extensions — maîtrisez l'outil de référence pour le pentest web.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#burp-suite-guide-complet" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔧</div>
+    <div class="meta-info">
+      <div class="meta-category">Outils & Logiciels</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Burp Suite : le guide complet du pentesteur web</div>
+      <div class="meta-details">
+        <span>📅 2025-07-13</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-burp-suite-">Qu'est-ce que Burp Suite ?</a></li>
+<li><a href="#installation-et-configuration">Installation et configuration</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#installation">Installation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#configurer-le-proxy">Configurer le proxy</a></li>
+<li><a href="#les-modules-essentiels">Les modules essentiels</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#proxy-intercepter-les-requ-tes">Proxy — Intercepter les requêtes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#repeater-rejouer-et-modifier-les-requ-tes">Repeater — Rejouer et modifier les requêtes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#intruder-automatiser-les-attaques">Intruder — Automatiser les attaques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#scanner-d-tecter-les-vuln-rabilit-s-pro-">Scanner — Détecter les vulnérabilités (Pro)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#decoder-encoder-d-coder-les-donn-es">Decoder — Encoder/Décoder les données</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#comparer-comparer-">Comparer (Comparer)</a></li>
+<li><a href="#techniques-avanc-es">Techniques avancées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#scan-passif">Scan passif</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#extensions-bapp-store-">Extensions (BApp Store)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#macro-et-session-handling">Macro et session handling</a></li>
+<li><a href="#workflow-de-pentest-web-avec-burp">Workflow de pentest web avec Burp</a></li>
+<li><a href="#ressources-pour-progresser">Ressources pour progresser</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Burp Suite : le guide complet du pentesteur web</h1>
+
+<p>Burp Suite est l'outil de référence pour le pentest web. Développé par PortSwigger, il est utilisé par les professionnels du monde entier pour intercepter, analyser et manipuler le trafic HTTP. Voici comment le maîtriser.</p>
+
+<h2 id="qu-est-ce-que-burp-suite-">Qu'est-ce que Burp Suite ?</h2>
+
+<p>Burp Suite est un <strong>proxy d'interception</strong> qui se place entre votre navigateur et le serveur web. Il vous permet de voir, modifier et rejouer toutes les requêtes HTTP/HTTPS.</p>
+
+<p>Il existe trois versions :</p>
+<ul><li><strong>Community</strong> : gratuite, fonctionnalités limitées (pas de scanner automatique)</li><li><strong>Professional</strong> : ~450€/an, scanner automatique, toutes fonctionnalités</li><li><strong>Enterprise</strong> : pour les grandes organisations, scan automatisé à grande échelle</li></ul>
+
+<h2 id="installation-et-configuration">Installation et configuration</h2>
+
+<h3 id="installation">Installation</h3>
+<p>Téléchargez Burp Suite depuis <strong>portswigger.net/burp</strong>. Il tourne sur Java et est disponible sur Windows, Linux et macOS.</p>
+
+<h3 id="configurer-le-proxy">Configurer le proxy</h3>
+
+<p><strong>1. Dans Burp Suite :</strong></p>
+<ul><li>Onglet <strong>Proxy</strong> → <strong>Options</strong></li><li>Vérifiez que le proxy écoute sur <code>127.0.0.1:8080</code></li></ul>
+
+<p><strong>2. Dans votre navigateur (Firefox recommandé) :</strong></p>
+<ul><li>Paramètres → Réseau → Paramètres de connexion</li><li>Proxy manuel : <code>127.0.0.1</code>, port <code>8080</code></li><li>Cochez "Utiliser ce proxy pour tous les protocoles"</li></ul>
+
+<p><strong>3. Installer le certificat CA Burp :</strong></p>
+<ul><li>Naviguez vers <code>http://burpsuite</code> dans Firefox</li><li>Téléchargez le certificat CA</li><li>Firefox → Paramètres → Certificats → Importer</li><li>Cochez "Faire confiance pour les sites web"</li></ul>
+
+<h2 id="les-modules-essentiels">Les modules essentiels</h2>
+
+<h3 id="proxy-intercepter-les-requ-tes">Proxy — Intercepter les requêtes</h3>
+
+<p>Le cœur de Burp Suite. Activez l'interception et naviguez sur le site cible. Chaque requête est capturée et vous pouvez la modifier avant de l'envoyer.</p>
+
+<pre><code>GET /search?q=test HTTP/1.1
+<p>Host: example.com</p>
+<p>Cookie: session=abc123</p>
+
+<p>→ Modifier q=test par q=' OR '1'='1 pour tester SQLi</code></pre>
+
+<p><strong>Astuce</strong> : utilisez la fonction <strong>"Send to Repeater"</strong> (Ctrl+R) pour envoyer une requête au Repeater et la rejouer autant de fois que nécessaire.</p>
+
+<h3 id="repeater-rejouer-et-modifier-les-requ-tes">Repeater — Rejouer et modifier les requêtes</h3>
+
+<p>Le Repeater permet de modifier une requête et l'envoyer manuellement, autant de fois que voulu. Essentiel pour :</p>
+<ul><li>Tester les injections SQL manuellement</li><li>Explorer les paramètres d'une API</li><li>Confirmer une vulnérabilité</li></ul>
+
+<h3 id="intruder-automatiser-les-attaques">Intruder — Automatiser les attaques</h3>
+
+<p>L'Intruder automatise l'envoi de requêtes modifiées. Quatre modes :</p>
+
+<p><strong>Sniper</strong> : teste une position avec une liste de payloads</p>
+<pre><code>GET /login?user=§admin§&amp;pass=test
+<p>→ Teste: admin, administrator, root, user...</code></pre>
+
+<p><strong>Cluster Bomb</strong> : teste toutes les combinaisons de plusieurs listes</p>
+<pre><code>GET /login?user=§USER§&amp;pass=§PASS§
+<p>→ Teste toutes les combinaisons user/pass</code></pre>
+
+<p>⚠️ En version Community, l'Intruder est limité à une requête par seconde. Utilisez <strong>ffuf</strong> ou <strong>hydra</strong> pour contourner cette limitation.</p>
+
+<h3 id="scanner-d-tecter-les-vuln-rabilit-s-pro-">Scanner — Détecter les vulnérabilités (Pro)</h3>
+
+<p>Le scanner automatique de Burp Pro détecte :</p>
+<ul><li>Injections SQL, XSS, XXE</li><li>SSRF, IDOR</li><li>Misconfigurations</li><li>Vulnérabilités d'authentification</li></ul>
+
+<p>Il fonctionne de façon passive (analyse le trafic) et active (envoie des payloads de test).</p>
+
+<h3 id="decoder-encoder-d-coder-les-donn-es">Decoder — Encoder/Décoder les données</h3>
+
+<p>Encode et décode rapidement :</p>
+<ul><li>Base64 : <code>dGVzdA==</code> → <code>test</code></li><li>URL encoding : <code>%3C%73%63%72%69%70%74%3E</code> → <code><script></code></li><li>HTML entities, Hex, Gzip...</li></ul>
+
+<h3 id="comparer-comparer-">Comparer (Comparer)</h3>
+
+<p>Compare deux requêtes ou réponses pour identifier les différences. Utile pour détecter des comportements différents selon les paramètres.</p>
+
+<h2 id="techniques-avanc-es">Techniques avancées</h2>
+
+<h3 id="scan-passif">Scan passif</h3>
+<p>Activez le scan passif pour que Burp analyse automatiquement tout le trafic qui passe par le proxy, sans envoyer de requêtes supplémentaires.</p>
+
+<h3 id="extensions-bapp-store-">Extensions (BApp Store)</h3>
+<p>Burp dispose d'un store d'extensions. Les plus utiles :</p>
+
+<ul><li><strong>Autorize</strong> : teste automatiquement les problèmes d'autorisation (IDOR)</li><li><strong>JWT Editor</strong> : manipule les tokens JWT</li><li><strong>ActiveScan++</strong> : améliore le scanner actif</li><li><strong>Turbo Intruder</strong> : Intruder ultra-rapide (contourne la limitation Community)</li><li><strong>Logger++</strong> : logging avancé de toutes les requêtes</li></ul>
+
+<h3 id="macro-et-session-handling">Macro et session handling</h3>
+<p>Les macros permettent d'automatiser des séquences de requêtes (connexion, navigation) pour maintenir une session valide pendant les scans.</p>
+
+<h2 id="workflow-de-pentest-web-avec-burp">Workflow de pentest web avec Burp</h2>
+
+<pre><code>1. Configurer Burp comme proxy
+<li>Spider/naviguer manuellement le site → construire la sitemap</li>
+<li>Analyser les résultats du scan passif</li>
+<li>Identifier les fonctionnalités intéressantes</li>
+<li>Utiliser Repeater pour tester manuellement</li>
+<li>Lancer le scan actif sur les zones ciblées (Pro)</li>
+<li>Exploiter et confirmer les vulnérabilités</li>
+<li>Documenter avec les captures Burp</code></pre></li>
+
+<h2 id="ressources-pour-progresser">Ressources pour progresser</h2>
+
+<ul><li><strong>PortSwigger Web Security Academy</strong> : gratuit, labs pratiques excellents</li><li><strong>TryHackMe</strong> : parcours Burp Suite dédié</li><li><strong>HackTheBox</strong> : machines web avec Burp obligatoire</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Burp Suite est un outil indispensable que tout pentesteur web doit maîtriser. La version Community est suffisante pour débuter et réaliser des tests manuels approfondis. Investissez du temps dans la Web Security Academy de PortSwigger — c'est la meilleure ressource gratuite pour apprendre à utiliser Burp efficacement.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#burp-suite-guide-complet" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cv-entretien-cybersecurite.html" class="nav-prev">← Décrocher un poste en cybersécurité : CV, entretien et portfolio</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/nmap-guide-complet.html" class="nav-next">Nmap : maîtriser le scanner réseau incontournable →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

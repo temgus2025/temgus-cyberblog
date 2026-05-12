@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Cryptomonnaies et sécurité : protéger vos actifs — Temgus.CyberBlog</title>
 <meta name="description" content="Menaces crypto, sécurité des wallets, arnaques et bonnes pratiques pour protéger vos fonds.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptomonnaies-securite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/cryptomonnaies-securite.html">
 <meta property="og:title" content="Cryptomonnaies et sécurité : protéger vos actifs — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Cryptomonnaies et sécurité : protéger vos actifs — Temgus.CyberBlog">
 <meta name="twitter:description" content="Menaces crypto, sécurité des wallets, arnaques et bonnes pratiques pour protéger vos fonds.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,518 @@
   "headline": "Cryptomonnaies et sécurité : protéger vos actifs",
   "description": "Menaces crypto, sécurité des wallets, arnaques et bonnes pratiques pour protéger vos fonds.",
   "datePublished": "2025-05-07",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/cryptomonnaies-securite.html",
   "inLanguage": "fr",
   "keywords": "crypto, bitcoin, wallet, sécurité",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">₿</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Cryptomonnaies et sécurité : protéger vos actifs</h1>
-  <p style="color:#8892a4;max-width:500px">Menaces crypto, sécurité des wallets, arnaques et bonnes pratiques pour protéger vos fonds.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cryptomonnaies-securite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">₿</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Cryptomonnaies et sécurité : protéger vos actifs</div>
+      <div class="meta-details">
+        <span>📅 2025-05-07</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-menaces-sp-cifiques-aux-cryptomonnaies">Les menaces spécifiques aux cryptomonnaies</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#irr-versibilit-des-transactions">Irréversibilité des transactions</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#types-d-attaques">Types d'attaques</a></li>
+<li><a href="#comprendre-les-cl-s-cryptographiques">Comprendre les clés cryptographiques</a></li>
+<li><a href="#types-de-wallets-et-leur-s-curit-">Types de wallets et leur sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#hot-wallets-connect-s-internet-">Hot Wallets (connectés à Internet)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cold-wallets-hors-ligne-recommand-">Cold Wallets (hors ligne) - Recommandé</a></li>
+<li><a href="#s-curiser-votre-hardware-wallet">Sécuriser votre hardware wallet</a></li>
+<li><a href="#les-arnaques-crypto-les-plus-courantes">Les arnaques crypto les plus courantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#faux-support-ledger-metamask">Faux support Ledger/MetaMask</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#approval-scams-smart-contract-malveillants-">Approval scams (Smart Contract malveillants)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pig-butchering-romance-scam-crypto-">Pig Butchering (romance scam crypto)</a></li>
+<li><a href="#s-curit-des-exchanges">Sécurité des exchanges</a></li>
+<li><a href="#opsec-crypto">OpSec crypto</a></li>
+<li><a href="#en-cas-de-hack">En cas de hack</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Cryptomonnaies et sécurité : protéger vos actifs numériques</h1>
+
+<p>Le marché des cryptomonnaies a perdu plus de <strong>3 milliards de dollars</strong> en hacks et arnaques en 2023. Bitcoin, Ethereum, DeFi — les actifs numériques attirent autant les investisseurs que les cybercriminels. Ce guide couvre les menaces spécifiques aux cryptos et comment sécuriser vos fonds.</p>
+
+<h2 id="les-menaces-sp-cifiques-aux-cryptomonnaies">Les menaces spécifiques aux cryptomonnaies</h2>
+
+<h3 id="irr-versibilit-des-transactions">Irréversibilité des transactions</h3>
+
+<pre><code>Banque traditionnelle :
+<p>Transaction frauduleuse → Contestation → Remboursement possible</p>
+
+<p>Cryptomonnaies :</p>
+<p>Transaction frauduleuse → IRRÉVOCABLE</p>
+<p>"Not your keys, not your coins"</p>
+
+<p>Si quelqu'un accède à votre wallet → Vos fonds sont perdus pour toujours</p>
+<p>Aucun service client, aucun recours légal efficace</code></pre>
+
+<h3 id="types-d-attaques">Types d'attaques</h3>
+
+<pre><code>Vol de clé privée :
+<p>→ Malware keylogger vole votre seed phrase</p>
+<p>→ Phishing sur un faux exchange</p>
+<p>→ Hack d'exchange centralisé (Mt. Gox, FTX, Binance)</p>
+
+<p>Smart Contract exploits :</p>
+<p>→ Failles dans le code Ethereum/Solidity</p>
+<p>→ Flash loan attacks (manipulation de prix en une transaction)</p>
+<p>→ Reentrancy attacks (The DAO hack - 60M$ en 2016)</p>
+
+<p>Arnaques (scams) :</p>
+<p>→ Rug pulls (projet qui disparaît avec les fonds)</p>
+<p>→ Pump and dump (manipulation de prix)</p>
+<p>→ Faux airdrops (vider le wallet en signant un contrat malveillant)</p>
+<p>→ Romance scams crypto ("pig butchering")</code></pre>
+
+<h2 id="comprendre-les-cl-s-cryptographiques">Comprendre les clés cryptographiques</h2>
+
+<pre><code class="language-python"># Anatomie d'un wallet crypto
+
+<h1>1. Seed phrase (mnémonique BIP39) - LA CLÉ MAÎTRESSE</h1>
+<p>seed_phrase = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"</p>
+<h1>12 ou 24 mots générés aléatoirement</h1>
+<h1>TOUTE votre fortune crypto dépend de ces mots</h1>
+<h1>Quiconque a ces mots a accès à TOUS vos fonds</h1>
+
+<h1>2. Clé privée (dérivée du seed)</h1>
+<p>cle_privee = "0x4c0883a69102937d6231471b5dbb6e538eba2ef0..."</p>
+<h1>256 bits d'entropie</h1>
+<h1>Sert à signer les transactions</h1>
+
+<h1>3. Clé publique (dérivée de la clé privée)</h1>
+<h1>Adresse publique (ce que vous partagez pour recevoir des fonds)</h1>
+<p>adresse_bitcoin  = "1A1zP1eP5QGefi2DMPTfTL5SLmv7Divf..."</p>
+<p>adresse_ethereum = "0x742d35Cc6634C0532925a3b8D4C9fF..."</p>
+
+<h1>La clé privée → clé publique est à sens unique (impossible à inverser)</h1>
+<h1>C'est l'asymétrie cryptographique en action</code></pre></h1>
+
+<h2 id="types-de-wallets-et-leur-s-curit-">Types de wallets et leur sécurité</h2>
+
+<h3 id="hot-wallets-connect-s-internet-">Hot Wallets (connectés à Internet)</h3>
+
+<pre><code>Exchange centralisé (Binance, Coinbase) :
+<p>→ Le plus pratique mais le MOINS sécurisé</p>
+<p>→ "Not your keys, not your coins"</p>
+<p>→ Si l'exchange est hacké → vous perdez tout</p>
+<p>→ Réservé aux sommes que vous tradez activement</p>
+
+<p>Wallet logiciel (MetaMask, Phantom) :</p>
+<p>→ Vous contrôlez vos clés</p>
+<p>→ Vulnérable aux malwares sur votre ordinateur</p>
+<p>→ Acceptable pour de petites sommes</p>
+<p>→ JAMAIS pour votre épargne principale</code></pre>
+
+<h3 id="cold-wallets-hors-ligne-recommand-">Cold Wallets (hors ligne) - Recommandé</h3>
+
+<pre><code>Hardware Wallet (Ledger, Trezor) :
+<p>→ Clés privées générées et stockées HORS LIGNE</p>
+<p>→ Les clés ne quittent jamais l'appareil</p>
+<p>→ Transaction signée en interne, sans exposer la clé</p>
+<p>→ Coût : 50-150€ → INDISPENSABLE si vous détenez des crypto</p>
+
+<p>Paper Wallet :</p>
+<p>→ Clé privée imprimée sur papier</p>
+<p>→ Gratuit mais fragile (eau, feu, perte)</p>
+<p>→ Génération sur ordinateur air-gapped (jamais connecté)</code></pre>
+
+<h2 id="s-curiser-votre-hardware-wallet">Sécuriser votre hardware wallet</h2>
+
+<pre><code>✅ Acheter UNIQUEMENT depuis le site officiel ou revendeurs agréés
+<p>→ Jamais sur Amazon, eBay ou occasion</p>
+<p>→ Les wallets pré-initialisés sont piégés</p>
+
+<p>✅ Vérifier l'intégrité du packaging à la réception</p>
+<p>→ Hologrammes anti-falsification intacts</p>
+<p>→ Seed phrase VIERGE (jamais préremplie)</p>
+
+<p>✅ Générer le seed phrase VOUS-MÊME lors de l'initialisation</p>
+<p>→ Le Ledger/Trezor génère ses propres mots</p>
+<p>→ N'utilisez JAMAIS un seed phrase fourni par quelqu'un</p>
+
+<p>✅ Sauvegarder le seed phrase de façon sécurisée</p>
+<p>→ Écrire sur papier, jamais sur téléphone/ordinateur</p>
+<p>→ Copie dans un coffre-fort ou chez un notaire</p>
+<p>→ Plaque en acier inoxydable pour résister au feu (Cryptosteel)</p>
+
+<p>✅ Ne JAMAIS entrer le seed phrase en ligne</p>
+<p>→ Aucun site légitime ne vous demandera votre seed phrase</p>
+<p>→ C'est TOUJOURS une arnaque</code></pre>
+
+<h2 id="les-arnaques-crypto-les-plus-courantes">Les arnaques crypto les plus courantes</h2>
+
+<h3 id="faux-support-ledger-metamask">Faux support Ledger/MetaMask</h3>
+
+<pre><code>Scénario :
+<p>Votre MetaMask bug → Vous cherchez de l'aide sur Google</p>
+<p>→ Le premier résultat est une pub Google "Support MetaMask officiel"</p>
+<p>→ Le "support" vous demande votre seed phrase "pour vérifier"</p>
+<p>→ Vos fonds disparaissent en secondes</p>
+
+<p>Règle absolue :</p>
+<p>Aucun support légitime ne vous demandera jamais votre seed phrase.</p>
+<p>JAMAIS. SOUS AUCUN PRÉTEXTE.</code></pre>
+
+<h3 id="approval-scams-smart-contract-malveillants-">Approval scams (Smart Contract malveillants)</h3>
+
+<pre><code class="language-javascript">// Vous signez un contrat qui semble inoffensif
+<p>// "Mint gratuit de NFT" ou "Claim votre airdrop"</p>
+
+<p>// Le contrat contient en réalité :</p>
+<p>{</p>
+<p>"type": "ERC20 Approve",</p>
+<p>"spender": "0xAttaquant...",</p>
+<p>"amount": "115792089237316195423570985008687907853269984665640564039457584007913129639935"</p>
+<p>// = uint256 max = accès ILLIMITÉ à tous vos tokens</p>
+<p>}</p>
+
+<p>// L'attaquant peut maintenant vider votre wallet à tout moment</p>
+
+<p>// Protection : vérifier les approbations avec revoke.cash</p>
+<p>// Révoquer les approbations suspectes</code></pre>
+
+<h3 id="pig-butchering-romance-scam-crypto-">Pig Butchering (romance scam crypto)</h3>
+
+<pre><code>Schéma sur 3-6 mois :
+
+<li>Contact sur réseau social / app de rencontre</li>
+<li>Construction d'une relation de confiance</li>
+<li>Mention "par hasard" de succès en crypto trading</li>
+<li>Invitation sur une "plateforme exclusive" (fausse)</li>
+<li>Premiers gains affichés (fictifs)</li>
+<li>Demande de dépôts croissants</li>
+<li>Au moment du retrait : "taxe de déblocage" requise</li>
+<li>Disparition avec tout l'argent</li>
+
+<p>Pertes moyennes : 120 000$ par victime selon le FBI</p>
+<p>Total mondial 2023 : 3,96 milliards de dollars</code></pre>
+
+<h2 id="s-curit-des-exchanges">Sécurité des exchanges</h2>
+
+<pre><code class="language-python"># Bonnes pratiques sur un exchange centralisé
+
+<h1>1. Activer le 2FA avec application TOTP (jamais SMS)</h1>
+<h1>Aegis (Android) ou Raivo (iOS)</h1>
+
+<h1>2. Whitelist des adresses de retrait</h1>
+<h1>Seules les adresses pré-approuvées peuvent recevoir des retraits</h1>
+<h1>Un hacker ne peut pas retirer vers son wallet</h1>
+
+<h1>3. Délai de retrait (anti-hack)</h1>
+<h1>Configurer un délai de 24-48h pour les nouvelles adresses</h1>
+
+<h1>4. Ne jamais laisser de grosses sommes sur un exchange</h1>
+<h1>"If it's not your keys, it's not your coins"</h1>
+<h1>Règle : garder sur exchange uniquement ce que vous tradez activement</h1>
+
+<h1>5. Vérifier les adresses caractère par caractère</h1>
+<h1>Les malwares remplacent l'adresse dans le presse-papier</h1>
+<h1>Clipboard hijacking : vous copiez 0xABCD... → malware remplace par 0xEVIL...</code></pre></h1>
+
+<h2 id="opsec-crypto">OpSec crypto</h2>
+
+<pre><code>Anonymat financier :
+
+<p>Bitcoin N'EST PAS anonyme :</p>
+<p>→ Toutes les transactions sont publiques sur la blockchain</p>
+<p>→ Les exchanges ont votre KYC (identité vérifiée)</p>
+<p>→ Chainalysis et autres firmes tracent les flux</p>
+<p>→ Bitcoin est PSEUDONYME, pas anonyme</p>
+
+<p>Pour plus de confidentialité :</p>
+<p>→ Monero (XMR) : transactions privées by design</p>
+<p>→ Zcash (ZEC) : transactions shieldées optionnelles</p>
+<p>→ Bitcoin CoinJoin : mixer les UTXOs pour briser le traçage</p>
+
+<p>Attention au doxing financier :</p>
+<p>→ Ne jamais partager publiquement votre adresse principale</p>
+<p>→ Générer une nouvelle adresse pour chaque réception (HD wallet)</p>
+<p>→ Ne pas lier votre identité réelle à vos adresses publiques</code></pre>
+
+<h2 id="en-cas-de-hack">En cas de hack</h2>
+
+<pre><code>Si vous êtes hacké :
+
+<li>AGIR DANS LES SECONDES qui suivent</li>
+<p>→ Les attaquants ont des bots qui vident les wallets automatiquement</p>
+
+<li>Transférer les fonds restants vers un wallet sain</li>
+<p>→ Utilisez un autre appareil non compromis</p>
+<p>→ Votre ordinateur actuel est peut-être encore infecté</p>
+
+<li>Révoquer toutes les approbations de smart contracts</li>
+<p>→ revoke.cash (Ethereum)</p>
+<p>→ Les attaquants peuvent avoir des approbations infinies</p>
+
+<li>Changer TOUS les mots de passe et 2FA</li>
+<p>→ Sur un appareil propre</p>
+
+<li>Analyser comment c'est arrivé</li>
+<p>→ Phishing ? Malware ? Clé privée exposée ?</p>
+<p>→ Pour ne pas répéter l'erreur</p>
+
+<li>Signaler</li>
+<p>→ IC3 (FBI) si vous êtes aux USA</p>
+<p>→ Police nationale + ANSSI en France</p>
+<p>→ Peu de chances de récupérer, mais ça aide les enquêtes</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité crypto repose sur un principe simple : <strong>gardez vos clés privées hors ligne et secrètes</strong>. Un hardware wallet + une seed phrase correctement sauvegardée protègent contre la grande majorité des attaques. N'entrez JAMAIS votre seed phrase en ligne, vérifiez toujours les contrats que vous signez et méfiez-vous de toute opportunité "trop belle pour être vraie".</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cryptomonnaies-securite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/surveillance-vie-privee.html" class="nav-prev">← Société de surveillance et vie privée numérique</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/oscp-preparation.html" class="nav-next">OSCP : préparer et réussir la certification →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

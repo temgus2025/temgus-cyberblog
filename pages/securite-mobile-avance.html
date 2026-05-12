@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité mobile avancée : pentest Android et iOS — Temgus.CyberBlog</title>
 <meta name="description" content="Analyse d'APK, Frida, SSL pinning bypass, OWASP Mobile Top 10 et techniques de pentest iOS/Android.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile-avance.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile-avance.html">
 <meta property="og:title" content="Sécurité mobile avancée : pentest Android et iOS — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité mobile avancée : pentest Android et iOS — Temgus.CyberBlog">
 <meta name="twitter:description" content="Analyse d'APK, Frida, SSL pinning bypass, OWASP Mobile Top 10 et techniques de pentest iOS/Android.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,469 @@
   "headline": "Sécurité mobile avancée : pentest Android et iOS",
   "description": "Analyse d'APK, Frida, SSL pinning bypass, OWASP Mobile Top 10 et techniques de pentest iOS/Android.",
   "datePublished": "2025-09-04",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile-avance.html",
   "inLanguage": "fr",
   "keywords": "Android, iOS, Frida, pentest mobile, APK",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📱</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité mobile avancée : pentest Android et iOS</h1>
-  <p style="color:#8892a4;max-width:500px">Analyse d'APK, Frida, SSL pinning bypass, OWASP Mobile Top 10 et techniques de pentest iOS/Android.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-mobile-avance" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📱</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité mobile avancée : pentest Android et iOS</div>
+      <div class="meta-details">
+        <span>📅 2025-09-04</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#architecture-de-s-curit-mobile">Architecture de sécurité mobile</a></li>
+<li><a href="#pentest-android">Pentest Android</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#environnement-de-test">Environnement de test</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyse-statique-d-une-apk">Analyse statique d'une APK</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#interception-du-trafic-mitm-">Interception du trafic (MitM)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyse-dynamique-avec-frida">Analyse dynamique avec Frida</a></li>
+<li><a href="#pentest-ios">Pentest iOS</a></li>
+<li><a href="#owasp-mobile-top-10">OWASP Mobile Top 10</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité mobile avancée : pentest Android et iOS</h1>
+
+<p>Les smartphones contiennent nos données les plus personnelles. Ce guide couvre les techniques avancées de pentest mobile : analyse d'applications Android/iOS, interception de trafic et analyse forensique mobile.</p>
+
+<h2 id="architecture-de-s-curit-mobile">Architecture de sécurité mobile</h2>
+
+<pre><code>Android - Modèle de sécurité :
+<p>→ Linux kernel + SELinux</p>
+<p>→ Application sandbox (chaque app dans son propre UID)</p>
+<p>→ Permissions explicites (runtime permissions Android 6+)</p>
+<p>→ Verified Boot (chaîne de confiance hardware → kernel → système)</p>
+<p>→ Play Protect : scan des apps</p>
+
+<p>iOS - Modèle de sécurité :</p>
+<p>→ Secure Enclave (puce dédiée pour les clés et biométrie)</p>
+<p>→ App Store review + code signing obligatoire</p>
+<p>→ Sandboxing strict (plus restrictif qu'Android)</p>
+<p>→ Data Protection : chiffrement par classe selon verrouillage</p>
+<p>→ Pas de jailbreak = surface d'attaque très réduite</code></pre>
+
+<h2 id="pentest-android">Pentest Android</h2>
+
+<h3 id="environnement-de-test">Environnement de test</h3>
+
+<pre><code class="language-bash"># Prérequis
+<p>adb --version         # Android Debug Bridge</p>
+<p>apktool --version     # Décompiler APK</p>
+<p>jadx --version        # Décompiler APK en Java</p>
+<p>frida --version       # Framework d'instrumentation dynamique</p>
+
+<h1>Connecter un appareil de test (USB Debugging activé)</h1>
+<p>adb devices</p>
+<p>adb shell</p>
+
+<h1>Ou utiliser un émulateur (Android Studio / Genymotion)</h1>
+<h1>Genymotion recommandé (plus facile à rooter)</code></pre></h1>
+
+<h3 id="analyse-statique-d-une-apk">Analyse statique d'une APK</h3>
+
+<pre><code class="language-bash"># 1. Extraire l'APK
+<p>adb shell pm list packages | grep target</p>
+<p>adb shell pm path com.target.app</p>
+<h1>→ package:/data/app/com.target.app-1/base.apk</h1>
+<p>adb pull /data/app/com.target.app-1/base.apk ./target.apk</p>
+
+<h1>2. Décompiler avec APKTool</h1>
+<p>apktool d target.apk -o target_decoded</p>
+<h1>→ AndroidManifest.xml décodé</h1>
+<h1>→ resources/ (layouts, strings)</h1>
+<h1>→ smali/ (code Dalvik)</h1>
+
+<h1>3. Analyser le Manifest</h1>
+<p>cat target_decoded/AndroidManifest.xml</p>
+<h1>Red flags :</h1>
+<h1>→ android:allowBackup="true" (backup non sécurisé)</h1>
+<h1>→ android:debuggable="true" (debug activé en prod)</h1>
+<h1>→ exported="true" sur des activités sensibles</h1>
+<h1>→ permissions excessives</h1>
+
+<h1>4. Décompiler en Java avec JADX</h1>
+<p>jadx target.apk -d target_java</p>
+<h1>Chercher des informations sensibles</h1>
+<p>grep -r "password\|secret\|api_key\|token" target_java/ -l</p>
+<p>grep -r "http://" target_java/ | grep -v "//schemas"  # HTTP non chiffré</p>
+<p>grep -r "Log.d\|Log.e" target_java/ | head -20       # Logs de debug</code></pre>
+
+<h3 id="interception-du-trafic-mitm-">Interception du trafic (MitM)</h3>
+
+<pre><code class="language-bash"># Burp Suite + proxy Android
+
+<h1>1. Configurer Burp comme proxy</h1>
+<h1>Burp → Proxy → Options → Add listener sur 8080</h1>
+
+<h1>2. Configurer Android pour utiliser le proxy</h1>
+<h1>WiFi Settings → Modifier réseau → Proxy manuel → IP:8080</h1>
+
+<h1>3. Installer le certificat Burp</h1>
+<h1>Android &lt; 7 : installer le CA Burp directement</h1>
+<h1>Android &gt;= 7 : nécessite root ou VPN-based proxy</h1>
+
+<h1>Avec Frida pour bypasser la Certificate Pinning</h1>
+<p>frida -U -f com.target.app -l ssl_pinning_bypass.js</p>
+
+<h1>Script ssl_pinning_bypass.js (simplifié)</h1>
+<p>Java.perform(function() {</p>
+<p>var array_list = Java.use("java.util.ArrayList");</p>
+<p>var TrustManager = Java.use('com.android.org.conscrypt.TrustManagerImpl');</p>
+<p>TrustManager.checkTrustedRecursive.implementation = function(a,b,c,d,e,f) {</p>
+<p>console.log('Bypassed SSL Pinning !');</p>
+<p>return array_list.$new();</p>
+<p>};</p>
+<p>});</code></pre>
+
+<h3 id="analyse-dynamique-avec-frida">Analyse dynamique avec Frida</h3>
+
+<pre><code class="language-javascript">// Frida - Hooker les méthodes Java en temps réel
+
+<p>Java.perform(function() {</p>
+
+<p>// Hooker une méthode de login</p>
+<p>var LoginActivity = Java.use('com.target.app.LoginActivity');</p>
+<p>LoginActivity.login.implementation = function(username, password) {</p>
+<p>console.log('[*] Login called!');</p>
+<p>console.log('[*] Username: ' + username);</p>
+<p>console.log('[*] Password: ' + password);</p>
+
+<p>// Appeler la méthode originale</p>
+<p>return this.login(username, password);</p>
+<p>};</p>
+
+<p>// Hooker la cryptographie</p>
+<p>var SecretKeySpec = Java.use('javax.crypto.spec.SecretKeySpec');</p>
+<p>SecretKeySpec.$init.overload('[B', 'java.lang.String').implementation = function(key, algo) {</p>
+<p>console.log('[*] Crypto key: ' + bytesToHex(key));</p>
+<p>console.log('[*] Algorithm: ' + algo);</p>
+<p>return this.$init(key, algo);</p>
+<p>};</p>
+
+<p>// Bypasser la vérification de root</p>
+<p>var RootBeer = Java.use('com.scottyab.rootbeer.RootBeer');</p>
+<p>RootBeer.isRooted.implementation = function() {</p>
+<p>console.log('[*] isRooted called - returning false');</p>
+<p>return false;</p>
+<p>};</p>
+<p>});</code></pre>
+
+<h2 id="pentest-ios">Pentest iOS</h2>
+
+<pre><code class="language-bash"># Nécessite un iPhone jailbreaké pour le pentest complet
+
+<h1>Outils essentiels</h1>
+<h1>→ Objection (basé sur Frida, multi-plateformes)</h1>
+<h1>→ idb (iOS App Security Assessment Tool)</h1>
+<h1>→ Clutch (décryptage des apps)</h1>
+
+<h1>Installer Objection</h1>
+<p>pip3 install objection</p>
+
+<h1>Lancer une session Objection</h1>
+<p>objection -g "com.target.app" explore</p>
+
+<h1>Commandes Objection</h1>
+<p>ios sslpinning disable       # Bypasser SSL pinning</p>
+<p>ios jailbreak simulate       # Simuler pas de jailbreak</p>
+<p>ios keychain dump            # Extraire le keychain</p>
+<p>ios pasteboard monitor       # Surveiller le presse-papier</p>
+<p>ios nsurlcredentialstorage dump  # Credentials stockés</p>
+<p>ios heap search instances    # Chercher des objets en mémoire</code></pre>
+
+<h2 id="owasp-mobile-top-10">OWASP Mobile Top 10</h2>
+
+<pre><code>M1 - Utilisation incorrecte des plateformes
+<p>→ Mauvaise gestion des intents Android, permissions excessives</p>
+
+<p>M2 - Stockage non sécurisé des données</p>
+<p>→ Données sensibles dans SharedPreferences, SQLite non chiffré</p>
+<p>→ Logs avec informations sensibles</p>
+
+<p>M3 - Communication non sécurisée</p>
+<p>→ HTTP, SSL pinning absent, certificats non validés</p>
+
+<p>M4 - Authentification non sécurisée</p>
+<p>→ Tokens stockés non chiffrés, biométrie mal implémentée</p>
+
+<p>M5 - Cryptographie insuffisante</p>
+<p>→ Algorithmes obsolètes (MD5, DES), clés hardcodées</p>
+
+<p>M6 - Autorisation non sécurisée</p>
+<p>→ IDOR dans l'API, vérifications d'autorisation côté client</p>
+
+<p>M7 - Qualité du code client</p>
+<p>→ Décompilation révèle la logique business, reverse engineering facile</p>
+
+<p>M8 - Falsification du code</p>
+<p>→ Pas de vérification d'intégrité, facile à modifier/repackager</p>
+
+<p>M9 - Reverse Engineering</p>
+<p>→ Pas d'obfuscation, symboles de debug présents</p>
+
+<p>M10 - Fonctionnalités superflues</p>
+<p>→ Backdoors de test en production, logs de debug activés</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité mobile est un domaine en évolution constante. Android et iOS ont des modèles de sécurité robustes, mais les applications qui tournent dessus peuvent introduire des vulnérabilités. Le pentest mobile combine analyse statique (manifest, code décompilé), analyse dynamique (Frida, Objection) et test réseau (interception TLS). La maîtrise des outils comme Frida ouvre des possibilités d'analyse très puissantes pour tout chercheur en sécurité.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-mobile-avance" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-memoire-avance.html" class="nav-prev">← Forensics mémoire avancé : Volatility 3 et analyse d'incidents</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api-graphql.html" class="nav-next">Sécurité des APIs GraphQL : vulnérabilités et protections →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

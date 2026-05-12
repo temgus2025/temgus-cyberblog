@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>DNS sécurisé : bloquer les menaces à la source — Temgus.CyberBlog</title>
 <meta name="description" content="Pi-hole, NextDNS, DoH, DoT, DNSSEC, détection DNS tunneling — sécuriser et filtrer le DNS de votre réseau.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/dns-securise-filtrage.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/dns-securise-filtrage.html">
 <meta property="og:title" content="DNS sécurisé : bloquer les menaces à la source — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="DNS sécurisé : bloquer les menaces à la source — Temgus.CyberBlog">
 <meta name="twitter:description" content="Pi-hole, NextDNS, DoH, DoT, DNSSEC, détection DNS tunneling — sécuriser et filtrer le DNS de votre réseau.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,458 @@
   "headline": "DNS sécurisé : bloquer les menaces à la source",
   "description": "Pi-hole, NextDNS, DoH, DoT, DNSSEC, détection DNS tunneling — sécuriser et filtrer le DNS de votre réseau.",
   "datePublished": "2025-08-27",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/dns-securise-filtrage.html",
   "inLanguage": "fr",
   "keywords": "DNS, Pi-hole, NextDNS, DoH, filtrage",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🌐</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">DNS sécurisé : bloquer les menaces à la source</h1>
-  <p style="color:#8892a4;max-width:500px">Pi-hole, NextDNS, DoH, DoT, DNSSEC, détection DNS tunneling — sécuriser et filtrer le DNS de votre réseau.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#dns-securise-filtrage" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🌐</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">DNS sécurisé : bloquer les menaces à la source</div>
+      <div class="meta-details">
+        <span>📅 2025-08-27</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-s-curiser-le-dns-">Pourquoi sécuriser le DNS ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-dns-comme-vecteur-d-attaque">Le DNS comme vecteur d'attaque</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-dns-comme-point-de-contr-le">Le DNS comme point de contrôle</a></li>
+<li><a href="#dns-over-https-doh-et-dns-over-tls-dot-">DNS over HTTPS (DoH) et DNS over TLS (DoT)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dns-over-tls-dot-">DNS over TLS (DoT)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dns-over-https-doh-">DNS over HTTPS (DoH)</a></li>
+<li><a href="#pi-hole-filtrage-dns-r-seau">Pi-hole — Filtrage DNS réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#installation">Installation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#configuration-de-pi-hole">Configuration de Pi-hole</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#int-grer-la-threat-intelligence">Intégrer la threat intelligence</a></li>
+<li><a href="#nextdns-dns-filtrant-dans-le-cloud">NextDNS — DNS filtrant dans le cloud</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#fonctionnalit-s">Fonctionnalités</a></li>
+<li><a href="#dnssec-int-grit-du-dns">DNSSEC — Intégrité du DNS</a></li>
+<li><a href="#d-tection-du-dns-tunneling">Détection du DNS tunneling</a></li>
+<li><a href="#architecture-dns-d-entreprise-s-curis-e">Architecture DNS d'entreprise sécurisée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#avantages-de-cette-architecture">Avantages de cette architecture</a></li>
+<li><a href="#r-ponse-aux-incidents-dns">Réponse aux incidents DNS</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>DNS sécurisé : bloquer les menaces à la source</h1>
+
+<p>Le DNS est souvent négligé en sécurité, pourtant c'est un vecteur d'attaque majeur et un point de contrôle stratégique. Sécuriser le DNS permet de bloquer malwares, phishing et exfiltration de données avant même qu'une connexion soit établie.</p>
+
+<h2 id="pourquoi-s-curiser-le-dns-">Pourquoi sécuriser le DNS ?</h2>
+
+<h3 id="le-dns-comme-vecteur-d-attaque">Le DNS comme vecteur d'attaque</h3>
+<ul><li><strong>DNS spoofing/poisoning</strong> : rediriger vers de faux serveurs</li><li><strong>DNS tunneling</strong> : exfiltrer des données via des requêtes DNS</li><li><strong>DGA</strong> (Domain Generation Algorithm) : malwares qui génèrent des domaines aléatoires pour leurs C2</li><li><strong>Fast flux</strong> : changer rapidement les IPs pour éviter le blocage</li></ul>
+
+<h3 id="le-dns-comme-point-de-contr-le">Le DNS comme point de contrôle</h3>
+<p>Bloquer un domaine malveillant au niveau DNS empêche toute communication, même si le malware est déjà sur un poste. C'est la solution la plus économe en ressources.</p>
+
+<h2 id="dns-over-https-doh-et-dns-over-tls-dot-">DNS over HTTPS (DoH) et DNS over TLS (DoT)</h2>
+
+<p>Le DNS traditionnel est en clair — n'importe qui sur le réseau peut voir vos requêtes DNS.</p>
+
+<h3 id="dns-over-tls-dot-">DNS over TLS (DoT)</h3>
+<p>Chiffre les requêtes DNS avec TLS sur le port 853.</p>
+
+<pre><code class="language-bash"># Configurer DoT sur Linux avec systemd-resolved
+<h1>/etc/systemd/resolved.conf</h1>
+
+<p>[Resolve]</p>
+<p>DNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net</p>
+<p>DNSOverTLS=yes</p>
+<p>DNSSEC=yes</p>
+
+<h1>Appliquer</h1>
+<p>sudo systemctl restart systemd-resolved</code></pre>
+
+<h3 id="dns-over-https-doh-">DNS over HTTPS (DoH)</h3>
+<p>Chiffre les requêtes DNS dans du HTTPS (port 443), impossible à distinguer du trafic web normal.</p>
+
+<pre><code class="language-bash"># Configurer DoH avec dnscrypt-proxy
+<p>sudo apt install dnscrypt-proxy</p>
+
+<h1>/etc/dnscrypt-proxy/dnscrypt-proxy.toml</h1>
+<p>server_names = ['cloudflare', 'quad9-dnscrypt-ip4-filter-pri']</p>
+<p>listen_addresses = ['127.0.0.1:53']</p>
+
+<h1>Serveurs DoH/DoT de référence</h1>
+<h1>Cloudflare : 1.1.1.1</h1>
+<h1>Quad9 : 9.9.9.9 (filtrage malwares)</h1>
+<h1>NextDNS : personnalisable</code></pre></h1>
+
+<h2 id="pi-hole-filtrage-dns-r-seau">Pi-hole — Filtrage DNS réseau</h2>
+
+<p>Pi-hole est un serveur DNS local qui bloque les domaines malveillants et publicitaires pour tout le réseau.</p>
+
+<h3 id="installation">Installation</h3>
+<pre><code class="language-bash"># Sur un Raspberry Pi ou serveur Linux
+<p>curl -sSL https://install.pi-hole.net | bash</p>
+
+<h1>Configuration réseau</h1>
+<h1>Pointer le DNS de votre routeur vers l'IP du Pi-hole</h1>
+<h1>Tous les appareils du réseau bénéficient du filtrage</code></pre></h1>
+
+<h3 id="configuration-de-pi-hole">Configuration de Pi-hole</h3>
+<pre><code class="language-bash"># Ajouter des listes de blocage
+<h1>Interface web : Settings → Blocklists</h1>
+
+<h1>Listes recommandées :</h1>
+<h1>https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts</h1>
+<h1>https://malware-filter.gitlab.io/malware-filter/phishing-filter-hosts.txt</h1>
+<h1>https://urlhaus.abuse.ch/downloads/hostfile/</h1>
+
+<h1>Whitelist si nécessaire</h1>
+<p>pihole -w domaine-legitime.com</p>
+
+<h1>Statistiques</h1>
+<p>pihole -c   # Console</p>
+<p>pihole -t   # Tail des logs en temps réel</code></pre>
+
+<h3 id="int-grer-la-threat-intelligence">Intégrer la threat intelligence</h3>
+<pre><code class="language-bash"># Bloquer automatiquement les nouveaux IoCs
+<h1>Script de mise à jour des listes depuis MISP/OpenCTI</h1>
+
+<p>#!/bin/bash</p>
+<h1>Récupérer les domaines malveillants du jour</h1>
+<p>curl -s "https://urlhaus.abuse.ch/downloads/hostfile/" &gt; /tmp/malware_domains.txt</p>
+
+<h1>Ajouter à Pi-hole</h1>
+<p>pihole -b $(cat /tmp/malware_domains.txt | grep -v "#" | awk '{print $2}')</code></pre>
+
+<h2 id="nextdns-dns-filtrant-dans-le-cloud">NextDNS — DNS filtrant dans le cloud</h2>
+
+<p>Pour les organisations sans infrastructure propre, NextDNS offre un DNS filtrant managé.</p>
+
+<h3 id="fonctionnalit-s">Fonctionnalités</h3>
+<ul><li>Blocage de malwares, phishing, trackers</li><li>Personnalisation des politiques par profil</li><li>Logs détaillés de toutes les requêtes</li><li>DoH/DoT inclus</li><li>Gratuit jusqu'à 300 000 requêtes/mois</li></ul>
+
+<pre><code class="language-bash"># Configurer NextDNS sur Linux
+<p>curl -sS https://nextdns.io/install | sh</p>
+<p>sudo nextdns install -profile VOTRE_PROFIL_ID -report-client-info</code></pre>
+
+<h2 id="dnssec-int-grit-du-dns">DNSSEC — Intégrité du DNS</h2>
+
+<p>DNSSEC signe cryptographiquement les réponses DNS pour garantir leur authenticité.</p>
+
+<pre><code class="language-bash"># Vérifier si un domaine supporte DNSSEC
+<p>dig +dnssec example.com</p>
+
+<h1>Configurer DNSSEC sur un resolver</h1>
+<h1>/etc/unbound/unbound.conf</h1>
+<p>server:</p>
+<p>auto-trust-anchor-file: "/var/lib/unbound/root.key"</p>
+<p>val-log-level: 2</code></pre>
+
+<h2 id="d-tection-du-dns-tunneling">Détection du DNS tunneling</h2>
+
+<p>Le DNS tunneling exfiltre des données en encodant dans les requêtes DNS.</p>
+
+<pre><code class="language-bash"># Signes de DNS tunneling
+<h1>- Requêtes DNS très longues (&gt; 50 caractères)</h1>
+<h1>- Nombreuses requêtes DNS TXT</h1>
+<h1>- Sous-domaines encodés en Base64</h1>
+
+<h1>Détection avec Zeek/Bro</h1>
+<h1>/usr/share/zeek/policy/protocols/dns/detect-external-names.zeek</h1>
+
+<h1>Règle Suricata</h1>
+<p>alert dns any any -&gt; any 53 (</p>
+<p>msg:"Possible DNS tunneling - long query";</p>
+<p>dns.query; content:".";</p>
+<p>pcre:"/^[A-Za-z0-9+\/]{40,}\./";</p>
+<p>sid:9000001;</p>
+<p>)</p>
+
+<h1>Sinkholing avec Pi-hole</h1>
+<h1>Rediriger les domaines C2 connus vers une IP contrôlée</code></pre></h1>
+
+<h2 id="architecture-dns-d-entreprise-s-curis-e">Architecture DNS d'entreprise sécurisée</h2>
+
+<pre><code>Postes clients
+<p>│</p>
+<p>[Pi-hole / DNS interne] ← filtrage, caching, logs</p>
+<p>│</p>
+<p>[Resolver récursif sécurisé]</p>
+<p>│ DoT/DoH</p>
+<p>[DNS publics sécurisés]</p>
+<p>(Quad9, Cloudflare)</p>
+<p>│</p>
+<p>[Root DNS]</code></pre>
+
+<h3 id="avantages-de-cette-architecture">Avantages de cette architecture</h3>
+<ul><li>Filtrage malwares/phishing au niveau réseau</li><li>Logs centralisés de toutes les requêtes DNS</li><li>Chiffrement vers les serveurs publics</li><li>DNSSEC pour l'intégrité</li></ul>
+
+<h2 id="r-ponse-aux-incidents-dns">Réponse aux incidents DNS</h2>
+
+<pre><code class="language-bash"># Vérifier si un domaine est malveillant
+<h1>VirusTotal API</h1>
+<p>curl "https://www.virustotal.com/api/v3/domains/suspicious-domain.com" \</p>
+<p>-H "x-apikey: VOTRE_CLE"</p>
+
+<h1>Threatfox (abuse.ch)</h1>
+<p>curl -X POST https://threatfox-api.abuse.ch/api/v1/ \</p>
+<p>-d '{"query": "search_ioc", "search_term": "suspicious-domain.com"}'</p>
+
+<h1>Bloquer d'urgence sur Pi-hole</h1>
+<p>pihole -b suspicious-domain.com</p>
+
+<h1>Dans Windows, forcer la résolution locale</h1>
+<h1>C:\Windows\System32\drivers\etc\hosts</h1>
+<p>0.0.0.0 suspicious-domain.com</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le DNS est un pilier de la sécurité réseau souvent sous-estimé. Un Pi-hole sur le réseau interne, combiné à NextDNS pour les appareils nomades, offre une protection efficace contre les malwares et le phishing pour un coût quasi nul. C'est l'un des meilleurs retours sur investissement en cybersécurité.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#dns-securise-filtrage" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/vpn-entreprise-acces-distant.html" class="nav-prev">← VPN d'entreprise et accès distant sécurisé : guide complet</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/analyse-malwares-debutants.html" class="nav-next">Analyse de malwares : guide pour débutants →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

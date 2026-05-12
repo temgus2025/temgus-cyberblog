@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Forensics mémoire avancé : Volatility 3 et analyse d'incidents — Temgus.CyberBlog</title>
 <meta name="description" content="Acquisition mémoire, Volatility 3, détection de process hollowing, extraction de credentials et artefacts cryptographiques.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-memoire-avance.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-memoire-avance.html">
 <meta property="og:title" content="Forensics mémoire avancé : Volatility 3 et analyse d'incidents — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Forensics mémoire avancé : Volatility 3 et analyse d'incidents — Temgus.CyberBlog">
 <meta name="twitter:description" content="Acquisition mémoire, Volatility 3, détection de process hollowing, extraction de credentials et artefacts cryptographiques.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,448 @@
   "headline": "Forensics mémoire avancé : Volatility 3 et analyse d'incidents",
   "description": "Acquisition mémoire, Volatility 3, détection de process hollowing, extraction de credentials et artefacts cryptographiques.",
   "datePublished": "2025-09-02",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/forensics-memoire-avance.html",
   "inLanguage": "fr",
   "keywords": "forensics, Volatility, mémoire, malware, DFIR",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔬</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Forensics mémoire avancé : Volatility 3 et analyse d'incidents</h1>
-  <p style="color:#8892a4;max-width:500px">Acquisition mémoire, Volatility 3, détection de process hollowing, extraction de credentials et artefacts cryptographiques.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#forensics-memoire-avance" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔬</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Forensics mémoire avancé : Volatility 3 et analyse d'incidents</div>
+      <div class="meta-details">
+        <span>📅 2025-09-02</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-la-m-moire-est-si-pr-cieuse">Pourquoi la mémoire est si précieuse</a></li>
+<li><a href="#acquisition-de-la-m-moire">Acquisition de la mémoire</a></li>
+<li><a href="#volatility-3-r-f-rence">Volatility 3 — Référence</a></li>
+<li><a href="#analyse-d-un-process-suspect">Analyse d'un process suspect</a></li>
+<li><a href="#d-tecter-les-techniques-d-vasion">Détecter les techniques d'évasion</a></li>
+<li><a href="#extraire-des-artefacts-cryptographiques">Extraire des artefacts cryptographiques</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Forensics mémoire avancé : Volatility 3 et analyse d'incidents</h1>
+
+<p>L'analyse de la mémoire vive est l'une des techniques forensiques les plus puissantes. La RAM contient des informations qui n'existent nulle part ailleurs : processus actifs, clés de chiffrement, mots de passe en clair, connexions réseau, malwares fileless.</p>
+
+<h2 id="pourquoi-la-m-moire-est-si-pr-cieuse">Pourquoi la mémoire est si précieuse</h2>
+
+<pre><code>La RAM contient ce que le disque ne montre pas :
+<p>→ Malwares fileless (jamais écrits sur disque)</p>
+<p>→ Clés de chiffrement Bitlocker/VeraCrypt</p>
+<p>→ Mots de passe en mémoire (Mimikatz les récupère de là)</p>
+<p>→ Connexions réseau établies au moment du dump</p>
+<p>→ Historique des commandes PowerShell/bash</p>
+<p>→ Artifacts d'injection de code</p>
+<p>→ Configuration de malwares décryptée en mémoire</code></pre>
+
+<h2 id="acquisition-de-la-m-moire">Acquisition de la mémoire</h2>
+
+<pre><code class="language-bash"># Windows - WinPmem (recommandé)
+<p>winpmem_mini_x64_rc2.exe memory.dmp</p>
+
+<h1>Windows - DumpIt</h1>
+<p>DumpIt.exe /output memory.raw</p>
+
+<h1>Linux - LiME (Linux Memory Extractor)</h1>
+<h1>Compiler le module kernel</h1>
+<p>git clone https://github.com/504ensicsLabs/LiME</p>
+<p>cd LiME/src &amp;&amp; make</p>
+
+<h1>Charger et capturer</h1>
+<p>sudo insmod lime.ko "path=/media/usb/memory.lime format=lime"</p>
+
+<h1>Sur une VM (depuis l'hyperviseur)</h1>
+<h1>VMware : Suspendre la VM → .vmem file</h1>
+<h1>VirtualBox : vboxmanage debugvm "VM Name" dumpguestcore --filename memory.elf</code></pre></h1>
+
+<h2 id="volatility-3-r-f-rence">Volatility 3 — Référence</h2>
+
+<pre><code class="language-bash"># Informations générales
+<p>vol3 -f memory.dmp windows.info</p>
+<p>vol3 -f memory.dmp windows.envars --pid 1234  # Variables d'environnement</p>
+
+<h1>Processus</h1>
+<p>vol3 -f memory.dmp windows.pslist            # Liste simple</p>
+<p>vol3 -f memory.dmp windows.pstree           # Arbre père-fils</p>
+<p>vol3 -f memory.dmp windows.cmdline          # Arguments des processus</p>
+<p>vol3 -f memory.dmp windows.dlllist          # DLLs chargées par process</p>
+
+<h1>Réseau</h1>
+<p>vol3 -f memory.dmp windows.netscan          # Connexions et sockets</p>
+<p>vol3 -f memory.dmp windows.netstat          # État des connexions</p>
+
+<h1>Détection de malwares</h1>
+<p>vol3 -f memory.dmp windows.malfind          # Code injecté suspect</p>
+<p>vol3 -f memory.dmp windows.hollowfind       # Process hollowing</p>
+<p>vol3 -f memory.dmp windows.vadinfo --pid 1234  # Memory regions</p>
+
+<h1>Extraction</h1>
+<p>vol3 -f memory.dmp windows.dumpfiles --virtaddr 0x7ff... # Extraire un fichier</p>
+<p>vol3 -f memory.dmp windows.memmap --dump --pid 1234      # Dumper la mémoire d'un process</p>
+
+<h1>Registry</h1>
+<p>vol3 -f memory.dmp windows.registry.hivelist     # Lister les hives</p>
+<p>vol3 -f memory.dmp windows.registry.printkey -K "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</p>
+
+<h1>Credentials</h1>
+<p>vol3 -f memory.dmp windows.hashdump         # Hashes NTLM</p>
+<p>vol3 -f memory.dmp windows.lsadump         # Secrets LSA</code></pre>
+
+<h2 id="analyse-d-un-process-suspect">Analyse d'un process suspect</h2>
+
+<pre><code class="language-bash"># Workflow d'analyse d'un processus suspect
+
+<h1>1. Identifier les processus anormaux</h1>
+<p>vol3 -f memory.dmp windows.pstree</p>
+<h1>Red flags :</h1>
+<h1>→ cmd.exe enfant de Word/Excel (macro malveillante)</h1>
+<h1>→ PowerShell avec nom aléatoire</h1>
+<h1>→ Processus sans icône ou description</h1>
+<h1>→ Processus légitime avec PPID inhabituel</h1>
+
+<h1>2. Analyser les arguments</h1>
+<p>vol3 -f memory.dmp windows.cmdline --pid 1234</p>
+<h1>PowerShell avec -EncodedCommand = suspect !</h1>
+
+<h1>3. Vérifier les connexions réseau</h1>
+<p>vol3 -f memory.dmp windows.netscan | grep 1234</p>
+<h1>Connexions vers des IPs inhabituelles = C2 ?</h1>
+
+<h1>4. Analyser la mémoire du processus</h1>
+<p>vol3 -f memory.dmp windows.malfind --pid 1234</p>
+<h1>Sections RWX (Read-Write-Execute) = code injecté</h1>
+
+<h1>5. Extraire le processus pour analyse statique</h1>
+<p>vol3 -f memory.dmp windows.dumpfiles --pid 1234</p>
+<h1>Analyser le dump avec strings, VirusTotal</h1>
+
+<h1>6. Analyser les DLLs</h1>
+<p>vol3 -f memory.dmp windows.dlllist --pid 1234</p>
+<h1>DLLs inconnues ou depuis %TEMP% = suspect</code></pre></h1>
+
+<h2 id="d-tecter-les-techniques-d-vasion">Détecter les techniques d'évasion</h2>
+
+<pre><code class="language-python"># Process Hollowing - Détecter via Volatility
+
+<h1>Process hollowing :</h1>
+<h1>1. Créer un processus légitime en mode suspendu</h1>
+<h1>2. Vider sa mémoire</h1>
+<h1>3. Injecter le malware</h1>
+<h1>4. Reprendre l'exécution</h1>
+
+<h1>Détection :</h1>
+<h1>Le chemin sur disque ≠ le code en mémoire</h1>
+
+<p>def detecter_process_hollowing(vol_output):</p>
+<p>"""Analyser la sortie de windows.hollowfind"""</p>
+<p>suspects = []</p>
+<p>for process in vol_output:</p>
+<p># Si le hash mémoire ≠ hash disque</p>
+<p>if process['disk_hash'] != process['memory_hash']:</p>
+<p>suspects.append({</p>
+<p>'pid': process['pid'],</p>
+<p>'name': process['name'],</p>
+<p>'note': 'Process hollowing possible'</p>
+<p>})</p>
+<p>return suspects</p>
+
+<h1>DKOM (Direct Kernel Object Manipulation)</h1>
+<h1>Malware qui se cache en modifiant les structures kernel</h1>
+<h1>Détection : comparer pslist (liste kernel) vs psscan (scan mémoire)</h1>
+<h1>vol3 windows.psscan → trouve les processus cachés</code></pre></h1>
+
+<h2 id="extraire-des-artefacts-cryptographiques">Extraire des artefacts cryptographiques</h2>
+
+<pre><code class="language-python"># Trouver des clés de chiffrement dans la mémoire
+
+<p>import re</p>
+
+<p>def chercher_cles_aes(memory_dump_path):</p>
+<p>"""Chercher des clés AES-256 dans un dump mémoire"""</p>
+<p>with open(memory_dump_path, 'rb') as f:</p>
+<p>data = f.read()</p>
+
+<p># AES key schedule pattern (heuristique simplifiée)</p>
+<p># Les vraies clés ont des patterns statistiques spécifiques</p>
+<p>potential_keys = []</p>
+
+<p># Chercher des patterns qui ressemblent à des clés AES (entropie élevée, 32 bytes)</p>
+<p>for i in range(0, len(data) - 32, 4):</p>
+<p>chunk = data[i:i+32]</p>
+<p># Calculer l'entropie</p>
+<p>from collections import Counter</p>
+<p>import math</p>
+<p>counts = Counter(chunk)</p>
+<p>entropy = -sum((c/32) * math.log2(c/32) for c in counts.values())</p>
+<p>if entropy &gt; 7.5:  # Entropie élevée = données aléatoires = possible clé</p>
+<p>potential_keys.append((hex(i), chunk.hex()))</p>
+
+<p>return potential_keys[:10]  # Retourner les 10 premières</p>
+
+<h1>Outils spécialisés :</h1>
+<h1>bulk_extractor : extraire automatiquement clés, emails, URLs</h1>
+<p>bulk_extractor -o output/ -x all -e aes memory.dmp</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La forensique mémoire révèle ce que les autres techniques ne voient pas. Volatility 3 est l'outil incontournable, mais la vraie compétence est dans l'<strong>interprétation</strong> : savoir distinguer un processus légitime d'un process hollowing, reconnaître les patterns de code injecté, corréler les connexions réseau avec les processus suspects. C'est une compétence qui s'acquiert par la pratique sur des images mémoire réelles ou des challenges CTF.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#forensics-memoire-avance" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-avancee.html" class="nav-prev">← Cryptographie avancée : PKI, certificats et post-quantique</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile-avance.html" class="nav-next">Sécurité mobile avancée : pentest Android et iOS →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

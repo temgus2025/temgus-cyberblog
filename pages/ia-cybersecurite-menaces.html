@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Intelligence Artificielle et cybersécurité : menaces et opportunités — Temgus.CyberBlog</title>
 <meta name="description" content="Deepfakes, phishing IA, WormGPT, détection d'anomalies — comment l'IA transforme le paysage des cybermenaces.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite-menaces.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite-menaces.html">
 <meta property="og:title" content="Intelligence Artificielle et cybersécurité : menaces et opportunités — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Intelligence Artificielle et cybersécurité : menaces et opportunités — Temgus.CyberBlog">
 <meta name="twitter:description" content="Deepfakes, phishing IA, WormGPT, détection d'anomalies — comment l'IA transforme le paysage des cybermenaces.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,345 @@
   "headline": "Intelligence Artificielle et cybersécurité : menaces et opportunités",
   "description": "Deepfakes, phishing IA, WormGPT, détection d'anomalies — comment l'IA transforme le paysage des cybermenaces.",
   "datePublished": "2025-07-01",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/ia-cybersecurite-menaces.html",
   "inLanguage": "fr",
   "keywords": "IA, deepfake, LLM, détection, UEBA",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🤖</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Intelligence Artificielle et cybersécurité : menaces et opportunités</h1>
-  <p style="color:#8892a4;max-width:500px">Deepfakes, phishing IA, WormGPT, détection d'anomalies — comment l'IA transforme le paysage des cybermenaces.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ia-cybersecurite-menaces" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🤖</div>
+    <div class="meta-info">
+      <div class="meta-category">Intelligence Artificielle & Sécurité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Intelligence Artificielle et cybersécurité : menaces et opportunités</div>
+      <div class="meta-details">
+        <span>📅 2025-07-01</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#l-ia-au-service-des-attaquants">L'IA au service des attaquants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#phishing-hyper-personnalis-">Phishing hyper-personnalisé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#deepfakes-et-ing-nierie-sociale">Deepfakes et ingénierie sociale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#automatisation-des-attaques">Automatisation des attaques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#g-n-ration-de-malwares">Génération de malwares</a></li>
+<li><a href="#l-ia-au-service-des-d-fenseurs">L'IA au service des défenseurs</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tection-d-anomalies">Détection d'anomalies</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyse-comportementale-ueba-">Analyse comportementale (UEBA)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-ponse-automatis-e-aux-incidents">Réponse automatisée aux incidents</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyse-de-malwares">Analyse de malwares</a></li>
+<li><a href="#les-risques-sp-cifiques-aux-syst-mes-d-ia">Les risques spécifiques aux systèmes d'IA</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#adversarial-attacks">Adversarial attacks</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#empoisonnement-des-donn-es-data-poisoning-">Empoisonnement des données (Data poisoning)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#prompt-injection">Prompt injection</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#vol-de-mod-les">Vol de modèles</a></li>
+<li><a href="#bonnes-pratiques">Bonnes pratiques</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Intelligence Artificielle et cybersécurité : menaces et opportunités</h1>
+
+<p>L'intelligence artificielle transforme radicalement le paysage de la cybersécurité. D'un côté, elle donne aux attaquants des outils puissants pour automatiser et sophistiquer leurs attaques. De l'autre, elle permet aux défenseurs de détecter les menaces plus rapidement que jamais.</p>
+
+<h2 id="l-ia-au-service-des-attaquants">L'IA au service des attaquants</h2>
+
+<h3 id="phishing-hyper-personnalis-">Phishing hyper-personnalisé</h3>
+<p>Les modèles de langage comme GPT permettent de générer des emails de phishing parfaitement rédigés, sans fautes d'orthographe, adaptés à la cible. Fini les messages approximatifs facilement repérables — l'IA rédige des messages convaincants à grande échelle.</p>
+
+<h3 id="deepfakes-et-ing-nierie-sociale">Deepfakes et ingénierie sociale</h3>
+<p>Les deepfakes audio et vidéo permettent d'usurper l'identité de dirigeants ou de proches. Des cas documentés montrent des transferts bancaires frauduleux déclenchés par de faux appels vocaux imitant parfaitement la voix d'un PDG.</p>
+
+<h3 id="automatisation-des-attaques">Automatisation des attaques</h3>
+<p>L'IA permet d'automatiser :</p>
+<ul><li>La découverte de vulnérabilités dans les applications web</li><li>Le fuzzing intelligent de code</li><li>L'adaptation des malwares pour contourner les antivirus</li><li>Les attaques par force brute intelligentes</li></ul>
+
+<h3 id="g-n-ration-de-malwares">Génération de malwares</h3>
+<p>Des outils comme WormGPT ou FraudGPT — des versions non censurées de LLMs — circulent sur le dark web et permettent de générer du code malveillant sans contraintes éthiques.</p>
+
+<h2 id="l-ia-au-service-des-d-fenseurs">L'IA au service des défenseurs</h2>
+
+<h3 id="d-tection-d-anomalies">Détection d'anomalies</h3>
+<p>Les algorithmes de Machine Learning analysent des millions d'événements réseau pour détecter des comportements anormaux impossibles à identifier manuellement. Un utilisateur qui se connecte à 3h du matin depuis un pays inhabituel ? L'IA le signale immédiatement.</p>
+
+<h3 id="analyse-comportementale-ueba-">Analyse comportementale (UEBA)</h3>
+<p>L'<strong>User and Entity Behavior Analytics</strong> (UEBA) crée un profil comportemental de chaque utilisateur et détecte les déviances : téléchargement massif de fichiers, accès inhabituel à des ressources sensibles, etc.</p>
+
+<h3 id="r-ponse-automatis-e-aux-incidents">Réponse automatisée aux incidents</h3>
+<p>Les plateformes <strong>SOAR</strong> (Security Orchestration, Automation and Response) utilisent l'IA pour automatiser la réponse aux incidents : isolation d'une machine compromise, blocage d'une IP suspecte, notification des équipes — tout ça en quelques secondes.</p>
+
+<h3 id="analyse-de-malwares">Analyse de malwares</h3>
+<p>L'IA analyse les comportements des fichiers suspects en sandbox et identifie les malwares inconnus (zero-day) grâce à l'analyse comportementale plutôt que par signature.</p>
+
+<h2 id="les-risques-sp-cifiques-aux-syst-mes-d-ia">Les risques spécifiques aux systèmes d'IA</h2>
+
+<h3 id="adversarial-attacks">Adversarial attacks</h3>
+<p>Les attaques adversariales consistent à manipuler les entrées d'un modèle d'IA pour lui faire prendre de mauvaises décisions. Un exemple célèbre : modifier imperceptiblement une image pour qu'un modèle de reconnaissance visuelle confonde un panneau "Stop" avec un panneau de limitation de vitesse.</p>
+
+<h3 id="empoisonnement-des-donn-es-data-poisoning-">Empoisonnement des données (Data poisoning)</h3>
+<p>En injectant des données malveillantes dans le jeu d'entraînement d'un modèle, un attaquant peut créer des backdoors ou dégrader les performances du modèle sur certains cas précis.</p>
+
+<h3 id="prompt-injection">Prompt injection</h3>
+<p>Les attaques par <strong>prompt injection</strong> ciblent les applications basées sur des LLMs. En insérant des instructions malveillantes dans le contenu traité par l'IA, un attaquant peut détourner le comportement du système — par exemple, faire exfiltrer des données confidentielles par un chatbot.</p>
+
+<h3 id="vol-de-mod-les">Vol de modèles</h3>
+<p>Les modèles d'IA représentent un investissement considérable. Leur vol par des requêtes répétées (model extraction) ou par accès non autorisé aux systèmes constitue une menace économique réelle.</p>
+
+<h2 id="bonnes-pratiques">Bonnes pratiques</h2>
+
+<p>Pour les organisations qui déploient de l'IA :</p>
+
+<ul><li><strong>Auditer les modèles</strong> régulièrement pour détecter les biais et backdoors</li><li><strong>Sécuriser les pipelines de données</strong> d'entraînement</li><li><strong>Mettre en place une validation humaine</strong> pour les décisions critiques automatisées</li><li><strong>Former les équipes</strong> à reconnaître les deepfakes et le phishing généré par IA</li><li><strong>Surveiller les APIs</strong> exposant des modèles d'IA</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'IA est une arme à double tranchant en cybersécurité. Les organisations qui sauront l'utiliser intelligemment pour leur défense auront un avantage significatif. Mais ignorer les menaces qu'elle génère serait une erreur stratégique. La course entre attaquants et défenseurs entre dans une nouvelle ère, accélérée par l'IA.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ia-cybersecurite-menaces" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-windows-server.html" class="nav-prev">← Hardening Windows Server : durcissement complet</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-llm-applications.html" class="nav-next">Sécuriser les applications basées sur les LLMs →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

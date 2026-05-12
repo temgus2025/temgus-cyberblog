@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité WiFi : WPA2, WPA3 et attaques courantes — Temgus.CyberBlog</title>
 <meta name="description" content="Protocoles WiFi, attaques par dictionnaire, Evil Twin et sécurisation du réseau sans fil.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-wifi.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-wifi.html">
 <meta property="og:title" content="Sécurité WiFi : WPA2, WPA3 et attaques courantes — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité WiFi : WPA2, WPA3 et attaques courantes — Temgus.CyberBlog">
 <meta name="twitter:description" content="Protocoles WiFi, attaques par dictionnaire, Evil Twin et sécurisation du réseau sans fil.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,440 @@
   "headline": "Sécurité WiFi : WPA2, WPA3 et attaques courantes",
   "description": "Protocoles WiFi, attaques par dictionnaire, Evil Twin et sécurisation du réseau sans fil.",
   "datePublished": "2025-04-03",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-wifi.html",
   "inLanguage": "fr",
   "keywords": "WiFi, WPA2, WPA3",
-  "timeRequired": "PT7M"
+  "timeRequired": "PT7M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📶</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité WiFi : WPA2, WPA3 et attaques courantes</h1>
-  <p style="color:#8892a4;max-width:500px">Protocoles WiFi, attaques par dictionnaire, Evil Twin et sécurisation du réseau sans fil.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-wifi" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📶</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité WiFi : WPA2, WPA3 et attaques courantes</div>
+      <div class="meta-details">
+        <span>📅 2025-04-03</span>
+        <span>⏱ 7 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#l-volution-des-protocoles-wifi">L'évolution des protocoles WiFi</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#wep-1997-compl-tement-cass-">WEP (1997) — ⛔ Complètement cassé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#wpa-2003-obsol-te">WPA (2003) — ⚠️ Obsolète</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#wpa2-2004-acceptable-si-bien-configur-">WPA2 (2004) — ✅ Acceptable si bien configuré</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#wpa3-2018-recommand-">WPA3 (2018) — ✅✅ Recommandé</a></li>
+<li><a href="#les-attaques-wifi-courantes">Les attaques WiFi courantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-attaque-par-dictionnaire-force-brute">1. Attaque par dictionnaire / force brute</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-evil-twin-faux-point-d-acc-s-">2. Evil Twin (Faux point d'accès)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-krack-key-reinstallation-attack-">3. KRACK (Key Reinstallation Attack)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-pmkid-attack">4. PMKID Attack</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-wardriving">5. Wardriving</a></li>
+<li><a href="#s-curiser-votre-r-seau-wifi">Sécuriser votre réseau WiFi</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#configuration-du-routeur">Configuration du routeur</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#s-parer-les-r-seaux">Séparer les réseaux</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#exemple-de-mot-de-passe-wifi-robuste">Exemple de mot de passe WiFi robuste</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#audit-de-votre-r-seau-wifi">Audit de votre réseau WiFi</a></li>
+<li><a href="#les-bonnes-pratiques-sur-les-wifi-publics">Les bonnes pratiques sur les WiFi publics</a></li>
+<li><a href="#analyse-de-trafic-wifi-avec-wireshark">Analyse de trafic WiFi avec Wireshark</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité WiFi : WPA2, WPA3 et attaques courantes</h1>
+
+<p>Le WiFi est omniprésent mais souvent mal sécurisé. Un réseau WiFi vulnérable peut permettre à un attaquant d'intercepter tout votre trafic, d'accéder à vos appareils et de voler vos données. Voici comment comprendre et sécuriser votre réseau sans fil.</p>
+
+<h2 id="l-volution-des-protocoles-wifi">L'évolution des protocoles WiFi</h2>
+
+<h3 id="wep-1997-compl-tement-cass-">WEP (1997) — ⛔ Complètement cassé</h3>
+
+<p>WEP (Wired Equivalent Privacy) utilisait RC4 avec une clé statique. Il peut être cracké en <strong>moins de 60 secondes</strong> avec des outils modernes. Ne l'utilisez jamais.</p>
+
+<h3 id="wpa-2003-obsol-te">WPA (2003) — ⚠️ Obsolète</h3>
+
+<p>WPA introduisait TKIP pour corriger les failles de WEP. Également compromis, à éviter.</p>
+
+<h3 id="wpa2-2004-acceptable-si-bien-configur-">WPA2 (2004) — ✅ Acceptable si bien configuré</h3>
+
+<p>WPA2 utilise AES-CCMP, nettement plus robuste. Encore largement utilisé. Vulnérable aux attaques par dictionnaire sur les mots de passe faibles et à KRACK (2017).</p>
+
+<h3 id="wpa3-2018-recommand-">WPA3 (2018) — ✅✅ Recommandé</h3>
+
+<p>WPA3 apporte des améliorations majeures :</p>
+<ul><li><strong>SAE</strong> (Simultaneous Authentication of Equals) remplace PSK — résistant aux attaques hors-ligne</li><li><strong>Forward Secrecy</strong> — une clé compromise ne compromet pas les sessions passées</li><li><strong>Protection des réseaux ouverts</strong> avec OWE (Opportunistic Wireless Encryption)</li></ul>
+
+<h2 id="les-attaques-wifi-courantes">Les attaques WiFi courantes</h2>
+
+<h3 id="1-attaque-par-dictionnaire-force-brute">1. Attaque par dictionnaire / force brute</h3>
+
+<pre><code class="language-bash"># Capture du handshake WPA2 avec aircrack-ng (sur réseau autorisé)
+
+<h1>1. Passer la carte en mode monitor</h1>
+<p>airmon-ng start wlan0</p>
+
+<h1>2. Scanner les réseaux</h1>
+<p>airodump-ng wlan0mon</p>
+
+<h1>3. Capturer le handshake d'authentification</h1>
+<p>airodump-ng -c 6 --bssid AA:BB:CC:DD:EE:FF -w capture wlan0mon</p>
+
+<h1>4. Forcer un client à se reconnecter (envoie des paquets deauth)</h1>
+<p>aireplay-ng --deauth 10 -a AA:BB:CC:DD:EE:FF wlan0mon</p>
+
+<h1>5. Cracker le handshake avec un dictionnaire</h1>
+<p>aircrack-ng capture-01.cap -w /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p><strong>Protection :</strong> utilisez un mot de passe WiFi long et complexe (+20 caractères).</p>
+
+<h3 id="2-evil-twin-faux-point-d-acc-s-">2. Evil Twin (Faux point d'accès)</h3>
+
+<p>L'attaquant crée un <strong>faux réseau WiFi</strong> avec le même nom (SSID) que le réseau légitime. Les appareils se connectent automatiquement au signal le plus fort.</p>
+
+<pre><code>Réseau légitime  : "CafeWifi" (signal 60%)
+<p>Faux réseau      : "CafeWifi" (signal 90%) ← Attaquant</p>
+<p>↓</p>
+<p>Tout votre trafic passe par l'attaquant</code></pre>
+
+<p><strong>Protection :</strong> utilisez toujours un VPN sur les WiFi publics.</p>
+
+<h3 id="3-krack-key-reinstallation-attack-">3. KRACK (Key Reinstallation Attack)</h3>
+
+<p>Vulnérabilité dans le protocole WPA2 permettant de forcer la réinstallation de clés cryptographiques, exposant le trafic.</p>
+
+<p><strong>Protection :</strong> mettez à jour tous vos appareils (la plupart sont patchés depuis 2017).</p>
+
+<h3 id="4-pmkid-attack">4. PMKID Attack</h3>
+
+<p>Plus récente que KRACK, cette attaque permet de capturer un hash sans attendre qu'un client se connecte.</p>
+
+<pre><code class="language-bash"># Capture du PMKID (sans client nécessaire)
+<p>hcxdumptool -i wlan0mon -o capture.pcapng --enable_status=1</p>
+
+<h1>Conversion pour hashcat</h1>
+<p>hcxpcapngtool -o hash.hc22000 capture.pcapng</p>
+
+<h1>Crackage</h1>
+<p>hashcat -m 22000 hash.hc22000 wordlist.txt</code></pre>
+
+<p><strong>Protection :</strong> WPA3 ou mot de passe très long (+20 caractères).</p>
+
+<h3 id="5-wardriving">5. Wardriving</h3>
+
+<p>Technique consistant à se déplacer (en voiture, à vélo) pour cartographier les réseaux WiFi vulnérables.</p>
+
+<h2 id="s-curiser-votre-r-seau-wifi">Sécuriser votre réseau WiFi</h2>
+
+<h3 id="configuration-du-routeur">Configuration du routeur</h3>
+
+<pre><code>✅ Utiliser WPA3 ou WPA2-AES (jamais TKIP)
+<p>✅ Mot de passe WiFi : 20+ caractères aléatoires</p>
+<p>✅ Changer le mot de passe admin du routeur</p>
+<p>✅ Désactiver WPS (vulnérable par design)</p>
+<p>✅ Désactiver l'administration à distance</p>
+<p>✅ Mettre à jour le firmware du routeur</p>
+<p>✅ Désactiver UPnP si non nécessaire</code></pre>
+
+<h3 id="s-parer-les-r-seaux">Séparer les réseaux</h3>
+
+<pre><code>Réseau principal    : vos appareils de confiance
+<p>Réseau invités      : visiteurs (isolé du réseau principal)</p>
+<p>Réseau IoT          : caméras, ampoules, thermostats</p>
+<p>(isolé pour limiter la propagation)</code></pre>
+
+<h3 id="exemple-de-mot-de-passe-wifi-robuste">Exemple de mot de passe WiFi robuste</h3>
+
+<pre><code class="language-bash"># Générer un mot de passe WiFi fort
+<p>openssl rand -base64 32</p>
+<h1>Résultat : K7mP9xQ2nR5vL8wT3yU6jH4cF1bE0aD</h1>
+
+<h1>Ou avec Python</h1>
+<p>python3 -c "import secrets; print(secrets.token_urlsafe(24))"</p>
+<h1>Résultat : xK9mP2nR5vL8wT3yU6jH4cF1</code></pre></h1>
+
+<h3 id="audit-de-votre-r-seau-wifi">Audit de votre réseau WiFi</h3>
+
+<pre><code class="language-bash"># Scanner votre réseau pour trouver les appareils connectés
+<p>nmap -sn 192.168.1.0/24</p>
+
+<h1>Vérifier la sécurité de votre WiFi</h1>
+<h1>https://www.wifi-inspector.com (en ligne)</h1>
+
+<h1>Avec wash (détecte les réseaux avec WPS activé)</h1>
+<p>wash -i wlan0mon</code></pre>
+
+<h2 id="les-bonnes-pratiques-sur-les-wifi-publics">Les bonnes pratiques sur les WiFi publics</h2>
+
+<pre><code>Sur un WiFi public (café, hôtel, aéroport) :
+
+<p>✅ Utilisez un VPN (chiffre tout votre trafic)</p>
+<p>✅ Vérifiez le nom exact du réseau auprès du personnel</p>
+<p>✅ Préférez votre partage de connexion mobile</p>
+<p>✅ Évitez les transactions bancaires</p>
+<p>✅ Utilisez HTTPS partout (extension navigateur)</p>
+
+<p>❌ Ne vous connectez jamais à votre banque sans VPN</p>
+<p>❌ Ne téléchargez pas de fichiers</p>
+<p>❌ Ne vous connectez pas à des services sensibles</code></pre>
+
+<h2 id="analyse-de-trafic-wifi-avec-wireshark">Analyse de trafic WiFi avec Wireshark</h2>
+
+<pre><code class="language-bash"># Capturer le trafic sur votre propre réseau (légal)
+<p>sudo wireshark</p>
+
+<h1>Filtres utiles dans Wireshark</h1>
+<p>http                    # Voir le trafic HTTP non chiffré</p>
+<p>dns                     # Voir les requêtes DNS</p>
+<p>tcp.port == 443         # Trafic HTTPS</p>
+<p>arp                     # Voir la table ARP (détecter ARP spoofing)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité WiFi repose sur trois piliers : <strong>protocole moderne (WPA3)</strong>, <strong>mot de passe robuste</strong>, et <strong>segmentation du réseau</strong>. Sur les réseaux publics, un VPN est indispensable. La majorité des attaques WiFi réussies exploitent des mots de passe faibles — c'est le premier point à corriger.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-wifi" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/attaques-ddos.html" class="nav-prev">← Attaques DDoS : comment ça fonctionne et comment s'en protéger</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/mots-de-passe.html" class="nav-next">Mots de passe : créer et gérer des mots de passe forts →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

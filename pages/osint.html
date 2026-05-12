@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>OSINT : trouver des informations en source ouverte — Temgus.CyberBlog</title>
 <meta name="description" content="Techniques et outils de renseignement en sources ouvertes.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/osint.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/osint.html">
 <meta property="og:title" content="OSINT : trouver des informations en source ouverte — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="OSINT : trouver des informations en source ouverte — Temgus.CyberBlog">
 <meta name="twitter:description" content="Techniques et outils de renseignement en sources ouvertes.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,490 @@
   "headline": "OSINT : trouver des informations en source ouverte",
   "description": "Techniques et outils de renseignement en sources ouvertes.",
   "datePublished": "2025-04-13",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/osint.html",
   "inLanguage": "fr",
   "keywords": "OSINT, reconnaissance, Shodan",
-  "timeRequired": "PT8M"
+  "timeRequired": "PT8M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔍</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">OSINT : trouver des informations en source ouverte</h1>
-  <p style="color:#8892a4;max-width:500px">Techniques et outils de renseignement en sources ouvertes.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#osint" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔍</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">OSINT : trouver des informations en source ouverte</div>
+      <div class="meta-details">
+        <span>📅 2025-04-13</span>
+        <span>⏱ 8 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-l-osint-">Qu'est-ce que l'OSINT ?</a></li>
+<li><a href="#les-sources-osint-principales">Les sources OSINT principales</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#moteurs-de-recherche-avanc-s">Moteurs de recherche avancés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#whois-et-dns">WHOIS et DNS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-seaux-sociaux-et-osint-personnel">Réseaux sociaux et OSINT personnel</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#recherche-d-images-osint-visuel-">Recherche d'images (OSINT visuel)</a></li>
+<li><a href="#cadre-m-thodologique-osint">Cadre méthodologique OSINT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-cycle-du-renseignement">Le cycle du renseignement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cartographie-d-une-cible-entreprise-">Cartographie d'une cible (entreprise)</a></li>
+<li><a href="#outils-osint-essentiels">Outils OSINT essentiels</a></li>
+<li><a href="#osint-d-fensif-prot-ger-votre-empreinte">OSINT défensif : protéger votre empreinte</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-duire-votre-exposition">Réduire votre exposition</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sites-de-data-brokers-surveiller">Sites de data brokers à surveiller</a></li>
+<li><a href="#cas-d-usage-l-gitimes">Cas d'usage légitimes</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>OSINT : trouver des informations en source ouverte</h1>
+
+<p>L'OSINT (Open Source Intelligence) consiste à collecter et analyser des informations <strong>publiquement disponibles</strong> pour en tirer du renseignement. C'est une compétence fondamentale en cybersécurité, utilisée aussi bien par les attaquants (phase de reconnaissance) que par les défenseurs (threat intelligence).</p>
+
+<h2 id="qu-est-ce-que-l-osint-">Qu'est-ce que l'OSINT ?</h2>
+
+<p>L'OSINT utilise uniquement des sources <strong>légalement accessibles</strong> :</p>
+<ul><li>Sites web et réseaux sociaux</li><li>Registres publics (WHOIS, cadastre)</li><li>Bases de données gouvernementales</li><li>Moteurs de recherche</li><li>Archives et caches</li></ul>
+
+<p>> L'OSINT est légal tant que vous accédez uniquement à des informations publiques. L'utiliser pour harceler, menacer ou accéder à des systèmes est illégal.</p>
+
+<h2 id="les-sources-osint-principales">Les sources OSINT principales</h2>
+
+<h3 id="moteurs-de-recherche-avanc-s">Moteurs de recherche avancés</h3>
+
+<pre><code class="language-bash"># Google Dorks - Recherches avancées Google
+
+<h1>Trouver des fichiers spécifiques</h1>
+<p>site:exemple.com filetype:pdf</p>
+<p>site:exemple.com filetype:xlsx "confidentiel"</p>
+
+<h1>Trouver des pages d'administration</h1>
+<p>site:exemple.com inurl:admin</p>
+<p>site:exemple.com inurl:login intitle:"admin"</p>
+
+<h1>Trouver des informations exposées</h1>
+<p>site:exemple.com "mot de passe" OR "password"</p>
+<p>site:exemple.com ext:env OR ext:sql OR ext:config</p>
+
+<h1>Caméras exposées sur Internet</h1>
+<p>intitle:"webcam" inurl:view/view.shtml</p>
+<p>intitle:"IP Camera" inurl:/view/index.shtml</p>
+
+<h1>Appareils industriels exposés (SCADA)</h1>
+<p>"SIMATIC" inurl:Portal/Portal.mwsl</p>
+
+<h1>Shodan (moteur de recherche des objets connectés)</h1>
+<h1>https://www.shodan.io</h1>
+<h1>Rechercher des appareils vulnérables, ports ouverts, etc.</code></pre></h1>
+
+<h3 id="whois-et-dns">WHOIS et DNS</h3>
+
+<pre><code class="language-bash"># Informations sur un domaine
+<p>whois exemple.com</p>
+<h1>Révèle : propriétaire, registrar, dates de création/expiration</h1>
+
+<h1>Résolution DNS complète</h1>
+<p>dig exemple.com ANY</p>
+<p>dig exemple.com MX          # Serveurs mail</p>
+<p>dig exemple.com NS          # Serveurs de noms</p>
+<p>dig exemple.com TXT         # Enregistrements texte (SPF, DKIM)</p>
+<p>dig -x 93.184.216.34        # DNS inverse</p>
+
+<h1>Trouver les sous-domaines</h1>
+<h1>Via certificats SSL (crt.sh)</h1>
+<p>curl "https://crt.sh/?q=%.exemple.com&amp;output=json" | python3 -m json.tool</p>
+
+<h1>Sublist3r</h1>
+<p>python3 sublist3r.py -d exemple.com</p>
+
+<h1>Amass (le plus complet)</h1>
+<p>amass enum -d exemple.com</code></pre>
+
+<h3 id="r-seaux-sociaux-et-osint-personnel">Réseaux sociaux et OSINT personnel</h3>
+
+<pre><code class="language-bash"># Outils OSINT pour personnes
+<h1>Sherlock - Trouver un username sur 300+ plateformes</h1>
+<p>python3 sherlock.py username_cible</p>
+
+<h1>theHarvester - Collecter emails et sous-domaines</h1>
+<p>theHarvester -d exemple.com -l 500 -b google,linkedin,twitter</p>
+
+<h1>Maltego - Cartographie visuelle des relations</h1>
+<h1>https://www.maltego.com (version communautaire gratuite)</code></pre></h1>
+
+<h3 id="recherche-d-images-osint-visuel-">Recherche d'images (OSINT visuel)</h3>
+
+<pre><code>Outils de recherche d'image inversée :
+<p>→ Google Images (images.google.com) → Importer une image</p>
+<p>→ TinEye (tineye.com) → Trouver l'origine d'une image</p>
+<p>→ Yandex Images → Souvent plus efficace que Google</p>
+<p>→ PimEyes → Reconnaissance faciale (controversé)</p>
+
+<p>Métadonnées EXIF des photos :</p>
+<p>→ ExifTool révèle : coordonnées GPS, appareil photo, date, auteur</code></pre>
+
+<pre><code class="language-bash"># Extraire les métadonnées EXIF d'une image
+<p>exiftool photo.jpg</p>
+<h1>Peut révéler : GPS coordinates, device model, date, author</h1>
+
+<h1>Exemple de sortie :</h1>
+<h1>GPS Latitude  : 48 deg 51' 30.12" N</h1>
+<h1>GPS Longitude : 2 deg 17' 40.44" E</h1>
+<h1>Make          : Apple</h1>
+<h1>Model         : iPhone 13 Pro</h1>
+<h1>Date/Time     : 2024:03:15 14:32:11</code></pre></h1>
+
+<h2 id="cadre-m-thodologique-osint">Cadre méthodologique OSINT</h2>
+
+<h3 id="le-cycle-du-renseignement">Le cycle du renseignement</h3>
+
+<pre><code>1. DÉFINITION
+<p>Quel est l'objectif ? Que cherche-t-on ?</p>
+<p>↓</p>
+<li>COLLECTE</li>
+<p>Utilisation des sources appropriées</p>
+<p>↓</p>
+<li>TRAITEMENT</li>
+<p>Organisation et vérification des données</p>
+<p>↓</p>
+<li>ANALYSE</li>
+<p>Extraction du renseignement utile</p>
+<p>↓</p>
+<li>DIFFUSION</li>
+<p>Rapport et recommandations</code></pre>
+
+<h3 id="cartographie-d-une-cible-entreprise-">Cartographie d'une cible (entreprise)</h3>
+
+<pre><code>Cible : exemple.com
+<p>│</p>
+<p>├── Infrastructure</p>
+<p>│   ├── IP : nmap, shodan, censys</p>
+<p>│   ├── Domaines : sublist3r, amass, crt.sh</p>
+<p>│   ├── Technologies : wappalyzer, builtwith</p>
+<p>│   └── Ports/services : nmap, masscan</p>
+<p>│</p>
+<p>├── Personnel</p>
+<p>│   ├── LinkedIn : employees, organigramme</p>
+<p>│   ├── Emails : theHarvester, hunter.io</p>
+<p>│   ├── Réseaux sociaux : twitter, github</p>
+<p>│   └── CV/offres d'emploi : compétences internes</p>
+<p>│</p>
+<p>└── Données exposées</p>
+<p>├── GitHub : code source, secrets</p>
+<p>├── Pastebin : dumps, leaks</p>
+<p>├── Google Dorks : fichiers sensibles</p>
+<p>└── HaveIBeenPwned : comptes compromis</code></pre>
+
+<h2 id="outils-osint-essentiels">Outils OSINT essentiels</h2>
+
+<p>| Outil | Usage | Lien |</p>
+<p>|-------|-------|------|</p>
+<p>| Maltego | Cartographie visuelle | maltego.com |</p>
+<p>| theHarvester | Emails, domaines | GitHub |</p>
+<p>| Shodan | Appareils connectés | shodan.io |</p>
+<p>| Recon-ng | Framework OSINT | GitHub |</p>
+<p>| SpiderFoot | Automatisation OSINT | spiderfoot.net |</p>
+<p>| Amass | Énumération DNS | GitHub |</p>
+<p>| Sherlock | Username hunting | GitHub |</p>
+<p>| ExifTool | Métadonnées fichiers | exiftool.org |</p>
+
+<pre><code class="language-bash"># Recon-ng - Framework modulaire OSINT
+<p>recon-ng</p>
+<p>[recon-ng] &gt; marketplace install all</p>
+<p>[recon-ng] &gt; workspaces create exemple_com</p>
+<p>[recon-ng] &gt; modules load recon/domains-hosts/bing_domain_web</p>
+<p>[recon-ng] &gt; options set SOURCE exemple.com</p>
+<p>[recon-ng] &gt; run</code></pre>
+
+<h2 id="osint-d-fensif-prot-ger-votre-empreinte">OSINT défensif : protéger votre empreinte</h2>
+
+<h3 id="r-duire-votre-exposition">Réduire votre exposition</h3>
+
+<pre><code>✅ Activer la protection WHOIS (proxy d'enregistrement)
+<p>✅ Supprimer vos infos des sites de data brokers</p>
+<p>✅ Vérifier vos paramètres de confidentialité réseaux sociaux</p>
+<p>✅ Désactiver les métadonnées EXIF avant publication de photos</p>
+<p>✅ Utiliser des alias email pour les inscriptions</p>
+<p>✅ Google vous-même régulièrement (ego-googling)</code></pre>
+
+<pre><code class="language-bash"># Supprimer les métadonnées EXIF avant publication
+<p>exiftool -all= photo.jpg           # Supprime toutes les métadonnées</p>
+<p>exiftool -GPS*= photo.jpg          # Supprime seulement le GPS</p>
+
+<h1>Vérifier ce que Google sait de vous</h1>
+<h1>https://myactivity.google.com</h1>
+<h1>https://aboutme.google.com</code></pre></h1>
+
+<h3 id="sites-de-data-brokers-surveiller">Sites de data brokers à surveiller</h3>
+
+<pre><code>Sites qui collectent et vendent vos informations :
+<p>→ Spokeo, Whitepages, BeenVerified, PeopleFinder</p>
+
+<p>Pour se faire supprimer :</p>
+<p>→ Visitez chaque site → "Opt-out" ou "Remove my info"</p>
+<p>→ Service automatisé : DeleteMe, Privacy Bee (payants)</code></pre>
+
+<h2 id="cas-d-usage-l-gitimes">Cas d'usage légitimes</h2>
+
+<p><strong>Red Team / Pentest :</strong></p>
+<p>Reconnaissance avant un test d'intrusion autorisé pour identifier les vecteurs d'attaque potentiels.</p>
+
+<p><strong>Threat Intelligence :</strong></p>
+<p>Surveiller les mentions de votre entreprise sur le dark web, identifier les acteurs malveillants.</p>
+
+<p><strong>Journalisme d'investigation :</strong></p>
+<p>Vérifier des informations, identifier des sources, enquêter sur des personnalités publiques.</p>
+
+<p><strong>Recrutement :</strong></p>
+<p>Vérifier les informations d'un candidat (dans le cadre légal RGPD).</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'OSINT est une discipline puissante qui démontre à quel point nos informations personnelles et professionnelles sont exposées en ligne. Maîtriser ces techniques vous permet à la fois de <strong>mieux comprendre les attaquants</strong> et de <strong>protéger votre propre empreinte numérique</strong>.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#osint" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/linux-securite.html" class="nav-prev">← Linux pour la sécurité : commandes essentielles</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/injection-sql.html" class="nav-next">Injection SQL : comprendre et se protéger →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

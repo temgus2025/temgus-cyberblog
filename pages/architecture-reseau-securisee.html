@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Architecture réseau sécurisée : concevoir une infrastructure robuste — Temgus.CyberBlog</title>
 <meta name="description" content="VLANs, DMZ, pfSense, règles de filtrage, IDS/IPS Suricata — concevoir une infrastructure réseau sécurisée.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/architecture-reseau-securisee.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/architecture-reseau-securisee.html">
 <meta property="og:title" content="Architecture réseau sécurisée : concevoir une infrastructure robuste — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Architecture réseau sécurisée : concevoir une infrastructure robuste — Temgus.CyberBlog">
 <meta name="twitter:description" content="VLANs, DMZ, pfSense, règles de filtrage, IDS/IPS Suricata — concevoir une infrastructure réseau sécurisée.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,490 @@
   "headline": "Architecture réseau sécurisée : concevoir une infrastructure robuste",
   "description": "VLANs, DMZ, pfSense, règles de filtrage, IDS/IPS Suricata — concevoir une infrastructure réseau sécurisée.",
   "datePublished": "2025-08-23",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/architecture-reseau-securisee.html",
   "inLanguage": "fr",
   "keywords": "architecture réseau, VLAN, DMZ, pfSense, Suricata",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🏗️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Architecture réseau sécurisée : concevoir une infrastructure robuste</h1>
-  <p style="color:#8892a4;max-width:500px">VLANs, DMZ, pfSense, règles de filtrage, IDS/IPS Suricata — concevoir une infrastructure réseau sécurisée.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#architecture-reseau-securisee" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🏗️</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Architecture réseau sécurisée : concevoir une infrastructure robuste</div>
+      <div class="meta-details">
+        <span>📅 2025-08-23</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-principes-fondamentaux">Les principes fondamentaux</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-fense-en-profondeur">Défense en profondeur</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#principe-du-moindre-privil-ge-r-seau">Principe du moindre privilège réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#zero-trust">Zero Trust</a></li>
+<li><a href="#la-segmentation-r-seau">La segmentation réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#vlans-virtual-local-area-networks">VLANs — Virtual Local Area Networks</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-dmz-zone-d-militaris-e-">La DMZ (Zone DéMilitarisée)</a></li>
+<li><a href="#firewalls-et-filtrage">Firewalls et filtrage</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pfsense-firewall-open-source">pfSense — Firewall open source</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#inspection-de-paquets-dpi-">Inspection de paquets (DPI)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#next-generation-firewall-ngfw-">Next-Generation Firewall (NGFW)</a></li>
+<li><a href="#syst-mes-de-d-tection-et-pr-vention-d-intrusion">Systèmes de détection et prévention d'intrusion</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ids-vs-ips">IDS vs IPS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#suricata-ids-ips-open-source">Suricata — IDS/IPS open source</a></li>
+<li><a href="#monitoring-r-seau">Monitoring réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#netflow-ipfix">NetFlow / IPFIX</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#honeypots-r-seau">Honeypots réseau</a></li>
+<li><a href="#architecture-pour-pme-exemple-pratique">Architecture pour PME — Exemple pratique</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Architecture réseau sécurisée : concevoir une infrastructure robuste</h1>
+
+<p>Une architecture réseau bien conçue est la première ligne de défense contre les cyberattaques. La segmentation, le filtrage et la surveillance du trafic limitent considérablement l'impact d'une compromission. Voici comment concevoir une infrastructure sécurisée.</p>
+
+<h2 id="les-principes-fondamentaux">Les principes fondamentaux</h2>
+
+<h3 id="d-fense-en-profondeur">Défense en profondeur</h3>
+<p>Ne jamais compter sur un seul mécanisme de sécurité. Multiplier les couches : firewall périmétrique, segmentation interne, endpoint protection, surveillance.</p>
+
+<h3 id="principe-du-moindre-privil-ge-r-seau">Principe du moindre privilège réseau</h3>
+<p>Chaque segment réseau n'accède qu'aux ressources dont il a strictement besoin. Un serveur web n'a pas besoin d'accéder à la base de données RH.</p>
+
+<h3 id="zero-trust">Zero Trust</h3>
+<p>"Ne jamais faire confiance, toujours vérifier." Même à l'intérieur du réseau, chaque connexion doit être authentifiée et autorisée.</p>
+
+<h2 id="la-segmentation-r-seau">La segmentation réseau</h2>
+
+<h3 id="vlans-virtual-local-area-networks">VLANs — Virtual Local Area Networks</h3>
+
+<p>Les VLANs permettent de segmenter logiquement le réseau physique.</p>
+
+<pre><code>Réseau physique unique
+<p>├── VLAN 10 : Postes utilisateurs (192.168.10.0/24)</p>
+<p>├── VLAN 20 : Serveurs internes (192.168.20.0/24)</p>
+<p>├── VLAN 30 : DMZ - Serveurs web publics (192.168.30.0/24)</p>
+<p>├── VLAN 40 : Imprimantes/IoT (192.168.40.0/24)</p>
+<p>├── VLAN 50 : WiFi invités (192.168.50.0/24)</p>
+<p>└── VLAN 99 : Management réseau (192.168.99.0/24)</code></pre>
+
+<p><strong>Configuration switch Cisco :</strong></p>
+<pre><code>! Créer les VLANs
+<p>vlan 10</p>
+<p>name Utilisateurs</p>
+<p>vlan 20</p>
+<p>name Serveurs</p>
+<p>vlan 30</p>
+<p>name DMZ</p>
+
+<p>! Configurer un port en access</p>
+<p>interface FastEthernet0/1</p>
+<p>switchport mode access</p>
+<p>switchport access vlan 10</p>
+
+<p>! Configurer un trunk (entre switch et routeur)</p>
+<p>interface GigabitEthernet0/1</p>
+<p>switchport mode trunk</p>
+<p>switchport trunk allowed vlan 10,20,30,99</code></pre>
+
+<h3 id="la-dmz-zone-d-militaris-e-">La DMZ (Zone DéMilitarisée)</h3>
+
+<p>La DMZ héberge les serveurs accessibles depuis Internet, isolés du réseau interne.</p>
+
+<pre><code>Internet
+<p>│</p>
+<p>[Firewall externe]</p>
+<p>│</p>
+<p>[DMZ]</p>
+<p>├── Serveur web</p>
+<p>├── Serveur mail</p>
+<p>└── Reverse proxy</p>
+<p>│</p>
+<p>[Firewall interne]</p>
+<p>│</p>
+<p>[Réseau interne]</p>
+<p>├── Serveurs applicatifs</p>
+<p>├── Base de données</p>
+<p>└── Active Directory</code></pre>
+
+<p><strong>Règles firewall pour la DMZ :</strong></p>
+<pre><code>Internet → DMZ : autoriser 80, 443 vers serveurs web
+<p>DMZ → Internet : autoriser réponses (stateful)</p>
+<p>DMZ → Interne : interdire par défaut sauf ports spécifiques</p>
+<p>Interne → DMZ : autoriser selon besoins</p>
+<p>Internet → Interne : interdire tout</code></pre>
+
+<h2 id="firewalls-et-filtrage">Firewalls et filtrage</h2>
+
+<h3 id="pfsense-firewall-open-source">pfSense — Firewall open source</h3>
+
+<p>pfSense est un excellent firewall open source basé sur FreeBSD.</p>
+
+<pre><code># Règles de filtrage typiques pfSense
+
+<h1>LAN vers WAN - autoriser tout (NAT)</h1>
+<p>Source: LAN net    Dest: any     Action: Allow</p>
+
+<h1>WAN vers DMZ - HTTP/HTTPS uniquement</h1>
+<p>Source: any        Dest: DMZ_HTTP_Server   Port: 80,443   Action: Allow</p>
+
+<h1>DMZ vers LAN - interdire</h1>
+<p>Source: DMZ net    Dest: LAN net   Action: Block</p>
+
+<h1>DMZ vers serveur DB interne - autoriser MySQL</h1>
+<p>Source: DMZ_AppServer   Dest: LAN_DB_Server   Port: 3306   Action: Allow</code></pre>
+
+<h3 id="inspection-de-paquets-dpi-">Inspection de paquets (DPI)</h3>
+
+<p>Le Deep Packet Inspection analyse le contenu des paquets, pas seulement les headers :</p>
+
+<ul><li><strong>Détection d'intrusion</strong> : identifier les signatures d'attaque</li><li><strong>Filtrage applicatif</strong> : contrôler l'usage des applications (Teams, Netflix...)</li><li><strong>SSL Inspection</strong> : déchiffrer et inspecter le trafic HTTPS (attention au RGPD)</li></ul>
+
+<h3 id="next-generation-firewall-ngfw-">Next-Generation Firewall (NGFW)</h3>
+
+<p>Les NGFW ajoutent aux firewalls classiques :</p>
+<ul><li>Inspection applicative (couche 7)</li><li>Prévention d'intrusion (IPS)</li><li>Filtrage URL et catégories</li><li>Contrôle des identités (intégration AD)</li><li>Threat intelligence en temps réel</li></ul>
+
+<p><strong>Solutions populaires :</strong> Palo Alto, Fortinet FortiGate, Cisco Firepower, pfSense + Snort</p>
+
+<h2 id="syst-mes-de-d-tection-et-pr-vention-d-intrusion">Systèmes de détection et prévention d'intrusion</h2>
+
+<h3 id="ids-vs-ips">IDS vs IPS</h3>
+<ul><li><strong>IDS</strong> (Intrusion Detection System) : détecte et alerte</li><li><strong>IPS</strong> (Intrusion Prevention System) : détecte et bloque automatiquement</li></ul>
+
+<h3 id="suricata-ids-ips-open-source">Suricata — IDS/IPS open source</h3>
+
+<pre><code class="language-yaml"># Installation
+<p>sudo apt install suricata</p>
+
+<h1>Configuration suricata.yaml</h1>
+<p>af-packet:</p>
+<p>- interface: eth0</p>
+
+<h1>Activer les règles</h1>
+<p>rule-files:</p>
+<p>- suricata.rules</p>
+<p>- /etc/suricata/rules/*.rules</p>
+
+<h1>Exemple de règle Suricata</h1>
+<p>alert tcp $EXTERNAL_NET any -&gt; $HOME_NET 22 (</p>
+<p>msg:"SSH Brute Force Attempt";</p>
+<p>flow:to_server;</p>
+<p>threshold:type both, track by_src, count 5, seconds 60;</p>
+<p>classtype:attempted-dos;</p>
+<p>sid:2001219;</p>
+<p>)</code></pre>
+
+<h2 id="monitoring-r-seau">Monitoring réseau</h2>
+
+<h3 id="netflow-ipfix">NetFlow / IPFIX</h3>
+
+<p>Collecte les métadonnées des flux réseau (pas le contenu) :</p>
+<ul><li>Qui communique avec qui</li><li>Volumes de données échangées</li><li>Durée des connexions</li><li>Ports utilisés</li></ul>
+
+<pre><code class="language-bash"># Collecter les flows avec nfdump
+<p>nfcapd -w -l /var/log/netflow -p 9995</p>
+
+<h1>Analyser</h1>
+<p>nfdump -r /var/log/netflow/nfcapd.202507010000 \</p>
+<p>-s record/bytes \</p>
+<p>-n 20 \</p>
+<p>'bytes &gt; 1000000'</code></pre>
+
+<h3 id="honeypots-r-seau">Honeypots réseau</h3>
+
+<p>Des leurres qui attirent et détectent les attaquants.</p>
+
+<pre><code class="language-python"># Honeypot simple avec Python
+<p>import socket</p>
+
+<p>def honeypot(port):</p>
+<p>s = socket.socket()</p>
+<p>s.bind(('0.0.0.0', port))</p>
+<p>s.listen(5)</p>
+<p>print(f"Honeypot actif sur port {port}")</p>
+<p>while True:</p>
+<p>conn, addr = s.accept()</p>
+<p>print(f"ALERTE: Connexion depuis {addr[0]} sur port {port}")</p>
+<p>conn.close()</p>
+
+<h1>Écouter sur des ports inhabituels</h1>
+<p>honeypot(23)   # Telnet</p>
+<p>honeypot(3389) # RDP</code></pre>
+
+<h2 id="architecture-pour-pme-exemple-pratique">Architecture pour PME — Exemple pratique</h2>
+
+<pre><code>Internet
+<p>│</p>
+<p>[Modem/Box FAI]</p>
+<p>│</p>
+<p>[pfSense Firewall]</p>
+<p>│</p>
+<p>[Switch L3 manageable]</p>
+<p>├── VLAN 10 (192.168.10.0/24) : Postes Windows</p>
+<p>├── VLAN 20 (192.168.20.0/24) : Serveurs</p>
+<p>│       ├── DC01 (Active Directory)</p>
+<p>│       ├── FS01 (Fichiers)</p>
+<p>│       └── BACKUP01 (Sauvegardes)</p>
+<p>├── VLAN 30 (192.168.30.0/24) : DMZ</p>
+<p>│       └── WEB01 (Site web)</p>
+<p>├── VLAN 40 (192.168.40.0/24) : WiFi employés</p>
+<p>├── VLAN 50 (192.168.50.0/24) : WiFi invités</p>
+<p>└── VLAN 99 (192.168.99.0/24) : Management</code></pre>
+
+<p><strong>Budget indicatif :</strong></p>
+<ul><li>pfSense sur mini-PC : 200-400€</li><li>Switch manageable : 300-800€</li><li><strong>Total infrastructure réseau sécurisée PME : ~1 000€</strong></li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Une architecture réseau sécurisée n'est pas réservée aux grandes entreprises. Avec pfSense, un switch manageable et une bonne segmentation, une PME peut atteindre un niveau de sécurité réseau très correct. L'investissement initial est rentabilisé dès le premier incident évité.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#architecture-reseau-securisee" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/recon-web-enumeration.html" class="nav-prev">← Reconnaissance web : énumération et cartographie des cibles</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/vpn-entreprise-acces-distant.html" class="nav-next">VPN d'entreprise et accès distant sécurisé : guide complet →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

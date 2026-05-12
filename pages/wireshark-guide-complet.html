@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Wireshark : analyser le trafic réseau comme un expert — Temgus.CyberBlog</title>
 <meta name="description" content="Filtres d'affichage, Follow Stream, détection d'attaques, déchiffrement TLS — maîtrisez l'analyseur réseau de référence.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/wireshark-guide-complet.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/wireshark-guide-complet.html">
 <meta property="og:title" content="Wireshark : analyser le trafic réseau comme un expert — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Wireshark : analyser le trafic réseau comme un expert — Temgus.CyberBlog">
 <meta name="twitter:description" content="Filtres d'affichage, Follow Stream, détection d'attaques, déchiffrement TLS — maîtrisez l'analyseur réseau de référence.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,480 @@
   "headline": "Wireshark : analyser le trafic réseau comme un expert",
   "description": "Filtres d'affichage, Follow Stream, détection d'attaques, déchiffrement TLS — maîtrisez l'analyseur réseau de référence.",
   "datePublished": "2025-08-11",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/wireshark-guide-complet.html",
   "inLanguage": "fr",
   "keywords": "Wireshark, analyse réseau, tshark, pcap, sniffing",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🦈</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Wireshark : analyser le trafic réseau comme un expert</h1>
-  <p style="color:#8892a4;max-width:500px">Filtres d'affichage, Follow Stream, détection d'attaques, déchiffrement TLS — maîtrisez l'analyseur réseau de référence.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#wireshark-guide-complet" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🦈</div>
+    <div class="meta-info">
+      <div class="meta-category">Outils & Logiciels</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Wireshark : analyser le trafic réseau comme un expert</div>
+      <div class="meta-details">
+        <span>📅 2025-08-11</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-wireshark-">Qu'est-ce que Wireshark ?</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#interface-et-navigation">Interface et navigation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-trois-panneaux-principaux">Les trois panneaux principaux</a></li>
+<li><a href="#capturer-du-trafic">Capturer du trafic</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-marrer-une-capture">Démarrer une capture</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#capture-en-ligne-de-commande-avec-tshark">Capture en ligne de commande avec tshark</a></li>
+<li><a href="#les-filtres-la-cl-de-wireshark">Les filtres — La clé de Wireshark</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#filtres-de-capture-bpf-">Filtres de capture (BPF)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#filtres-d-affichage">Filtres d'affichage</a></li>
+<li><a href="#analyser-des-attaques-courantes">Analyser des attaques courantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tecter-un-scan-de-ports-nmap">Détecter un scan de ports Nmap</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tecter-un-arp-spoofing">Détecter un ARP spoofing</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyser-du-trafic-http-suspect">Analyser du trafic HTTP suspect</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tecter-du-dns-tunneling">Détecter du DNS tunneling</a></li>
+<li><a href="#fonctionnalit-s-avanc-es">Fonctionnalités avancées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#suivre-un-flux-follow-stream-">Suivre un flux (Follow Stream)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#statistiques-utiles">Statistiques utiles</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-chiffrer-tls-https">Déchiffrer TLS/HTTPS</a></li>
+<li><a href="#wireshark-pour-le-ctf-et-le-forensic">Wireshark pour le CTF et le forensic</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyser-un-fichier-pcap-de-ctf">Analyser un fichier pcap de CTF</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#extraire-des-fichiers-d-une-capture">Extraire des fichiers d'une capture</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Wireshark : analyser le trafic réseau comme un expert</h1>
+
+<p>Wireshark est l'analyseur de paquets réseau le plus utilisé au monde. Indispensable pour comprendre les protocoles réseau, diagnostiquer des problèmes et analyser des attaques. Ce guide vous emmène de l'installation à l'analyse avancée.</p>
+
+<h2 id="qu-est-ce-que-wireshark-">Qu'est-ce que Wireshark ?</h2>
+
+<p>Wireshark est un <strong>sniffer réseau</strong> open source qui capture et analyse le trafic réseau en temps réel. Il décode plus de 3 000 protocoles et affiche les paquets de façon lisible et structurée.</p>
+
+<p><strong>Cas d'usage :</strong></p>
+<ul><li>Analyse de protocoles réseau</li><li>Diagnostic de problèmes réseau</li><li>Détection d'attaques (ARP spoofing, scans, exfiltration)</li><li>Analyse forensique de captures réseau</li><li>Apprentissage des protocoles</li></ul>
+
+<h2 id="installation">Installation</h2>
+
+<pre><code class="language-bash"># Linux (Debian/Ubuntu)
+<p>sudo apt install wireshark</p>
+<p>sudo usermod -aG wireshark $USER</p>
+<h1>Déconnectez-vous et reconnectez-vous</h1>
+
+<h1>macOS</h1>
+<p>brew install --cask wireshark</p>
+
+<h1>Windows</h1>
+<h1>Télécharger sur wireshark.org</code></pre></h1>
+
+<h2 id="interface-et-navigation">Interface et navigation</h2>
+
+<h3 id="les-trois-panneaux-principaux">Les trois panneaux principaux</h3>
+
+<p><strong>1. Liste des paquets</strong> (haut)</p>
+<p>Affiche tous les paquets capturés avec : numéro, timestamp, source, destination, protocole, longueur, info.</p>
+
+<p><strong>2. Détail du paquet</strong> (milieu)</p>
+<p>Décompose le paquet par couche : Ethernet → IP → TCP → HTTP. Cliquez sur chaque couche pour voir les champs détaillés.</p>
+
+<p><strong>3. Vue hexadécimale</strong> (bas)</p>
+<p>Affiche les données brutes en hexadécimal et ASCII.</p>
+
+<h2 id="capturer-du-trafic">Capturer du trafic</h2>
+
+<h3 id="d-marrer-une-capture">Démarrer une capture</h3>
+<li>Sélectionnez l'interface réseau (eth0, wlan0, lo...)</li>
+<li>Cliquez sur l'icône requine bleue ou double-cliquez l'interface</li>
+<li>Pour arrêter : carré rouge</li>
+
+<h3 id="capture-en-ligne-de-commande-avec-tshark">Capture en ligne de commande avec tshark</h3>
+<pre><code class="language-bash"># Capturer sur eth0
+<p>tshark -i eth0</p>
+
+<h1>Capturer et sauvegarder</h1>
+<p>tshark -i eth0 -w capture.pcap</p>
+
+<h1>Capturer uniquement HTTP</h1>
+<p>tshark -i eth0 -f "port 80"</p>
+
+<h1>Lire un fichier pcap</h1>
+<p>tshark -r capture.pcap</code></pre>
+
+<h2 id="les-filtres-la-cl-de-wireshark">Les filtres — La clé de Wireshark</h2>
+
+<h3 id="filtres-de-capture-bpf-">Filtres de capture (BPF)</h3>
+<p>Appliqués avant la capture, réduisent les données collectées.</p>
+
+<pre><code class="language-bash"># Filtrer par protocole
+<p>tcp</p>
+<p>udp</p>
+<p>icmp</p>
+<p>arp</p>
+
+<h1>Filtrer par port</h1>
+<p>port 80</p>
+<p>port 443</p>
+<p>port 22</p>
+
+<h1>Filtrer par IP</h1>
+<p>host 192.168.1.1</p>
+<p>src host 192.168.1.1</p>
+<p>dst host 192.168.1.1</p>
+
+<h1>Combinaisons</h1>
+<p>tcp and port 80</p>
+<p>host 192.168.1.1 and not port 22</code></pre>
+
+<h3 id="filtres-d-affichage">Filtres d'affichage</h3>
+<p>Appliqués après la capture sur les paquets déjà collectés. Plus puissants.</p>
+
+<pre><code># Protocoles
+<p>http</p>
+<p>dns</p>
+<p>ssh</p>
+<p>ftp</p>
+<p>smtp</p>
+
+<h1>IP source/destination</h1>
+<p>ip.src == 192.168.1.1</p>
+<p>ip.dst == 10.0.0.1</p>
+<p>ip.addr == 192.168.1.0/24</p>
+
+<h1>Ports</h1>
+<p>tcp.port == 80</p>
+<p>tcp.dstport == 443</p>
+
+<h1>Drapeaux TCP</h1>
+<p>tcp.flags.syn == 1</p>
+<p>tcp.flags.rst == 1</p>
+<p>tcp.flags.syn == 1 and tcp.flags.ack == 0</p>
+
+<h1>Contenu</h1>
+<p>http.request.method == "POST"</p>
+<p>http contains "password"</p>
+<p>dns.qry.name contains "malware"</p>
+
+<h1>Combinaisons</h1>
+<p>ip.src == 192.168.1.1 and tcp.dstport == 80</p>
+<p>http.request.method == "POST" and http.host contains "bank"</code></pre>
+
+<h2 id="analyser-des-attaques-courantes">Analyser des attaques courantes</h2>
+
+<h3 id="d-tecter-un-scan-de-ports-nmap">Détecter un scan de ports Nmap</h3>
+<pre><code># SYN scan : beaucoup de SYN sans ACK
+<p>tcp.flags.syn == 1 and tcp.flags.ack == 0</p>
+
+<h1>Scan rapide : même source vers de nombreux ports</h1>
+<p>ip.src == [IP_SUSPECTE]</code></pre>
+
+<h3 id="d-tecter-un-arp-spoofing">Détecter un ARP spoofing</h3>
+<pre><code># Plusieurs réponses ARP pour la même IP
+<p>arp.opcode == 2</p>
+
+<h1>Chercher des duplicates d'IP MAC</h1>
+<p>Statistics → Endpoints → Ethernet (chercher les anomalies)</code></pre>
+
+<h3 id="analyser-du-trafic-http-suspect">Analyser du trafic HTTP suspect</h3>
+<pre><code># Requêtes POST (exfiltration potentielle)
+<p>http.request.method == "POST"</p>
+
+<h1>User-agents inhabituels</h1>
+<p>http.user_agent contains "curl"</p>
+<p>http.user_agent contains "python"</p>
+
+<h1>Grandes réponses (exfiltration de données)</h1>
+<p>http.content_length &gt; 100000</code></pre>
+
+<h3 id="d-tecter-du-dns-tunneling">Détecter du DNS tunneling</h3>
+<pre><code># Requêtes DNS longues et nombreuses
+<p>dns and dns.qry.name.len &gt; 50</p>
+
+<h1>Réponses DNS volumineuses</h1>
+<p>dns.resp.len &gt; 200</code></pre>
+
+<h2 id="fonctionnalit-s-avanc-es">Fonctionnalités avancées</h2>
+
+<h3 id="suivre-un-flux-follow-stream-">Suivre un flux (Follow Stream)</h3>
+<p>Clic droit sur un paquet → Follow → TCP/HTTP/TLS Stream. Reconstitue la conversation complète, lisible en clair.</p>
+
+<h3 id="statistiques-utiles">Statistiques utiles</h3>
+<ul><li><strong>Statistics → Protocol Hierarchy</strong> : répartition du trafic par protocole</li><li><strong>Statistics → Conversations</strong> : tous les flux entre hôtes</li><li><strong>Statistics → Endpoints</strong> : tous les hôtes avec volumes</li><li><strong>Statistics → IO Graph</strong> : graphique du débit dans le temps</li></ul>
+
+<h3 id="d-chiffrer-tls-https">Déchiffrer TLS/HTTPS</h3>
+<p>Si vous avez la clé privée du serveur ou les secrets de session :</p>
+
+<pre><code>Edit → Preferences → Protocols → TLS
+<p>→ RSA keys list : ajouter IP, port, protocole, fichier de clé</code></pre>
+
+<p>Pour capturer les secrets de session avec Firefox/Chrome :</p>
+<pre><code class="language-bash"># Linux/Mac
+<p>export SSLKEYLOGFILE=~/ssl_keys.log</p>
+<p>firefox &amp;</p>
+
+<h1>Dans Wireshark : Edit → Preferences → TLS → (Pre)-Master-Secret log</code></pre></h1>
+
+<h2 id="wireshark-pour-le-ctf-et-le-forensic">Wireshark pour le CTF et le forensic</h2>
+
+<h3 id="analyser-un-fichier-pcap-de-ctf">Analyser un fichier pcap de CTF</h3>
+<pre><code>1. Statistics → Protocol Hierarchy (vue d'ensemble)
+<li>Statistics → Conversations (identifier les flux intéressants)</li>
+<li>Follow TCP/HTTP Stream sur les flux suspects</li>
+<li>File → Export Objects → HTTP (extraire les fichiers transférés)</li>
+<li>Chercher des chaînes : Edit → Find Packet → String</code></pre></li>
+
+<h3 id="extraire-des-fichiers-d-une-capture">Extraire des fichiers d'une capture</h3>
+<pre><code>File → Export Objects → HTTP/SMB/FTP</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Wireshark est un outil fondamental que tout professionnel réseau et sécurité doit maîtriser. Les filtres d'affichage sont la compétence clé — investissez du temps à les apprendre. Pratiquez sur des captures CTF disponibles sur PacketLife.net et Malware-Traffic-Analysis.net pour vous exercer sur du trafic réel.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#wireshark-guide-complet" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/lab-cybersecurite-maison.html" class="nav-prev">← Monter son lab cybersécurité à la maison : guide complet</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/metasploit-guide-pentesteur.html" class="nav-next">Metasploit Framework : le guide du pentesteur →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

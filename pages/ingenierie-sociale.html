@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Ingénierie sociale : manipuler l'humain — Temgus.CyberBlog</title>
 <meta name="description" content="Pretexting, baiting, vishing — exploitation de la psychologie humaine et défenses.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/ingenierie-sociale.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/ingenierie-sociale.html">
 <meta property="og:title" content="Ingénierie sociale : manipuler l'humain — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Ingénierie sociale : manipuler l'humain — Temgus.CyberBlog">
 <meta name="twitter:description" content="Pretexting, baiting, vishing — exploitation de la psychologie humaine et défenses.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,492 @@
   "headline": "Ingénierie sociale : manipuler l'humain",
   "description": "Pretexting, baiting, vishing — exploitation de la psychologie humaine et défenses.",
   "datePublished": "2025-04-07",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/ingenierie-sociale.html",
   "inLanguage": "fr",
   "keywords": "ingénierie sociale, manipulation",
-  "timeRequired": "PT7M"
+  "timeRequired": "PT7M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎭</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Ingénierie sociale : manipuler l'humain</h1>
-  <p style="color:#8892a4;max-width:500px">Pretexting, baiting, vishing — exploitation de la psychologie humaine et défenses.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ingenierie-sociale" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎭</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Ingénierie sociale : manipuler l'humain</div>
+      <div class="meta-details">
+        <span>📅 2025-04-07</span>
+        <span>⏱ 7 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-l-humain-est-le-maillon-faible">Pourquoi l'humain est le maillon faible</a></li>
+<li><a href="#les-techniques-d-ing-nierie-sociale">Les techniques d'ingénierie sociale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-pretexting">1. Pretexting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-baiting-app-tage-">2. Baiting (Appâtage)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-quid-pro-quo">3. Quid Pro Quo</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-tailgating-piggybacking">4. Tailgating / Piggybacking</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-vishing-voice-phishing-">5. Vishing (Voice Phishing)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#6-spear-phishing-cibl-">6. Spear Phishing ciblé</a></li>
+<li><a href="#les-indicateurs-d-une-attaque">Les indicateurs d'une attaque</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#au-t-l-phone">Au téléphone</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#par-email">Par email</a></li>
+<li><a href="#se-prot-ger-de-l-ing-nierie-sociale">Se protéger de l'ingénierie sociale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pour-les-individus">Pour les individus</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pour-les-entreprises">Pour les entreprises</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-r-gle-des-3-v-rifications">La règle des 3 vérifications</a></li>
+<li><a href="#cas-r-els-c-l-bres">Cas réels célèbres</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Ingénierie sociale : manipuler l'humain pour contourner la sécurité</h1>
+
+<p>L'ingénierie sociale est l'art de <strong>manipuler les personnes</strong> pour qu'elles divulguent des informations confidentielles ou effectuent des actions compromettantes. C'est souvent le vecteur d'attaque le plus efficace car il contourne toutes les défenses techniques.</p>
+
+<p>> "Il est plus facile de tromper un humain que de cracker un système bien sécurisé." — Kevin Mitnick, ancien hacker le plus recherché des USA</p>
+
+<h2 id="pourquoi-l-humain-est-le-maillon-faible">Pourquoi l'humain est le maillon faible</h2>
+
+<p>Les systèmes informatiques peuvent être patchés. Les humains, eux, ont des <strong>biais cognitifs</strong> permanents que les attaquants exploitent :</p>
+
+<p>| Biais | Exploitation |</p>
+<p>|-------|-------------|</p>
+<p>| <strong>Autorité</strong> | Se faire passer pour un supérieur, l'IT, la police |</p>
+<p>| <strong>Urgence</strong> | "Votre compte sera supprimé dans 2 heures" |</p>
+<p>| <strong>Réciprocité</strong> | Rendre service d'abord pour demander quelque chose ensuite |</p>
+<p>| <strong>Sympathie</strong> | Établir une relation de confiance avant d'attaquer |</p>
+<p>| <strong>Peur</strong> | "Vous avez un virus, appelez immédiatement le 0800..." |</p>
+<p>| <strong>Curiosité</strong> | "Vous avez gagné un prix, cliquez ici" |</p>
+
+<h2 id="les-techniques-d-ing-nierie-sociale">Les techniques d'ingénierie sociale</h2>
+
+<h3 id="1-pretexting">1. Pretexting</h3>
+
+<p>L'attaquant crée un <strong>scénario fictif crédible</strong> pour obtenir des informations.</p>
+
+<pre><code>Scénario classique - "L'audit informatique" :
+
+<p>Attaquant (par téléphone) :</p>
+<p>"Bonjour, je suis Thomas de la DSI centrale.</p>
+<p>Nous faisons un audit de sécurité suite à l'incident</p>
+<p>de la semaine dernière. J'ai besoin de vérifier</p>
+<p>votre compte. Pouvez-vous me confirmer votre</p>
+<p>identifiant et je vais réinitialiser votre accès ?"</p>
+
+<p>Victime :</p>
+<p>"Bien sûr, c'est j.martin@entreprise.com,</p>
+<p>mot de passe c'est Martin2024..."</code></pre>
+
+<p><strong>Éléments qui rendent le pretexting efficace :</strong></p>
+<ul><li>Connaissance préalable (prénom, service, incidents récents)</li><li>Vocabulaire technique crédible</li><li>Ton professionnel et assuré</li><li>Référence à des événements réels</li></ul>
+
+<h3 id="2-baiting-app-tage-">2. Baiting (Appâtage)</h3>
+
+<p>Laisser un objet piégé pour attiser la curiosité.</p>
+
+<pre><code>Technique de la clé USB :
+
+<li>L'attaquant laisse des clés USB dans le parking</li>
+<p>ou la salle de pause de l'entreprise cible</p>
+<p>↓</p>
+<li>Étiquette alléchante : "Salaires 2024"</li>
+<p>ou "Photos soirée de Noël"</p>
+<p>↓</p>
+<li>Un employé curieux la branche sur son PC</li>
+<p>↓</p>
+<li>Exécution automatique du malware</li>
+<p>↓</p>
+<li>L'attaquant a accès au réseau interne</code></pre></li>
+
+<p>> Une étude de l'Université d'Illinois a montré que <strong>48% des clés USB</strong> trouvées dans un parking étaient branchées par les personnes qui les trouvaient.</p>
+
+<h3 id="3-quid-pro-quo">3. Quid Pro Quo</h3>
+
+<p>Offrir quelque chose en échange d'informations.</p>
+
+<pre><code>"Support technique gratuit" :
+
+<p>Attaquant appelle aléatoirement des employés :</p>
+<p>"Bonjour, je suis du support IT. Nous avons détecté</p>
+<p>des problèmes sur votre poste. Je peux vous aider</p>
+<p>à les résoudre, j'ai juste besoin d'accéder à</p>
+<p>votre ordinateur à distance..."</p>
+
+<p>L'employé reçoit une "aide" → donne l'accès</p>
+<p>→ Le "technicien" installe un RAT (Remote Access Trojan)</code></pre>
+
+<h3 id="4-tailgating-piggybacking">4. Tailgating / Piggybacking</h3>
+
+<p>Accès physique non autorisé en suivant quelqu'un.</p>
+
+<pre><code>Attaquant avec les bras chargés de cartons :
+<p>"Excusez-moi, pouvez-vous me tenir la porte ?</p>
+<p>J'ai les mains prises..."</p>
+
+<p>Employé accommodant : tient la porte</p>
+<p>→ L'attaquant entre dans les locaux sécurisés</code></pre>
+
+<h3 id="5-vishing-voice-phishing-">5. Vishing (Voice Phishing)</h3>
+
+<pre><code>Arnaque au faux support Microsoft :
+
+<p>"Bonjour, nous avons détecté que votre ordinateur</p>
+<p>Windows envoie des erreurs à nos serveurs. Votre</p>
+<p>ordinateur est infecté. Je suis technicien Microsoft</p>
+<p>et je vais vous aider gratuitement..."</p>
+
+<p>→ Installation de TeamViewer ou AnyDesk</p>
+<p>→ Accès total à l'ordinateur</p>
+<p>→ Vol de données bancaires et installation de malware</p>
+<p>→ Parfois demande de paiement en cartes cadeaux</code></pre>
+
+<p><strong>Microsoft ne vous appellera JAMAIS de façon proactive.</strong></p>
+
+<h3 id="6-spear-phishing-cibl-">6. Spear Phishing ciblé</h3>
+
+<pre><code class="language-bash"># Phase de reconnaissance sur LinkedIn avant l'attaque
+
+<p>Informations collectées sur la cible :</p>
+<ul><li>Nom : Jean Martin</li><li>Poste : Comptable senior</li><li>Entreprise : ABC Corp</li><li>Manager : Sophie Leblanc (DAF)</li><li>Fournisseur habituel : Cabinet Audit XYZ</li><li>Dernier post LinkedIn : "Clôture des comptes en cours"</li></ul>
+
+<p>Email de spear phishing personnalisé :</p>
+<p>De : sophie.leblanc@abc-corp.eu  ← Domaine similaire (typosquat)</p>
+<p>Objet : Urgent - Virement fournisseur à valider</p>
+
+<p>"Jean,</p>
+<p>Suite à notre réunion de ce matin, peux-tu valider</p>
+<p>ce virement urgent pour le Cabinet Audit XYZ ?</p>
+<p>Ils ont changé leurs coordonnées bancaires.</p>
+<p>RIB en pièce jointe.</p>
+<p>Sophie"</code></pre>
+
+<p>C'est la <strong>fraude au président</strong> (BEC - Business Email Compromise), qui coûte des milliards chaque année.</p>
+
+<h2 id="les-indicateurs-d-une-attaque">Les indicateurs d'une attaque</h2>
+
+<h3 id="au-t-l-phone">Au téléphone</h3>
+
+<pre><code>⚠️ Signes d'alerte :
+<p>→ Appel non sollicité demandant des infos sensibles</p>
+<p>→ Urgence artificielle ("maintenant ou jamais")</p>
+<p>→ Demande de garder la conversation confidentielle</p>
+<p>→ Résistance quand vous proposez de rappeler officiellement</p>
+<p>→ Demande de paiement en cartes cadeaux (Apple, Amazon)</p>
+<p>→ Accent étranger sur des numéros prétendument français</code></pre>
+
+<h3 id="par-email">Par email</h3>
+
+<pre><code>⚠️ Signes d'alerte :
+<p>→ Expéditeur que vous ne reconnaissez pas</p>
+<p>→ Domaine légèrement différent (abc-corp.eu vs abc-corp.fr)</p>
+<p>→ Pièce jointe inattendue</p>
+<p>→ Demande de changer des coordonnées bancaires par email</p>
+<p>→ Lien qui ne correspond pas au texte affiché</p>
+<p>→ Demande de confidentialité ("ne pas en parler à votre manager")</code></pre>
+
+<h2 id="se-prot-ger-de-l-ing-nierie-sociale">Se protéger de l'ingénierie sociale</h2>
+
+<h3 id="pour-les-individus">Pour les individus</h3>
+
+<pre><code>1. VÉRIFIER l'identité de façon indépendante
+<p>→ Raccrochez et rappelez via le numéro officiel</p>
+<p>→ Ne rappelez jamais sur le numéro fourni par l'appelant</p>
+
+<li>RALENTIR face à l'urgence</li>
+<p>→ L'urgence est une manipulation : prenez le temps de vérifier</p>
+
+<li>NE JAMAIS donner d'identifiants par téléphone ou email</li>
+<p>→ Aucun service légitime ne vous demandera votre mot de passe</p>
+
+<li>SIGNALER les tentatives</li>
+<p>→ Informez votre responsable et l'équipe sécurité</p>
+
+<li>FAIRE CONFIANCE à votre instinct</li>
+<p>→ Si quelque chose semble bizarre, c'est probablement le cas</code></pre>
+
+<h3 id="pour-les-entreprises">Pour les entreprises</h3>
+
+<pre><code class="language-bash"># Programme de sensibilisation recommandé :
+
+<li>Formation régulière des employés</li>
+<p>→ Simulations de phishing</p>
+<p>→ Exercices de pretexting contrôlés</p>
+
+<li>Procédures claires</li>
+<p>→ Process de vérification pour les virements</p>
+<p>→ "Call-back procedure" pour toute demande sensible</p>
+
+<li>Culture de la sécurité</li>
+<p>→ Encourager le signalement sans punition</p>
+<p>→ "Si vous avez un doute, vérifiez"</p>
+
+<li>Tests de pénétration sociale</li>
+<p>→ Engager des experts pour tester les employés</p>
+<p>→ Identifier les maillons faibles</code></pre>
+
+<h3 id="la-r-gle-des-3-v-rifications">La règle des 3 vérifications</h3>
+
+<p>Avant d'effectuer une action sensible demandée par quelqu'un :</p>
+
+<pre><code>1. L'identité est-elle vérifiable indépendamment ?
+<li>La demande passe-t-elle par les canaux officiels ?</li>
+<li>Ai-je informé mon responsable ?</li>
+
+<p>Si NON à l'une de ces questions → REFUSER et SIGNALER</code></pre>
+
+<h2 id="cas-r-els-c-l-bres">Cas réels célèbres</h2>
+
+<p><strong>Twitter 2020</strong> — Des hackers ont appelé des employés Twitter en se faisant passer pour le support IT interne. Résultat : accès aux comptes de Barack Obama, Elon Musk et Apple pour une arnaque Bitcoin à 120 000$.</p>
+
+<p><strong>RSA Security 2011</strong> — Un email avec une pièce jointe Excel intitulée "Plan de recrutement 2011" a suffi à compromettre les tokens SecurID de millions d'utilisateurs dans le monde entier.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'ingénierie sociale démontre que la technologie seule ne suffit pas à sécuriser une organisation. <strong>La formation et la sensibilisation des humains</strong> sont aussi importantes que les firewalls et les antivirus. La règle d'or : <strong>vérifiez toujours, faites confiance prudemment</strong>.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ingenierie-sociale" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/mots-de-passe.html" class="nav-prev">← Mots de passe : créer et gérer des mots de passe forts</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api.html" class="nav-next">Sécurité des APIs REST : les bonnes pratiques →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

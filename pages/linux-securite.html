@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Linux pour la sécurité : commandes essentielles — Temgus.CyberBlog</title>
 <meta name="description" content="Commandes Linux indispensables pour surveiller, durcir et auditer vos systèmes.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/linux-securite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/linux-securite.html">
 <meta property="og:title" content="Linux pour la sécurité : commandes essentielles — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Linux pour la sécurité : commandes essentielles — Temgus.CyberBlog">
 <meta name="twitter:description" content="Commandes Linux indispensables pour surveiller, durcir et auditer vos systèmes.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,545 @@
   "headline": "Linux pour la sécurité : commandes essentielles",
   "description": "Commandes Linux indispensables pour surveiller, durcir et auditer vos systèmes.",
   "datePublished": "2025-04-11",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/linux-securite.html",
   "inLanguage": "fr",
   "keywords": "Linux, commandes, audit",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🐧</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Linux pour la sécurité : commandes essentielles</h1>
-  <p style="color:#8892a4;max-width:500px">Commandes Linux indispensables pour surveiller, durcir et auditer vos systèmes.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#linux-securite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🐧</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Linux pour la sécurité : commandes essentielles</div>
+      <div class="meta-details">
+        <span>📅 2025-04-11</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#navigation-et-exploration-du-syst-me">Navigation et exploration du système</a></li>
+<li><a href="#gestion-des-permissions">Gestion des permissions</a></li>
+<li><a href="#surveillance-des-processus-et-connexions">Surveillance des processus et connexions</a></li>
+<li><a href="#analyse-des-logs">Analyse des logs</a></li>
+<li><a href="#s-curisation-ssh">Sécurisation SSH</a></li>
+<li><a href="#gestion-du-pare-feu-avec-iptables-ufw">Gestion du pare-feu avec iptables/UFW</a></li>
+<li><a href="#audit-de-s-curit-syst-me">Audit de sécurité système</a></li>
+<li><a href="#gestion-des-services">Gestion des services</a></li>
+<li><a href="#recherche-de-fichiers-sensibles">Recherche de fichiers sensibles</a></li>
+<li><a href="#commandes-r-seau-essentielles">Commandes réseau essentielles</a></li>
+<li><a href="#alias-utiles-pour-la-s-curit-">Alias utiles pour la sécurité</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Linux pour la sécurité : commandes essentielles</h1>
+
+<p>Linux est le système d'exploitation de référence en cybersécurité. Que vous soyez défenseur (Blue Team) ou testeur (Red Team), maîtriser les commandes Linux est indispensable. Ce guide couvre les commandes les plus utiles pour la sécurité.</p>
+
+<h2 id="navigation-et-exploration-du-syst-me">Navigation et exploration du système</h2>
+
+<pre><code class="language-bash"># Informations sur le système
+<p>uname -a                    # Kernel, architecture, hostname</p>
+<p>cat /etc/os-release         # Distribution Linux</p>
+<p>hostname -I                 # Adresses IP de la machine</p>
+<p>uptime                      # Temps de fonctionnement et charge</p>
+
+<h1>Utilisateurs connectés et activité</h1>
+<p>who                         # Utilisateurs connectés</p>
+<p>w                           # Utilisateurs + ce qu'ils font</p>
+<p>last                        # Historique des connexions</p>
+<p>lastb                       # Tentatives de connexion échouées</p>
+<p>id                          # Votre UID, GID et groupes</p>
+<p>sudo -l                     # Ce que vous pouvez faire avec sudo</code></pre>
+
+<h2 id="gestion-des-permissions">Gestion des permissions</h2>
+
+<pre><code class="language-bash"># Comprendre les permissions Linux
+<p>ls -la /etc/passwd</p>
+<h1>-rw-r--r-- 1 root root 2847 jan 1 10:00 /etc/passwd</h1>
+<h1> ↑↑↑↑↑↑↑↑↑</h1>
+<h1> └─ rwx : propriétaire (root) = lecture+écriture</h1>
+<h1>     └─ r-- : groupe = lecture seulement</h1>
+<h1>         └─ r-- : autres = lecture seulement</h1>
+
+<h1>Modifier les permissions</h1>
+<p>chmod 700 script.sh         # Propriétaire seul peut tout faire</p>
+<p>chmod 644 fichier.txt       # Propriétaire écrit, tous lisent</p>
+<p>chmod +x script.sh          # Rendre exécutable</p>
+<p>chown user:group fichier    # Changer propriétaire</p>
+
+<h1>Trouver les fichiers SUID (dangereux si mal configurés)</h1>
+<p>find / -perm -4000 -type f 2&gt;/dev/null</p>
+<h1>Les binaires SUID s'exécutent avec les droits du propriétaire (souvent root)</h1>
+<h1>Un SUID mal configuré = escalade de privilèges potentielle</h1>
+
+<h1>Trouver les fichiers world-writable (tout le monde peut écrire)</h1>
+<p>find / -perm -0002 -type f 2&gt;/dev/null</p>
+<p>find / -perm -0002 -type d 2&gt;/dev/null</code></pre>
+
+<h2 id="surveillance-des-processus-et-connexions">Surveillance des processus et connexions</h2>
+
+<pre><code class="language-bash"># Processus en cours
+<p>ps aux                      # Tous les processus</p>
+<p>ps aux | grep nginx         # Filtrer par nom</p>
+<p>top                         # Processus en temps réel</p>
+<p>htop                        # Version améliorée de top</p>
+
+<h1>Connexions réseau actives</h1>
+<p>netstat -tuln               # Ports ouverts en écoute</p>
+<p>netstat -antp               # Toutes les connexions avec PID</p>
+<p>ss -tuln                    # Alternative moderne à netstat</p>
+<p>ss -s                       # Statistiques réseau</p>
+
+<h1>Identifier quel processus utilise un port</h1>
+<p>lsof -i :80                 # Qui écoute sur le port 80</p>
+<p>lsof -i :443</p>
+<p>fuser 80/tcp                # Alternative</p>
+
+<h1>Connexions suspectes</h1>
+<p>netstat -antp | grep ESTABLISHED | grep -v "127.0.0.1"</p>
+<h1>Montre toutes les connexions externes établies</code></pre></h1>
+
+<h2 id="analyse-des-logs">Analyse des logs</h2>
+
+<pre><code class="language-bash"># Logs système principaux
+<p>tail -f /var/log/syslog          # Logs système en temps réel</p>
+<p>tail -f /var/log/auth.log        # Authentifications (Debian/Ubuntu)</p>
+<p>tail -f /var/log/secure          # Authentifications (CentOS/RHEL)</p>
+<p>tail -f /var/log/apache2/access.log  # Logs Apache</p>
+<p>tail -f /var/log/nginx/access.log    # Logs Nginx</p>
+
+<h1>Rechercher dans les logs</h1>
+<p>grep "Failed password" /var/log/auth.log</p>
+<p>grep "FAILED LOGIN" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -rn</p>
+<h1>Affiche les IPs avec le plus de tentatives échouées</h1>
+
+<h1>Détecter les tentatives de brute force SSH</h1>
+<p>grep "Invalid user" /var/log/auth.log | awk '{print $8}' | sort | uniq -c | sort -rn | head -10</p>
+
+<h1>Surveiller les logs en temps réel avec filtre</h1>
+<p>tail -f /var/log/auth.log | grep --line-buffered "Failed\|Invalid\|error"</p>
+
+<h1>Journald (systemd)</h1>
+<p>journalctl -u ssh --since "1 hour ago"</p>
+<p>journalctl -p err --since today</p>
+<p>journalctl -f                    # Suivi en temps réel</code></pre>
+
+<h2 id="s-curisation-ssh">Sécurisation SSH</h2>
+
+<pre><code class="language-bash"># Configuration SSH sécurisée /etc/ssh/sshd_config
+<p>Port 2222                        # Changer le port par défaut</p>
+<p>PermitRootLogin no               # Interdire connexion root</p>
+<p>PasswordAuthentication no        # Forcer les clés SSH uniquement</p>
+<p>PubkeyAuthentication yes</p>
+<p>MaxAuthTries 3                   # Max 3 tentatives</p>
+<p>ClientAliveInterval 300          # Timeout d'inactivité</p>
+<p>AllowUsers alice bob             # Whitelist d'utilisateurs</p>
+<p>X11Forwarding no</p>
+<p>AllowTcpForwarding no</p>
+
+<h1>Générer une paire de clés SSH</h1>
+<p>ssh-keygen -t ed25519 -C "votre@email.com"</p>
+<h1>Crée ~/.ssh/id_ed25519 (privée) et ~/.ssh/id_ed25519.pub (publique)</h1>
+
+<h1>Copier la clé publique sur le serveur</h1>
+<p>ssh-copy-id -i ~/.ssh/id_ed25519.pub user@serveur</p>
+
+<h1>Connexion avec clé</h1>
+<p>ssh -i ~/.ssh/id_ed25519 user@serveur</p>
+
+<h1>Redémarrer SSH après modification</h1>
+<p>sudo systemctl restart sshd</p>
+<p>sudo systemctl status sshd</code></pre>
+
+<h2 id="gestion-du-pare-feu-avec-iptables-ufw">Gestion du pare-feu avec iptables/UFW</h2>
+
+<pre><code class="language-bash"># UFW (Uncomplicated Firewall) - Plus simple
+<p>sudo ufw enable</p>
+<p>sudo ufw default deny incoming   # Bloquer tout par défaut</p>
+<p>sudo ufw default allow outgoing  # Autoriser les sorties</p>
+<p>sudo ufw allow 22/tcp            # SSH</p>
+<p>sudo ufw allow 80/tcp            # HTTP</p>
+<p>sudo ufw allow 443/tcp           # HTTPS</p>
+<p>sudo ufw allow from 192.168.1.0/24 to any port 3306  # MySQL depuis LAN seulement</p>
+<p>sudo ufw status verbose</p>
+
+<h1>iptables - Plus puissant</h1>
+<h1>Voir les règles actuelles</h1>
+<p>sudo iptables -L -n -v --line-numbers</p>
+
+<h1>Politique par défaut : tout bloquer</h1>
+<p>sudo iptables -P INPUT DROP</p>
+<p>sudo iptables -P FORWARD DROP</p>
+<p>sudo iptables -P OUTPUT ACCEPT</p>
+
+<h1>Autoriser loopback et connexions établies</h1>
+<p>sudo iptables -A INPUT -i lo -j ACCEPT</p>
+<p>sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</p>
+
+<h1>Sauvegarder les règles</h1>
+<p>sudo iptables-save &gt; /etc/iptables/rules.v4</code></pre>
+
+<h2 id="audit-de-s-curit-syst-me">Audit de sécurité système</h2>
+
+<pre><code class="language-bash"># Lynis - Audit de sécurité complet
+<p>sudo apt install lynis</p>
+<p>sudo lynis audit system</p>
+<h1>Génère un rapport avec score et recommandations</h1>
+
+<h1>Rkhunter - Détection de rootkits</h1>
+<p>sudo apt install rkhunter</p>
+<p>sudo rkhunter --update</p>
+<p>sudo rkhunter --check</p>
+<h1>Vérifie les binaires système et cherche des rootkits</h1>
+
+<h1>Chkrootkit</h1>
+<p>sudo apt install chkrootkit</p>
+<p>sudo chkrootkit</p>
+
+<h1>Vérifier l'intégrité des fichiers système</h1>
+<p>sudo debsums -c              # Debian/Ubuntu</p>
+<p>sudo rpm -Va                 # CentOS/RHEL</p>
+
+<h1>Trouver les fichiers modifiés récemment</h1>
+<p>find /etc -mtime -7 -type f 2&gt;/dev/null   # Modifiés dans les 7 derniers jours</p>
+<p>find /bin /sbin /usr/bin -newer /bin/ls   # Binaires modifiés après ls</code></pre>
+
+<h2 id="gestion-des-services">Gestion des services</h2>
+
+<pre><code class="language-bash"># Voir tous les services actifs
+<p>systemctl list-units --type=service --state=running</p>
+
+<h1>Désactiver les services inutiles</h1>
+<p>sudo systemctl disable bluetooth</p>
+<p>sudo systemctl disable cups          # Imprimantes (si non nécessaire)</p>
+<p>sudo systemctl disable avahi-daemon  # Découverte réseau</p>
+
+<h1>Ports ouverts vs services actifs</h1>
+<p>ss -tuln | grep LISTEN</p>
+<h1>Comparez avec les services attendus</h1>
+
+<h1>Trouver les programmes qui démarrent automatiquement</h1>
+<p>ls /etc/init.d/</p>
+<p>ls /etc/cron.d/</p>
+<p>crontab -l                   # Cron de l'utilisateur courant</p>
+<p>sudo crontab -l              # Cron de root</code></pre>
+
+<h2 id="recherche-de-fichiers-sensibles">Recherche de fichiers sensibles</h2>
+
+<pre><code class="language-bash"># Fichiers contenant des mots de passe
+<p>grep -r "password" /etc/ 2&gt;/dev/null</p>
+<p>grep -r "passwd" /var/www/ 2&gt;/dev/null</p>
+<p>find / -name "*.env" 2&gt;/dev/null</p>
+<p>find / -name "config.php" 2&gt;/dev/null</p>
+<p>find / -name ".htpasswd" 2&gt;/dev/null</p>
+
+<h1>Historique des commandes</h1>
+<p>cat ~/.bash_history</p>
+<p>cat ~/.zsh_history</p>
+<h1>Chercher des mots de passe saisis en ligne de commande</h1>
+<p>grep -i "pass\|secret\|key\|token" ~/.bash_history</p>
+
+<h1>Fichiers de configuration importants</h1>
+<p>cat /etc/passwd              # Utilisateurs système</p>
+<p>cat /etc/shadow              # Hashes mots de passe (root seulement)</p>
+<p>cat /etc/sudoers             # Configuration sudo</p>
+<p>ls -la /home/*/              # Contenu des home directories</code></pre>
+
+<h2 id="commandes-r-seau-essentielles">Commandes réseau essentielles</h2>
+
+<pre><code class="language-bash"># Diagnostic réseau
+<p>ping -c 4 8.8.8.8            # Test connectivité</p>
+<p>traceroute google.com        # Tracer la route</p>
+<p>nslookup google.com          # Résolution DNS</p>
+<p>dig google.com A             # Requête DNS détaillée</p>
+<p>dig -x 8.8.8.8               # DNS inverse</p>
+
+<h1>Capture de paquets</h1>
+<p>sudo tcpdump -i eth0 -n      # Capturer tout le trafic</p>
+<p>sudo tcpdump -i eth0 port 80 # Seulement le trafic HTTP</p>
+<p>sudo tcpdump -i eth0 -w capture.pcap  # Sauvegarder dans un fichier</p>
+
+<h1>Scan réseau (sur votre propre réseau)</h1>
+<p>nmap -sn 192.168.1.0/24      # Découvrir les hôtes</p>
+<p>nmap -sV 192.168.1.1         # Services sur un hôte</p>
+<p>nmap -sC -sV -O 192.168.1.1  # Scan complet</p>
+
+<h1>Transfert de fichiers</h1>
+<p>scp fichier.txt user@serveur:/tmp/</p>
+<p>rsync -avz /local/ user@serveur:/remote/</p>
+<p>wget https://example.com/fichier.zip</p>
+<p>curl -O https://example.com/fichier.zip</code></pre>
+
+<h2 id="alias-utiles-pour-la-s-curit-">Alias utiles pour la sécurité</h2>
+
+<pre><code class="language-bash"># Ajoutez ces alias dans ~/.bashrc ou ~/.zshrc
+
+<h1>Surveillance</h1>
+<p>alias ports='netstat -tuln'</p>
+<p>alias connexions='netstat -antp | grep ESTABLISHED'</p>
+<p>alias logs='tail -f /var/log/syslog'</p>
+<p>alias authlog='tail -f /var/log/auth.log'</p>
+
+<h1>Sécurité</h1>
+<p>alias perms='ls -la'</p>
+<p>alias suid='find / -perm -4000 -type f 2&gt;/dev/null'</p>
+<p>alias world-writable='find / -perm -0002 -type f 2&gt;/dev/null'</p>
+
+<h1>Réseau</h1>
+<p>alias myip='curl -s ifconfig.me'</p>
+<p>alias localip='ip addr show | grep "inet " | grep -v 127.0.0.1'</p>
+<p>alias scanlocal='nmap -sn 192.168.1.0/24'</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Maîtriser ces commandes Linux vous donne une <strong>visibilité complète</strong> sur votre système. En cybersécurité, la connaissance du système sur lequel vous travaillez est fondamentale — que vous défendiez vos propres serveurs ou que vous testiez ceux d'un client. Pratiquez sur une machine virtuelle pour intégrer ces commandes naturellement.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#linux-securite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api.html" class="nav-prev">← Sécurité des APIs REST : les bonnes pratiques</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/osint.html" class="nav-next">OSINT : trouver des informations en source ouverte →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Firewall et sécurité réseau : protection contre les attaques — Temgus.CyberBlog</title>
 <meta name="description" content="Fonctionnement des pare-feu, règles de filtrage et sécurisation de l'infrastructure réseau.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/firewall-securite-reseau.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/firewall-securite-reseau.html">
 <meta property="og:title" content="Firewall et sécurité réseau : protection contre les attaques — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Firewall et sécurité réseau : protection contre les attaques — Temgus.CyberBlog">
 <meta name="twitter:description" content="Fonctionnement des pare-feu, règles de filtrage et sécurisation de l'infrastructure réseau.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,441 @@
   "headline": "Firewall et sécurité réseau : protection contre les attaques",
   "description": "Fonctionnement des pare-feu, règles de filtrage et sécurisation de l'infrastructure réseau.",
   "datePublished": "2025-03-10",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/firewall-securite-reseau.html",
   "inLanguage": "fr",
   "keywords": "firewall, réseau, iptables",
-  "timeRequired": "PT6M"
+  "timeRequired": "PT6M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🧱</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Firewall et sécurité réseau : protection contre les attaques</h1>
-  <p style="color:#8892a4;max-width:500px">Fonctionnement des pare-feu, règles de filtrage et sécurisation de l'infrastructure réseau.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#firewall-securite-reseau" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🧱</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Firewall et sécurité réseau : protection contre les attaques</div>
+      <div class="meta-details">
+        <span>📅 2025-03-10</span>
+        <span>⏱ 6 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-un-firewall-">Qu'est-ce qu'un firewall ?</a></li>
+<li><a href="#les-types-de-firewalls">Les types de firewalls</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-firewall-filtrage-de-paquets-packet-filtering-">1. Firewall à filtrage de paquets (Packet Filtering)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-firewall-inspection-d-tat-stateful-inspection-">2. Firewall à inspection d'état (Stateful Inspection)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-firewall-applicatif-waf-">3. Firewall applicatif (WAF)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-next-generation-firewall-ngfw-">4. Next-Generation Firewall (NGFW)</a></li>
+<li><a href="#les-zones-de-s-curit-r-seau">Les zones de sécurité réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-dmz-zone-d-militaris-e-">La DMZ (Zone Démilitarisée)</a></li>
+<li><a href="#r-gles-de-firewall-les-bonnes-pratiques">Règles de firewall : les bonnes pratiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#principe-du-moindre-privil-ge">Principe du moindre privilège</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-erreurs-courantes-viter">Les erreurs courantes à éviter</a></li>
+<li><a href="#d-tection-et-pr-vention-d-intrusion-ids-ips-">Détection et prévention d'intrusion (IDS/IPS)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#outils-populaires">Outils populaires</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#exemple-avec-fail2ban">Exemple avec fail2ban</a></li>
+<li><a href="#les-attaques-que-le-firewall-ne-peut-pas-bloquer">Les attaques que le firewall ne peut pas bloquer</a></li>
+<li><a href="#tester-votre-firewall">Tester votre firewall</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Firewall et sécurité réseau : protection contre les attaques</h1>
+
+<p>Un firewall (pare-feu) est la première ligne de défense de votre réseau. Il filtre le trafic entrant et sortant selon des règles définies. Dans cet article, nous allons comprendre comment il fonctionne et comment bien configurer votre sécurité réseau.</p>
+
+<h2 id="qu-est-ce-qu-un-firewall-">Qu'est-ce qu'un firewall ?</h2>
+
+<p>Un firewall est un système de sécurité qui <strong>contrôle le trafic réseau</strong> entre deux zones de confiance différente — typiquement entre votre réseau local (LAN) et Internet (WAN).</p>
+
+<p>Il analyse chaque paquet de données et décide de l'<strong>autoriser</strong> ou de le <strong>bloquer</strong> selon un ensemble de règles prédéfinies.</p>
+
+<p>> Un firewall bien configuré peut bloquer la majorité des attaques automatisées avant même qu'elles n'atteignent vos systèmes.</p>
+
+<h2 id="les-types-de-firewalls">Les types de firewalls</h2>
+
+<h3 id="1-firewall-filtrage-de-paquets-packet-filtering-">1. Firewall à filtrage de paquets (Packet Filtering)</h3>
+
+<p>Le type le plus basique. Il examine chaque paquet individuellement selon :</p>
+<ul><li>L'adresse IP source et destination</li><li>Le port source et destination</li><li>Le protocole (TCP, UDP, ICMP)</li></ul>
+
+<pre><code>Règle : BLOQUER tout trafic entrant sur le port 23 (Telnet)
+<p>Règle : AUTORISER le trafic entrant sur le port 443 (HTTPS)</p>
+<p>Règle : AUTORISER le trafic sortant depuis 192.168.1.0/24</code></pre>
+
+<p><strong>Avantage</strong> : rapide et peu gourmand en ressources.</p>
+<p><strong>Inconvénient</strong> : ne comprend pas le contexte des connexions.</p>
+
+<h3 id="2-firewall-inspection-d-tat-stateful-inspection-">2. Firewall à inspection d'état (Stateful Inspection)</h3>
+
+<p>Plus intelligent, il suit l'<strong>état des connexions</strong> actives. Il sait si un paquet entrant est une réponse légitime à une requête sortante.</p>
+
+<pre><code>Client → Serveur : SYN (connexion initiée)
+<p>Serveur → Client : SYN-ACK (réponse autorisée car connexion connue)</p>
+<p>Client → Serveur : ACK (connexion établie)</code></pre>
+
+<h3 id="3-firewall-applicatif-waf-">3. Firewall applicatif (WAF)</h3>
+
+<p>Fonctionne au niveau de la <strong>couche application</strong> (couche 7 du modèle OSI). Il comprend les protocoles comme HTTP, FTP, DNS et peut détecter des attaques spécifiques comme les injections SQL ou les attaques XSS.</p>
+
+<h3 id="4-next-generation-firewall-ngfw-">4. Next-Generation Firewall (NGFW)</h3>
+
+<p>Combine toutes les fonctionnalités précédentes avec :</p>
+<ul><li>Inspection approfondie des paquets (DPI)</li><li>Détection d'intrusion (IDS/IPS)</li><li>Contrôle des applications</li><li>Filtrage par réputation d'IP</li></ul>
+
+<h2 id="les-zones-de-s-curit-r-seau">Les zones de sécurité réseau</h2>
+
+<p>Une bonne architecture réseau divise l'infrastructure en <strong>zones de confiance</strong> :</p>
+
+<pre><code>Internet (non fiable)
+<p>|</p>
+<p>[Firewall]</p>
+<p>|</p>
+<p>DMZ (zone démilitarisée)</p>
+<p>├── Serveur web</p>
+<p>├── Serveur mail</p>
+<p>└── Serveur DNS</p>
+<p>|</p>
+<p>[Firewall interne]</p>
+<p>|</p>
+<p>LAN (réseau interne)</p>
+<p>├── Postes de travail</p>
+<p>├── Serveurs internes</p>
+<p>└── Imprimantes</code></pre>
+
+<h3 id="la-dmz-zone-d-militaris-e-">La DMZ (Zone Démilitarisée)</h3>
+
+<p>La DMZ est une zone intermédiaire entre Internet et votre réseau interne. Les serveurs accessibles depuis Internet (web, mail) sont placés en DMZ. Ainsi, même si un serveur est compromis, l'attaquant ne peut pas accéder directement au réseau interne.</p>
+
+<h2 id="r-gles-de-firewall-les-bonnes-pratiques">Règles de firewall : les bonnes pratiques</h2>
+
+<h3 id="principe-du-moindre-privil-ge">Principe du moindre privilège</h3>
+
+<p><strong>Bloquez tout par défaut, n'autorisez que ce qui est nécessaire.</strong></p>
+
+<pre><code class="language-bash"># Exemple de règles iptables Linux (ordre important !)
+
+<h1>1. Politique par défaut : tout bloquer</h1>
+<p>iptables -P INPUT DROP</p>
+<p>iptables -P FORWARD DROP</p>
+<p>iptables -P OUTPUT ACCEPT</p>
+
+<h1>2. Autoriser les connexions établies</h1>
+<p>iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</p>
+
+<h1>3. Autoriser SSH depuis un IP spécifique uniquement</h1>
+<p>iptables -A INPUT -p tcp --dport 22 -s 192.168.1.100 -j ACCEPT</p>
+
+<h1>4. Autoriser HTTP et HTTPS</h1>
+<p>iptables -A INPUT -p tcp --dport 80 -j ACCEPT</p>
+<p>iptables -A INPUT -p tcp --dport 443 -j ACCEPT</p>
+
+<h1>5. Autoriser le loopback</h1>
+<p>iptables -A INPUT -i lo -j ACCEPT</code></pre>
+
+<h3 id="les-erreurs-courantes-viter">Les erreurs courantes à éviter</h3>
+
+<ul><li><strong>Règle "autoriser tout"</strong> en bas de liste sans jamais bloquer</li><li><strong>SSH ouvert sur tout Internet</strong> sans restriction d'IP</li><li><strong>Pas de logs</strong> — vous ne saurez jamais ce qui a été bloqué</li><li><strong>Règles trop permissives</strong> pour "simplifier" la configuration</li></ul>
+
+<h2 id="d-tection-et-pr-vention-d-intrusion-ids-ips-">Détection et prévention d'intrusion (IDS/IPS)</h2>
+
+<p>Un <strong>IDS (Intrusion Detection System)</strong> surveille le trafic et <strong>alerte</strong> en cas d'activité suspecte.</p>
+
+<p>Un <strong>IPS (Intrusion Prevention System)</strong> va plus loin : il <strong>bloque automatiquement</strong> les attaques détectées.</p>
+
+<h3 id="outils-populaires">Outils populaires</h3>
+
+<p>| Outil | Type | Usage |</p>
+<p>|-------|------|-------|</p>
+<p>| Snort | IDS/IPS | Détection en temps réel |</p>
+<p>| Suricata | IDS/IPS | Haute performance |</p>
+<p>| pfSense | Firewall | Open source complet |</p>
+<p>| fail2ban | IPS | Bloque les brute force |</p>
+
+<h3 id="exemple-avec-fail2ban">Exemple avec fail2ban</h3>
+
+<pre><code class="language-bash"># fail2ban surveille les logs et bloque les IPs malveillantes
+<h1>Configuration /etc/fail2ban/jail.conf</h1>
+
+<p>[ssh]</p>
+<p>enabled  = true</p>
+<p>port     = ssh</p>
+<p>filter   = sshd</p>
+<p>logpath  = /var/log/auth.log</p>
+<p>maxretry = 3        # 3 tentatives échouées</p>
+<p>bantime  = 3600     # Bannissement 1 heure</code></pre>
+
+<h2 id="les-attaques-que-le-firewall-ne-peut-pas-bloquer">Les attaques que le firewall ne peut pas bloquer</h2>
+
+<p>Un firewall n'est pas une solution miracle. Il ne protège pas contre :</p>
+
+<ul><li><strong>Le phishing</strong> — l'utilisateur initie la connexion lui-même</li><li><strong>Les malwares dans les pièces jointes</strong> — trafic légitime (email)</li><li><strong>Les attaques internes</strong> — un employé malveillant sur le LAN</li><li><strong>Les tunnels chiffrés</strong> — HTTPS peut cacher du contenu malveillant</li></ul>
+
+<p>C'est pourquoi un firewall doit toujours faire partie d'une <strong>stratégie de défense en profondeur</strong> combinant antivirus, formation des utilisateurs, et mises à jour régulières.</p>
+
+<h2 id="tester-votre-firewall">Tester votre firewall</h2>
+
+<pre><code class="language-bash"># Scanner les ports ouverts depuis l'extérieur avec nmap
+<p>nmap -sV -p 1-65535 VOTRE_IP_PUBLIQUE</p>
+
+<h1>Vérifier les règles actives sur Linux</h1>
+<p>iptables -L -n -v</p>
+
+<h1>Tester la connectivité sur un port spécifique</h1>
+<p>nc -zv 192.168.1.1 443</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Un firewall bien configuré est indispensable mais insuffisant seul. Retenez ces principes fondamentaux :</p>
+
+<li><strong>Bloquez tout par défaut</strong>, n'autorisez que le nécessaire</li>
+<li><strong>Segmentez votre réseau</strong> en zones de confiance</li>
+<li><strong>Analysez vos logs</strong> régulièrement</li>
+<li><strong>Testez vos règles</strong> périodiquement</li>
+<li><strong>Combinez</strong> firewall, IDS/IPS et autres outils de sécurité</li></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#firewall-securite-reseau" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/comprendre-reseaux.html" class="nav-prev">← Comprendre les réseaux : comment les ordinateurs communiquent</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/malwares-virus.html" class="nav-next">Malwares et virus : comprendre les menaces →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

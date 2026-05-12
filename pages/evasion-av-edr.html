@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Évasion d'antivirus et EDR : techniques et contre-mesures — Temgus.CyberBlog</title>
 <meta name="description" content="Détection par signatures, heuristiques, sandbox, obfuscation, AMSI et stratégies défensives contre l'évasion.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/evasion-av-edr.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/evasion-av-edr.html">
 <meta property="og:title" content="Évasion d'antivirus et EDR : techniques et contre-mesures — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Évasion d'antivirus et EDR : techniques et contre-mesures — Temgus.CyberBlog">
 <meta name="twitter:description" content="Détection par signatures, heuristiques, sandbox, obfuscation, AMSI et stratégies défensives contre l'évasion.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,509 @@
   "headline": "Évasion d'antivirus et EDR : techniques et contre-mesures",
   "description": "Détection par signatures, heuristiques, sandbox, obfuscation, AMSI et stratégies défensives contre l'évasion.",
   "datePublished": "2025-08-09",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/evasion-av-edr.html",
   "inLanguage": "fr",
   "keywords": "évasion, antivirus, EDR, AMSI, obfuscation",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">👻</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Évasion d'antivirus et EDR : techniques et contre-mesures</h1>
-  <p style="color:#8892a4;max-width:500px">Détection par signatures, heuristiques, sandbox, obfuscation, AMSI et stratégies défensives contre l'évasion.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#evasion-av-edr" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">👻</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Évasion d'antivirus et EDR : techniques et contre-mesures</div>
+      <div class="meta-details">
+        <span>📅 2025-08-09</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#comment-fonctionnent-les-antivirus-modernes">Comment fonctionnent les antivirus modernes</a></li>
+<li><a href="#techniques-d-vasion-statique">Techniques d'évasion statique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#obfuscation-et-encodage">Obfuscation et encodage</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#techniques-de-d-tection-sandbox">Techniques de détection sandbox</a></li>
+<li><a href="#techniques-d-vasion-en-m-moire-fileless-">Techniques d'évasion en mémoire (Fileless)</a></li>
+<li><a href="#amsi-antimalware-scan-interface">AMSI — Antimalware Scan Interface</a></li>
+<li><a href="#strat-gies-de-d-tection-et-d-fense">Stratégies de détection et défense</a></li>
+<li><a href="#outils-de-test-red-team-">Outils de test (Red Team)</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Évasion d'antivirus et EDR : techniques et contre-mesures</h1>
+
+<p>Comprendre comment les attaquants contournent les solutions de sécurité est essentiel pour améliorer ses défenses. Cet article explore les techniques d'évasion d'antivirus et d'EDR d'un point de vue éducatif et défensif.</p>
+
+<h2 id="comment-fonctionnent-les-antivirus-modernes">Comment fonctionnent les antivirus modernes</h2>
+
+<pre><code>Méthodes de détection :
+
+<li>Signatures (détection basée sur les patterns) :</li>
+<p>→ Base de données de patterns malveillants connus</p>
+<p>→ Rapide mais inefficace contre les nouveaux malwares</p>
+<p>→ Bypass trivial : modifier quelques bytes</p>
+
+<li>Heuristiques :</li>
+<p>→ Analyse comportementale statique</p>
+<p>→ "Ce code ressemble à un shellcode"</p>
+<p>→ Bypass : obfuscation, encodage</p>
+
+<li>Sandbox dynamique :</li>
+<p>→ Exécuter le programme dans un environnement isolé</p>
+<p>→ Observer le comportement réel</p>
+<p>→ Bypass : détecter la sandbox, délai d'exécution</p>
+
+<li>Machine Learning :</li>
+<p>→ Modèles entraînés sur des millions de samples</p>
+<p>→ Difficile à bypasser mais pas impossible</p>
+<p>→ Bypass : adversarial examples, style de code légitime</p>
+
+<p>EDR (Endpoint Detection &amp; Response) :</p>
+<p>→ Surveillance continue des processus, réseau, registre</p>
+<p>→ Corrélation d'événements (kill chain)</p>
+<p>→ Réponse automatique (isolation, kill process)</p>
+<p>→ Plus difficile à bypasser que l'AV classique</code></pre>
+
+<h2 id="techniques-d-vasion-statique">Techniques d'évasion statique</h2>
+
+<h3 id="obfuscation-et-encodage">Obfuscation et encodage</h3>
+
+<pre><code class="language-python"># Encoder un payload pour éviter la détection par signatures
+
+<p>import base64</p>
+<p>import random</p>
+
+<p>def xor_encode(data: bytes, key: int = None) -&gt; tuple:</p>
+<p>"""XOR encoding simple"""</p>
+<p>if key is None:</p>
+<p>key = random.randint(1, 255)</p>
+<p>encoded = bytes(b ^ key for b in data)</p>
+<p>return encoded, key</p>
+
+<p>def encode_base64(data: bytes) -&gt; str:</p>
+<p>"""Encodage Base64"""</p>
+<p>return base64.b64encode(data).decode()</p>
+
+<h1>Exemple : encoder une chaîne suspecte</h1>
+<p>payload = b"cmd.exe /c whoami"</p>
+
+<h1>XOR avec clé aléatoire</h1>
+<p>encoded, key = xor_encode(payload)</p>
+<p>print(f"XOR encodé (clé {key}): {encoded.hex()}")</p>
+
+<h1>Décodage au runtime</h1>
+<p>decoded = bytes(b ^ key for b in encoded)</p>
+<p>print(f"Décodé: {decoded.decode()}")</p>
+
+<h1>Chaîner plusieurs encodages</h1>
+<p>double_encoded = encode_base64(encoded)</p>
+<p>print(f"Double encodé: {double_encoded}")</p>
+
+<h1>Les AV modernes détectent souvent ces patterns simples</h1>
+<h1>Les techniques avancées incluent : chiffrement AES, compression, polymorphisme</code></pre></h1>
+
+<h3 id="techniques-de-d-tection-sandbox">Techniques de détection sandbox</h3>
+
+<pre><code class="language-python"># Les malwares modernes vérifient s'ils tournent dans une sandbox
+<h1>Pour éviter d'être analysés</h1>
+
+<p>import os</p>
+<p>import time</p>
+<p>import ctypes</p>
+
+<p>def check_sandbox_indicators():</p>
+<p>"""Détecter les indicateurs de sandbox/VM - ÉDUCATIF UNIQUEMENT"""</p>
+<p>indicators = []</p>
+
+<p># 1. Vérifier les processus d'analyse</p>
+<p>suspicious_processes = [</p>
+<p>'wireshark', 'procmon', 'x64dbg', 'ollydbg',</p>
+<p>'ida', 'ghidra', 'processhacker', 'tcpview'</p>
+<p>]</p>
+<p># [vérification des processus]</p>
+
+<p># 2. Vérifier le nombre de processus (sandbox = peu de processus)</p>
+<p># Un vrai système a généralement 50+ processus</p>
+<p># Une sandbox en a souvent moins de 30</p>
+
+<p># 3. Délai d'exécution (sleep bombing)</p>
+<p>start = time.time()</p>
+<p>time.sleep(30)  # Les sandbox ont un timeout de 30-60s</p>
+<p>elapsed = time.time() - start</p>
+<p>if elapsed &lt; 25:  # Si le sleep a été accéléré = sandbox !</p>
+<p>indicators.append("Sleep acceleration detected")</p>
+
+<p># 4. Vérifier les ressources système</p>
+<p># RAM &lt; 2GB = souvent une sandbox</p>
+<p># CPU &lt; 2 cores = souvent une sandbox</p>
+
+<p>return indicators</p>
+
+<h1>Contre-mesures pour les défenseurs :</h1>
+<h1>→ Configurer les sandbox avec des ressources réalistes</h1>
+<h1>→ Simuler une activité utilisateur (mouvements souris, frappes clavier)</h1>
+<h1>→ Augmenter le timeout des sandbox</h1>
+<h1>→ Utiliser des snapshots de VMs "vivantes" avec historique réel</code></pre></h1>
+
+<h2 id="techniques-d-vasion-en-m-moire-fileless-">Techniques d'évasion en mémoire (Fileless)</h2>
+
+<pre><code class="language-python"># Les malwares fileless ne s'écrivent pas sur le disque
+<h1>→ Moins de traces forensiques</h1>
+<h1>→ Les AV basés sur les fichiers ne détectent rien</h1>
+
+<h1>Technique : Process Injection</h1>
+<h1>Injecter du code dans un processus légitime (explorer.exe, svchost.exe)</h1>
+
+<h1>Étapes conceptuelles (ÉDUCATIF) :</h1>
+<p>injection_steps = [</p>
+<p>"1. OpenProcess(target_pid) - Obtenir un handle sur le processus cible",</p>
+<p>"2. VirtualAllocEx(handle, size) - Allouer de la mémoire dans le processus",</p>
+<p>"3. WriteProcessMemory(handle, address, payload) - Écrire le shellcode",</p>
+<p>"4. CreateRemoteThread(handle, address) - Exécuter le shellcode"</p>
+<p>]</p>
+
+<h1>EDR moderne détecte ces patterns via :</h1>
+<h1>→ Hooks API Windows (NTDLL hooks)</h1>
+<h1>→ ETW (Event Tracing for Windows)</h1>
+<h1>→ Kernel callbacks (PsSetCreateProcessNotifyRoutine)</code></pre></h1>
+
+<h2 id="amsi-antimalware-scan-interface">AMSI — Antimalware Scan Interface</h2>
+
+<pre><code class="language-powershell"># AMSI (Windows 10+) intercepte tout le contenu PowerShell
+<h1>avant son exécution et le soumet à l'AV</h1>
+
+<h1>Comment AMSI fonctionne :</h1>
+<h1>PowerShell → AmsiScanBuffer() → AV Engine → Résultat</h1>
+<h1>Si malveillant → Exception "Script not executable"</h1>
+
+<h1>Test AMSI (ce string déclenche AMSI délibérément) :</h1>
+<h1>'AmsiScanBuffer' dans un script PS déclenche une alerte</h1>
+
+<h1>Techniques de bypass AMSI connues (déjà patchées pour la plupart) :</h1>
+<h1>→ Patching en mémoire de amsi.dll</h1>
+<h1>→ Reflection .NET pour contourner les hooks</h1>
+<h1>→ Obfuscation des patterns détectés</h1>
+
+<h1>Contre-mesures défensives :</h1>
+<h1>→ Activer PowerShell Constrained Language Mode</h1>
+<h1>→ Journalisation ScriptBlock complète</h1>
+<h1>→ Surveillance des événements AMSI dans le SIEM</h1>
+<h1>→ Mettre à jour régulièrement les signatures AV</code></pre></h1>
+
+<h2 id="strat-gies-de-d-tection-et-d-fense">Stratégies de détection et défense</h2>
+
+<pre><code class="language-python"># Pour les défenseurs : détecter les techniques d'évasion
+
+<p>detection_strategies = {</p>
+<p>"Obfuscation PowerShell": {</p>
+<p>"règle_sigma": """</p>
+<p>title: Suspicious PowerShell Obfuscation</p>
+<p>detection:</p>
+<p>selection:</p>
+<p>EventID: 4104</p>
+<p>ScriptBlockText|contains:</p>
+<p>- 'FromBase64String'</p>
+<p>- 'EncodedCommand'</p>
+<p>- 'Invoke-Expression'</p>
+<p>- 'IEX'</p>
+<p>condition: selection</p>
+<p>""",</p>
+<p>"action": "Alerter + analyser le script complet"</p>
+<p>},</p>
+<p>"Process Injection": {</p>
+<p>"règle_sysmon": """</p>
+<p>EventID: 8 (CreateRemoteThread)</p>
+<p>SourceImage ne contient pas le process cible habituel</p>
+<p>""",</p>
+<p>"action": "Isoler le processus, analyser la mémoire"</p>
+<p>},</p>
+<p>"Sandbox Evasion via Sleep": {</p>
+<p>"détection": "Analyser les binaires avec long sleep() statiquement",</p>
+<p>"action": "Patch le sleep() dans la sandbox"</p>
+<p>},</p>
+<p>"Fileless Malware": {</p>
+<p>"détection": [</p>
+<p>"Surveiller PowerShell/WMI/mshta pour du code encodé",</p>
+<p>"ETW pour les allocations mémoire suspectes",</p>
+<p>"Volatility pour analyser la mémoire des processus"</p>
+<p>]</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="outils-de-test-red-team-">Outils de test (Red Team)</h2>
+
+<pre><code class="language-bash"># Outils légitimes pour tester ses propres défenses
+
+<h1>ThreatCheck - Identifier ce qu'un AV détecte dans un binaire</h1>
+<p>ThreatCheck.exe -f payload.exe -e AMSI</p>
+<h1>Indique exactement quel byte/string déclenche la détection</h1>
+
+<h1>DefenderCheck - Similaire pour Windows Defender</h1>
+<p>DefenderCheck.exe payload.exe</p>
+
+<h1>Invoke-Obfuscation - Obfusquer des scripts PowerShell</h1>
+<h1>Pour tester si votre SIEM détecte les scripts obfusqués</h1>
+
+<h1>Cobalt Strike Malleable C2 Profiles</h1>
+<h1>Personnaliser le trafic réseau pour ressembler à du trafic légitime</h1>
+<h1>→ Test de vos règles réseau et SIEM</h1>
+
+<h1>AtomicRedTeam - Tests ATT&amp;CK automatisés</h1>
+<p>Invoke-AtomicTest T1562.001 -TestNumbers 1</p>
+<h1>Tester si votre EDR détecte la désactivation d'antivirus</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'évasion d'AV/EDR est un jeu du chat et de la souris entre attaquants et défenseurs. Pour les équipes défensives, la clé est de <strong>ne pas dépendre uniquement des signatures</strong> — combinez EDR comportemental, journalisation PowerShell complète, AMSI, surveillance réseau et threat hunting proactif. Plus vos couches de défense sont diversifiées, plus il est difficile pour un attaquant de toutes les contourner simultanément.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#evasion-av-edr" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-linux.html" class="nav-prev">← Hardening Linux : durcissement complet d'un serveur</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/anonymat-tails-whonix.html" class="nav-next">Anonymat avancé : Tails OS et Whonix →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

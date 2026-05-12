@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Ransomware : anatomie d'une attaque moderne — Temgus.CyberBlog</title>
 <meta name="description" content="RaaS, double extorsion, phases d'attaque et défense contre les ransomwares modernes.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/ransomware-anatomie.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/ransomware-anatomie.html">
 <meta property="og:title" content="Ransomware : anatomie d'une attaque moderne — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Ransomware : anatomie d'une attaque moderne — Temgus.CyberBlog">
 <meta name="twitter:description" content="RaaS, double extorsion, phases d'attaque et défense contre les ransomwares modernes.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,569 @@
   "headline": "Ransomware : anatomie d'une attaque moderne",
   "description": "RaaS, double extorsion, phases d'attaque et défense contre les ransomwares modernes.",
   "datePublished": "2025-06-04",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/ransomware-anatomie.html",
   "inLanguage": "fr",
   "keywords": "ransomware, RaaS, sauvegarde, incident",
-  "timeRequired": "PT13M"
+  "timeRequired": "PT13M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔒</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Ransomware : anatomie d'une attaque moderne</h1>
-  <p style="color:#8892a4;max-width:500px">RaaS, double extorsion, phases d'attaque et défense contre les ransomwares modernes.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ransomware-anatomie" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔒</div>
+    <div class="meta-info">
+      <div class="meta-category">Malwares</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Ransomware : anatomie d'une attaque moderne</div>
+      <div class="meta-details">
+        <span>📅 2025-06-04</span>
+        <span>⏱ 13 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#l-volution-du-ransomware">L'évolution du ransomware</a></li>
+<li><a href="#ransomware-as-a-service-raas-">Ransomware-as-a-Service (RaaS)</a></li>
+<li><a href="#anatomie-d-une-attaque-ransomware">Anatomie d'une attaque ransomware</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#phase-1-acc-s-initial">Phase 1 : Accès initial</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#phase-2-reconnaissance-et-mouvement-lat-ral">Phase 2 : Reconnaissance et mouvement latéral</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#phase-3-chiffrement">Phase 3 : Chiffrement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#phase-4-double-extorsion">Phase 4 : Double extorsion</a></li>
+<li><a href="#d-fense-contre-les-ransomwares">Défense contre les ransomwares</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-r-gle-3-2-1-1-0">La règle 3-2-1-1-0</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#architecture-anti-ransomware">Architecture anti-ransomware</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-ponse-une-attaque-active">Réponse à une attaque active</a></li>
+<li><a href="#le-paiement-de-la-ran-on">Le paiement de la rançon</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Ransomware : anatomie d'une attaque moderne</h1>
+
+<p>Les ransomwares ont coûté <strong>20 milliards de dollars</strong> en 2023. Hospitals paralysés, entreprises arrêtées, données chiffrées — ces attaques sont devenues l'une des menaces les plus dévastatrices de la cybercriminalité. Comprendre leur fonctionnement interne est essentiel pour s'en défendre.</p>
+
+<h2 id="l-volution-du-ransomware">L'évolution du ransomware</h2>
+
+<pre><code>2013 : CryptoLocker
+<p>→ Premier ransomware moderne</p>
+<p>→ Chiffrement RSA-2048 + AES</p>
+<p>→ Paiement Bitcoin</p>
+<p>→ 3 millions de dollars récoltés</p>
+
+<p>2017 : WannaCry / NotPetya</p>
+<p>→ Exploitation d'EternalBlue (NSA)</p>
+<p>→ Auto-propagation (worm)</p>
+<p>→ WannaCry : 4 milliards de dégâts</p>
+<p>→ NotPetya : 10 milliards (destructeur, pas vraiment ransomware)</p>
+
+<p>2019-aujourd'hui : Big Game Hunting</p>
+<p>→ Ciblage des grandes entreprises</p>
+<p>→ Double extorsion (chiffrement + vol de données)</p>
+<p>→ Ransomware-as-a-Service (RaaS)</p>
+<p>→ Négociations professionnelles</p>
+<p>→ Rançons : 1M$ → 50M$+</code></pre>
+
+<h2 id="ransomware-as-a-service-raas-">Ransomware-as-a-Service (RaaS)</h2>
+
+<pre><code>Le modèle RaaS a industrialisé les ransomwares :
+
+<p>Opérateurs (développeurs) :</p>
+<p>→ Développent et maintiennent le ransomware</p>
+<p>→ Gèrent l'infrastructure de paiement</p>
+<p>→ Fournissent le support aux affiliés (!!)</p>
+<p>→ Prennent 20-30% des rançons</p>
+
+<p>Affiliés (attaquants) :</p>
+<p>→ Louent l'accès au ransomware</p>
+<p>→ Conduisent les intrusions</p>
+<p>→ Gardent 70-80% des rançons</p>
+<p>→ Pas besoin de compétences de développement</p>
+
+<p>Groupes RaaS célèbres :</p>
+<p>→ LockBit (3.0) : le plus prolifique en 2023</p>
+<p>→ ALPHV/BlackCat : Rust, multiplateforme</p>
+<p>→ Cl0p : spécialiste des vulnérabilités zero-day</p>
+<p>→ Royal : successeur de Conti</p>
+<p>→ Black Basta : ex-membres de Conti</code></pre>
+
+<h2 id="anatomie-d-une-attaque-ransomware">Anatomie d'une attaque ransomware</h2>
+
+<h3 id="phase-1-acc-s-initial">Phase 1 : Accès initial</h3>
+
+<pre><code class="language-python"># Vecteurs d'entrée les plus courants en 2024
+
+<p>vecteurs = {</p>
+<p>"phishing": {</p>
+<p>"pourcentage": "41%",</p>
+<p>"technique": "Email avec pièce jointe malveillante ou lien",</p>
+<p>"exemple": "Fausse facture PDF avec macro Office malveillante"</p>
+<p>},</p>
+<p>"rdp_exposed": {</p>
+<p>"pourcentage": "20%",</p>
+<p>"technique": "RDP exposé sur Internet + brute force",</p>
+<p>"exemple": "Port 3389 accessible publiquement, mot de passe faible"</p>
+<p>},</p>
+<p>"vulnerability": {</p>
+<p>"pourcentage": "15%",</p>
+<p>"technique": "Exploitation de vulnérabilités non patchées",</p>
+<p>"exemple": "VPN Fortinet CVE-2023-27997, Exchange ProxyShell"</p>
+<p>},</p>
+<p>"supply_chain": {</p>
+<p>"pourcentage": "10%",</p>
+<p>"technique": "Compromission d'un fournisseur de confiance",</p>
+<p>"exemple": "MSP (Managed Service Provider) compromis → tous ses clients"</p>
+<p>},</p>
+<p>"credentials": {</p>
+<p>"pourcentage": "14%",</p>
+<p>"technique": "Credentials volés sur le dark web",</p>
+<p>"exemple": "Logs de stealers vendus sur Russian Market"</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h3 id="phase-2-reconnaissance-et-mouvement-lat-ral">Phase 2 : Reconnaissance et mouvement latéral</h3>
+
+<pre><code class="language-bash"># Sur le réseau de la victime, l'attaquant passe semaines/mois
+<h1>à explorer avant de déclencher le chiffrement</h1>
+
+<h1>Outils typiquement utilisés :</h1>
+<h1>Cobalt Strike, Brute Ratel, Sliver (C2)</h1>
+<h1>BloodHound (cartographie AD)</h1>
+<h1>Mimikatz (vol de credentials)</h1>
+<h1>AdFind, ADExplorer (énumération AD)</h1>
+
+<h1>Objectifs avant chiffrement :</h1>
+<li>Compromettre le Domain Controller (accès à TOUT)</li>
+<li>Désactiver les sauvegardes (Veeam, Windows Backup, snapshots cloud)</li>
+<li>Désactiver ou contourner l'EDR/antivirus</li>
+<li>Exfiltrer les données (double extorsion)</li>
+<li>Persister sur un maximum de machines</li>
+
+<h1>Timeline typique :</h1>
+<h1>J0  : Accès initial (phishing ou RDP)</h1>
+<h1>J+7 : Compromission du premier admin</h1>
+<h1>J+14: Accès au Domain Controller</h1>
+<h1>J+21: Exfiltration silencieuse des données</h1>
+<h1>J+25: Destruction des sauvegardes</h1>
+<h1>J+28: DÉCLENCHEMENT du chiffrement</code></pre></h1>
+
+<h3 id="phase-3-chiffrement">Phase 3 : Chiffrement</h3>
+
+<pre><code class="language-python"># Implémentation simplifiée d'un ransomware (ÉDUCATIF UNIQUEMENT)
+<h1>NE JAMAIS utiliser pour du vrai ransomware</h1>
+
+<p>import os</p>
+<p>from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes</p>
+<p>from cryptography.hazmat.primitives.asymmetric import rsa, padding</p>
+<p>from cryptography.hazmat.primitives import hashes, serialization</p>
+<p>import secrets</p>
+
+<p>class RansomwareDemo:</p>
+<p>"""Exemple ÉDUCATIF uniquement - Ne jamais déployer"""</p>
+
+<p>def __init__(self):</p>
+<p># Générer une clé AES aléatoire pour chiffrer les fichiers</p>
+<p>self.aes_key = secrets.token_bytes(32)  # AES-256</p>
+<p>self.aes_iv = secrets.token_bytes(16)</p>
+
+<p># La clé AES est chiffrée avec la clé publique RSA de l'attaquant</p>
+<p># → Seul l'attaquant avec sa clé privée peut déchiffrer la clé AES</p>
+<p># → Seul l'attaquant peut donc déchiffrer les fichiers</p>
+
+<p>def encrypt_file(self, filepath):</p>
+<p>"""Chiffre un fichier avec AES-256-CBC"""</p>
+<p>with open(filepath, 'rb') as f:</p>
+<p>plaintext = f.read()</p>
+
+<p># Padding pour AES</p>
+<p>from cryptography.hazmat.primitives import padding as sym_padding</p>
+<p>padder = sym_padding.PKCS7(128).padder()</p>
+<p>padded = padder.update(plaintext) + padder.finalize()</p>
+
+<p># Chiffrement AES</p>
+<p>cipher = Cipher(algorithms.AES(self.aes_key), modes.CBC(self.aes_iv))</p>
+<p>encryptor = cipher.encryptor()</p>
+<p>ciphertext = encryptor.update(padded) + encryptor.finalize()</p>
+
+<p># Écrire le fichier chiffré</p>
+<p>with open(filepath + '.locked', 'wb') as f:</p>
+<p>f.write(self.aes_iv + ciphertext)</p>
+
+<p>os.remove(filepath)  # Supprimer l'original</p>
+
+<h1>Les vrais ransomwares utilisent des techniques additionnelles :</h1>
+<h1>→ Chiffrement partiel (premiers 1MB) pour aller plus vite</h1>
+<h1>→ Ciblage des extensions (documents, images, BDD)</h1>
+<h1>→ Shadow Copy deletion (suppression sauvegardes Windows)</h1>
+<h1>→ Inhibition des outils de recovery</code></pre></h1>
+
+<h3 id="phase-4-double-extorsion">Phase 4 : Double extorsion</h3>
+
+<pre><code>Évolution de la stratégie de pression :
+
+<p>Simple extorsion (2013-2019) :</p>
+<p>→ Chiffrement des fichiers</p>
+<p>→ Payez ou perdez vos données</p>
+<p>Problème pour la victime : si sauvegardes OK → pas de rançon</p>
+
+<p>Double extorsion (2019+) :</p>
+<p>→ Chiffrement + exfiltration des données</p>
+<p>→ "Payez ou on publie vos données sur notre blog"</p>
+<p>→ Données clients, RH, financières, secrets industriels</p>
+<p>→ Efficace même si les sauvegardes fonctionnent</p>
+
+<p>Triple extorsion (2021+) :</p>
+<p>→ Double extorsion + contact direct des clients/partenaires</p>
+<p>→ "Votre fournisseur a été hacké, vos données aussi"</p>
+<p>→ DDoS simultané sur le site de la victime</p>
+
+<p>Blogs de ransomware (leak sites) :</p>
+<p>→ LockBit Blog, ALPHV Blog, Cl0p Blog</p>
+<p>→ Publications des victimes qui refusent de payer</p>
+<p>→ Accessible sur le Dark Web</code></pre>
+
+<h2 id="d-fense-contre-les-ransomwares">Défense contre les ransomwares</h2>
+
+<h3 id="la-r-gle-3-2-1-1-0">La règle 3-2-1-1-0</h3>
+
+<pre><code>3 copies des données
+<p>2 supports différents (disque local + NAS)</p>
+<p>1 copie hors-site (cloud ou site distant)</p>
+<p>1 copie air-gapped (déconnectée du réseau)</p>
+<p>0 erreur de restauration vérifiée régulièrement</p>
+
+<p>TESTER LES SAUVEGARDES RÉGULIÈREMENT !</p>
+<p>Une sauvegarde non testée = sauvegarde inutile</p>
+
+<p>Script de test de restauration hebdomadaire :</p>
+<p>→ Restaurer un fichier aléatoire chaque semaine</p>
+<p>→ Restaurer une VM complète chaque mois</p>
+<p>→ Simuler une restauration complète chaque trimestre</code></pre>
+
+<h3 id="architecture-anti-ransomware">Architecture anti-ransomware</h3>
+
+<pre><code class="language-yaml"># Mesures techniques prioritaires
+
+<p>Endpoints :</p>
+<p>✅ EDR moderne (CrowdStrike, SentinelOne, Microsoft Defender for Endpoint)</p>
+<p>✅ Application Whitelisting (seulement les apps approuvées s'exécutent)</p>
+<p>✅ Désactiver les macros Office (ou seulement macros signées)</p>
+<p>✅ PowerShell Constrained Language Mode</p>
+
+<p>Réseau :</p>
+<p>✅ Segmentation : sauvegardes sur réseau isolé</p>
+<p>✅ Pas de RDP exposé sur Internet (utiliser VPN + MFA)</p>
+<p>✅ Monitoring DNS (détecter beaconing C2)</p>
+<p>✅ Blocage des domaines malveillants connus</p>
+
+<p>Active Directory :</p>
+<p>✅ Tier Model (admins de domaine n'ont pas accès aux postes)</p>
+<p>✅ LAPS (mots de passe admin locaux uniques)</p>
+<p>✅ MFA pour tous les accès admin</p>
+<p>✅ Alerte sur ajout aux groupes privilégiés</p>
+
+<p>Sauvegardes :</p>
+<p>✅ Immutable backups (ne peuvent pas être supprimées)</p>
+<p>✅ Sauvegarde hors-ligne (air-gapped)</p>
+<p>✅ Veeam avec Hardened Repository</p>
+<p>✅ Snapshots cloud immuables (AWS S3 Object Lock)</code></pre>
+
+<h3 id="r-ponse-une-attaque-active">Réponse à une attaque active</h3>
+
+<pre><code>DÉTECTION :
+<p>Alertes EDR sur chiffrement massif, Shadow Copy deletion, Cobalt Strike</p>
+
+<p>CONFINEMENT IMMÉDIAT (&lt; 15 minutes) :</p>
+<li>Isoler les machines affectées du réseau (couper le câble ethernet)</li>
+<li>Ne pas éteindre (préserver les preuves en RAM)</li>
+<li>Activer le mode de crise (war room)</li>
+<li>Contacter l'assurance cyber immédiatement</li>
+
+<p>ÉVALUATION :</p>
+<li>Identifier le périmètre atteint (combien de machines ?)</li>
+<li>Les sauvegardes sont-elles intactes ?</li>
+<li>Y a-t-il eu exfiltration de données ?</li>
+<li>Quel groupe ransomware ? (identifier depuis la note de rançon)</li>
+
+<p>DÉCISION : Payer ou ne pas payer ?</p>
+<p>Facteurs :</p>
+<p>→ Les sauvegardes fonctionnent ?     → Ne pas payer</p>
+<p>→ Données critiques exfiltrées ?     → Considérer (avec juriste)</p>
+<p>→ Vies humaines en jeu (hôpital) ?  → Cas particulier</p>
+<p>→ Négociation possible ?             → Spécialistes IR (Coveware)</p>
+<p>→ Groupe sanctionné (OFAC) ?        → Paiement ILLÉGAL</p>
+
+<p>RESTAURATION :</p>
+<p>→ Nettoyer 100% du réseau avant de restaurer</p>
+<p>→ Patcher toutes les vulnérabilités exploitées</p>
+<p>→ Réinitialiser TOUS les credentials</p>
+<p>→ Restaurer depuis sauvegardes saines</p>
+<p>→ Monitoring renforcé pendant 6 mois</code></pre>
+
+<h2 id="le-paiement-de-la-ran-on">Le paiement de la rançon</h2>
+
+<pre><code>Données statistiques :
+<p>→ 46% des victimes paient</p>
+<p>→ Parmi ceux qui paient : 80% récupèrent leurs données</p>
+<p>→ Parmi ceux qui paient : 46% sont re-attaqués dans l'année</p>
+<p>→ Rançon moyenne 2023 : 1,54 million de dollars</p>
+
+<p>Risques légaux du paiement :</p>
+<p>→ USA (OFAC) : payer des groupes sanctionnés = crime fédéral</p>
+<p>(LockBit, Evil Corp, Cl0p sont sur la liste OFAC)</p>
+<p>→ France : pas d'interdiction mais signalement ANSSI + Police obligatoire</p>
+<p>→ Certaines assurances cyber remboursent les rançons</p>
+
+<p>Alternatives au paiement :</p>
+<p>→ No More Ransom (nomoreransom.org) :</p>
+<p>Outils de déchiffrement GRATUITS pour certains ransomwares</p>
+<p>Europol + Kaspersky + McAfee</p>
+<p>→ Négociation professionnelle (Coveware, Kivu)</p>
+<p>Réduction de 50-80% de la rançon</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les ransomwares sont devenus une industrie criminelle professionnelle avec ses équipes de développement, son support client et ses affiliés. La défense efficace repose sur <strong>sauvegardes immuables hors-ligne + EDR + MFA partout + segmentation réseau</strong>. Ces quatre mesures réduisent de 90% le risque d'être impacté. La question n'est pas "si" vous serez ciblé, mais "quand" — préparez votre plan de réponse avant l'incident.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ransomware-anatomie" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-numerique.html" class="nav-prev">← Forensics numérique : investigation après un incident</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-kubernetes.html" class="nav-next">Sécurité Kubernetes : protéger vos clusters →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

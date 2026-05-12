@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Threat Hunting : la chasse proactive aux menaces — Temgus.CyberBlog</title>
 <meta name="description" content="Méthodologie, outils et techniques pour détecter les attaquants cachés dans votre réseau.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/threat-hunting.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/threat-hunting.html">
 <meta property="og:title" content="Threat Hunting : la chasse proactive aux menaces — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Threat Hunting : la chasse proactive aux menaces — Temgus.CyberBlog">
 <meta name="twitter:description" content="Méthodologie, outils et techniques pour détecter les attaquants cachés dans votre réseau.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,546 @@
   "headline": "Threat Hunting : la chasse proactive aux menaces",
   "description": "Méthodologie, outils et techniques pour détecter les attaquants cachés dans votre réseau.",
   "datePublished": "2025-05-03",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/threat-hunting.html",
   "inLanguage": "fr",
   "keywords": "threat hunting, SIEM, MITRE ATT&CK, Sysmon",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎯</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Threat Hunting : la chasse proactive aux menaces</h1>
-  <p style="color:#8892a4;max-width:500px">Méthodologie, outils et techniques pour détecter les attaquants cachés dans votre réseau.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#threat-hunting" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎯</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Threat Hunting : la chasse proactive aux menaces</div>
+      <div class="meta-details">
+        <span>📅 2025-05-03</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-le-threat-hunting-">Qu'est-ce que le Threat Hunting ?</a></li>
+<li><a href="#le-cycle-du-threat-hunting">Le cycle du Threat Hunting</a></li>
+<li><a href="#les-sources-de-donn-es-essentielles">Les sources de données essentielles</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#logs-collecter">Logs à collecter</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sysmon-l-outil-indispensable">Sysmon — L'outil indispensable</a></li>
+<li><a href="#techniques-et-hypoth-ses-de-hunting">Techniques et hypothèses de hunting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#hunting-1-exfiltration-dns">Hunting 1 : Exfiltration DNS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#hunting-2-living-off-the-land-lolbins-">Hunting 2 : Living off the Land (LOLBins)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#hunting-3-connexions-vers-des-ips-suspectes">Hunting 3 : Connexions vers des IPs suspectes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#hunting-4-comptes-dormants-r-activ-s">Hunting 4 : Comptes dormants réactivés</a></li>
+<li><a href="#framework-mitre-att-ck">Framework MITRE ATT&CK</a></li>
+<li><a href="#outils-de-threat-hunting">Outils de Threat Hunting</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Threat Hunting : la chasse proactive aux menaces</h1>
+
+<p>Le Threat Hunting (chasse aux menaces) est l'approche proactive de la cybersécurité. Plutôt que d'attendre qu'une alerte se déclenche, les threat hunters <strong>partent à la recherche active</strong> des attaquants qui se cachent déjà dans votre réseau.</p>
+
+<h2 id="qu-est-ce-que-le-threat-hunting-">Qu'est-ce que le Threat Hunting ?</h2>
+
+<pre><code>Sécurité RÉACTIVE (classique) :
+<p>Attaque → Alerte → Réponse</p>
+<p>Problème : le délai moyen de détection est de 197 jours !</p>
+
+<p>Sécurité PROACTIVE (Threat Hunting) :</p>
+<p>Hypothèse → Recherche active → Découverte → Réponse</p>
+<p>Avantage : on cherche AVANT que l'attaquant ait causé des dégâts</code></pre>
+
+<p>> En 2023, le temps moyen entre l'intrusion initiale et la détection était de <strong>197 jours</strong> selon IBM. Le Threat Hunting vise à réduire ce délai à des heures ou des jours.</p>
+
+<h2 id="le-cycle-du-threat-hunting">Le cycle du Threat Hunting</h2>
+
+<pre><code>1. HYPOTHÈSE
+<p>"Peut-être qu'un attaquant utilise le DNS pour exfiltrer des données"</p>
+<p>↓</p>
+<li>COLLECTE DE DONNÉES</li>
+<p>Logs réseau, EDR, SIEM, DNS queries</p>
+<p>↓</p>
+<li>INVESTIGATION</li>
+<p>Analyser les données à la recherche de patterns anormaux</p>
+<p>↓</p>
+<li>DÉCOUVERTE</li>
+<p>Trouver (ou infirmer) l'activité malveillante</p>
+<p>↓</p>
+<li>AMÉLIORATION</li>
+<p>Créer des détections automatiques pour la prochaine fois</code></pre>
+
+<h2 id="les-sources-de-donn-es-essentielles">Les sources de données essentielles</h2>
+
+<h3 id="logs-collecter">Logs à collecter</h3>
+
+<pre><code class="language-bash"># Sur Windows - Sources prioritaires
+<p>→ Windows Event Logs (Security, System, Application, PowerShell)</p>
+<p>→ Sysmon (journalisation avancée des processus, réseau, registre)</p>
+<p>→ EDR logs (CrowdStrike, SentinelOne, Defender for Endpoint)</p>
+
+<h1>Sur Linux</h1>
+<p>→ /var/log/auth.log, /var/log/syslog</p>
+<p>→ Auditd logs (/var/log/audit/audit.log)</p>
+<p>→ Process accounting</p>
+
+<h1>Réseau</h1>
+<p>→ DNS queries (toutes les requêtes DNS)</p>
+<p>→ NetFlow / IPFIX (métadonnées des flux)</p>
+<p>→ Proxy logs (trafic web)</p>
+<p>→ Firewall logs</code></pre>
+
+<h3 id="sysmon-l-outil-indispensable">Sysmon — L'outil indispensable</h3>
+
+<pre><code class="language-xml">&lt;!-- Installation et configuration de Sysmon --&gt;
+<p>&lt;!-- Télécharger : https://docs.microsoft.com/sysinternals/sysmon --&gt;</p>
+
+<p>&lt;!-- Configuration recommandée (sysmonconfig.xml) --&gt;</p>
+<p>&lt;Sysmon schemaversion="4.70"&gt;</p>
+<p>&lt;EventFiltering&gt;</p>
+<p>&lt;!-- Event 1 : Création de processus --&gt;</p>
+<p>&lt;ProcessCreate onmatch="include"&gt;</p>
+<p>&lt;CommandLine condition="contains"&gt;powershell&lt;/CommandLine&gt;</p>
+<p>&lt;CommandLine condition="contains"&gt;cmd.exe&lt;/CommandLine&gt;</p>
+<p>&lt;CommandLine condition="contains"&gt;wscript&lt;/CommandLine&gt;</p>
+<p>&lt;/ProcessCreate&gt;</p>
+
+<p>&lt;!-- Event 3 : Connexions réseau --&gt;</p>
+<p>&lt;NetworkConnect onmatch="include"&gt;</p>
+<p>&lt;DestinationPort condition="is"&gt;4444&lt;/DestinationPort&gt;</p>
+<p>&lt;DestinationPort condition="is"&gt;1337&lt;/DestinationPort&gt;</p>
+<p>&lt;/NetworkConnect&gt;</p>
+
+<p>&lt;!-- Event 11 : Création de fichiers --&gt;</p>
+<p>&lt;FileCreate onmatch="include"&gt;</p>
+<p>&lt;TargetFilename condition="end with"&gt;.exe&lt;/TargetFilename&gt;</p>
+<p>&lt;TargetFilename condition="contains"&gt;Temp&lt;/TargetFilename&gt;</p>
+<p>&lt;/FileCreate&gt;</p>
+<p>&lt;/EventFiltering&gt;</p>
+<p>&lt;/Sysmon&gt;</code></pre>
+
+<pre><code class="language-powershell"># Installer Sysmon avec la config
+<p>.\Sysmon64.exe -accepteula -i sysmonconfig.xml</p>
+
+<h1>Vérifier les événements Sysmon</h1>
+<p>Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 50</code></pre>
+
+<h2 id="techniques-et-hypoth-ses-de-hunting">Techniques et hypothèses de hunting</h2>
+
+<h3 id="hunting-1-exfiltration-dns">Hunting 1 : Exfiltration DNS</h3>
+
+<pre><code class="language-python"># Hypothèse : un malware utilise DNS pour exfiltrer des données
+<h1>(données encodées dans les sous-domaines)</h1>
+
+<h1>Exemple de requête suspecte :</h1>
+<h1>dGhpcyBpcyBzZW5zaXRpdmUgZGF0YQ==.evil.com</h1>
+<h1>(données en base64 dans le sous-domaine)</h1>
+
+<h1>Détection avec Python - analyser les logs DNS</h1>
+<p>import re</p>
+<p>from collections import Counter</p>
+
+<p>def analyser_dns_suspects(fichier_logs):</p>
+<p>with open(fichier_logs) as f:</p>
+<p>lignes = f.readlines()</p>
+
+<p>domaines_suspects = []</p>
+<p>for ligne in lignes:</p>
+<p># Chercher des sous-domaines anormalement longs</p>
+<p>match = re.search(r'(\S+)\.example\.com', ligne)</p>
+<p>if match:</p>
+<p>sous_domaine = match.group(1)</p>
+<p>if len(sous_domaine) &gt; 30:  # Sous-domaine suspect si &gt; 30 chars</p>
+<p>domaines_suspects.append(sous_domaine)</p>
+
+<p>return Counter(domaines_suspects).most_common(20)</p>
+
+<h1>Requête KQL (Kusto Query Language) pour Microsoft Sentinel</h1>
+<p>"""</p>
+<p>DnsEvents</p>
+<p>| where Name has_any ("base64", "encoded")</p>
+<p>or strlen(extract(@"([^.]+)\.", 1, Name)) &gt; 30</p>
+<p>| summarize count() by Name, ClientIP</p>
+<p>| where count_ &gt; 10</p>
+<p>| order by count_ desc</p>
+<p>"""</code></pre>
+
+<h3 id="hunting-2-living-off-the-land-lolbins-">Hunting 2 : Living off the Land (LOLBins)</h3>
+
+<p>Les attaquants utilisent des <strong>binaires Windows légitimes</strong> pour éviter la détection.</p>
+
+<pre><code class="language-powershell"># LOLBins couramment abusés
+<h1>certutil, mshta, regsvr32, rundll32, wmic, bitsadmin</h1>
+
+<h1>Chercher l'utilisation suspecte de certutil (souvent utilisé pour télécharger des fichiers)</h1>
+<p>Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" |</p>
+<p>Where-Object {$_.Message -match "certutil" -and $_.Message -match "urlcache"} |</p>
+<p>Select-Object TimeCreated, Message</p>
+
+<h1>Requête Splunk SPL</h1>
+<p>"""</p>
+<p>index=windows EventCode=1</p>
+<p>| search Image="<em>certutil</em>" CommandLine="<em>urlcache</em>"</p>
+<p>| table _time, ComputerName, User, CommandLine</p>
+<p>"""</p>
+
+<h1>Requête Sigma (format universel)</h1>
+<p>"""</p>
+<p>title: Suspicious Certutil Usage</p>
+<p>detection:</p>
+<p>selection:</p>
+<p>EventID: 1</p>
+<p>Image|endswith: '\certutil.exe'</p>
+<p>CommandLine|contains:</p>
+<p>- 'urlcache'</p>
+<p>- 'decode'</p>
+<p>- 'encode'</p>
+<p>condition: selection</p>
+<p>"""</code></pre>
+
+<h3 id="hunting-3-connexions-vers-des-ips-suspectes">Hunting 3 : Connexions vers des IPs suspectes</h3>
+
+<pre><code class="language-python"># Enrichissement des IPs avec VirusTotal
+<p>import requests</p>
+
+<p>def check_ip_virustotal(ip, api_key):</p>
+<p>url = f"https://www.virustotal.com/api/v3/ip_addresses/{ip}"</p>
+<p>headers = {"x-apikey": api_key}</p>
+<p>response = requests.get(url, headers=headers)</p>
+<p>data = response.json()</p>
+
+<p>malicious = data['data']['attributes']['last_analysis_stats']['malicious']</p>
+<p>return {'ip': ip, 'malicious_votes': malicious}</p>
+
+<h1>Automatiser sur un fichier de logs réseau</h1>
+<p>def hunt_malicious_ips(netflow_file, vt_api_key):</p>
+<p>ips = extraire_ips_externes(netflow_file)</p>
+<p>results = []</p>
+<p>for ip in ips:</p>
+<p>result = check_ip_virustotal(ip, vt_api_key)</p>
+<p>if result['malicious_votes'] &gt; 5:</p>
+<p>results.append(result)</p>
+<p>return sorted(results, key=lambda x: x['malicious_votes'], reverse=True)</code></pre>
+
+<h3 id="hunting-4-comptes-dormants-r-activ-s">Hunting 4 : Comptes dormants réactivés</h3>
+
+<pre><code class="language-powershell"># Chercher des connexions de comptes qui ne s'étaient pas connectés depuis longtemps
+<h1>(signe possible de compromission de credentials oubliés)</h1>
+
+<p>$cutoff = (Get-Date).AddDays(-180)  # Inactif depuis 6 mois</p>
+
+<p>Get-ADUser -Filter {LastLogonDate -lt $cutoff -and Enabled -eq $true} `</p>
+<p>-Properties LastLogonDate, PasswordLastSet |</p>
+<p>Select-Object Name, SamAccountName, LastLogonDate, PasswordLastSet |</p>
+<p>Sort-Object LastLogonDate</p>
+
+<h1>Croiser avec les événements de connexion récents</h1>
+<p>Get-WinEvent -FilterHashtable @{</p>
+<p>LogName='Security'</p>
+<p>Id=4624</p>
+<p>StartTime=(Get-Date).AddDays(-7)</p>
+<p>} | Where-Object {$_.Properties[5].Value -in $comptes_dormants}</code></pre>
+
+<h2 id="framework-mitre-att-ck">Framework MITRE ATT&CK</h2>
+
+<p>Le framework <strong>MITRE ATT&CK</strong> catalogue toutes les techniques d'attaque connues. C'est la bible du threat hunter.</p>
+
+<pre><code>Structure ATT&amp;CK :
+<p>Tactiques (pourquoi) → Techniques (comment) → Procédures (implémentation)</p>
+
+<p>Exemple :</p>
+<p>Tactique    : Persistence (T1547)</p>
+<p>Technique   : Boot/Logon Autostart Execution</p>
+<p>Sous-tech.  : Registry Run Keys (T1547.001)</p>
+<p>Procédure   : Malware X ajoute HKLM\Run\WindowsUpdate = malware.exe</code></pre>
+
+<pre><code class="language-python"># Mapper vos détections au framework ATT&amp;CK
+<p>hypotheses_hunting = [</p>
+<p>{</p>
+<p>"id": "HUNT-001",</p>
+<p>"hypothese": "Utilisation de DNS pour C2",</p>
+<p>"mitre_technique": "T1071.004",</p>
+<p>"mitre_nom": "Application Layer Protocol: DNS",</p>
+<p>"sources_donnees": ["DNS logs", "NetFlow"],</p>
+<p>"outils": ["Zeek", "RITA"]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "HUNT-002",</p>
+<p>"hypothese": "PowerShell encodé pour l'évasion",</p>
+<p>"mitre_technique": "T1059.001",</p>
+<p>"mitre_nom": "Command and Scripting Interpreter: PowerShell",</p>
+<p>"sources_donnees": ["Sysmon Event 1", "PowerShell logs"],</p>
+<p>"outils": ["Splunk", "Sigma"]</p>
+<p>}</p>
+<p>]</code></pre>
+
+<h2 id="outils-de-threat-hunting">Outils de Threat Hunting</h2>
+
+<p>| Outil | Usage | Type |</p>
+<p>|-------|-------|------|</p>
+<p>| <strong>Velociraptor</strong> | Collecte forensique distribuée | Open source |</p>
+<p>| <strong>RITA</strong> | Analyse de trafic réseau | Open source |</p>
+<p>| <strong>Zeek</strong> | Analyse réseau avancée | Open source |</p>
+<p>| <strong>ELK Stack</strong> | SIEM open source | Open source |</p>
+<p>| <strong>Splunk</strong> | SIEM enterprise | Commercial |</p>
+<p>| <strong>Microsoft Sentinel</strong> | SIEM cloud | Commercial |</p>
+<p>| <strong>CrowdStrike Falcon</strong> | EDR + hunting | Commercial |</p>
+
+<pre><code class="language-bash"># Velociraptor - Collecte forensique à distance
+<h1>Déployer un serveur Velociraptor</h1>
+<p>./velociraptor-v0.7.0-linux-amd64 config generate -i</p>
+<p>./velociraptor-v0.7.0-linux-amd64 --config server.config.yaml frontend</p>
+
+<h1>Créer un artefact de hunting personnalisé</h1>
+<h1>Chercher les processus avec des connexions réseau inhabituelles</h1>
+<p>velociraptor artifact collect Windows.Network.Netstat</p>
+<p>velociraptor artifact collect Windows.Persistence.PermanentWMIEvents</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le Threat Hunting transforme la sécurité d'une posture réactive en approche proactive. En combinant <strong>hypothèses basées sur le renseignement</strong>, <strong>données de qualité (Sysmon, EDR)</strong> et <strong>framework MITRE ATT&CK</strong>, vous pouvez découvrir des attaquants qui ont contourné vos défenses automatisées. C'est le niveau supérieur de la cyberdéfense.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#threat-hunting" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/powershell-securite.html" class="nav-prev">← PowerShell pour la sécurité : guide complet</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/surveillance-vie-privee.html" class="nav-next">Société de surveillance et vie privée numérique →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

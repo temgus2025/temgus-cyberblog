@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Le facteur humain en cybersécurité : former et sensibiliser — Temgus.CyberBlog</title>
 <meta name="description" content="Principes de Cialdini, simulation de phishing, programme de sensibilisation et culture de cybersécurité organisationnelle.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/facteur-humain-sensibilisation.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/facteur-humain-sensibilisation.html">
 <meta property="og:title" content="Le facteur humain en cybersécurité : former et sensibiliser — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Le facteur humain en cybersécurité : former et sensibiliser — Temgus.CyberBlog">
 <meta name="twitter:description" content="Principes de Cialdini, simulation de phishing, programme de sensibilisation et culture de cybersécurité organisationnelle.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,554 @@
   "headline": "Le facteur humain en cybersécurité : former et sensibiliser",
   "description": "Principes de Cialdini, simulation de phishing, programme de sensibilisation et culture de cybersécurité organisationnelle.",
   "datePublished": "2025-09-16",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/facteur-humain-sensibilisation.html",
   "inLanguage": "fr",
   "keywords": "sensibilisation, phishing, formation, culture sécurité, facteur humain",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🧠</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Le facteur humain en cybersécurité : former et sensibiliser</h1>
-  <p style="color:#8892a4;max-width:500px">Principes de Cialdini, simulation de phishing, programme de sensibilisation et culture de cybersécurité organisationnelle.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#facteur-humain-sensibilisation" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🧠</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Le facteur humain en cybersécurité : former et sensibiliser</div>
+      <div class="meta-details">
+        <span>📅 2025-09-16</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#le-facteur-humain-en-chiffres">Le facteur humain en chiffres</a></li>
+<li><a href="#les-6-principes-de-cialdini-exploit-s">Les 6 principes de Cialdini exploités</a></li>
+<li><a href="#programme-de-sensibilisation-efficace">Programme de sensibilisation efficace</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-erreurs-viter">Les erreurs à éviter</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#simulation-de-phishing">Simulation de phishing</a></li>
+<li><a href="#politique-de-s-curit-humaine">Politique de sécurité humaine</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#clean-desk-policy">Clean Desk Policy</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#politique-de-mots-de-passe-pour-les-humains">Politique de mots de passe pour les humains</a></li>
+<li><a href="#m-triques-de-maturit-en-sensibilisation">Métriques de maturité en sensibilisation</a></li>
+<li><a href="#la-culture-de-cybers-curit-">La culture de cybersécurité</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Le facteur humain en cybersécurité : former et sensibiliser</h1>
+
+<p>Les technologies de sécurité les plus avancées peuvent être contournées par un seul clic sur un lien malveillant. Le facteur humain reste la principale cause de brèches de sécurité. Ce guide explore comment construire une culture de cybersécurité efficace dans une organisation.</p>
+
+<h2 id="le-facteur-humain-en-chiffres">Le facteur humain en chiffres</h2>
+
+<pre><code>Statistiques 2024 :
+<p>→ 74% des brèches de données impliquent l'élément humain (Verizon DBIR)</p>
+<p>→ 91% des cyberattaques commencent par un email de phishing</p>
+<p>→ Un employé non formé clique sur 1 phishing sur 3</p>
+<p>→ Après formation, ce taux tombe à 1 sur 20</p>
+<p>→ ROI de la formation : 37$ économisés pour chaque dollar investi</p>
+
+<p>Pourquoi l'humain est vulnérable :</p>
+<p>→ Surcharge cognitive (trop de décisions à prendre)</p>
+<p>→ Confiance par défaut (nous voulons aider)</p>
+<p>→ Urgence (attaquants créent une pression temporelle)</p>
+<p>→ Autorité (difficile de refuser un "supérieur")</p>
+<p>→ Curiosité (difficile de résister à cliquer)</p>
+<p>→ Fatigue (en fin de journée, vigilance réduite)</code></pre>
+
+<h2 id="les-6-principes-de-cialdini-exploit-s">Les 6 principes de Cialdini exploités</h2>
+
+<pre><code class="language-python"># Robert Cialdini a identifié 6 principes d'influence
+<h1>Les attaquants les exploitent systématiquement</h1>
+
+<p>principes_exploitation = {</p>
+
+<p>"1. Réciprocité": {</p>
+<p>"principe": "Nous voulons rendre ce qu'on nous donne",</p>
+<p>"exploitation": "L'attaquant offre quelque chose (aide, info) puis demande en retour",</p>
+<p>"exemple": "Je vous ai envoyé le document demandé, pouvez-vous me donner vos accès ?",</p>
+<p>"défense": "Identifier la demande qui suit le 'cadeau'"</p>
+<p>},</p>
+
+<p>"2. Engagement/Cohérence": {</p>
+<p>"principe": "Nous voulons rester cohérents avec nos engagements",</p>
+<p>"exploitation": "Petit engagement initial, puis demandes croissantes",</p>
+<p>"exemple": "D'abord : Confirmez-vous être bien employé ? Ensuite : Donnez votre identifiant",</p>
+<p>"défense": "Chaque demande évaluée indépendamment"</p>
+<p>},</p>
+
+<p>"3. Preuve sociale": {</p>
+<p>"principe": "Nous faisons ce que font les autres",</p>
+<p>"exploitation": "Votre collègue X a déjà approuvé, il ne manque que vous",</p>
+<p>"exemple": "Tous vos collègues ont déjà cliqué sur ce lien de mise à jour",</p>
+<p>"défense": "Vérifier directement avec la personne citée"</p>
+<p>},</p>
+
+<p>"4. Autorité": {</p>
+<p>"principe": "Nous obéissons aux figures d'autorité",</p>
+<p>"exploitation": "Se faire passer pour PDG, IT, police, banque",</p>
+<p>"exemple": "Fraude au président : email du PDG demandant virement urgent",</p>
+<p>"défense": "Protocoles de vérification pour toute demande sensible"</p>
+<p>},</p>
+
+<p>"5. Sympathie": {</p>
+<p>"principe": "Nous aidons ceux que nous aimons bien",</p>
+<p>"exploitation": "Créer un rapport amical avant d'exploiter",</p>
+<p>"exemple": "Pig butchering : relation de confiance sur des mois avant l'arnaque",</p>
+<p>"défense": "Méfiance proportionnelle à la demande, même d'amis"</p>
+<p>},</p>
+
+<p>"6. Rareté/Urgence": {</p>
+<p>"principe": "Ce qui est rare ou urgent est plus désirable",</p>
+<p>"exploitation": "Créer une fausse urgence pour court-circuiter la réflexion",</p>
+<p>"exemple": "Votre compte sera fermé dans 24h si vous ne confirmez pas maintenant",</p>
+<p>"défense": "L'urgence est un signal d'alarme, pas une raison d'agir vite"</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="programme-de-sensibilisation-efficace">Programme de sensibilisation efficace</h2>
+
+<h3 id="les-erreurs-viter">Les erreurs à éviter</h3>
+
+<pre><code>❌ Formation annuelle de 2 heures = insuffisant et oublié en 2 semaines
+<p>❌ Présentations PowerPoint sans interactivité</p>
+<p>❌ Punir les employés qui se font piéger (crée la honte, pas l'apprentissage)</p>
+<p>❌ Formation générique non adaptée au contexte de l'entreprise</p>
+<p>❌ Focus uniquement sur le technique (ignorer la psychologie)</p>
+<p>❌ Faux sentiment de sécurité après formation (ça ne suffit pas)</p>
+
+<p>✅ Programme continu : petites doses régulières toute l'année</p>
+<p>✅ Simulations de phishing avec feedback immédiat</p>
+<p>✅ Adaptation par métier (comptable ≠ développeur ≠ RH)</p>
+<p>✅ Résultats mesurés et améliorés (taux de clic, signalements)</p>
+<p>✅ Culture positive : récompenser la vigilance, pas punir l'erreur</p>
+<p>✅ Cas réels d'entreprises similaires (rend concret)</code></pre>
+
+<h3 id="simulation-de-phishing">Simulation de phishing</h3>
+
+<pre><code class="language-python"># Construire un programme de simulation phishing
+
+<p>class PhishingSimulationProgram:</p>
+
+<p>def __init__(self):</p>
+<p>self.scenarios = {</p>
+<p>"débutant": [</p>
+<p>"Email Nigeria prince",</p>
+<p>"Alerte sécurité générique",</p>
+<p>"Prix/concours gagné"</p>
+<p>],</p>
+<p>"intermédiaire": [</p>
+<p>"Fausse facture fournisseur connu",</p>
+<p>"Demande RH urgente",</p>
+<p>"Mise à jour mot de passe IT"</p>
+<p>],</p>
+<p>"avancé": [</p>
+<p>"Spear phishing basé sur LinkedIn",</p>
+<p>"Deepfake audio PDG",</p>
+<p>"Compromission de partenaire réel"</p>
+<p>]</p>
+<p>}</p>
+
+<p>def run_campaign(self, employees, difficulty="intermédiaire"):</p>
+<p>results = {</p>
+<p>"envoyés": len(employees),</p>
+<p>"cliqués": 0,</p>
+<p>"credentials_saisis": 0,</p>
+<p>"signalés": 0,</p>
+<p>"ignorés": 0</p>
+<p>}</p>
+
+<p>for employee in employees:</p>
+<p># Envoyer simulation</p>
+<p>result = self.send_simulation(employee, difficulty)</p>
+
+<p>if result == "clicked_and_credentials":</p>
+<p>results["credentials_saisis"] += 1</p>
+<p># Feedback immédiat et bienveillant</p>
+<p>self.send_learning_module(employee, "urgent")</p>
+
+<p>elif result == "clicked":</p>
+<p>results["cliqués"] += 1</p>
+<p>self.send_learning_module(employee, "standard")</p>
+
+<p>elif result == "reported":</p>
+<p>results["signalés"] += 1</p>
+<p>self.reward_vigilance(employee)  # Féliciter !</p>
+
+<p>return results</p>
+
+<p>def reward_vigilance(self, employee):</p>
+<p>"""Récompenser les employés vigilants"""</p>
+<p># Email de félicitations</p>
+<p># Points dans un programme de gamification</p>
+<p># Mention lors des réunions d'équipe</p>
+<p>pass</p>
+
+<h1>Plateformes de simulation phishing :</h1>
+<h1>→ KnowBe4 (leader mondial)</h1>
+<h1>→ Proofpoint Security Awareness</h1>
+<h1>→ Gophish (open source)</h1>
+<h1>→ Cofense</code></pre></h1>
+
+<h2 id="politique-de-s-curit-humaine">Politique de sécurité humaine</h2>
+
+<h3 id="clean-desk-policy">Clean Desk Policy</h3>
+
+<pre><code>Clean Desk Policy = bureau propre à la fin de la journée
+
+<p>Obligatoire :</p>
+<p>→ Aucun document sensible visible sur le bureau</p>
+<p>→ Ordinateur verrouillé (Windows+L) dès qu'on quitte le poste</p>
+<p>→ Documents confidentiels dans un tiroir fermé à clé</p>
+<p>→ Post-it avec mots de passe INTERDITS</p>
+<p>→ Badges laissés visibles (ne pas laisser traîner)</p>
+<p>→ Déchiqueter les documents sensibles (pas juste poubelle)</p>
+
+<p>Vérification :</p>
+<p>→ Audits surprise mensuels</p>
+<p>→ Score par équipe (gamification positive)</p>
+<p>→ Résultats partagés → émulation saine entre équipes</code></pre>
+
+<h3 id="politique-de-mots-de-passe-pour-les-humains">Politique de mots de passe pour les humains</h3>
+
+<pre><code>Recommandations NIST 2024 (enfin réalistes) :
+
+<p>ABANDONNÉES (obsolètes) :</p>
+<p>❌ Changer le mot de passe tous les 90 jours (crée des patterns prévisibles)</p>
+<p>❌ Exiger majuscules + chiffres + symboles (favorise Pa$$w0rd1)</p>
+<p>❌ Interdire la réutilisation sur 12 mots de passe</p>
+
+<p>RECOMMANDÉES :</p>
+<p>✅ Longues passphrases : "correct-horse-battery-staple" (meilleur que @Mtu789!)</p>
+<p>✅ Gestionnaire de mots de passe obligatoire (Bitwarden Enterprise)</p>
+<p>✅ Ne changer que si compromis (détecté par HaveIBeenPwned)</p>
+<p>✅ MFA obligatoire sur tous les comptes</p>
+<p>✅ Passkeys là où c'est disponible</p>
+
+<p>Exemple de bonne politique :</p>
+<p>→ Minimum 16 caractères (passphrase encouragée)</p>
+<p>→ Bitwarden fourni par l'entreprise</p>
+<p>→ MFA TOTP ou FIDO2 obligatoire pour les accès critiques</p>
+<p>→ Pas de rotation forcée sauf si brèche détectée</code></pre>
+
+<h2 id="m-triques-de-maturit-en-sensibilisation">Métriques de maturité en sensibilisation</h2>
+
+<pre><code class="language-python"># KPIs pour mesurer l'efficacité du programme
+
+<p>metriques = {</p>
+<p>"taux_clic_phishing": {</p>
+<p>"débutant": "&gt; 30%",</p>
+<p>"intermédiaire": "10-30%",</p>
+<p>"avancé": "5-10%",</p>
+<p>"excellent": "&lt; 5%"</p>
+<p>},</p>
+<p>"taux_signalement_phishing": {</p>
+<p>"objectif": "&gt; 50% des phishing simulés signalés",</p>
+<p>"excellent": "&gt; 80%"</p>
+<p>},</p>
+<p>"délai_signalement": {</p>
+<p>"objectif": "&lt; 1 heure après réception",</p>
+<p>"excellent": "&lt; 15 minutes"</p>
+<p>},</p>
+<p>"participation_formation": {</p>
+<p>"objectif": "&gt; 90% en 30 jours",</p>
+<p>"excellent": "&gt; 95%"</p>
+<p>},</p>
+<p>"incidents_liés_humain": {</p>
+<p>"mesure": "Évolution année sur année",</p>
+<p>"objectif": "Réduction de 30% par an"</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Tableau de bord mensuel pour la direction :</h1>
+<p>rapport_mensuel = {</p>
+<p>"simulations_envoyées": 500,</p>
+<p>"taux_clic": "8% (vs 12% le mois dernier) ✅",</p>
+<p>"taux_signalement": "45% (vs 30% le mois dernier) ✅",</p>
+<p>"formations_complétées": "94% ✅",</p>
+<p>"incidents_réels": 2,</p>
+<p>"dont_liés_humain": 1,</p>
+<p>"économies_estimées": "450 000€ (incidents évités)"</p>
+<p>}</code></pre>
+
+<h2 id="la-culture-de-cybers-curit-">La culture de cybersécurité</h2>
+
+<pre><code>Les 5 piliers d'une culture cyber saine :
+
+<li>TON DONNÉ PAR LE MANAGEMENT</li>
+<p>→ Les dirigeants respectent eux-mêmes les règles</p>
+<p>→ La sécurité est un investissement, pas un coût</p>
+<p>→ Les incidents sont traités comme des opportunités d'apprentissage</p>
+
+<li>RESPONSABILITÉ PARTAGÉE</li>
+<p>→ La sécurité n'est pas SEULEMENT le problème de l'IT</p>
+<p>→ Chaque employé est un acteur de la sécurité</p>
+<p>→ "See something, say something" : encourager les signalements</p>
+
+<li>FACILITÉ D'UTILISATION</li>
+<p>→ Les outils sécurisés doivent être aussi faciles que les non-sécurisés</p>
+<p>→ Si la procédure sécurisée est trop complexe → elle sera contournée</p>
+<p>→ UX de la sécurité est aussi importante que la technique</p>
+
+<li>APPRENTISSAGE CONTINU</li>
+<p>→ Le paysage des menaces évolue → la formation doit évoluer</p>
+<p>→ Partager les incidents réels (anonymisés) pour apprendre</p>
+<p>→ Bulletin mensuel des nouvelles menaces en langage accessible</p>
+
+<li>BIENVEILLANCE</li>
+<p>→ Punir les erreurs = culture de la honte = moins de signalements</p>
+<p>→ Récompenser la vigilance = culture positive = plus de signalements</p>
+<p>→ Un employé qui signale un clic malencontreux est un héros, pas un coupable</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cybersécurité humaine est un investissement continu, pas une case à cocher. Les simulations de phishing régulières, la formation contextuelle et une culture positive du signalement réduisent considérablement le risque humain. Mais la technologie doit aussi faciliter la sécurité : passkeys, gestionnaires de mots de passe et MFA obligatoire réduisent la dépendance au bon comportement humain — et c'est exactement l'objectif.</p>
+
+<p>---</p>
+<p><em>Catégorie : Bonnes pratiques</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#facteur-humain-sensibilisation" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/biometrie-authentification.html" class="nav-prev">← Biométrie et authentification moderne : FIDO2 et Passkeys</a>
+    
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

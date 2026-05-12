@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité des APIs REST : les bonnes pratiques — Temgus.CyberBlog</title>
 <meta name="description" content="OWASP API Top 10, JWT, rate limiting et validation des entrées.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api.html">
 <meta property="og:title" content="Sécurité des APIs REST : les bonnes pratiques — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité des APIs REST : les bonnes pratiques — Temgus.CyberBlog">
 <meta name="twitter:description" content="OWASP API Top 10, JWT, rate limiting et validation des entrées.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,523 @@
   "headline": "Sécurité des APIs REST : les bonnes pratiques",
   "description": "OWASP API Top 10, JWT, rate limiting et validation des entrées.",
   "datePublished": "2025-04-09",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-api.html",
   "inLanguage": "fr",
   "keywords": "API, REST, JWT, OWASP",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔌</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité des APIs REST : les bonnes pratiques</h1>
-  <p style="color:#8892a4;max-width:500px">OWASP API Top 10, JWT, rate limiting et validation des entrées.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-api" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔌</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité des APIs REST : les bonnes pratiques</div>
+      <div class="meta-details">
+        <span>📅 2025-04-09</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-les-apis-sont-des-cibles-privil-gi-es">Pourquoi les APIs sont des cibles privilégiées</a></li>
+<li><a href="#owasp-api-top-10">OWASP API Top 10</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#api1-broken-object-level-authorization-bola-">API1 — Broken Object Level Authorization (BOLA)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#api2-broken-authentication">API2 — Broken Authentication</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#api3-broken-object-property-level-authorization">API3 — Broken Object Property Level Authorization</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#api4-unrestricted-resource-consumption">API4 — Unrestricted Resource Consumption</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#api5-broken-function-level-authorization">API5 — Broken Function Level Authorization</a></li>
+<li><a href="#s-curisation-compl-te-d-une-api">Sécurisation complète d'une API</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#authentification-et-autorisation">Authentification et autorisation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#headers-de-s-curit-">Headers de sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#validation-des-entr-es">Validation des entrées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#logging-et-monitoring">Logging et monitoring</a></li>
+<li><a href="#checklist-de-s-curit-api">Checklist de sécurité API</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité des APIs REST : les bonnes pratiques</h1>
+
+<p>Les APIs REST sont le cœur des applications modernes. Elles connectent frontend, mobile, microservices et partenaires. Mais une API mal sécurisée est une porte d'entrée directe sur vos données et systèmes.</p>
+
+<h2 id="pourquoi-les-apis-sont-des-cibles-privil-gi-es">Pourquoi les APIs sont des cibles privilégiées</h2>
+
+<p>En 2023, <strong>83% du trafic internet</strong> passe par des APIs. Les 10 principales vulnérabilités API (OWASP API Top 10) représentent les vecteurs d'attaque les plus courants.</p>
+
+<h2 id="owasp-api-top-10">OWASP API Top 10</h2>
+
+<h3 id="api1-broken-object-level-authorization-bola-">API1 — Broken Object Level Authorization (BOLA)</h3>
+
+<p>La vulnérabilité la plus commune. L'API ne vérifie pas si l'utilisateur a le droit d'accéder à un objet spécifique.</p>
+
+<pre><code class="language-http"># Requête légitime de l'utilisateur 123
+<p>GET /api/users/123/profile</p>
+<p>Authorization: Bearer token_user_123</p>
+
+<h1>Attaque BOLA : accès au profil d'un autre utilisateur</h1>
+<p>GET /api/users/124/profile</p>
+<p>Authorization: Bearer token_user_123</p>
+<h1>Si l'API retourne les données → BOLA !</code></pre></h1>
+
+<p><strong>Correction :</strong></p>
+<pre><code class="language-python"># Toujours vérifier que l'objet appartient à l'utilisateur connecté
+<p>@app.route('/api/users/&lt;int:user_id&gt;/profile')</p>
+<p>def get_profile(user_id):</p>
+<p>current_user = get_current_user()  # Depuis le token JWT</p>
+
+<p># Vérification d'autorisation explicite</p>
+<p>if current_user.id != user_id and not current_user.is_admin:</p>
+<p>return jsonify({'error': 'Unauthorized'}), 403</p>
+
+<p>return jsonify(User.query.get(user_id).to_dict())</code></pre>
+
+<h3 id="api2-broken-authentication">API2 — Broken Authentication</h3>
+
+<pre><code class="language-http"># Token JWT sans expiration
+<p>eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyX2lkIjoxMjN9.</p>
+<h1>Algorithme "none" → pas de signature → facile à falsifier !</h1>
+
+<h1>Token avec algorithme faible</h1>
+<p>eyJhbGciOiJIUzI1NiJ9...</p>
+<h1>Clé secrète faible : "secret" ou "password"</code></pre></h1>
+
+<p><strong>Bonnes pratiques :</strong></p>
+<pre><code class="language-python">import jwt
+<p>from datetime import datetime, timedelta</p>
+
+<p>def create_token(user_id):</p>
+<p>payload = {</p>
+<p>'user_id': user_id,</p>
+<p>'exp': datetime.utcnow() + timedelta(hours=1),  # Expiration 1h</p>
+<p>'iat': datetime.utcnow(),</p>
+<p>'jti': str(uuid.uuid4())  # ID unique pour révocation</p>
+<p>}</p>
+<p>return jwt.encode(payload, SECRET_KEY, algorithm='HS256')</p>
+<p># Utiliser RS256 (asymétrique) pour les systèmes critiques</code></pre>
+
+<h3 id="api3-broken-object-property-level-authorization">API3 — Broken Object Property Level Authorization</h3>
+
+<pre><code class="language-http"># Requête normale de mise à jour du profil
+<p>PATCH /api/users/123</p>
+<p>{"name": "Jean Martin", "email": "jean@example.com"}</p>
+
+<h1>Attaque : ajout de propriétés non attendues (Mass Assignment)</h1>
+<p>PATCH /api/users/123</p>
+<p>{"name": "Jean", "email": "jean@example.com", "role": "admin", "balance": 99999}</p>
+<h1>Si l'API accepte "role" et "balance" → Élévation de privilèges !</code></pre></h1>
+
+<p><strong>Correction :</strong></p>
+<pre><code class="language-python"># Whitelisting des champs autorisés
+<p>ALLOWED_UPDATE_FIELDS = {'name', 'email', 'phone'}</p>
+
+<p>def update_user(user_id, data):</p>
+<p># Ne traiter que les champs autorisés</p>
+<p>filtered_data = {k: v for k, v in data.items() if k in ALLOWED_UPDATE_FIELDS}</p>
+<p>User.query.filter_by(id=user_id).update(filtered_data)</code></pre>
+
+<h3 id="api4-unrestricted-resource-consumption">API4 — Unrestricted Resource Consumption</h3>
+
+<pre><code class="language-python"># Sans rate limiting : l'attaquant peut :
+<h1>- Envoyer 1 000 000 requêtes/seconde</h1>
+<h1>- Télécharger des fichiers énormes</h1>
+<h1>- Déclencher des opérations coûteuses en boucle</h1>
+
+<h1>Avec Flask-Limiter</h1>
+<p>from flask_limiter import Limiter</p>
+
+<p>limiter = Limiter(app, key_func=get_remote_address)</p>
+
+<p>@app.route('/api/send-email')</p>
+<p>@limiter.limit("5 per minute")  # Max 5 emails par minute par IP</p>
+<p>def send_email():</p>
+<p>pass</p>
+
+<p>@app.route('/api/search')</p>
+<p>@limiter.limit("100 per hour")</p>
+<p>def search():</p>
+<p>pass</code></pre>
+
+<h3 id="api5-broken-function-level-authorization">API5 — Broken Function Level Authorization</h3>
+
+<pre><code class="language-http"># Endpoints admin non protégés
+<p>GET  /api/users          # Liste publique → OK</p>
+<p>POST /api/admin/users    # Création admin → doit être protégé !</p>
+<p>DELETE /api/admin/users/123  # Suppression → doit être protégé !</p>
+
+<h1>L'attaquant tente de découvrir les endpoints admin</h1>
+<p>GET /api/admin</p>
+<p>GET /api/v1/admin</p>
+<p>GET /api/internal</code></pre>
+
+<h2 id="s-curisation-compl-te-d-une-api">Sécurisation complète d'une API</h2>
+
+<h3 id="authentification-et-autorisation">Authentification et autorisation</h3>
+
+<pre><code class="language-python">from functools import wraps
+<p>import jwt</p>
+
+<p>def require_auth(f):</p>
+<p>@wraps(f)</p>
+<p>def decorated(<em>args, </em>*kwargs):</p>
+<p>token = request.headers.get('Authorization', '').replace('Bearer ', '')</p>
+<p>if not token:</p>
+<p>return jsonify({'error': 'Token manquant'}), 401</p>
+<p>try:</p>
+<p>payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])</p>
+<p>request.current_user = User.query.get(payload['user_id'])</p>
+<p>except jwt.ExpiredSignatureError:</p>
+<p>return jsonify({'error': 'Token expiré'}), 401</p>
+<p>except jwt.InvalidTokenError:</p>
+<p>return jsonify({'error': 'Token invalide'}), 401</p>
+<p>return f(<em>args, </em>*kwargs)</p>
+<p>return decorated</p>
+
+<p>def require_role(role):</p>
+<p>def decorator(f):</p>
+<p>@wraps(f)</p>
+<p>def decorated(<em>args, </em>*kwargs):</p>
+<p>if not request.current_user.has_role(role):</p>
+<p>return jsonify({'error': 'Accès refusé'}), 403</p>
+<p>return f(<em>args, </em>*kwargs)</p>
+<p>return decorated</p>
+<p>return decorator</p>
+
+<p>@app.route('/api/admin/users')</p>
+<p>@require_auth</p>
+<p>@require_role('admin')</p>
+<p>def list_all_users():</p>
+<p>return jsonify([u.to_dict() for u in User.query.all()])</code></pre>
+
+<h3 id="headers-de-s-curit-">Headers de sécurité</h3>
+
+<pre><code class="language-python">@app.after_request
+<p>def add_security_headers(response):</p>
+<p>response.headers['X-Content-Type-Options'] = 'nosniff'</p>
+<p>response.headers['X-Frame-Options'] = 'DENY'</p>
+<p>response.headers['Content-Security-Policy'] = "default-src 'self'"</p>
+<p>response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'</p>
+<p>response.headers['X-XSS-Protection'] = '1; mode=block'</p>
+<p># Ne jamais exposer la version du serveur</p>
+<p>response.headers.pop('Server', None)</p>
+<p>response.headers.pop('X-Powered-By', None)</p>
+<p>return response</code></pre>
+
+<h3 id="validation-des-entr-es">Validation des entrées</h3>
+
+<pre><code class="language-python">from marshmallow import Schema, fields, validate, ValidationError
+
+<p>class UserCreateSchema(Schema):</p>
+<p>name = fields.Str(required=True, validate=validate.Length(min=2, max=50))</p>
+<p>email = fields.Email(required=True)</p>
+<p>age = fields.Int(validate=validate.Range(min=18, max=120))</p>
+<p>role = fields.Str(validate=validate.OneOf(['user', 'moderator']))</p>
+<p># Jamais 'admin' accessible depuis l'API publique !</p>
+
+<p>@app.route('/api/users', methods=['POST'])</p>
+<p>@require_auth</p>
+<p>def create_user():</p>
+<p>try:</p>
+<p>data = UserCreateSchema().load(request.json)</p>
+<p>except ValidationError as e:</p>
+<p>return jsonify({'errors': e.messages}), 400</p>
+<p># Continuer avec data validée et filtrée</code></pre>
+
+<h3 id="logging-et-monitoring">Logging et monitoring</h3>
+
+<pre><code class="language-python">import logging
+<p>from datetime import datetime</p>
+
+<p>security_logger = logging.getLogger('security')</p>
+
+<p>@app.before_request</p>
+<p>def log_request():</p>
+<p>security_logger.info({</p>
+<p>'timestamp': datetime.utcnow().isoformat(),</p>
+<p>'ip': request.remote_addr,</p>
+<p>'method': request.method,</p>
+<p>'path': request.path,</p>
+<p>'user_agent': request.user_agent.string</p>
+<p>})</p>
+
+<h1>Alertes sur comportements suspects</h1>
+<p>def check_suspicious_activity(user_id, action):</p>
+<p>recent_failures = get_recent_failures(user_id, minutes=5)</p>
+<p>if recent_failures &gt; 10:</p>
+<p>security_logger.warning(f"Activité suspecte user {user_id}: {recent_failures} échecs")</p>
+<p>block_user_temporarily(user_id)</code></pre>
+
+<h2 id="checklist-de-s-curit-api">Checklist de sécurité API</h2>
+
+<pre><code>Authentification
+<p>✅ JWT avec expiration courte (1h max)</p>
+<p>✅ Algorithme RS256 ou HS256 (jamais "none")</p>
+<p>✅ Refresh tokens avec rotation</p>
+<p>✅ Révocation de tokens possible</p>
+
+<p>Autorisation</p>
+<p>✅ Vérification objet par objet (anti-BOLA)</p>
+<p>✅ Whitelisting des champs modifiables</p>
+<p>✅ Endpoints admin séparés et protégés</p>
+
+<p>Données</p>
+<p>✅ Validation stricte des entrées</p>
+<p>✅ Pas de données sensibles dans les URLs</p>
+<p>✅ Pagination limitée (max 100 résultats)</p>
+<p>✅ HTTPS uniquement (HSTS activé)</p>
+
+<p>Infrastructure</p>
+<p>✅ Rate limiting par endpoint</p>
+<p>✅ Logs de sécurité centralisés</p>
+<p>✅ Headers de sécurité</p>
+<p>✅ Tests de pénétration réguliers</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité d'une API repose sur le principe <strong>"ne jamais faire confiance au client"</strong>. Validez tout, autorisez explicitement, limitez le débit et loguez tout. Les outils comme <strong>OWASP ZAP</strong> ou <strong>Burp Suite</strong> permettent d'auditer automatiquement vos APIs.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-api" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ingenierie-sociale.html" class="nav-prev">← Ingénierie sociale : manipuler l'humain</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/linux-securite.html" class="nav-next">Linux pour la sécurité : commandes essentielles →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

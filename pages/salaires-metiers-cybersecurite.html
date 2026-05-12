@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Salaires et métiers de la cybersécurité en 2025 : le guide complet — Temgus.CyberBlog</title>
 <meta name="description" content="Analyste SOC, pentesteur, RSSI, consultant — salaires détaillés par métier et niveau en France et à l'international.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/salaires-metiers-cybersecurite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/salaires-metiers-cybersecurite.html">
 <meta property="og:title" content="Salaires et métiers de la cybersécurité en 2025 : le guide complet — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Salaires et métiers de la cybersécurité en 2025 : le guide complet — Temgus.CyberBlog">
 <meta name="twitter:description" content="Analyste SOC, pentesteur, RSSI, consultant — salaires détaillés par métier et niveau en France et à l'international.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,416 @@
   "headline": "Salaires et métiers de la cybersécurité en 2025 : le guide complet",
   "description": "Analyste SOC, pentesteur, RSSI, consultant — salaires détaillés par métier et niveau en France et à l'international.",
   "datePublished": "2025-07-09",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/salaires-metiers-cybersecurite.html",
   "inLanguage": "fr",
   "keywords": "salaire, métiers, RSSI, SOC, carrière",
-  "timeRequired": "PT8M"
+  "timeRequired": "PT8M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">💰</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Salaires et métiers de la cybersécurité en 2025 : le guide complet</h1>
-  <p style="color:#8892a4;max-width:500px">Analyste SOC, pentesteur, RSSI, consultant — salaires détaillés par métier et niveau en France et à l'international.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#salaires-metiers-cybersecurite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">💰</div>
+    <div class="meta-info">
+      <div class="meta-category">Carrière en cybersécurité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Salaires et métiers de la cybersécurité en 2025 : le guide complet</div>
+      <div class="meta-details">
+        <span>📅 2025-07-09</span>
+        <span>⏱ 8 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-les-salaires-sont-ils-lev-s-">Pourquoi les salaires sont-ils élevés ?</a></li>
+<li><a href="#les-m-tiers-et-leurs-salaires-en-france">Les métiers et leurs salaires en France</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyste-soc-security-operations-center-">Analyste SOC (Security Operations Center)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pentesteur-ethical-hacker">Pentesteur / Ethical Hacker</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ing-nieur-en-s-curit-">Ingénieur en sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#rssi-responsable-de-la-s-curit-des-syst-mes-d-information-">RSSI (Responsable de la Sécurité des Systèmes d'Information)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#consultant-en-cybers-curit-">Consultant en cybersécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#forensic-incident-response">Forensic / Incident Response</a></li>
+<li><a href="#les-sp-cialisations-les-mieux-r-mun-r-es">Les spécialisations les mieux rémunérées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-cloud-security-aws-azure-gcp-">1. Cloud Security (AWS/Azure/GCP)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-ot-ics-security-syst-mes-industriels-">2. OT/ICS Security (systèmes industriels)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-red-team-apt-simulation">3. Red Team / APT Simulation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-bug-bounty">4. Bug Bounty</a></li>
+<li><a href="#salaires-l-international">Salaires à l'international</a></li>
+<li><a href="#les-certifications-qui-boostent-les-salaires">Les certifications qui boostent les salaires</a></li>
+<li><a href="#freelance-vs-salari-">Freelance vs salarié</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#freelance">Freelance</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#salari-">Salarié</a></li>
+<li><a href="#comment-n-gocier-son-salaire-">Comment négocier son salaire ?</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Salaires et métiers de la cybersécurité en 2025 : le guide complet</h1>
+
+<p>La cybersécurité offre certains des meilleurs salaires du secteur informatique. Mais toutes les spécialisations ne se valent pas. Voici un panorama complet des métiers et rémunérations en France et à l'international.</p>
+
+<h2 id="pourquoi-les-salaires-sont-ils-lev-s-">Pourquoi les salaires sont-ils élevés ?</h2>
+
+<p>Trois facteurs expliquent les rémunérations attractives :</p>
+
+<li><strong>Pénurie de talents</strong> : l'offre de professionnels qualifiés est largement inférieure à la demande</li>
+<li><strong>Criticité du domaine</strong> : une faille peut coûter des millions — les experts qui les préviennent ont de la valeur</li>
+<li><strong>Formation longue</strong> : acquérir une vraie expertise prend plusieurs années</li>
+
+<h2 id="les-m-tiers-et-leurs-salaires-en-france">Les métiers et leurs salaires en France</h2>
+
+<h3 id="analyste-soc-security-operations-center-">Analyste SOC (Security Operations Center)</h3>
+
+<p><strong>Missions</strong> : surveiller les alertes de sécurité, qualifier les incidents, escalader les cas critiques.</p>
+
+<p>| Niveau | Salaire brut annuel |</p>
+<p>|--------|-------------------|</p>
+<p>| Junior (0-2 ans) | 32 000 — 42 000 € |</p>
+<p>| Confirmé (2-5 ans) | 42 000 — 55 000 € |</p>
+<p>| Senior (5+ ans) | 55 000 — 70 000 € |</p>
+
+<h3 id="pentesteur-ethical-hacker">Pentesteur / Ethical Hacker</h3>
+
+<p><strong>Missions</strong> : tester la sécurité des systèmes, identifier les vulnérabilités, rédiger des rapports.</p>
+
+<p>| Niveau | Salaire brut annuel |</p>
+<p>|--------|-------------------|</p>
+<p>| Junior (0-2 ans) | 38 000 — 48 000 € |</p>
+<p>| Confirmé (2-5 ans) | 48 000 — 65 000 € |</p>
+<p>| Senior (5+ ans) | 65 000 — 90 000 € |</p>
+
+<h3 id="ing-nieur-en-s-curit-">Ingénieur en sécurité</h3>
+
+<p><strong>Missions</strong> : concevoir et implémenter les architectures sécurisées, gérer les outils de sécurité.</p>
+
+<p>| Niveau | Salaire brut annuel |</p>
+<p>|--------|-------------------|</p>
+<p>| Junior | 40 000 — 50 000 € |</p>
+<p>| Confirmé | 50 000 — 70 000 € |</p>
+<p>| Senior | 70 000 — 95 000 € |</p>
+
+<h3 id="rssi-responsable-de-la-s-curit-des-syst-mes-d-information-">RSSI (Responsable de la Sécurité des Systèmes d'Information)</h3>
+
+<p><strong>Missions</strong> : définir la stratégie sécurité, gérer les risques, piloter les équipes, interlocuteur COMEX.</p>
+
+<p>| Taille entreprise | Salaire brut annuel |</p>
+<p>|------------------|-------------------|</p>
+<p>| PME | 55 000 — 75 000 € |</p>
+<p>| ETI | 75 000 — 100 000 € |</p>
+<p>| Grand groupe | 100 000 — 150 000 € |</p>
+
+<h3 id="consultant-en-cybers-curit-">Consultant en cybersécurité</h3>
+
+<p><strong>Missions</strong> : accompagner les clients, réaliser des audits, proposer des recommandations.</p>
+
+<p>| Niveau | Salaire brut annuel |</p>
+<p>|--------|-------------------|</p>
+<p>| Junior | 38 000 — 50 000 € |</p>
+<p>| Senior | 55 000 — 80 000 € |</p>
+<p>| Manager | 75 000 — 110 000 € |</p>
+
+<h3 id="forensic-incident-response">Forensic / Incident Response</h3>
+
+<p><strong>Missions</strong> : analyser les compromissions, collecter les preuves, produire des rapports d'investigation.</p>
+
+<p>| Niveau | Salaire brut annuel |</p>
+<p>|--------|-------------------|</p>
+<p>| Junior | 38 000 — 50 000 € |</p>
+<p>| Confirmé | 50 000 — 70 000 € |</p>
+<p>| Expert | 70 000 — 95 000 € |</p>
+
+<h2 id="les-sp-cialisations-les-mieux-r-mun-r-es">Les spécialisations les mieux rémunérées</h2>
+
+<p>Certaines niches sont particulièrement recherchées et donc bien payées :</p>
+
+<h3 id="1-cloud-security-aws-azure-gcp-">1. Cloud Security (AWS/Azure/GCP)</h3>
+<p>La migration massive vers le cloud crée une demande explosive. Un architecte sécurité cloud senior peut dépasser <strong>100 000 €</strong> en France.</p>
+
+<h3 id="2-ot-ics-security-syst-mes-industriels-">2. OT/ICS Security (systèmes industriels)</h3>
+<p>Sécuriser les infrastructures critiques (énergie, eau, transport) demande des compétences rares. Salaires 20-30% supérieurs à la moyenne.</p>
+
+<h3 id="3-red-team-apt-simulation">3. Red Team / APT Simulation</h3>
+<p>Les pentesters capables de simuler des groupes APT avancés sont très rares et très demandés. Certains freelances facturent <strong>1 500 à 2 000 €/jour</strong>.</p>
+
+<h3 id="4-bug-bounty">4. Bug Bounty</h3>
+<p>Les meilleurs hunters gagnent plusieurs centaines de milliers d'euros par an. En 2024, le top hunter HackerOne a gagné plus de 4 millions de dollars.</p>
+
+<h2 id="salaires-l-international">Salaires à l'international</h2>
+
+<p>| Pays | Pentesteur senior | RSSI |</p>
+<p>|------|------------------|------|</p>
+<p>| France | 65 000 — 90 000 € | 80 000 — 130 000 € |</p>
+<p>| Suisse | 100 000 — 150 000 CHF | 140 000 — 200 000 CHF |</p>
+<p>| Royaume-Uni | 70 000 — 100 000 £ | 100 000 — 160 000 £ |</p>
+<p>| États-Unis | 120 000 — 180 000 $ | 150 000 — 250 000 $ |</p>
+<p>| Canada | 90 000 — 130 000 CAD | 120 000 — 180 000 CAD |</p>
+
+<h2 id="les-certifications-qui-boostent-les-salaires">Les certifications qui boostent les salaires</h2>
+
+<p>Certaines certifications ont un impact direct et mesurable sur la rémunération :</p>
+
+<ul><li><strong>OSCP</strong> : +10 à +20% selon les études</li><li><strong>CISSP</strong> : +15 à +25% pour les profils management</li><li><strong>AWS Security Specialty</strong> : +15% pour les profils cloud</li><li><strong>CISM</strong> : +20% pour les RSSI</li></ul>
+
+<h2 id="freelance-vs-salari-">Freelance vs salarié</h2>
+
+<h3 id="freelance">Freelance</h3>
+<ul><li><strong>Avantages</strong> : TJM élevé (600-1500 €/jour), liberté, variété des missions</li><li><strong>Inconvénients</strong> : pas de salaire fixe, gestion administrative, pas de congés payés</li></ul>
+
+<h3 id="salari-">Salarié</h3>
+<ul><li><strong>Avantages</strong> : stabilité, avantages sociaux, montée en compétences structurée</li><li><strong>Inconvénients</strong> : plafond salarial, moins de flexibilité</li></ul>
+
+<h2 id="comment-n-gocier-son-salaire-">Comment négocier son salaire ?</h2>
+
+<li><strong>Documentez vos compétences</strong> : certifications, CTF, projets GitHub</li>
+<li><strong>Renseignez-vous sur le marché</strong> : LinkedIn Salary, Glassdoor, enquêtes CLUSIF</li>
+<li><strong>Valorisez vos réalisations</strong> concrètes, pas vos responsabilités abstraites</li>
+<li><strong>Négociez le package complet</strong> : télétravail, formation, matériel, variable</li>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cybersécurité offre des perspectives salariales excellentes pour ceux qui investissent dans leurs compétences. La clé est de se spécialiser progressivement, d'obtenir des certifications reconnues et de construire un portfolio de réalisations concrètes. Le marché récompense l'expertise réelle.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#salaires-metiers-cybersecurite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/debuter-cybersecurite-guide.html" class="nav-prev">← Débuter en cybersécurité : le guide complet pour se lancer</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cv-entretien-cybersecurite.html" class="nav-next">Décrocher un poste en cybersécurité : CV, entretien et portfolio →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

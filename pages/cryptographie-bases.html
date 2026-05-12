@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Cryptographie : chiffrer ses données efficacement — Temgus.CyberBlog</title>
 <meta name="description" content="Symétrique, asymétrique, hachage — les fondamentaux du chiffrement.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-bases.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-bases.html">
 <meta property="og:title" content="Cryptographie : chiffrer ses données efficacement — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Cryptographie : chiffrer ses données efficacement — Temgus.CyberBlog">
 <meta name="twitter:description" content="Symétrique, asymétrique, hachage — les fondamentaux du chiffrement.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,478 @@
   "headline": "Cryptographie : chiffrer ses données efficacement",
   "description": "Symétrique, asymétrique, hachage — les fondamentaux du chiffrement.",
   "datePublished": "2025-03-18",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-bases.html",
   "inLanguage": "fr",
   "keywords": "crypto, chiffrement, RSA, AES",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔑</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Cryptographie : chiffrer ses données efficacement</h1>
-  <p style="color:#8892a4;max-width:500px">Symétrique, asymétrique, hachage — les fondamentaux du chiffrement.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cryptographie-bases" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔑</div>
+    <div class="meta-info">
+      <div class="meta-category">Cryptographie</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Cryptographie : chiffrer ses données efficacement</div>
+      <div class="meta-details">
+        <span>📅 2025-03-18</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-la-cryptographie-">Qu'est-ce que la cryptographie ?</a></li>
+<li><a href="#les-deux-grandes-familles-de-chiffrement">Les deux grandes familles de chiffrement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#chiffrement-sym-trique">Chiffrement symétrique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#chiffrement-asym-trique">Chiffrement asymétrique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-combinaison-chiffrement-hybride">La combinaison : chiffrement hybride</a></li>
+<li><a href="#les-fonctions-de-hachage">Les fonctions de hachage</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#hachage-des-mots-de-passe">Hachage des mots de passe</a></li>
+<li><a href="#les-signatures-num-riques">Les signatures numériques</a></li>
+<li><a href="#tls-https-la-cryptographie-en-action">TLS/HTTPS : la cryptographie en action</a></li>
+<li><a href="#bonnes-pratiques-cryptographiques">Bonnes pratiques cryptographiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ce-qu-il-faut-faire-">Ce qu'il faut faire ✅</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ce-qu-il-faut-viter-">Ce qu'il faut éviter ❌</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Cryptographie : chiffrer ses données efficacement</h1>
+
+<p>La cryptographie est la science du secret. Elle protège vos communications, vos mots de passe, vos transactions bancaires et vos données stockées. Comprendre ses bases vous permet de faire des choix éclairés pour sécuriser vos informations.</p>
+
+<h2 id="qu-est-ce-que-la-cryptographie-">Qu'est-ce que la cryptographie ?</h2>
+
+<p>La cryptographie transforme des données <strong>lisibles</strong> (texte en clair) en données <strong>illisibles</strong> (texte chiffré) à l'aide d'un algorithme et d'une clé. Seul quelqu'un possédant la bonne clé peut déchiffrer le message.</p>
+
+<pre><code>Texte clair  : "Mot de passe : Admin123"
+<p>+</p>
+<p>Algorithme   : AES-256</p>
+<p>+</p>
+<p>Clé secrète  : x7K#mP9$qL2@nR5v</p>
+<p>↓</p>
+<p>Texte chiffré: 8f3a2b1c9d4e5f6a7b8c9d0e1f2a3b4c</code></pre>
+
+<h2 id="les-deux-grandes-familles-de-chiffrement">Les deux grandes familles de chiffrement</h2>
+
+<h3 id="chiffrement-sym-trique">Chiffrement symétrique</h3>
+
+<p>La <strong>même clé</strong> sert à chiffrer ET à déchiffrer. C'est rapide et efficace pour de grandes quantités de données.</p>
+
+<pre><code>Expéditeur                    Destinataire
+<p>|                              |</p>
+<p>|--- [CLÉ SECRÈTE PARTAGÉE] ---|</p>
+<p>|                              |</p>
+<p>Chiffre avec la clé          Déchiffre avec la clé</code></pre>
+
+<p><strong>Algorithmes principaux :</strong></p>
+
+<p>| Algorithme | Taille clé | Usage |</p>
+<p>|------------|-----------|-------|</p>
+<p>| AES-128 | 128 bits | Standard actuel |</p>
+<p>| AES-256 | 256 bits | Haute sécurité |</p>
+<p>| ChaCha20 | 256 bits | Mobile/embarqué |</p>
+<p>| 3DES | 168 bits | Obsolète (éviter) |</p>
+
+<p><strong>Problème :</strong> comment partager la clé secrète de façon sécurisée ?</p>
+
+<pre><code class="language-python"># Exemple de chiffrement AES en Python
+<p>from Crypto.Cipher import AES</p>
+<p>from Crypto.Random import get_random_bytes</p>
+<p>import base64</p>
+
+<h1>Générer une clé aléatoire</h1>
+<p>cle = get_random_bytes(32)  # 256 bits</p>
+
+<h1>Chiffrer</h1>
+<p>cipher = AES.new(cle, AES.MODE_GCM)</p>
+<p>texte_chiffre, tag = cipher.encrypt_and_digest(b"Message secret")</p>
+
+<p>print(f"Chiffré : {base64.b64encode(texte_chiffre).decode()}")</code></pre>
+
+<h3 id="chiffrement-asym-trique">Chiffrement asymétrique</h3>
+
+<p>Utilise <strong>deux clés mathématiquement liées</strong> :</p>
+<ul><li><strong>Clé publique</strong> : partagée librement, sert à chiffrer</li><li><strong>Clé privée</strong> : gardée secrète, sert à déchiffrer</li></ul>
+
+<pre><code>Clé publique de Bob
+<p>↓</p>
+<p>Alice chiffre le message ──→ Message chiffré ──→ Bob déchiffre</p>
+<p>avec sa clé privée</code></pre>
+
+<p><strong>Analogie :</strong> la clé publique est comme un cadenas ouvert que vous distribuez. N'importe qui peut fermer le cadenas (chiffrer), mais seul vous avez la clé pour l'ouvrir (déchiffrer).</p>
+
+<p><strong>Algorithmes principaux :</strong></p>
+
+<p>| Algorithme | Usage | Recommandation |</p>
+<p>|------------|-------|----------------|</p>
+<p>| RSA-2048 | Chiffrement, signatures | Acceptable |</p>
+<p>| RSA-4096 | Chiffrement haute sécurité | Recommandé |</p>
+<p>| ECDSA | Signatures numériques | Excellent |</p>
+<p>| Ed25519 | SSH, signatures | Meilleur choix actuel |</p>
+
+<pre><code class="language-bash"># Générer une paire de clés RSA avec OpenSSL
+<p>openssl genrsa -out cle_privee.pem 4096</p>
+<p>openssl rsa -in cle_privee.pem -pubout -out cle_publique.pem</p>
+
+<h1>Chiffrer un fichier avec la clé publique</h1>
+<p>openssl rsautl -encrypt -pubin -inkey cle_publique.pem \</p>
+<p>-in message.txt -out message_chiffre.bin</p>
+
+<h1>Déchiffrer avec la clé privée</h1>
+<p>openssl rsautl -decrypt -inkey cle_privee.pem \</p>
+<p>-in message_chiffre.bin -out message_dechiffre.txt</code></pre>
+
+<h3 id="la-combinaison-chiffrement-hybride">La combinaison : chiffrement hybride</h3>
+
+<p>En pratique, on combine les deux :</p>
+<li>On génère une clé symétrique aléatoire (rapide pour chiffrer les données)</li>
+<li>On chiffre cette clé avec la clé publique du destinataire (asymétrique)</li>
+
+<p>C'est exactement ce que fait <strong>TLS/HTTPS</strong> !</p>
+
+<h2 id="les-fonctions-de-hachage">Les fonctions de hachage</h2>
+
+<p>Une fonction de hachage transforme n'importe quelle donnée en une <strong>empreinte de taille fixe</strong>. Ce n'est pas du chiffrement car c'est <strong>irréversible</strong> — on ne peut pas retrouver la donnée originale.</p>
+
+<pre><code>"Bonjour"        → SHA-256 → 7f83b1657ff1fc53b92dc18148a1d65...
+<p>"Bonjour."       → SHA-256 → ef0c748df4da50a8d6b284f7ca943...</p>
+<p>"bonjour"        → SHA-256 → 9b74c9897bac770ffc029102a200c5...</code></pre>
+
+<p><strong>Propriétés importantes :</strong></p>
+<ul><li>Même entrée → toujours même sortie</li><li>Moindre modification → empreinte complètement différente</li><li>Impossible de retrouver l'entrée depuis l'empreinte</li><li>Extrêmement difficile de trouver deux entrées avec la même empreinte</li></ul>
+
+<p><strong>Algorithmes :</strong></p>
+
+<p>| Algorithme | Taille | Statut |</p>
+<p>|------------|--------|--------|</p>
+<p>| MD5 | 128 bits | ⛔ Cassé, ne plus utiliser |</p>
+<p>| SHA-1 | 160 bits | ⛔ Cassé, ne plus utiliser |</p>
+<p>| SHA-256 | 256 bits | ✅ Standard actuel |</p>
+<p>| SHA-3 | Variable | ✅ Excellent |</p>
+<p>| bcrypt | Variable | ✅ Idéal pour mots de passe |</p>
+
+<h3 id="hachage-des-mots-de-passe">Hachage des mots de passe</h3>
+
+<p>Les mots de passe ne doivent <strong>jamais</strong> être stockés en clair. On stocke leur empreinte.</p>
+
+<pre><code class="language-python">import bcrypt
+
+<h1>Hacher un mot de passe (avec salt automatique)</h1>
+<p>mot_de_passe = b"MonMotDePasse123"</p>
+<p>hash_mdp = bcrypt.hashpw(mot_de_passe, bcrypt.gensalt(rounds=12))</p>
+
+<p>print(f"Hash stocké : {hash_mdp}")</p>
+<h1>Hash stocké : $2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/...</h1>
+
+<h1>Vérifier un mot de passe</h1>
+<p>if bcrypt.checkpw(mot_de_passe, hash_mdp):</p>
+<p>print("Mot de passe correct !")</code></pre>
+
+<p>> <strong>Pourquoi bcrypt et pas SHA-256 ?</strong> bcrypt est intentionnellement lent, ce qui rend les attaques par force brute très coûteuses en temps.</p>
+
+<h2 id="les-signatures-num-riques">Les signatures numériques</h2>
+
+<p>Une signature numérique prouve <strong>l'authenticité et l'intégrité</strong> d'un document. Elle utilise la clé <strong>privée</strong> pour signer et la clé <strong>publique</strong> pour vérifier.</p>
+
+<pre><code>Alice signe :
+<p>Document + Clé privée d'Alice → Signature numérique</p>
+
+<p>Bob vérifie :</p>
+<p>Document + Signature + Clé publique d'Alice → Valide / Invalide</code></pre>
+
+<p><strong>Utilisations :</strong></p>
+<ul><li>Certificats SSL/TLS (HTTPS)</li><li>Signatures d'emails (S/MIME, PGP)</li><li>Mises à jour logicielles</li><li>Transactions blockchain</li></ul>
+
+<pre><code class="language-bash"># Signer un fichier avec GPG
+<p>gpg --sign --armor document.pdf</p>
+
+<h1>Vérifier une signature</h1>
+<p>gpg --verify document.pdf.asc</code></pre>
+
+<h2 id="tls-https-la-cryptographie-en-action">TLS/HTTPS : la cryptographie en action</h2>
+
+<p>Quand vous vous connectez à un site HTTPS, voici ce qui se passe en coulisses :</p>
+
+<pre><code>1. Votre navigateur → Serveur : "Bonjour, je supporte TLS 1.3"
+<li>Serveur → Navigateur : Certificat (clé publique + identité)</li>
+<li>Navigateur : Vérifie le certificat auprès d'une autorité de confiance</li>
+<li>Échange de clés : Génération d'une clé de session secrète</li>
+<li>Communication chiffrée avec AES-256</code></pre></li>
+
+<p><strong>Vérifier un certificat SSL :</strong></p>
+<pre><code class="language-bash"># Via la ligne de commande
+<p>openssl s_client -connect google.com:443 -showcerts</p>
+
+<h1>Voir les détails du certificat</h1>
+<p>echo | openssl s_client -connect google.com:443 2&gt;/dev/null | \</p>
+<p>openssl x509 -noout -text</code></pre>
+
+<h2 id="bonnes-pratiques-cryptographiques">Bonnes pratiques cryptographiques</h2>
+
+<h3 id="ce-qu-il-faut-faire-">Ce qu'il faut faire ✅</h3>
+
+<ul><li>Utiliser <strong>AES-256</strong> pour le chiffrement symétrique</li><li>Utiliser <strong>RSA-4096 ou Ed25519</strong> pour l'asymétrique</li><li>Utiliser <strong>SHA-256 ou SHA-3</strong> pour le hachage</li><li>Utiliser <strong>bcrypt, scrypt ou Argon2</strong> pour les mots de passe</li><li>Toujours utiliser des <strong>clés aléatoires</strong> générées cryptographiquement</li></ul>
+
+<h3 id="ce-qu-il-faut-viter-">Ce qu'il faut éviter ❌</h3>
+
+<pre><code class="language-python"># ❌ NE JAMAIS faire ça
+<p>import hashlib</p>
+<p>mot_de_passe_hash = hashlib.md5("MonMotDePasse".encode()).hexdigest()</p>
+<h1>MD5 est cassé et instantanément reversible avec des rainbow tables</h1>
+
+<h1>❌ Clé codée en dur dans le code</h1>
+<p>CLE_SECRETE = "motdepasse123"  # Visible dans le code source !</p>
+
+<h1>❌ Chiffrement maison</h1>
+<p>def mon_chiffrement(texte):</p>
+<p>return ''.join(chr(ord(c) + 3) for c in texte)  # César de César !</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cryptographie est partout — dans votre navigateur, votre téléphone, vos applications bancaires. Retenez l'essentiel : <strong>AES-256 pour stocker, RSA/ECC pour échanger, bcrypt pour les mots de passe, SHA-256 pour vérifier l'intégrité</strong>. Et surtout, n'inventez jamais votre propre algorithme de chiffrement — utilisez toujours des implémentations éprouvées.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cryptographie-bases" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/phishing-arnaques.html" class="nav-prev">← Phishing : reconnaître et éviter les pièges</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/intro-pentest.html" class="nav-next">Introduction au pentesting éthique →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

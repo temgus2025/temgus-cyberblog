@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécuriser sa maison connectée : le guide complet — Temgus.CyberBlog</title>
 <meta name="description" content="Routeur, Wi-Fi, IoT, mots de passe, MFA, sauvegardes — protéger son domicile numérique sans être expert.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securiser-maison-connectee.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securiser-maison-connectee.html">
 <meta property="og:title" content="Sécuriser sa maison connectée : le guide complet — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécuriser sa maison connectée : le guide complet — Temgus.CyberBlog">
 <meta name="twitter:description" content="Routeur, Wi-Fi, IoT, mots de passe, MFA, sauvegardes — protéger son domicile numérique sans être expert.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,459 @@
   "headline": "Sécuriser sa maison connectée : le guide complet",
   "description": "Routeur, Wi-Fi, IoT, mots de passe, MFA, sauvegardes — protéger son domicile numérique sans être expert.",
   "datePublished": "2025-09-04",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securiser-maison-connectee.html",
   "inLanguage": "fr",
   "keywords": "IoT, Wi-Fi, routeur, maison connectée, vie privée",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🏠</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécuriser sa maison connectée : le guide complet</h1>
-  <p style="color:#8892a4;max-width:500px">Routeur, Wi-Fi, IoT, mots de passe, MFA, sauvegardes — protéger son domicile numérique sans être expert.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securiser-maison-connectee" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🏠</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécuriser sa maison connectée : le guide complet</div>
+      <div class="meta-details">
+        <span>📅 2025-09-04</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#l-tat-des-lieux-inqui-tant">L'état des lieux inquiétant</a></li>
+<li><a href="#s-curiser-votre-box-routeur">Sécuriser votre box/routeur</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#changer-les-identifiants-par-d-faut">Changer les identifiants par défaut</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mettre-jour-le-firmware">Mettre à jour le firmware</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-sactiver-les-fonctionnalit-s-inutiles">Désactiver les fonctionnalités inutiles</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#configuration-dns-s-curis-e">Configuration DNS sécurisée</a></li>
+<li><a href="#s-curiser-le-wi-fi">Sécuriser le Wi-Fi</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#protocole-de-chiffrement">Protocole de chiffrement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mot-de-passe-wi-fi">Mot de passe Wi-Fi</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#masquer-le-ssid-">Masquer le SSID ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-seau-invit-s-s-par-">Réseau invités séparé</a></li>
+<li><a href="#s-curiser-les-objets-connect-s">Sécuriser les objets connectés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-gle-d-or-inventoriez-vos-appareils">Règle d'or : inventoriez vos appareils</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pour-chaque-appareil-iot">Pour chaque appareil IoT</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cam-ras-de-surveillance">Caméras de surveillance</a></li>
+<li><a href="#s-curiser-les-comptes-en-ligne">Sécuriser les comptes en ligne</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mots-de-passe-uniques-partout">Mots de passe uniques partout</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#activer-le-mfa-sur-les-comptes-importants">Activer le MFA sur les comptes importants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#v-rifier-si-vos-donn-es-ont-fuit-">Vérifier si vos données ont fuité</a></li>
+<li><a href="#protection-contre-le-phishing">Protection contre le phishing</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#signaux-d-alerte">Signaux d'alerte</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#v-rifier-un-lien-avant-de-cliquer">Vérifier un lien avant de cliquer</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#extensions-navigateur-recommand-es">Extensions navigateur recommandées</a></li>
+<li><a href="#sauvegardes-domestiques">Sauvegardes domestiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-gle-3-2-1">Règle 3-2-1</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#solutions-recommand-es">Solutions recommandées</a></li>
+<li><a href="#que-faire-en-cas-d-incident">Que faire en cas d'incident</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#comportement-suspect-sur-le-r-seau">Comportement suspect sur le réseau</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#compte-pirat-">Compte piraté</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécuriser sa maison connectée : le guide complet</h1>
+
+<p>Caméras, télévisions, box domotique, enceintes connectées — nos maisons sont devenues de véritables réseaux informatiques. Pourtant, la sécurité y est souvent négligée. Voici comment transformer votre domicile en forteresse numérique.</p>
+
+<h2 id="l-tat-des-lieux-inqui-tant">L'état des lieux inquiétant</h2>
+
+<p>Des millions d'objets connectés (IoT) sont accessibles directement depuis Internet avec des identifiants par défaut. Des moteurs de recherche comme Shodan indexent des caméras, routeurs et imprimantes accessibles publiquement.</p>
+
+<p><strong>Risques concrets :</strong></p>
+<ul><li>Espionnage via caméras mal sécurisées</li><li>Utilisation de votre connexion pour des attaques DDoS (botnet Mirai)</li><li>Accès à votre réseau domestique depuis un appareil IoT compromis</li><li>Vol de données personnelles</li></ul>
+
+<h2 id="s-curiser-votre-box-routeur">Sécuriser votre box/routeur</h2>
+
+<h3 id="changer-les-identifiants-par-d-faut">Changer les identifiants par défaut</h3>
+<pre><code>❌ admin / admin
+<p>❌ admin / password</p>
+<p>❌ admin / 1234</p>
+
+<p>✅ Utilisateur unique + mot de passe 20 caractères aléatoires</code></pre>
+
+<h3 id="mettre-jour-le-firmware">Mettre à jour le firmware</h3>
+<p>Vérifiez régulièrement les mises à jour de votre routeur. Les fabricants publient des correctifs pour les vulnérabilités critiques.</p>
+
+<h3 id="d-sactiver-les-fonctionnalit-s-inutiles">Désactiver les fonctionnalités inutiles</h3>
+<pre><code>☐ UPnP (Universal Plug and Play) → DÉSACTIVER
+<p>☐ WPS (Wi-Fi Protected Setup) → DÉSACTIVER (vulnérable)</p>
+<p>☐ Administration à distance → DÉSACTIVER sauf besoin</p>
+<p>☐ Telnet → DÉSACTIVER (remplacé par SSH)</code></pre>
+
+<h3 id="configuration-dns-s-curis-e">Configuration DNS sécurisée</h3>
+<pre><code>DNS primaire   : 9.9.9.9 (Quad9 - filtrage malwares)
+<p>DNS secondaire : 149.112.112.112</p>
+
+<p>Ou : 1.1.1.2 / 1.0.0.2 (Cloudflare avec filtrage malwares)</code></pre>
+
+<h2 id="s-curiser-le-wi-fi">Sécuriser le Wi-Fi</h2>
+
+<h3 id="protocole-de-chiffrement">Protocole de chiffrement</h3>
+<pre><code>❌ WEP (cassable en minutes)
+<p>❌ WPA (trop ancien)</p>
+<p>⚠️ WPA2 (acceptable mais WPA3 préférable)</p>
+<p>✅ WPA3 (standard actuel recommandé)</code></pre>
+
+<h3 id="mot-de-passe-wi-fi">Mot de passe Wi-Fi</h3>
+<pre><code class="language-bash"># Générer un mot de passe Wi-Fi fort
+<p>python3 -c "import secrets; print(secrets.token_urlsafe(16))"</p>
+<h1>Exemple : K9mX2pLqR7nW4vYj</h1>
+
+<h1>Minimum recommandé : 15 caractères, mixte lettres/chiffres</code></pre></h1>
+
+<h3 id="masquer-le-ssid-">Masquer le SSID ?</h3>
+<p>Masquer le SSID (nom du réseau) n'est pas une vraie sécurité — tout outil de scan le révèle en quelques secondes. Cela rend surtout la connexion plus pénible. Inutile.</p>
+
+<h3 id="r-seau-invit-s-s-par-">Réseau invités séparé</h3>
+<p>Créez un réseau Wi-Fi séparé pour vos invités ET vos objets connectés IoT.</p>
+
+<pre><code>Réseau principal : famille / téléphones / ordinateurs
+<p>Réseau IoT       : télévision, enceinte, caméras, aspirateur robot</p>
+<p>Réseau invités   : visiteurs (accès Internet uniquement)</code></pre>
+
+<p><strong>Pourquoi séparer l'IoT ?</strong> Si votre téléviseur est compromis, il ne peut pas accéder à vos ordinateurs sur le réseau principal.</p>
+
+<h2 id="s-curiser-les-objets-connect-s">Sécuriser les objets connectés</h2>
+
+<h3 id="r-gle-d-or-inventoriez-vos-appareils">Règle d'or : inventoriez vos appareils</h3>
+<pre><code class="language-bash"># Scanner votre réseau pour lister tous les appareils
+<p>nmap -sn 192.168.1.0/24</p>
+
+<h1>Ou utiliser l'interface de votre routeur</h1>
+<h1>(liste des appareils connectés)</code></pre></h1>
+
+<h3 id="pour-chaque-appareil-iot">Pour chaque appareil IoT</h3>
+<pre><code>✓ Changer le mot de passe par défaut
+<p>✓ Mettre à jour le firmware</p>
+<p>✓ Désactiver les fonctionnalités non utilisées</p>
+<p>✓ Vérifier si des données sont envoyées au fabricant</p>
+<p>✓ Isoler sur le réseau IoT</code></pre>
+
+<h3 id="cam-ras-de-surveillance">Caméras de surveillance</h3>
+<pre><code>✓ Mot de passe fort et unique
+<p>✓ Chiffrement activé</p>
+<p>✓ Accès à distance via VPN uniquement (pas de port forwarding !)</p>
+<p>✓ Marques reconnues (Axis, Hanwha, pas les marques inconnues &lt; 20€)</p>
+<p>✓ Firmware à jour</p>
+<p>✗ Ne jamais exposer directement sur Internet</code></pre>
+
+<h2 id="s-curiser-les-comptes-en-ligne">Sécuriser les comptes en ligne</h2>
+
+<h3 id="mots-de-passe-uniques-partout">Mots de passe uniques partout</h3>
+<p>Utilisez un gestionnaire de mots de passe (Bitwarden, gratuit) pour générer et stocker des mots de passe uniques pour chaque service.</p>
+
+<h3 id="activer-le-mfa-sur-les-comptes-importants">Activer le MFA sur les comptes importants</h3>
+<pre><code>Priorité absolue :
+<p>□ Email principal (Gmail, Outlook)</p>
+<p>□ Compte Apple ID / Google</p>
+<p>□ Banque en ligne</p>
+<p>□ Réseaux sociaux</p>
+<p>□ Amazon, PayPal</p>
+<p>□ Opérateur téléphonique</code></pre>
+
+<h3 id="v-rifier-si-vos-donn-es-ont-fuit-">Vérifier si vos données ont fuité</h3>
+<ul><li><strong>haveibeenpwned.com</strong> : vérifiez si votre email est dans des fuites</li><li><strong>Firefox Monitor</strong> : alertes automatiques</li><li>Activez les alertes de connexion suspecte sur vos comptes importants</li></ul>
+
+<h2 id="protection-contre-le-phishing">Protection contre le phishing</h2>
+
+<h3 id="signaux-d-alerte">Signaux d'alerte</h3>
+<pre><code>✗ Email urgent demandant une action immédiate
+<p>✗ Lien vers une URL qui ne correspond pas au domaine officiel</p>
+<p>✗ Demande d'informations sensibles (mot de passe, code SMS)</p>
+<p>✗ Pièce jointe inattendue</p>
+<p>✗ Expéditeur inconnu ou légèrement différent du vrai (amaz0n.com)</code></pre>
+
+<h3 id="v-rifier-un-lien-avant-de-cliquer">Vérifier un lien avant de cliquer</h3>
+<pre><code class="language-bash"># Copier l'URL (sans cliquer) et vérifier sur :
+<h1>- VirusTotal.com</h1>
+<h1>- URLvoid.com</h1>
+<h1>- Google Safe Browsing</code></pre></h1>
+
+<h3 id="extensions-navigateur-recommand-es">Extensions navigateur recommandées</h3>
+<ul><li><strong>uBlock Origin</strong> : bloqueur de publicités et de trackers</li><li><strong>Privacy Badger</strong> : bloqueur de trackers</li><li><strong>HTTPS Everywhere</strong> : force HTTPS</li><li><strong>Bitwarden</strong> : gestionnaire de mots de passe intégré</li></ul>
+
+<h2 id="sauvegardes-domestiques">Sauvegardes domestiques</h2>
+
+<h3 id="r-gle-3-2-1">Règle 3-2-1</h3>
+<pre><code>3 copies de vos données importantes
+<p>2 supports différents (disque dur + NAS)</p>
+<p>1 copie hors site (cloud chiffré ou chez un proche)</code></pre>
+
+<h3 id="solutions-recommand-es">Solutions recommandées</h3>
+<pre><code class="language-bash"># Sauvegarde automatique Linux avec rsync
+<p>rsync -avz --delete ~/Documents/ /media/backup/Documents/</p>
+
+<h1>Chiffrement avant envoi cloud</h1>
+<h1>Cryptomator (gratuit) : chiffre les fichiers avant Dropbox/Google Drive</h1>
+
+<h1>NAS domestique</h1>
+<h1>Synology DS223 (~350€) : solution complète et simple</code></pre></h1>
+
+<h2 id="que-faire-en-cas-d-incident">Que faire en cas d'incident</h2>
+
+<h3 id="comportement-suspect-sur-le-r-seau">Comportement suspect sur le réseau</h3>
+<li>Identifier l'appareil concerné (logs routeur)</li>
+<li>L'isoler du réseau (déconnecter le câble ou exclure du Wi-Fi)</li>
+<li>Changer les mots de passe Wi-Fi</li>
+<li>Faire une réinitialisation d'usine de l'appareil suspect</li>
+<li>Remettre à jour le firmware avant de reconnecter</li>
+
+<h3 id="compte-pirat-">Compte piraté</h3>
+<li>Changer immédiatement le mot de passe depuis un autre appareil</li>
+<li>Activer le MFA si pas déjà fait</li>
+<li>Vérifier les sessions actives et les déconnecter</li>
+<li>Vérifier si des données ont été modifiées (emails envoyés, achats...)</li>
+<li>Signaler à la plateforme concernée</li>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Sécuriser sa maison connectée ne demande pas d'être expert en cybersécurité. Les mesures de base — mots de passe forts, MFA, réseaux séparés, mises à jour — couvrent 90% des risques. L'essentiel est d'y consacrer quelques heures une fois, puis de maintenir ces bonnes pratiques au quotidien.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securiser-maison-connectee" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-quotidien-pros-it.html" class="nav-prev">← Sécurité au quotidien pour les professionnels IT : les bons réflexes</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/infrastructures-critiques-cyberattaques.html" class="nav-next">Infrastructures critiques sous attaque : eau, énergie, hôpitaux →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

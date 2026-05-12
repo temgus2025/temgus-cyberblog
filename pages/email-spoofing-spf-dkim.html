@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie — Temgus.CyberBlog</title>
 <meta name="description" content="Protection contre l'usurpation d'email avec SPF, DKIM et DMARC configurés correctement.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/email-spoofing-spf-dkim.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/email-spoofing-spf-dkim.html">
 <meta property="og:title" content="Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie — Temgus.CyberBlog">
 <meta name="twitter:description" content="Protection contre l'usurpation d'email avec SPF, DKIM et DMARC configurés correctement.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,484 @@
   "headline": "Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie",
   "description": "Protection contre l'usurpation d'email avec SPF, DKIM et DMARC configurés correctement.",
   "datePublished": "2025-05-31",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/email-spoofing-spf-dkim.html",
   "inLanguage": "fr",
   "keywords": "email, SPF, DKIM, DMARC, spoofing",
-  "timeRequired": "PT8M"
+  "timeRequired": "PT8M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📧</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie</h1>
-  <p style="color:#8892a4;max-width:500px">Protection contre l'usurpation d'email avec SPF, DKIM et DMARC configurés correctement.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#email-spoofing-spf-dkim" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📧</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie</div>
+      <div class="meta-details">
+        <span>📅 2025-05-31</span>
+        <span>⏱ 8 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#comment-fonctionne-l-email-spoofing">Comment fonctionne l'email spoofing</a></li>
+<li><a href="#spf-sender-policy-framework">SPF — Sender Policy Framework</a></li>
+<li><a href="#dkim-domainkeys-identified-mail">DKIM — DomainKeys Identified Mail</a></li>
+<li><a href="#dmarc-domain-based-message-authentication">DMARC — Domain-based Message Authentication</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#d-ploiement-progressif-dmarc">Déploiement progressif DMARC</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyser-les-rapports-dmarc">Analyser les rapports DMARC</a></li>
+<li><a href="#arc-authenticated-received-chain">ARC — Authenticated Received Chain</a></li>
+<li><a href="#email-security-checklist">Email security checklist</a></li>
+<li><a href="#v-rifier-votre-configuration-compl-te">Vérifier votre configuration complète</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie</h1>
+
+<p>L'usurpation d'email (spoofing) permet à un attaquant d'envoyer des emails en se faisant passer pour votre domaine. C'est le vecteur principal du phishing et de la fraude au président. SPF, DKIM et DMARC sont les trois boucliers qui protègent votre réputation email.</p>
+
+<h2 id="comment-fonctionne-l-email-spoofing">Comment fonctionne l'email spoofing</h2>
+
+<pre><code>Le protocole SMTP ne vérifie pas l'identité de l'expéditeur !
+
+<h1>Envoyer un email en se faisant passer pour CEO@votre-entreprise.com</h1>
+<p>telnet smtp.gmail.com 25</p>
+<p>EHLO fake-server.com</p>
+<p>MAIL FROM: &lt;ceo@votre-entreprise.com&gt;    ← N'IMPORTE QUI peut mettre ça</p>
+<p>RCPT TO: &lt;comptable@votre-entreprise.com&gt;</p>
+<p>DATA</p>
+<p>Subject: Virement urgent</p>
+<p>From: CEO &lt;ceo@votre-entreprise.com&gt;</p>
+<p>To: comptable@votre-entreprise.com</p>
+
+<p>Bonjour,</p>
+<p>Veuillez effectuer un virement de 50 000€ vers IBAN FR76...</p>
+<p>C'est urgent et confidentiel.</p>
+
+<p>PDG</p>
+<p>.</p>
+<p>QUIT</code></pre>
+
+<h2 id="spf-sender-policy-framework">SPF — Sender Policy Framework</h2>
+
+<p>SPF liste les serveurs <strong>autorisés à envoyer des emails</strong> pour votre domaine.</p>
+
+<pre><code class="language-bash"># Enregistrement SPF dans le DNS (enregistrement TXT)
+<h1>Pour exemple.com, les emails peuvent venir de :</h1>
+
+<p>exemple.com. IN TXT "v=spf1 include:_spf.google.com include:sendgrid.net ip4:203.0.113.0/24 -all"</p>
+
+<h1>Décomposition :</h1>
+<h1>v=spf1              → Version SPF 1</h1>
+<h1>include:_spf.google.com → Google Workspace autorisé</h1>
+<h1>include:sendgrid.net → SendGrid autorisé</h1>
+<h1>ip4:203.0.113.0/24  → Plage d'IPs autorisée</h1>
+<h1>-all                → Tout le reste → REJET (hard fail)</h1>
+<h1>                      ~all → soft fail (marqué comme spam)</h1>
+<h1>                      +all → tout autorisé (À ÉVITER !)</h1>
+
+<h1>Vérifier votre SPF</h1>
+<p>dig +short TXT exemple.com | grep spf</p>
+<p>nslookup -type=TXT exemple.com</p>
+
+<h1>Tester la configuration SPF</h1>
+<p>curl "https://www.mxpolice.com/api/dns/spf?domain=exemple.com"</code></pre>
+
+<pre><code class="language-python"># Résultats possibles d'une vérification SPF :
+<p>spf_results = {</p>
+<p>"pass":    "IP autorisée → email légitime",</p>
+<p>"fail":    "IP non autorisée → -all → rejeter",</p>
+<p>"softfail":"IP non autorisée → ~all → marquer comme suspect",</p>
+<p>"neutral": "Pas de politique définie",</p>
+<p>"none":    "Pas d'enregistrement SPF",</p>
+<p>"permerror":"Erreur de configuration SPF",</p>
+<p>"temperror":"Erreur temporaire DNS"</p>
+<p>}</code></pre>
+
+<h2 id="dkim-domainkeys-identified-mail">DKIM — DomainKeys Identified Mail</h2>
+
+<p>DKIM appose une <strong>signature cryptographique</strong> sur chaque email, prouvant qu'il n'a pas été modifié en transit.</p>
+
+<pre><code class="language-bash"># Fonctionnement DKIM :
+<h1>1. Le serveur mail signe l'email avec une clé privée (RSA/ED25519)</h1>
+<h1>2. La clé publique est publiée dans le DNS</h1>
+<h1>3. Le serveur destinataire vérifie la signature</h1>
+
+<h1>Générer une paire de clés DKIM</h1>
+<p>openssl genrsa -out dkim_private.pem 2048</p>
+<p>openssl rsa -in dkim_private.pem -pubout -out dkim_public.pem</p>
+
+<h1>Publier la clé publique dans le DNS</h1>
+<h1>_domainkey.exemple.com TXT</h1>
+<p>selector._domainkey.exemple.com. IN TXT "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."</p>
+
+<h1>Vérifier la configuration DKIM</h1>
+<p>dig +short TXT selector._domainkey.exemple.com</p>
+
+<h1>L'en-tête DKIM ajouté à chaque email :</h1>
+<h1>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=exemple.com;</h1>
+<h1>  s=selector; h=from:to:subject:date:message-id;</h1>
+<h1>  bh=hash_du_corps; b=signature_base64</code></pre></h1>
+
+<h2 id="dmarc-domain-based-message-authentication">DMARC — Domain-based Message Authentication</h2>
+
+<p>DMARC combine SPF et DKIM et <strong>définit une politique</strong> : que faire des emails qui échouent ?</p>
+
+<pre><code class="language-bash"># Enregistrement DMARC
+<p>_dmarc.exemple.com. IN TXT "v=DMARC1; p=reject; rua=mailto:dmarc@exemple.com; ruf=mailto:dmarc-forensic@exemple.com; pct=100; adkim=s; aspf=s"</p>
+
+<h1>Décomposition :</h1>
+<h1>v=DMARC1    → Version DMARC</h1>
+<h1>p=reject    → Politique : rejeter les emails non conformes</h1>
+<h1>  (p=none   → Surveiller seulement, rien bloquer)</h1>
+<h1>  (p=quarantine → Mettre en spam)</h1>
+<h1>  (p=reject → Rejeter complètement)</h1>
+<h1>rua=        → Rapports agrégés (statistiques quotidiennes)</h1>
+<h1>ruf=        → Rapports forensiques (emails qui ont échoué)</h1>
+<h1>pct=100     → Appliquer à 100% des emails</h1>
+<h1>adkim=s     → Alignement DKIM strict</h1>
+<h1>aspf=s      → Alignement SPF strict</code></pre></h1>
+
+<h3 id="d-ploiement-progressif-dmarc">Déploiement progressif DMARC</h3>
+
+<pre><code class="language-bash"># Étape 1 : Monitoring (p=none) - Commencer ici !
+<h1>Surveiller sans bloquer - découvrir vos sources d'envoi légitimes</h1>
+<p>_dmarc.exemple.com. TXT "v=DMARC1; p=none; rua=mailto:dmarc@exemple.com"</p>
+
+<h1>Attendre 2-4 semaines, analyser les rapports</h1>
+<h1>→ Identifier tous les services qui envoient des emails en votre nom</h1>
+
+<h1>Étape 2 : Quarantine (p=quarantine) - Après avoir tout identifié</h1>
+<p>_dmarc.exemple.com. TXT "v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc@exemple.com"</p>
+<h1>pct=25 → Appliquer à seulement 25% des emails pour tester</h1>
+
+<h1>Étape 3 : Enforcement total (p=reject)</h1>
+<p>_dmarc.exemple.com. TXT "v=DMARC1; p=reject; pct=100; rua=mailto:dmarc@exemple.com"</code></pre>
+
+<h3 id="analyser-les-rapports-dmarc">Analyser les rapports DMARC</h3>
+
+<pre><code class="language-python"># Les rapports DMARC arrivent en XML - exemple de parsing
+<p>import xml.etree.ElementTree as ET</p>
+<p>import zipfile, io</p>
+
+<p>def parse_dmarc_report(xml_content):</p>
+<p>root = ET.fromstring(xml_content)</p>
+<p>records = []</p>
+
+<p>for record in root.findall('.//record'):</p>
+<p>row = record.find('row')</p>
+<p>policy_eval = record.find('auth_results')</p>
+
+<p>records.append({</p>
+<p>'source_ip': row.find('source_ip').text,</p>
+<p>'count': int(row.find('count').text),</p>
+<p>'disposition': row.find('policy_evaluated/disposition').text,</p>
+<p>'dkim': row.find('policy_evaluated/dkim').text,</p>
+<p>'spf': row.find('policy_evaluated/spf').text,</p>
+<p>})</p>
+
+<p>return records</p>
+
+<h1>Outils d'analyse DMARC</h1>
+<h1>→ DMARC Analyzer (dmarcanalyzer.com)</h1>
+<h1>→ Postmark DMARC (dmarc.postmarkapp.com)</h1>
+<h1>→ Google Postmaster Tools (pour les domaines qui envoient vers Gmail)</code></pre></h1>
+
+<h2 id="arc-authenticated-received-chain">ARC — Authenticated Received Chain</h2>
+
+<pre><code class="language-bash"># Problème : les listes de diffusion et forwards cassent SPF/DKIM
+<h1>ARC préserve la chaîne d'authentification à travers les redirections</h1>
+
+<h1>En-tête ARC ajouté par chaque serveur intermédiaire :</h1>
+<h1>ARC-Seal: i=1; a=rsa-sha256; d=liste.exemple.com; ...</h1>
+<h1>ARC-Message-Signature: i=1; ...</h1>
+<h1>ARC-Authentication-Results: i=1; ...</code></pre></h1>
+
+<h2 id="email-security-checklist">Email security checklist</h2>
+
+<pre><code>Configuration DNS :
+<p>✅ SPF configuré avec -all (hard fail)</p>
+<p>✅ DKIM avec clé 2048 bits minimum</p>
+<p>✅ DMARC en p=reject</p>
+<p>✅ MTA-STS (force TLS sur le transport)</p>
+<p>✅ BIMI (logo de marque dans les emails)</p>
+
+<p>Serveur mail :</p>
+<p>✅ TLS 1.2+ pour le transport SMTP</p>
+<p>✅ Authentification SMTP obligatoire (pas de relais ouvert)</p>
+<p>✅ Rate limiting anti-spam</p>
+<p>✅ Listes noires (RBL) vérifiées</p>
+
+<p>Surveillance :</p>
+<p>✅ Rapports DMARC analysés hebdomadairement</p>
+<p>✅ Alertes sur nouvelles sources inconnues</p>
+<p>✅ Monitoring de la réputation IP (Google Postmaster)</code></pre>
+
+<h2 id="v-rifier-votre-configuration-compl-te">Vérifier votre configuration complète</h2>
+
+<pre><code class="language-bash"># MXToolbox - Outil en ligne complet
+<h1>https://mxtoolbox.com/SuperTool.aspx</h1>
+
+<h1>En ligne de commande</h1>
+<h1>Vérifier SPF</h1>
+<p>dig +short TXT exemple.com | grep "v=spf"</p>
+
+<h1>Vérifier DKIM</h1>
+<p>dig +short TXT default._domainkey.exemple.com</p>
+
+<h1>Vérifier DMARC</h1>
+<p>dig +short TXT _dmarc.exemple.com</p>
+
+<h1>Tester l'envoi depuis un vrai serveur</h1>
+<h1>https://www.mail-tester.com</h1>
+<h1>→ Score sur 10 + recommandations</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>SPF + DKIM + DMARC en p=reject = votre domaine est <strong>quasi-impossible à usurper</strong>. Déployez-les dans l'ordre et avec patience : commencez par p=none pour analyser votre trafic légitime, puis montez progressivement en p=quarantine, puis p=reject. Cette configuration élimine la grande majorité des attaques de phishing utilisant votre domaine.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#email-spoofing-spf-dkim" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/zero-trust.html" class="nav-prev">← Zero Trust Architecture : ne jamais faire confiance</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-numerique.html" class="nav-next">Forensics numérique : investigation après un incident →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Société de surveillance et vie privée numérique — Temgus.CyberBlog</title>
 <meta name="description" content="Mécanismes de surveillance, tracking en ligne et outils pour protéger votre vie privée.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/surveillance-vie-privee.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/surveillance-vie-privee.html">
 <meta property="og:title" content="Société de surveillance et vie privée numérique — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Société de surveillance et vie privée numérique — Temgus.CyberBlog">
 <meta name="twitter:description" content="Mécanismes de surveillance, tracking en ligne et outils pour protéger votre vie privée.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,525 @@
   "headline": "Société de surveillance et vie privée numérique",
   "description": "Mécanismes de surveillance, tracking en ligne et outils pour protéger votre vie privée.",
   "datePublished": "2025-05-05",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/surveillance-vie-privee.html",
   "inLanguage": "fr",
   "keywords": "vie privée, surveillance, RGPD, anonymat",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">👁️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Société de surveillance et vie privée numérique</h1>
-  <p style="color:#8892a4;max-width:500px">Mécanismes de surveillance, tracking en ligne et outils pour protéger votre vie privée.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#surveillance-vie-privee" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">👁️</div>
+    <div class="meta-info">
+      <div class="meta-category">VPN & Anonymat</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Société de surveillance et vie privée numérique</div>
+      <div class="meta-details">
+        <span>📅 2025-05-05</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#l-ampleur-de-la-surveillance-moderne">L'ampleur de la surveillance moderne</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-surveillance-commerciale">La surveillance commerciale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-surveillance-gouvernementale">La surveillance gouvernementale</a></li>
+<li><a href="#comment-vous-tes-trac-">Comment vous êtes tracé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#browser-fingerprinting">Browser Fingerprinting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-m-tadonn-es-qui-r-v-lent-tout">Les métadonnées qui révèlent tout</a></li>
+<li><a href="#les-outils-de-protection-de-la-vie-priv-e">Les outils de protection de la vie privée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#navigateur-et-recherche">Navigateur et recherche</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#email-priv-">Email privé</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#messagerie-chiffr-e">Messagerie chiffrée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#vpn-et-protection-r-seau">VPN et protection réseau</a></li>
+<li><a href="#rgpd-vos-droits-en-europe">RGPD : vos droits en Europe</a></li>
+<li><a href="#le-mod-le-de-menace-personnel">Le modèle de menace personnel</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Société de surveillance et vie privée numérique</h1>
+
+<p>Nous vivons dans une société de surveillance sans précédent. Smartphones, caméras, cookies, métadonnées — chaque aspect de notre vie numérique est tracé, analysé et monétisé. Ce guide explore les mécanismes de surveillance et les outils pour reprendre le contrôle de votre vie privée.</p>
+
+<h2 id="l-ampleur-de-la-surveillance-moderne">L'ampleur de la surveillance moderne</h2>
+
+<h3 id="la-surveillance-commerciale">La surveillance commerciale</h3>
+
+<pre><code>Ce que les GAFAM savent de vous :
+
+<p>Google :</p>
+<p>→ Chaque recherche effectuée (depuis 2004 pour beaucoup)</p>
+<p>→ Chaque email Gmail (analyse pour ciblage pub)</p>
+<p>→ Votre localisation précise 24h/24 (Google Maps, Android)</p>
+<p>→ Vos habitudes de navigation (Google Analytics sur 80% des sites)</p>
+<p>→ Vos achats (Gmail reçoit vos confirmations de commande)</p>
+<p>→ Vos déplacements physiques (Google Timeline)</p>
+
+<p>Facebook/Meta :</p>
+<p>→ Vos relations, opinions, émotions</p>
+<p>→ Ce que vous tapez sans envoyer (keylogging des champs de saisie)</p>
+<p>→ Votre activité sur les sites tiers (pixel Facebook)</p>
+<p>→ La reconnaissance faciale de vos photos</p>
+<p>→ Votre localisation même sans GPS (WiFi, cell towers)</p>
+
+<p>Amazon :</p>
+<p>→ Tout ce que vous achetez et consultez</p>
+<p>→ Ce que vous dites chez vous (Alexa écoute en permanence)</p>
+<p>→ Vos habitudes de sommeil et santé (si vous avez des appareils connectés)</code></pre>
+
+<h3 id="la-surveillance-gouvernementale">La surveillance gouvernementale</h3>
+
+<pre><code>Révélations Snowden (2013) :
+<p>PRISM : collecte directe auprès de Google, Facebook, Microsoft, Apple</p>
+<p>XKeyscore : surveillance quasi-totale du trafic internet mondial</p>
+<p>Bullrun : affaiblissement délibéré des standards cryptographiques</p>
+
+<p>Outils de surveillance légale en France :</p>
+<p>→ IMSI catchers (fausses antennes qui interceptent les appels)</p>
+<p>→ Réquisitions judiciaires aux opérateurs télécom</p>
+<p>→ DGSI/DGSE : surveillance des communications internationales</p>
+<p>→ Fichier TES (titres électroniques sécurisés) : 60 millions de Français</code></pre>
+
+<h2 id="comment-vous-tes-trac-">Comment vous êtes tracé</h2>
+
+<h3 id="browser-fingerprinting">Browser Fingerprinting</h3>
+
+<pre><code class="language-javascript">// Ce que votre navigateur révèle sans cookies
+
+<p>const fingerprint = {</p>
+<p>userAgent: navigator.userAgent,</p>
+<p>// "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36..."</p>
+
+<p>screen: {</p>
+<p>width: screen.width,      // 1920</p>
+<p>height: screen.height,    // 1080</p>
+<p>colorDepth: screen.colorDepth  // 24</p>
+<p>},</p>
+
+<p>timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,</p>
+<p>// "Europe/Paris"</p>
+
+<p>languages: navigator.languages,</p>
+<p>// ["fr-FR", "fr", "en-US", "en"]</p>
+
+<p>plugins: Array.from(navigator.plugins).map(p =&gt; p.name),</p>
+<p>// Liste de vos plugins installés</p>
+
+<p>canvas: getCanvasFingerprint(),</p>
+<p>// Rendu graphique unique à votre GPU + driver + OS</p>
+
+<p>webgl: getWebGLFingerprint(),</p>
+<p>// Caractéristiques uniques de votre carte graphique</p>
+<p>};</p>
+
+<p>// Combiné, ce fingerprint identifie 99.24% des utilisateurs</p>
+<p>// de façon unique SANS AUCUN COOKIE</code></pre>
+
+<h3 id="les-m-tadonn-es-qui-r-v-lent-tout">Les métadonnées qui révèlent tout</h3>
+
+<pre><code>"Nous ne collectons pas le contenu, seulement les métadonnées"
+<p>— Déclaration de nombreuses agences de surveillance</p>
+
+<p>Mais les métadonnées révèlent :</p>
+
+<p>Appel de 3 minutes à un médecin spécialiste en oncologie</p>
+<p>+ Appel à la mutuelle pour vérifier la couverture chimiothérapie</p>
+<p>+ Appel à un proche pour "une conversation importante"</p>
+<p>→ Diagnostic probable de cancer sans écouter un seul mot</p>
+
+<p>Appels à un avocat spécialisé droit du travail</p>
+<p>+ Messages à des syndicats</p>
+<p>+ Réunions fréquentes avec des collègues</p>
+<p>→ Préparation d'une action collective contre l'employeur</p>
+
+<p>Les métadonnées révèlent PLUS que le contenu.</code></pre>
+
+<h2 id="les-outils-de-protection-de-la-vie-priv-e">Les outils de protection de la vie privée</h2>
+
+<h3 id="navigateur-et-recherche">Navigateur et recherche</h3>
+
+<pre><code>Navigateurs recommandés (du plus au moins privé) :
+<li>Tor Browser       → Anonymat maximum, lent</li>
+<li>Firefox (durci)   → Bon équilibre vie privée/utilisabilité</li>
+<li>Brave             → Blocage pub/trackers natif</li>
+<li>Safari            → Meilleur que Chrome sur Mac</li>
+<li>Chrome            → Éviter (mouchard Google intégré)</li>
+
+<p>Configuration Firefox pour la vie privée :</p>
+<p>→ about:config → privacy.resistFingerprinting = true</p>
+<p>→ Installer : uBlock Origin, Privacy Badger, Cookie AutoDelete</p>
+<p>→ Désactiver WebRTC (fuite d'IP) : media.peerconnection.enabled = false</p>
+
+<p>Moteurs de recherche privés :</p>
+<p>→ DuckDuckGo   : pas de profil, résultats décents</p>
+<p>→ Brave Search : index indépendant</p>
+<p>→ Startpage    : résultats Google sans le tracking</p>
+<p>→ SearXNG      : méta-moteur auto-hébergeable</code></pre>
+
+<h3 id="email-priv-">Email privé</h3>
+
+<pre><code>Problèmes avec Gmail :
+<p>→ Google scanne tous vos emails</p>
+<p>→ Publicités ciblées basées sur le contenu</p>
+<p>→ Partage avec partenaires publicitaires</p>
+<p>→ Accessible aux agences de renseignement américaines (PRISM)</p>
+
+<p>Alternatives respectueuses de la vie privée :</p>
+
+<p>ProtonMail (Suisse) :</p>
+<p>→ Chiffrement de bout en bout entre utilisateurs Proton</p>
+<p>→ Juridiction suisse (lois strictes sur la vie privée)</p>
+<p>→ Open source et audité</p>
+<p>→ Gratuit / 4€/mois</p>
+
+<p>Tutanota (Allemagne) :</p>
+<p>→ E2E chiffrement complet (boîte, contacts, agenda)</p>
+<p>→ Loi allemande RGPD stricte</p>
+<p>→ Open source</p>
+<p>→ Gratuit / 1€/mois</p>
+
+<p>SimpleLogin / AnonAddy :</p>
+<p>→ Création d'alias email à usage unique</p>
+<p>→ Protège votre adresse réelle des spammeurs et hackers</code></pre>
+
+<h3 id="messagerie-chiffr-e">Messagerie chiffrée</h3>
+
+<pre><code>Hiérarchie de sécurité :
+
+<p>Signal ✅✅✅</p>
+<p>→ E2E chiffrement (protocole Signal)</p>
+<p>→ Messages éphémères</p>
+<p>→ Pas de métadonnées stockées</p>
+<p>→ Open source, audité indépendamment</p>
+<p>→ Recommandé par Snowden, journalistes, avocats</p>
+
+<p>WhatsApp ✅✅ (avec nuances)</p>
+<p>→ E2E pour le contenu (protocole Signal)</p>
+<p>→ MAIS métadonnées collectées par Meta</p>
+<p>→ Graphe social (qui parle à qui) accessible à Meta</p>
+<p>→ Backups non chiffrés par défaut sur Google Drive</p>
+
+<p>Telegram ⚠️ (mal compris)</p>
+<p>→ PAS de E2E par défaut !</p>
+<p>→ Chiffrement serveur-client seulement</p>
+<p>→ Telegram peut lire vos messages</p>
+<p>→ E2E seulement dans les "Secret Chats"</p>
+<p>→ Beaucoup surestimé pour la vie privée</p>
+
+<p>SMS ❌</p>
+<p>→ Aucun chiffrement</p>
+<p>→ Accessible à votre opérateur télécom</p>
+<p>→ Interceptable par IMSI catcher</code></pre>
+
+<h3 id="vpn-et-protection-r-seau">VPN et protection réseau</h3>
+
+<pre><code class="language-bash"># DNS over HTTPS (DoH) - Chiffrer vos requêtes DNS
+<h1>Configurer sur Firefox :</h1>
+<h1>about:preferences#general → Activer DNS over HTTPS → Cloudflare ou NextDNS</h1>
+
+<h1>Pi-hole - Bloquer pubs et trackers au niveau réseau</h1>
+<p>docker run -d \</p>
+<p>--name pihole \</p>
+<p>-p 53:53/tcp -p 53:53/udp \</p>
+<p>-p 80:80 \</p>
+<p>-e TZ="Europe/Paris" \</p>
+<p>-v "$(pwd)/etc-pihole:/etc/pihole" \</p>
+<p>pihole/pihole:latest</p>
+
+<h1>Bloque les domaines de tracking pour TOUS les appareils du réseau</h1>
+<h1>Facebook analytics, Google DoubleClick, Amazon tracking...</code></pre></h1>
+
+<h2 id="rgpd-vos-droits-en-europe">RGPD : vos droits en Europe</h2>
+
+<pre><code>Le RGPD vous donne ces droits sur vos données :
+
+<p>✅ Droit d'accès : demandez toutes vos données à une entreprise</p>
+<p>→ Google Takeout : téléchargez tout ce que Google a sur vous</p>
+<p>→ Facebook : Paramètres → Vos informations Facebook → Télécharger</p>
+
+<p>✅ Droit à l'oubli : demandez la suppression de vos données</p>
+<p>→ Google : https://myaccount.google.com/delete-services-or-account</p>
+<p>→ Formulaire CNIL pour les refus</p>
+
+<p>✅ Droit d'opposition : refusez le traitement pour le marketing</p>
+
+<p>✅ Droit à la portabilité : récupérez vos données dans un format standard</p>
+
+<p>En cas de violation :</p>
+<p>→ Portez plainte à la CNIL (cnil.fr)</p>
+<p>→ Amende max : 4% du CA mondial ou 20M€</code></pre>
+
+<h2 id="le-mod-le-de-menace-personnel">Le modèle de menace personnel</h2>
+
+<p>Tout le monde n'a pas les mêmes besoins de vie privée.</p>
+
+<pre><code>Niveau 1 — Citoyen ordinaire
+<p>→ Firefox + uBlock Origin</p>
+<p>→ DuckDuckGo ou Brave Search</p>
+<p>→ ProtonMail pour l'email</p>
+<p>→ Signal pour les messages sensibles</p>
+<p>→ Gestionnaire de mots de passe (Bitwarden)</p>
+
+<p>Niveau 2 — Journaliste / Activiste</p>
+<p>→ Tor Browser pour la navigation sensible</p>
+<p>→ Signal + messages éphémères</p>
+<p>→ Email chiffré PGP</p>
+<p>→ VPN de confiance (Mullvad)</p>
+<p>→ Aucun smartphone (ou GrapheneOS)</p>
+
+<p>Niveau 3 — Haute valeur (lanceur d'alerte)</p>
+<p>→ Tails OS (aucune trace sur le disque)</p>
+<p>→ Communication uniquement via SecureDrop</p>
+<p>→ Jamais de smartphone personnel</p>
+<p>→ Réunions dans des espaces sans électronique</p>
+<p>→ Paiements uniquement en cash</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La vie privée n'est pas un luxe — c'est un droit fondamental. Dans une société de surveillance, se protéger demande des efforts mais reste possible. Commencez par les <strong>gains faciles</strong> : Firefox + uBlock Origin + Signal + Bitwarden. Ces quatre outils réduisent considérablement votre exposition. Ensuite, adaptez votre niveau de protection à votre modèle de menace réel.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#surveillance-vie-privee" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/threat-hunting.html" class="nav-prev">← Threat Hunting : la chasse proactive aux menaces</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptomonnaies-securite.html" class="nav-next">Cryptomonnaies et sécurité : protéger vos actifs →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

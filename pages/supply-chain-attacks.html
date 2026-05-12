@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Attaques supply chain : compromettre par les fournisseurs — Temgus.CyberBlog</title>
 <meta name="description" content="SolarWinds, XZ Utils, dependency confusion — comment les attaquants ciblent la chaîne d'approvisionnement.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/supply-chain-attacks.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/supply-chain-attacks.html">
 <meta property="og:title" content="Attaques supply chain : compromettre par les fournisseurs — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Attaques supply chain : compromettre par les fournisseurs — Temgus.CyberBlog">
 <meta name="twitter:description" content="SolarWinds, XZ Utils, dependency confusion — comment les attaquants ciblent la chaîne d'approvisionnement.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,523 @@
   "headline": "Attaques supply chain : compromettre par les fournisseurs",
   "description": "SolarWinds, XZ Utils, dependency confusion — comment les attaquants ciblent la chaîne d'approvisionnement.",
   "datePublished": "2025-06-16",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/supply-chain-attacks.html",
   "inLanguage": "fr",
   "keywords": "supply chain, SolarWinds, dépendances, SBOM",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⛓️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Attaques supply chain : compromettre par les fournisseurs</h1>
-  <p style="color:#8892a4;max-width:500px">SolarWinds, XZ Utils, dependency confusion — comment les attaquants ciblent la chaîne d'approvisionnement.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#supply-chain-attacks" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⛓️</div>
+    <div class="meta-info">
+      <div class="meta-category">Malwares</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Attaques supply chain : compromettre par les fournisseurs</div>
+      <div class="meta-details">
+        <span>📅 2025-06-16</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pourquoi-les-supply-chain-attacks-sont-si-efficaces">Pourquoi les supply chain attacks sont si efficaces</a></li>
+<li><a href="#cas-r-els-marquants">Cas réels marquants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#solarwinds-2020-la-m-re-de-toutes-les-supply-chain-attacks">SolarWinds (2020) — La mère de toutes les supply chain attacks</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#xz-utils-2024-l-attaque-quasi-parfaite">XZ Utils (2024) — L'attaque quasi-parfaite</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#dependency-confusion-2021-">Dependency Confusion (2021)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#typosquatting-de-packages-npm">Typosquatting de packages npm</a></li>
+<li><a href="#s-curiser-sa-supply-chain">Sécuriser sa supply chain</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#software-bill-of-materials-sbom-">Software Bill of Materials (SBOM)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#s-curisation-des-d-pendances">Sécurisation des dépendances</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#processus-de-v-rification-des-mises-jour">Processus de vérification des mises à jour</a></li>
+<li><a href="#checklist-supply-chain-security">Checklist supply chain security</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Attaques supply chain : compromettre par les fournisseurs</h1>
+
+<p>Les attaques supply chain (chaîne d'approvisionnement) ciblent <strong>les dépendances et fournisseurs</strong> d'une organisation plutôt que la cible directement. SolarWinds, XZ Utils, npm packages malveillants — ces attaques sont parmi les plus sophistiquées et les plus dévastatrices.</p>
+
+<h2 id="pourquoi-les-supply-chain-attacks-sont-si-efficaces">Pourquoi les supply chain attacks sont si efficaces</h2>
+
+<pre><code>Attaque directe :
+<p>Attaquant → [Cible bien défendue] ← Difficile</p>
+
+<p>Attaque supply chain :</p>
+<p>Attaquant → [Fournisseur/Dépendance moins défendu]</p>
+<p>↓ (distribution légitime)</p>
+<p>[Cible bien défendue] ← Contournée !</p>
+
+<p>La cible fait confiance au fournisseur :</p>
+<p>→ Le code malveillant est signé par le fournisseur</p>
+<p>→ Les mises à jour automatiques déploient le malware</p>
+<p>→ Détection très difficile</p>
+<p>→ Impact : toutes les organisations qui utilisent ce fournisseur</code></pre>
+
+<h2 id="cas-r-els-marquants">Cas réels marquants</h2>
+
+<h3 id="solarwinds-2020-la-m-re-de-toutes-les-supply-chain-attacks">SolarWinds (2020) — La mère de toutes les supply chain attacks</h3>
+
+<pre><code>Chronologie :
+<p>Oct 2019 : Accès initial chez SolarWinds</p>
+<p>Mar 2020 : Backdoor "SUNBURST" injectée dans Orion (logiciel IT)</p>
+<p>Mar-Dec 2020 : Distribution via mise à jour légitime signée</p>
+<p>18 000 organisations téléchargent la mise à jour</p>
+<p>Dont : US Treasury, DoD, DHS, FireEye, Microsoft...</p>
+<p>Dec 2020 : Découverte par FireEye (après avoir détecté leur propre infection)</p>
+
+<p>Technique :</p>
+<p>→ Le code malveillant dormait 2 semaines après installation</p>
+<p>→ Puis contactait un C2 via des requêtes DNS légitimes</p>
+<p>→ Communiquait via HTTPS en imitant le trafic Orion normal</p>
+<p>→ S'activait seulement dans les environnements d'entreprise (pas les sandbox)</p>
+
+<p>Attribution : APT29 (Cozy Bear) - SVR russe</p>
+<p>Coût estimé : 100 milliards de dollars</code></pre>
+
+<h3 id="xz-utils-2024-l-attaque-quasi-parfaite">XZ Utils (2024) — L'attaque quasi-parfaite</h3>
+
+<pre><code>Une des attaques les plus sophistiquées jamais documentées :
+
+<p>2021 : "Jia Tan" (pseudonyme) commence à contribuer au projet XZ Utils</p>
+<p>(outil de compression présent dans presque toutes les distributions Linux)</p>
+<p>2022-2023 : Contributions légitimes de qualité, gagne la confiance</p>
+<p>2024 (Fév) : Backdoor injectée dans XZ Utils 5.6.0</p>
+<p>Ciblait spécifiquement sshd via une technique très sophistiquée</p>
+
+<p>Découverte accidentelle :</p>
+<p>→ Andres Freund (ingénieur Microsoft) remarque que SSH est 500ms plus lent</p>
+<p>→ Analyse approfondie → découvre la backdoor dans les fichiers de test</p>
+
+<p>Impact potentiel si non découverte :</p>
+<p>→ Backdoor dans sshd sur des millions de serveurs Linux</p>
+<p>→ Authentification SSH contournable par l'attaquant</p>
+
+<p>Leçon : Les mainteneurs open source sous-staffés sont des cibles privilégiées</code></pre>
+
+<h3 id="dependency-confusion-2021-">Dependency Confusion (2021)</h3>
+
+<pre><code class="language-python"># Technique découverte par Alex Birsan
+
+<h1>Scénario :</h1>
+<h1>Une entreprise utilise un package interne privé : "monentreprise-utils"</h1>
+<h1>Ce package n'existe PAS sur PyPI / npm public</h1>
+
+<h1>Attaque :</h1>
+<h1>L'attaquant publie "monentreprise-utils" sur PyPI</h1>
+<h1>AVEC UNE VERSION PLUS HAUTE que l'interne (99.0.0 vs 1.0.0)</h1>
+
+<h1>pip et npm préfèrent les versions publiques PLUS HAUTES</h1>
+<p>pip install monentreprise-utils</p>
+<h1>Télécharge la version malveillante 99.0.0 du public</h1>
+<h1>Au lieu de la version interne légitime 1.0.0 !</h1>
+
+<h1>Birsan a réussi à faire exécuter du code sur des machines de :</h1>
+<h1>Apple, Microsoft, PayPal, Shopify, Netflix, Uber, Yelp, Tesla</h1>
+<h1>→ 130 000$ de bug bounties légitimes</h1>
+
+<h1>Protection :</h1>
+<h1>→ Utiliser un registre privé avec proxy</h1>
+<h1>→ Épingler les versions exactes avec hashes</h1>
+<h1>→ Namespacing (@monentreprise/utils)</code></pre></h1>
+
+<h3 id="typosquatting-de-packages-npm">Typosquatting de packages npm</h3>
+
+<pre><code class="language-bash"># Des packages avec des noms proches des packages populaires
+<h1>publiés avec du code malveillant</h1>
+
+<h1>Exemples réels :</h1>
+<h1>crossenv (a lieu de cross-env)   → 713 000 downloads avant suppression</h1>
+<h1>event-stream (empoisonné) → Vol de bitcoins Copay wallet</h1>
+<h1>colors/faker (saboté par l'auteur) → Boucle infinie intentionnelle</h1>
+
+<h1>La liste des packages malveillants détectés en 2023 :</h1>
+<p>malicious_packages = [</p>
+<p>"node-fetch-nativeify",  # Typosquat de node-fetch</p>
+<p>"lodash4",               # Typosquat de lodash</p>
+<p>"moment-updater",        # Faux outil lodash</p>
+<p>"npmconf2",              # Typosquat npmconf</p>
+<p>]</p>
+
+<h1>Détection :</h1>
+<h1>npm audit</h1>
+<h1>Socket.dev : surveillance des packages npm en temps réel</h1>
+<h1>Snyk : analyse les dépendances</code></pre></h1>
+
+<h2 id="s-curiser-sa-supply-chain">Sécuriser sa supply chain</h2>
+
+<h3 id="software-bill-of-materials-sbom-">Software Bill of Materials (SBOM)</h3>
+
+<pre><code class="language-python"># Un SBOM est un inventaire de tous les composants d'un logiciel
+<h1>Obligatoire aux USA pour les logiciels vendus au gouvernement (Executive Order 2021)</h1>
+
+<h1>Générer un SBOM avec syft</h1>
+<h1>syft packages dir:. -o spdx-json &gt; sbom.json</h1>
+<h1>syft packages image:mon-app:latest -o cyclonedx-json &gt; sbom.json</h1>
+
+<h1>Format SPDX (exemple simplifié)</h1>
+<p>sbom_exemple = {</p>
+<p>"spdxVersion": "SPDX-2.3",</p>
+<p>"name": "mon-application",</p>
+<p>"packages": [</p>
+<p>{</p>
+<p>"name": "Django",</p>
+<p>"version": "4.2.7",</p>
+<p>"licenseConcluded": "BSD-3-Clause",</p>
+<p>"downloadLocation": "https://pypi.org/project/Django/4.2.7/",</p>
+<p>"filesAnalyzed": True,</p>
+<p>"checksum": {"algorithm": "SHA256", "checksumValue": "abc123..."}</p>
+<p>},</p>
+<p>{</p>
+<p>"name": "cryptography",</p>
+<p>"version": "41.0.5",</p>
+<p>"licenseConcluded": "Apache-2.0",</p>
+<p># Présence de CVE-2023-49083 si version &lt; 41.0.6 !</p>
+<p>}</p>
+<p>]</p>
+<p>}</p>
+
+<h1>Vérifier le SBOM contre les CVE connus</h1>
+<h1>grype sbom:sbom.json</code></pre></h1>
+
+<h3 id="s-curisation-des-d-pendances">Sécurisation des dépendances</h3>
+
+<pre><code class="language-yaml"># pip - Épingler les versions avec hashes (pip-compile)
+<h1>requirements.txt généré par pip-compile :</h1>
+<p>Django==4.2.7 \</p>
+<p>--hash=sha256:1498db1d6836ab1fb44de5e9c8a09c20ad8cce14e7d7c47fb0e62f3cbe29a3e7 \</p>
+<p>--hash=sha256:7e6addb2e5aba2c90aa8fcc25b5df26aa4a6da00ad0f7741cf78e68d2523ad93</p>
+
+<h1>npm - package-lock.json avec intégrité SHA512</h1>
+<h1>"django": {</h1>
+<h1>  "version": "4.2.7",</h1>
+<h1>  "integrity": "sha512-abc123...",  ← Hash de l'archive</h1>
+<h1>  "resolved": "https://registry.npmjs.org/..."</h1>
+<h1>}</h1>
+
+<h1>Vérification automatique des hashes à chaque install</h1>
+<p>pip install -r requirements.txt  # Vérifie les hashes automatiquement</p>
+<p>npm ci  # Utilise package-lock.json, vérifie les intégrités</code></pre>
+
+<pre><code class="language-bash"># Sigstore/cosign - Signature cryptographique des artefacts
+<h1>Signer une image Docker</h1>
+<p>cosign sign --key cosign.key mon-registry/mon-app:latest</p>
+
+<h1>Vérifier la signature</h1>
+<p>cosign verify --key cosign.pub mon-registry/mon-app:latest</p>
+
+<h1>GitHub Actions avec provenance (SLSA niveau 3)</h1>
+<h1>Les artefacts de build incluent une attestation signée</h1>
+<h1>Prouvant qu'ils ont été construits par ce workflow exact</code></pre></h1>
+
+<h3 id="processus-de-v-rification-des-mises-jour">Processus de vérification des mises à jour</h3>
+
+<pre><code class="language-python">class DependencySecurityProcess:
+
+<p>def before_adding_dependency(self, package_name, version):</p>
+<p>"""Vérifications avant d'ajouter une nouvelle dépendance"""</p>
+<p>checks = {</p>
+<p>"age": self.check_package_age(package_name),</p>
+<p># Moins de 6 mois ? Méfiance !</p>
+
+<p>"downloads": self.check_download_count(package_name),</p>
+<p># Moins de 1000 downloads/semaine ? Inhabituel</p>
+
+<p>"maintainers": self.check_maintainer_count(package_name),</p>
+<p># 1 seul mainteneur = risque</p>
+
+<p>"typosquat": self.check_typosquat_risk(package_name),</p>
+<p># Ressemble à un package populaire ?</p>
+
+<p>"cve": self.check_known_vulnerabilities(package_name, version),</p>
+
+<p>"license": self.check_license_compatibility(package_name),</p>
+
+<p>"source_available": self.check_source_code_available(package_name),</p>
+<p># Pas de code source = red flag</p>
+<p>}</p>
+<p>return all(checks.values()), checks</p>
+
+<p>def before_updating_dependency(self, package, old_version, new_version):</p>
+<p>"""Vérifications avant une mise à jour"""</p>
+<p>return {</p>
+<p>"changelog_reviewed": self.review_changelog(package, old_version, new_version),</p>
+<p>"no_new_permissions": self.check_new_permissions(package, new_version),</p>
+<p>"no_new_dependencies": self.check_dependency_changes(package, new_version),</p>
+<p>"tests_pass": self.run_tests_with_new_version(package, new_version),</p>
+<p>"no_suspicious_commits": self.check_recent_commits(package, new_version)</p>
+<p>}</code></pre>
+
+<h2 id="checklist-supply-chain-security">Checklist supply chain security</h2>
+
+<pre><code>Code source :
+<p>✅ SBOM généré et maintenu</p>
+<p>✅ Dépendances épinglées avec hashes</p>
+<p>✅ Scan automatique des vulnérabilités (Snyk, Dependabot)</p>
+<p>✅ Review des mises à jour avant déploiement</p>
+<p>✅ Pas de packages avec 1 seul mainteneur pour les éléments critiques</p>
+
+<p>Build pipeline :</p>
+<p>✅ Environnement de build reproductible</p>
+<p>✅ Signature des artefacts (cosign, Sigstore)</p>
+<p>✅ SLSA compliance (Supply-chain Levels for Software Artifacts)</p>
+<p>✅ Pas de téléchargement d'internet pendant le build</p>
+<p>✅ Séparation des environnements dev/staging/prod</p>
+
+<p>Fournisseurs :</p>
+<p>✅ Évaluation sécurité des fournisseurs critiques</p>
+<p>✅ Contrats avec clauses de sécurité</p>
+<p>✅ MFA obligatoire pour les accès fournisseurs</p>
+<p>✅ Principe du moindre privilège pour les comptes fournisseurs</p>
+<p>✅ Monitoring des accès fournisseurs</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Les attaques supply chain exploitent la <strong>confiance implicite</strong> que nous accordons à nos fournisseurs et dépendances. La défense passe par la <strong>méfiance systématique</strong> : SBOM, hashes vérifiés, signatures cryptographiques, revue des mises à jour et évaluation des fournisseurs. SolarWinds et XZ Utils ont montré que même les entreprises les plus prudentes peuvent être victimes — la vigilance est permanente.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#supply-chain-attacks" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/rgpd-conformite.html" class="nav-prev">← RGPD et conformité sécurité : obligations et mise en œuvre</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/bluetooth-nfc-securite.html" class="nav-next">Bluetooth et NFC : sécurité des communications sans fil →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

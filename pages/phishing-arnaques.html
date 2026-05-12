@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Phishing : reconnaître et éviter les pièges — Temgus.CyberBlog</title>
 <meta name="description" content="Techniques d'hameçonnage modernes et comment se protéger au quotidien.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/phishing-arnaques.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/phishing-arnaques.html">
 <meta property="og:title" content="Phishing : reconnaître et éviter les pièges — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Phishing : reconnaître et éviter les pièges — Temgus.CyberBlog">
 <meta name="twitter:description" content="Techniques d'hameçonnage modernes et comment se protéger au quotidien.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,462 @@
   "headline": "Phishing : reconnaître et éviter les pièges",
   "description": "Techniques d'hameçonnage modernes et comment se protéger au quotidien.",
   "datePublished": "2025-03-15",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/phishing-arnaques.html",
   "inLanguage": "fr",
   "keywords": "phishing, social engineering",
-  "timeRequired": "PT5M"
+  "timeRequired": "PT5M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎣</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Phishing : reconnaître et éviter les pièges</h1>
-  <p style="color:#8892a4;max-width:500px">Techniques d'hameçonnage modernes et comment se protéger au quotidien.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#phishing-arnaques" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎣</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Phishing : reconnaître et éviter les pièges</div>
+      <div class="meta-details">
+        <span>📅 2025-03-15</span>
+        <span>⏱ 5 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-le-phishing-">Qu'est-ce que le phishing ?</a></li>
+<li><a href="#les-types-de-phishing">Les types de phishing</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-email-phishing-le-plus-courant-">1. Email Phishing (le plus courant)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-spear-phishing">2. Spear Phishing</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-smishing-sms-phishing-">3. Smishing (SMS Phishing)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-vishing-voice-phishing-">4. Vishing (Voice Phishing)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-quishing-qr-code-phishing-">5. Quishing (QR Code Phishing)</a></li>
+<li><a href="#comment-reconna-tre-un-phishing">Comment reconnaître un phishing</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#v-rifier-l-exp-diteur">Vérifier l'expéditeur</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyser-les-liens">Analyser les liens</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-signaux-d-alarme-universels">Les signaux d'alarme universels</a></li>
+<li><a href="#techniques-avanc-es-des-attaquants">Techniques avancées des attaquants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#typosquatting">Typosquatting</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sites-https-frauduleux">Sites HTTPS frauduleux</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#clone-phishing">Clone Phishing</a></li>
+<li><a href="#se-prot-ger-efficacement">Se protéger efficacement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-authentification-deux-facteurs-2fa-">1. Authentification à deux facteurs (2FA)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-gestionnaire-de-mots-de-passe">2. Gestionnaire de mots de passe</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-v-rification-ind-pendante">3. Vérification indépendante</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-signaler-les-tentatives">4. Signaler les tentatives</a></li>
+<li><a href="#que-faire-si-vous-avez-cliqu-">Que faire si vous avez cliqué ?</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Phishing : reconnaître et éviter les pièges</h1>
+
+<p>Le phishing (hameçonnage) est l'une des cyberattaques les plus répandues et les plus efficaces. En 2024, plus de <strong>3,4 milliards</strong> d'emails de phishing sont envoyés chaque jour. Apprendre à les reconnaître peut vous éviter de perdre vos données, votre argent ou l'accès à vos comptes.</p>
+
+<h2 id="qu-est-ce-que-le-phishing-">Qu'est-ce que le phishing ?</h2>
+
+<p>Le phishing est une technique d'<strong>ingénierie sociale</strong> qui consiste à se faire passer pour une entité de confiance (banque, service gouvernemental, entreprise connue) pour vous pousser à :</p>
+
+<ul><li>Divulguer vos identifiants et mots de passe</li><li>Entrer vos coordonnées bancaires</li><li>Télécharger un malware</li><li>Effectuer un virement frauduleux</li></ul>
+
+<p>> Le phishing exploite la <strong>psychologie humaine</strong>, pas les failles techniques. C'est pourquoi il est si efficace — même les experts peuvent se faire piéger.</p>
+
+<h2 id="les-types-de-phishing">Les types de phishing</h2>
+
+<h3 id="1-email-phishing-le-plus-courant-">1. Email Phishing (le plus courant)</h3>
+
+<p>Un email imitant une entreprise légitime vous demande d'agir rapidement.</p>
+
+<p><strong>Exemple typique :</strong></p>
+<pre><code>De : securite@credit-agricoI.com  ← Notez le "I" majuscule au lieu de "l"
+<p>Objet : ⚠️ Votre compte a été suspendu - Action requise</p>
+
+<p>Cher client,</p>
+
+<p>Nous avons détecté une activité suspecte sur votre compte.</p>
+<p>Pour éviter la suspension définitive, veuillez confirmer</p>
+<p>vos informations dans les 24 heures :</p>
+
+<p>→ [Cliquez ici pour sécuriser votre compte]</p>
+
+<p>Cordialement,</p>
+<p>Service Sécurité Crédit Agricole</code></pre>
+
+<p><strong>Red flags ici :</strong></p>
+<ul><li>Domaine avec faute (<code>agricoI</code> avec un I)</li><li>Urgence artificielle (24h)</li><li>Lien générique sans domaine visible</li><li>Menace de conséquences graves</li></ul>
+
+<h3 id="2-spear-phishing">2. Spear Phishing</h3>
+
+<p>Version <strong>ciblée</strong> du phishing. L'attaquant a fait des recherches sur vous (LinkedIn, réseaux sociaux) et personnalise son message pour le rendre plus crédible.</p>
+
+<pre><code>De : pierre.martin@votre-entreprise.com  ← Usurpation d'identité d'un collègue
+<p>Objet : Facture urgente à valider</p>
+
+<p>Bonjour [Votre prénom],</p>
+
+<p>Suite à notre réunion de lundi, pouvez-vous valider</p>
+<p>cette facture fournisseur avant ce soir ?</p>
+
+<p>[Facture_2024.pdf.exe]  ← Extension double piégée</p>
+
+<p>Merci,</p>
+<p>Pierre Martin</p>
+<p>Directeur Financier</code></pre>
+
+<h3 id="3-smishing-sms-phishing-">3. Smishing (SMS Phishing)</h3>
+
+<p>Phishing par SMS, souvent imitant La Poste, les impôts ou les services de livraison.</p>
+
+<pre><code>LA POSTE : Votre colis n°FR847291 est en attente.
+<p>Frais de douane : 1,99€</p>
+<p>→ http://laposte-livraison.xyz/payer</code></pre>
+
+<h3 id="4-vishing-voice-phishing-">4. Vishing (Voice Phishing)</h3>
+
+<p>Arnaque par téléphone. L'attaquant se fait passer pour un technicien Microsoft, un conseiller bancaire ou les impôts.</p>
+
+<p><strong>Script typique :</strong></p>
+<p>> "Bonjour, je vous appelle de Microsoft. Nous avons détecté que votre ordinateur est infecté. Je vais vous guider pour le réparer, j'ai besoin d'accéder à votre ordinateur à distance..."</p>
+
+<h3 id="5-quishing-qr-code-phishing-">5. Quishing (QR Code Phishing)</h3>
+
+<p>De plus en plus répandu. Un faux QR code (sur une affiche, dans un email, sur un parking) redirige vers un site malveillant.</p>
+
+<h2 id="comment-reconna-tre-un-phishing">Comment reconnaître un phishing</h2>
+
+<h3 id="v-rifier-l-exp-diteur">Vérifier l'expéditeur</h3>
+
+<pre><code>Email légitime  : contact@paypal.com
+<p>Email phishing  : contact@paypal.secure-login.com</p>
+<p>Email phishing  : paypal-securite@gmail.com</p>
+<p>Email phishing  : noreply@paypαl.com  ← α (alpha grec) au lieu de a</code></pre>
+
+<p><strong>Règle :</strong> le domaine réel est ce qui est <strong>juste avant le .com/.fr</strong> — tout ce qui précède est un sous-domaine contrôlé par l'attaquant.</p>
+
+<h3 id="analyser-les-liens">Analyser les liens</h3>
+
+<p>Avant de cliquer, <strong>survolez le lien</strong> avec votre souris pour voir l'URL réelle.</p>
+
+<pre><code>Texte affiché  : www.amazon.fr/votre-compte
+<p>URL réelle     : http://amazon-fr.connexion-secure.ru/login</p>
+<p>^^</p>
+<p>Domaine réel = connexion-secure.ru</code></pre>
+
+<h3 id="les-signaux-d-alarme-universels">Les signaux d'alarme universels</h3>
+
+<p>| Signal | Explication |</p>
+<p>|--------|-------------|</p>
+<p>| Urgence extrême | "Agissez dans les 2 heures" |</p>
+<p>| Menace | "Compte suspendu / Arrestation imminente" |</p>
+<p>| Offre trop belle | "Vous avez gagné 500€" |</p>
+<p>| Demande inhabituelle | "Payez en cartes cadeaux" |</p>
+<p>| Fautes d'orthographe | Traduction approximative |</p>
+<p>| Pièce jointe inattendue | Surtout .exe, .zip, .doc avec macros |</p>
+<p>| Demande d'identifiants | Les vrais services ne demandent jamais votre mot de passe par email |</p>
+
+<h2 id="techniques-avanc-es-des-attaquants">Techniques avancées des attaquants</h2>
+
+<h3 id="typosquatting">Typosquatting</h3>
+
+<p>Enregistrement de domaines proches de l'original :</p>
+<ul><li><code>arnazon.com</code> au lieu de <code>amazon.com</code></li><li><code>g00gle.com</code> au lieu de <code>google.com</code></li><li><code>paypa1.com</code> au lieu de <code>paypal.com</code></li></ul>
+
+<h3 id="sites-https-frauduleux">Sites HTTPS frauduleux</h3>
+
+<pre><code>⚠️ HTTPS ne signifie pas "site sûr" !
+<p>HTTPS signifie seulement que la connexion est chiffrée.</p>
+<p>Un site de phishing peut très bien avoir un certificat HTTPS valide.</code></pre>
+
+<h3 id="clone-phishing">Clone Phishing</h3>
+
+<p>L'attaquant copie un email légitime que vous avez déjà reçu et remplace les liens par des liens malveillants.</p>
+
+<h2 id="se-prot-ger-efficacement">Se protéger efficacement</h2>
+
+<h3 id="1-authentification-deux-facteurs-2fa-">1. Authentification à deux facteurs (2FA)</h3>
+
+<p>Même si vos identifiants sont volés, le 2FA empêche la connexion sans le second facteur.</p>
+
+<pre><code>Sans 2FA : identifiant + mot de passe = accès
+<p>Avec 2FA : identifiant + mot de passe + code SMS/TOTP = accès</code></pre>
+
+<p>Activez le 2FA sur : email, banque, réseaux sociaux, cloud.</p>
+
+<h3 id="2-gestionnaire-de-mots-de-passe">2. Gestionnaire de mots de passe</h3>
+
+<p>Un gestionnaire (Bitwarden, KeePass) remplit automatiquement vos identifiants <strong>uniquement sur le vrai domaine</strong>. Sur un site de phishing, il ne proposera rien — c'est un signal d'alarme automatique.</p>
+
+<h3 id="3-v-rification-ind-pendante">3. Vérification indépendante</h3>
+
+<p>Si vous recevez un email urgent de votre banque, <strong>n'utilisez pas le lien de l'email</strong>. Ouvrez un nouvel onglet et tapez l'URL de votre banque manuellement.</p>
+
+<h3 id="4-signaler-les-tentatives">4. Signaler les tentatives</h3>
+
+<pre><code>France : https://www.signal-spam.fr
+<p>Europe : https://www.phishing-initiative.eu</p>
+<p>Google : Clic droit sur l'email → Signaler le phishing</code></pre>
+
+<h2 id="que-faire-si-vous-avez-cliqu-">Que faire si vous avez cliqué ?</h2>
+
+<pre><code>1. NE SAISISSEZ PAS d'informations si la page est ouverte
+<p>↓</p>
+<li>FERMEZ immédiatement l'onglet</li>
+<p>↓</p>
+<li>Si vous avez saisi des identifiants :</li>
+<p>→ Changez votre mot de passe immédiatement</p>
+<p>→ Activez le 2FA</p>
+<p>→ Vérifiez les connexions récentes sur votre compte</p>
+<p>↓</p>
+<li>Si vous avez saisi des données bancaires :</li>
+<p>→ Appelez votre banque immédiatement</p>
+<p>→ Faites opposition sur votre carte</p>
+<p>↓</p>
+<li>Si vous avez téléchargé un fichier :</li>
+<p>→ Ne l'ouvrez pas</p>
+<p>→ Lancez un scan antivirus complet</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le phishing mise sur la <strong>précipitation et la peur</strong>. Prenez toujours le temps de vérifier avant d'agir. Demandez-vous : "Est-ce que j'attendais cet email ? Est-ce que ce lien mène bien où il dit ?" Ces quelques secondes de réflexion peuvent vous éviter bien des ennuis.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#phishing-arnaques" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/malwares-virus.html" class="nav-prev">← Malwares et virus : comprendre les menaces</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-bases.html" class="nav-next">Cryptographie : chiffrer ses données efficacement →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

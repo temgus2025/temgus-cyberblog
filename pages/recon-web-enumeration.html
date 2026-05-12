@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Reconnaissance web : énumération et cartographie des cibles — Temgus.CyberBlog</title>
 <meta name="description" content="Gobuster, ffuf, Amass, Google Dorks, Shodan, WPScan — guide complet de la reconnaissance pour le pentest web.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/recon-web-enumeration.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/recon-web-enumeration.html">
 <meta property="og:title" content="Reconnaissance web : énumération et cartographie des cibles — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Reconnaissance web : énumération et cartographie des cibles — Temgus.CyberBlog">
 <meta name="twitter:description" content="Gobuster, ffuf, Amass, Google Dorks, Shodan, WPScan — guide complet de la reconnaissance pour le pentest web.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,502 @@
   "headline": "Reconnaissance web : énumération et cartographie des cibles",
   "description": "Gobuster, ffuf, Amass, Google Dorks, Shodan, WPScan — guide complet de la reconnaissance pour le pentest web.",
   "datePublished": "2025-08-21",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/recon-web-enumeration.html",
   "inLanguage": "fr",
   "keywords": "recon, enumération, Gobuster, ffuf, OSINT",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔎</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Reconnaissance web : énumération et cartographie des cibles</h1>
-  <p style="color:#8892a4;max-width:500px">Gobuster, ffuf, Amass, Google Dorks, Shodan, WPScan — guide complet de la reconnaissance pour le pentest web.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#recon-web-enumeration" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔎</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Reconnaissance web : énumération et cartographie des cibles</div>
+      <div class="meta-details">
+        <span>📅 2025-08-21</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#m-thodologie-de-reconnaissance">Méthodologie de reconnaissance</a></li>
+<li><a href="#reconnaissance-passive">Reconnaissance passive</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#whois-et-dns">WHOIS et DNS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sous-domaines-passifs">Sous-domaines passifs</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#google-dorks">Google Dorks</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#shodan">Shodan</a></li>
+<li><a href="#reconnaissance-active">Reconnaissance active</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#scan-avec-nmap">Scan avec Nmap</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#technologies-utilis-es">Technologies utilisées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-num-ration-de-r-pertoires-et-fichiers">Énumération de répertoires et fichiers</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#fichiers-sensibles-chercher">Fichiers sensibles à chercher</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-num-ration-de-sous-domaines-active">Énumération de sous-domaines active</a></li>
+<li><a href="#analyser-les-r-sultats">Analyser les résultats</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#identifier-les-cms-vuln-rables">Identifier les CMS vulnérables</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyser-les-headers-http">Analyser les headers HTTP</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#analyser-les-certificats-ssl-tls">Analyser les certificats SSL/TLS</a></li>
+<li><a href="#outils-de-reconnaissance-globale">Outils de reconnaissance globale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#eyewitness-screenshots-automatiques">Eyewitness — Screenshots automatiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#aquatone">Aquatone</a></li>
+<li><a href="#organisation-des-r-sultats">Organisation des résultats</a></li>
+<li><a href="#sous-domaines-d-couverts">Sous-domaines découverts</a></li>
+<li><a href="#fichiers-int-ressants">Fichiers intéressants</a></li>
+<li><a href="#technologies">Technologies</a></li>
+<li><a href="#vecteurs-potentiels">Vecteurs potentiels</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Reconnaissance web : énumération et cartographie des cibles</h1>
+
+<p>La reconnaissance est la phase la plus importante d'un pentest web. Une énumération complète révèle des surfaces d'attaque invisibles au premier regard : répertoires cachés, sous-domaines oubliés, technologies exposées, fichiers sensibles.</p>
+
+<h2 id="m-thodologie-de-reconnaissance">Méthodologie de reconnaissance</h2>
+
+<pre><code>Passive Recon (sans contact avec la cible)
+<p>↓</p>
+<p>Active Recon (contact direct avec la cible)</p>
+<p>↓</p>
+<p>Cartographie complète</p>
+<p>↓</p>
+<p>Identification des vecteurs d'attaque</code></pre>
+
+<h2 id="reconnaissance-passive">Reconnaissance passive</h2>
+
+<h3 id="whois-et-dns">WHOIS et DNS</h3>
+<pre><code class="language-bash"># Informations WHOIS
+<p>whois example.com</p>
+
+<h1>Résolution DNS</h1>
+<p>dig example.com</p>
+<p>dig example.com MX      # Serveurs mail</p>
+<p>dig example.com NS      # Serveurs DNS</p>
+<p>dig example.com TXT     # Enregistrements TXT (SPF, DMARC...)</p>
+<p>dig example.com ANY     # Tous les enregistrements</p>
+
+<h1>Transfert de zone (si mal configuré)</h1>
+<p>dig axfr @ns1.example.com example.com</p>
+
+<h1>dnsx - résolution en masse</h1>
+<p>dnsx -l subdomains.txt -a -aaaa -cname -mx -ns</code></pre>
+
+<h3 id="sous-domaines-passifs">Sous-domaines passifs</h3>
+<pre><code class="language-bash"># Amass (passive)
+<p>amass enum -passive -d example.com</p>
+
+<h1>Subfinder</h1>
+<p>subfinder -d example.com</p>
+
+<h1>theHarvester</h1>
+<p>theHarvester -d example.com -b google,bing,linkedin</p>
+
+<h1>Certificate Transparency Logs</h1>
+<h1>crt.sh - chercher: %.example.com</h1>
+<p>curl "https://crt.sh/?q=%.example.com&amp;output=json" |</p>
+<p>jq '.[].name_value' | sort -u</code></pre>
+
+<h3 id="google-dorks">Google Dorks</h3>
+<pre><code>site:example.com                  # Toutes les pages indexées
+<p>site:example.com filetype:pdf     # Fichiers PDF</p>
+<p>site:example.com inurl:admin      # Pages admin</p>
+<p>site:example.com ext:php          # Scripts PHP</p>
+<p>"example.com" "password"          # Mentions de mots de passe</p>
+<p>inurl:example.com/wp-admin        # WordPress admin</code></pre>
+
+<h3 id="shodan">Shodan</h3>
+<pre><code class="language-bash"># Chercher des services exposés
+<p>shodan search "hostname:example.com"</p>
+<p>shodan search "org:Example Company"</p>
+<p>shodan search "ssl.cert.subject.cn:example.com"</p>
+
+<h1>Via API</h1>
+<p>shodan host 192.168.1.1</code></pre>
+
+<h2 id="reconnaissance-active">Reconnaissance active</h2>
+
+<h3 id="scan-avec-nmap">Scan avec Nmap</h3>
+<pre><code class="language-bash"># Scan web complet
+<p>nmap -sV -p 80,443,8080,8443,8888 --script http-title,http-headers example.com</p>
+
+<h1>Détection WAF</h1>
+<p>nmap --script http-waf-detect example.com</p>
+<p>nmap --script http-waf-fingerprint example.com</code></pre>
+
+<h3 id="technologies-utilis-es">Technologies utilisées</h3>
+<pre><code class="language-bash"># WhatWeb
+<p>whatweb example.com</p>
+<p>whatweb -a 3 example.com  # Niveau agressif</p>
+
+<h1>Wappalyzer (extension navigateur ou CLI)</h1>
+<h1>Détecte: CMS, frameworks, serveurs web, analytics...</h1>
+
+<h1>BuiltWith (online)</h1>
+<h1>builtwith.com/example.com</code></pre></h1>
+
+<h3 id="-num-ration-de-r-pertoires-et-fichiers">Énumération de répertoires et fichiers</h3>
+
+<pre><code class="language-bash"># Gobuster
+<p>gobuster dir -u https://example.com \</p>
+<p>-w /usr/share/seclists/Discovery/Web-Content/common.txt \</p>
+<p>-x php,html,txt,bak \</p>
+<p>-t 50</p>
+
+<h1>Feroxbuster (récursif automatiquement)</h1>
+<p>feroxbuster -u https://example.com \</p>
+<p>-w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt \</p>
+<p>-x php,html,txt \</p>
+<p>--depth 3</p>
+
+<h1>ffuf</h1>
+<p>ffuf -u https://example.com/FUZZ \</p>
+<p>-w /usr/share/seclists/Discovery/Web-Content/common.txt \</p>
+<p>-fc 404 \</p>
+<p>-mc all</p>
+
+<h1>Fichiers sensibles courants à chercher</h1>
+<p>ffuf -u https://example.com/FUZZ \</p>
+<p>-w /usr/share/seclists/Discovery/Web-Content/sensitive-files.txt</code></pre>
+
+<h3 id="fichiers-sensibles-chercher">Fichiers sensibles à chercher</h3>
+<pre><code>/.git/config          # Repository Git exposé
+<p>/.env                 # Variables d'environnement</p>
+<p>/backup.zip           # Sauvegardes</p>
+<p>/robots.txt           # Chemins cachés</p>
+<p>/sitemap.xml          # Structure du site</p>
+<p>/phpinfo.php          # Infos PHP</p>
+<p>/wp-config.php        # Config WordPress</p>
+<p>/.htaccess            # Config Apache</p>
+<p>/web.config           # Config IIS</p>
+<p>/config.php           # Configurations diverses</code></pre>
+
+<h3 id="-num-ration-de-sous-domaines-active">Énumération de sous-domaines active</h3>
+<pre><code class="language-bash"># DNSx avec bruteforce
+<p>dnsx -d example.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt</p>
+
+<h1>Amass actif</h1>
+<p>amass enum -active -d example.com</p>
+
+<h1>Gobuster DNS</h1>
+<p>gobuster dns -d example.com \</p>
+<p>-w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt \</p>
+<p>-t 50</code></pre>
+
+<h2 id="analyser-les-r-sultats">Analyser les résultats</h2>
+
+<h3 id="identifier-les-cms-vuln-rables">Identifier les CMS vulnérables</h3>
+
+<pre><code class="language-bash"># WordPress
+<p>wpscan --url https://example.com \</p>
+<p>--enumerate u,p,t,vp,vt \</p>
+<p>--api-token YOUR_TOKEN</p>
+
+<h1>Joomla</h1>
+<p>joomscan -u https://example.com</p>
+
+<h1>Drupal</h1>
+<p>droopescan scan drupal -u https://example.com</code></pre>
+
+<h3 id="analyser-les-headers-http">Analyser les headers HTTP</h3>
+<pre><code class="language-bash">curl -I https://example.com
+
+<h1>Headers de sécurité à vérifier :</h1>
+<h1>Strict-Transport-Security (HSTS)</h1>
+<h1>Content-Security-Policy (CSP)</h1>
+<h1>X-Frame-Options</h1>
+<h1>X-Content-Type-Options</h1>
+<h1>Referrer-Policy</h1>
+
+<h1>SecurityHeaders.com : outil en ligne pour analyser les headers</code></pre></h1>
+
+<h3 id="analyser-les-certificats-ssl-tls">Analyser les certificats SSL/TLS</h3>
+<pre><code class="language-bash"># SSLyze
+<p>sslyze example.com</p>
+
+<h1>testssl.sh</h1>
+<p>./testssl.sh https://example.com</p>
+
+<h1>SSLLabs (en ligne)</h1>
+<h1>ssllabs.com/ssltest/</code></pre></h1>
+
+<h2 id="outils-de-reconnaissance-globale">Outils de reconnaissance globale</h2>
+
+<h3 id="eyewitness-screenshots-automatiques">Eyewitness — Screenshots automatiques</h3>
+<pre><code class="language-bash"># Prendre des screenshots de toutes les URLs
+<p>eyewitness --web -f urls.txt --timeout 10 -d output/</p>
+
+<h1>Très utile pour identifier rapidement les applications intéressantes</code></pre></h1>
+
+<h3 id="aquatone">Aquatone</h3>
+<pre><code class="language-bash">cat subdomains.txt | aquatone -ports xlarge -out aquatone_output/</code></pre>
+
+<h2 id="organisation-des-r-sultats">Organisation des résultats</h2>
+
+<p>Documentez tout dans un fichier structuré :</p>
+
+<pre><code># Reconnaissance - example.com
+
+<h2 id="sous-domaines-d-couverts">Sous-domaines découverts</h2>
+<ul><li>www.example.com (Apache 2.4, WordPress 6.x)</li><li>admin.example.com (Nginx, Panel d'administration)</li><li>api.example.com (API REST, Node.js)</li><li>dev.example.com (Exposé, mêmes credentials que prod ?)</li></ul>
+
+<h2 id="fichiers-int-ressants">Fichiers intéressants</h2>
+<ul><li>/backup.zip (accès non authentifié !)</li><li>/.git/ (repository exposé)</li></ul>
+
+<h2 id="technologies">Technologies</h2>
+<ul><li>CMS: WordPress 6.1 (vulnérable CVE-XXXX)</li><li>Serveur: Apache 2.4.51</li><li>PHP: 7.4 (EOL)</li><li>Framework: Laravel 8</li></ul>
+
+<h2 id="vecteurs-potentiels">Vecteurs potentiels</h2>
+<li>WordPress 6.1 - CVE à vérifier</li>
+<li>.git exposé - extraire le code source</li>
+<li>admin.example.com - tester credentials par défaut</code></pre></li>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Une bonne reconnaissance peut faire la différence entre un pentest mediocre et une mission complète. Ne passez jamais directement à l'exploitation sans avoir cartographié exhaustivement la surface d'attaque. Les trouvailles les plus critiques (fichiers .env, .git exposés, sous-domaines oubliés) se révèlent souvent lors de cette phase.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#recon-web-enumeration" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-windows.html" class="nav-prev">← Élévation de privilèges Windows : techniques avancées</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/architecture-reseau-securisee.html" class="nav-next">Architecture réseau sécurisée : concevoir une infrastructure robuste →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

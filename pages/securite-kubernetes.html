@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité Kubernetes : protéger vos clusters — Temgus.CyberBlog</title>
 <meta name="description" content="RBAC, Pod Security, Network Policies, secrets et audit de sécurité K8s.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-kubernetes.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-kubernetes.html">
 <meta property="og:title" content="Sécurité Kubernetes : protéger vos clusters — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité Kubernetes : protéger vos clusters — Temgus.CyberBlog">
 <meta name="twitter:description" content="RBAC, Pod Security, Network Policies, secrets et audit de sécurité K8s.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,647 @@
   "headline": "Sécurité Kubernetes : protéger vos clusters",
   "description": "RBAC, Pod Security, Network Policies, secrets et audit de sécurité K8s.",
   "datePublished": "2025-06-06",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-kubernetes.html",
   "inLanguage": "fr",
   "keywords": "Kubernetes, K8s, conteneurs, RBAC",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⚙️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité Kubernetes : protéger vos clusters</h1>
-  <p style="color:#8892a4;max-width:500px">RBAC, Pod Security, Network Policies, secrets et audit de sécurité K8s.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-kubernetes" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⚙️</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité Kubernetes : protéger vos clusters</div>
+      <div class="meta-details">
+        <span>📅 2025-06-06</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-risques-sp-cifiques-kubernetes">Les risques spécifiques à Kubernetes</a></li>
+<li><a href="#s-curiser-l-api-server">Sécuriser l'API Server</a></li>
+<li><a href="#rbac-contr-le-d-acc-s-bas-sur-les-r-les">RBAC — Contrôle d'accès basé sur les rôles</a></li>
+<li><a href="#pod-security">Pod Security</a></li>
+<li><a href="#gestion-des-secrets">Gestion des secrets</a></li>
+<li><a href="#network-policies">Network Policies</a></li>
+<li><a href="#admission-controllers">Admission Controllers</a></li>
+<li><a href="#outils-d-audit-kubernetes">Outils d'audit Kubernetes</a></li>
+<li><a href="#checklist-s-curit-kubernetes">Checklist sécurité Kubernetes</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité Kubernetes : protéger vos clusters</h1>
+
+<p>Kubernetes est devenu le standard de l'orchestration de conteneurs. Mais un cluster mal configuré peut exposer toute votre infrastructure. Ce guide couvre les vecteurs d'attaque spécifiques à Kubernetes et les meilleures pratiques de sécurisation.</p>
+
+<h2 id="les-risques-sp-cifiques-kubernetes">Les risques spécifiques à Kubernetes</h2>
+
+<pre><code>Vecteurs d'attaque courants sur K8s :
+
+<li>API Server exposé sur Internet</li>
+<p>→ Pas d'authentification ou authentification faible</p>
+<p>→ Accès à tout le cluster</p>
+
+<li>RBAC trop permissif</li>
+<p>→ ServiceAccounts avec droits cluster-admin</p>
+<p>→ Pods peuvent modifier le cluster entier</p>
+
+<li>Conteneurs privilégiés</li>
+<p>→ Accès root sur le nœud hôte</p>
+<p>→ Évasion du conteneur possible</p>
+
+<li>Secrets en clair dans les manifests</li>
+<p>→ Mots de passe dans les variables d'environnement YAML</p>
+<p>→ Secrets visibles dans etcd non chiffré</p>
+
+<li>Images non scannées</li>
+<p>→ Vulnérabilités dans les images de base</p>
+<p>→ Images depuis registries non approuvés</p>
+
+<li>etcd non sécurisé</li>
+<p>→ Base de données du cluster exposée</p>
+<p>→ Tous les secrets en clair</code></pre>
+
+<h2 id="s-curiser-l-api-server">Sécuriser l'API Server</h2>
+
+<pre><code class="language-yaml"># kube-apiserver.yaml - Options de sécurité
+<p>apiVersion: v1</p>
+<p>kind: Pod</p>
+<p>metadata:</p>
+<p>name: kube-apiserver</p>
+<p>spec:</p>
+<p>containers:</p>
+<p>- command:</p>
+<p>- kube-apiserver</p>
+<p># Authentification</p>
+<p>- --client-ca-file=/etc/kubernetes/pki/ca.crt</p>
+<p>- --tls-cert-file=/etc/kubernetes/pki/apiserver.crt</p>
+<p>- --tls-private-key-file=/etc/kubernetes/pki/apiserver.key</p>
+
+<p># Désactiver l'accès anonyme</p>
+<p>- --anonymous-auth=false</p>
+
+<p># Authorization</p>
+<p>- --authorization-mode=Node,RBAC</p>
+
+<p># Audit logging</p>
+<p>- --audit-log-path=/var/log/audit.log</p>
+<p>- --audit-log-maxage=30</p>
+<p>- --audit-policy-file=/etc/kubernetes/audit-policy.yaml</p>
+
+<p># Chiffrement etcd</p>
+<p>- --encryption-provider-config=/etc/kubernetes/encryption-config.yaml</p>
+
+<p># Désactiver les profils insécurisés</p>
+<p>- --insecure-port=0  # Désactiver le port HTTP non chiffré</p>
+<p>- --profiling=false</code></pre>
+
+<h2 id="rbac-contr-le-d-acc-s-bas-sur-les-r-les">RBAC — Contrôle d'accès basé sur les rôles</h2>
+
+<pre><code class="language-yaml"># Principe du moindre privilège avec RBAC
+
+<h1>❌ MAUVAISE pratique : cluster-admin partout</h1>
+<p>apiVersion: rbac.authorization.k8s.io/v1</p>
+<p>kind: ClusterRoleBinding</p>
+<p>metadata:</p>
+<p>name: bad-practice</p>
+<p>subjects:</p>
+<ul><li>kind: ServiceAccount</li></ul>
+<p>name: my-app</p>
+<p>namespace: default</p>
+<p>roleRef:</p>
+<p>kind: ClusterRole</p>
+<p>apiGroup: rbac.authorization.k8s.io</p>
+<p>name: cluster-admin  # TROP PERMISSIF !</p>
+
+<p>---</p>
+<h1>✅ BONNE pratique : accès minimal</h1>
+<p>apiVersion: rbac.authorization.k8s.io/v1</p>
+<p>kind: Role</p>
+<p>metadata:</p>
+<p>namespace: production</p>
+<p>name: app-role</p>
+<p>rules:</p>
+<ul><li>apiGroups: [""]</li></ul>
+<p>resources: ["configmaps"]</p>
+<p>verbs: ["get", "list"]  # Seulement lecture</p>
+<ul><li>apiGroups: [""]</li></ul>
+<p>resources: ["pods"]</p>
+<p>verbs: ["get", "list"]</p>
+<h1>Pas d'accès aux secrets, pas de modification</h1>
+
+<p>---</p>
+<p>apiVersion: rbac.authorization.k8s.io/v1</p>
+<p>kind: RoleBinding</p>
+<p>metadata:</p>
+<p>name: app-rolebinding</p>
+<p>namespace: production</p>
+<p>subjects:</p>
+<ul><li>kind: ServiceAccount</li></ul>
+<p>name: my-app</p>
+<p>namespace: production</p>
+<p>roleRef:</p>
+<p>kind: Role</p>
+<p>apiGroup: rbac.authorization.k8s.io</p>
+<p>name: app-role</code></pre>
+
+<pre><code class="language-bash"># Auditer les permissions RBAC
+<p>kubectl auth can-i --list --as=system:serviceaccount:default:my-app</p>
+<p>kubectl auth can-i create pods --as=system:serviceaccount:default:my-app</p>
+
+<h1>Outil rakkess - Visualiser les permissions</h1>
+<p>rakkess --sa default:my-app</p>
+
+<h1>Outil rbac-tool</h1>
+<p>kubectl rbac-tool lookup system:serviceaccounts</p>
+<p>kubectl rbac-tool who-can create pods</code></pre>
+
+<h2 id="pod-security">Pod Security</h2>
+
+<pre><code class="language-yaml"># SecurityContext - Restrictions au niveau pod
+<p>apiVersion: v1</p>
+<p>kind: Pod</p>
+<p>metadata:</p>
+<p>name: secure-pod</p>
+<p>spec:</p>
+<p>securityContext:</p>
+<p>runAsNonRoot: true       # Pas de root</p>
+<p>runAsUser: 1000          # UID non-root</p>
+<p>runAsGroup: 3000</p>
+<p>fsGroup: 2000</p>
+<p>seccompProfile:</p>
+<p>type: RuntimeDefault   # Profil seccomp par défaut</p>
+
+<p>containers:</p>
+<p>- name: app</p>
+<p>image: mon-app:1.2.3</p>
+<p>securityContext:</p>
+<p>allowPrivilegeEscalation: false  # Pas d'élévation de privilèges</p>
+<p>readOnlyRootFilesystem: true     # FS en lecture seule</p>
+<p>capabilities:</p>
+<p>drop:</p>
+<p>- ALL                # Supprimer TOUTES les capabilities Linux</p>
+<p>add:</p>
+<p>- NET_BIND_SERVICE   # Réajouter seulement le nécessaire</p>
+
+<p>resources:</p>
+<p>limits:</p>
+<p>memory: "256Mi"</p>
+<p>cpu: "500m"</p>
+<p>requests:</p>
+<p>memory: "128Mi"</p>
+<p>cpu: "250m"</p>
+
+<p># Monter /tmp en mémoire (pour readOnlyRootFilesystem)</p>
+<p>volumeMounts:</p>
+<p>- mountPath: /tmp</p>
+<p>name: tmp-dir</p>
+
+<p>volumes:</p>
+<p>- name: tmp-dir</p>
+<p>emptyDir: {}</p>
+
+<p># Pas d'accès à l'API Kubernetes depuis le pod</p>
+<p>automountServiceAccountToken: false</code></pre>
+
+<h2 id="gestion-des-secrets">Gestion des secrets</h2>
+
+<pre><code class="language-bash"># ❌ MAUVAIS : secrets en clair dans les variables d'env
+<p>env:</p>
+<ul><li>name: DB_PASSWORD</li></ul>
+<p>value: "MonMotDePasse123"  # Visible dans le YAML !</p>
+
+<h1>❌ MAUVAIS : Secret K8s encodé Base64 (pas chiffré !)</h1>
+<p>apiVersion: v1</p>
+<p>kind: Secret</p>
+<p>metadata:</p>
+<p>name: db-secret</p>
+<p>data:</p>
+<p>password: TW9uTW90RGVQYXNzZTEyMw==  # Juste du base64 !</code></pre>
+
+<pre><code class="language-yaml"># ✅ BON : Chiffrement etcd
+<h1>/etc/kubernetes/encryption-config.yaml</h1>
+<p>apiVersion: apiserver.config.k8s.io/v1</p>
+<p>kind: EncryptionConfiguration</p>
+<p>resources:</p>
+<ul><li>resources:</li></ul>
+<p>- secrets</p>
+<p>providers:</p>
+<p>- aescbc:</p>
+<p>keys:</p>
+<p>- name: key1</p>
+<p>secret: &lt;base64-encoded-32-byte-key&gt;</p>
+<p>- identity: {}</p>
+
+<p>---</p>
+<h1>✅ MIEUX : External Secrets Operator avec HashiCorp Vault</h1>
+<p>apiVersion: external-secrets.io/v1beta1</p>
+<p>kind: ExternalSecret</p>
+<p>metadata:</p>
+<p>name: db-secret</p>
+<p>spec:</p>
+<p>refreshInterval: 1h</p>
+<p>secretStoreRef:</p>
+<p>name: vault-backend</p>
+<p>kind: ClusterSecretStore</p>
+<p>target:</p>
+<p>name: db-secret</p>
+<p>data:</p>
+<p>- secretKey: password</p>
+<p>remoteRef:</p>
+<p>key: prod/database</p>
+<p>property: password</code></pre>
+
+<h2 id="network-policies">Network Policies</h2>
+
+<pre><code class="language-yaml"># Par défaut Kubernetes : tout le trafic est autorisé entre pods !
+<h1>Network Policies permettent de micro-segmenter</h1>
+
+<h1>Politique "deny all" par défaut</h1>
+<p>apiVersion: networking.k8s.io/v1</p>
+<p>kind: NetworkPolicy</p>
+<p>metadata:</p>
+<p>name: default-deny-all</p>
+<p>namespace: production</p>
+<p>spec:</p>
+<p>podSelector: {}  # Sélectionne tous les pods</p>
+<p>policyTypes:</p>
+<p>- Ingress</p>
+<p>- Egress</p>
+<p># Pas de règles = tout bloqué</p>
+
+<p>---</p>
+<h1>Autoriser seulement le frontend vers le backend</h1>
+<p>apiVersion: networking.k8s.io/v1</p>
+<p>kind: NetworkPolicy</p>
+<p>metadata:</p>
+<p>name: allow-frontend-to-backend</p>
+<p>namespace: production</p>
+<p>spec:</p>
+<p>podSelector:</p>
+<p>matchLabels:</p>
+<p>app: backend</p>
+<p>policyTypes:</p>
+<p>- Ingress</p>
+<p>ingress:</p>
+<p>- from:</p>
+<p>- podSelector:</p>
+<p>matchLabels:</p>
+<p>app: frontend</p>
+<p>ports:</p>
+<p>- port: 3000</p>
+<p># Tout autre trafic vers backend = bloqué</code></pre>
+
+<h2 id="admission-controllers">Admission Controllers</h2>
+
+<pre><code class="language-yaml"># OPA Gatekeeper - Politique de sécurité déclarative
+
+<h1>Règle : interdire les images sans tag fixe (no "latest")</h1>
+<p>apiVersion: templates.gatekeeper.sh/v1</p>
+<p>kind: ConstraintTemplate</p>
+<p>metadata:</p>
+<p>name: k8srequiredlabels</p>
+<p>spec:</p>
+<p>crd:</p>
+<p>spec:</p>
+<p>names:</p>
+<p>kind: K8sRequiredLabels</p>
+<p>targets:</p>
+<p>- target: admission.k8s.gatekeeper.sh</p>
+<p>rego: |</p>
+<p>package k8srequiredlabels</p>
+<p>violation[{"msg": msg}] {</p>
+<p>container := input.review.object.spec.containers[_]</p>
+<p>endswith(container.image, ":latest")</p>
+<p>msg := sprintf("Image %v uses ':latest' tag - use specific version", [container.image])</p>
+<p>}</p>
+
+<p>---</p>
+<h1>Règle : CPU/Memory limits obligatoires</h1>
+<p>apiVersion: templates.gatekeeper.sh/v1</p>
+<p>kind: ConstraintTemplate</p>
+<p>metadata:</p>
+<p>name: k8sresourcelimits</p>
+<p>spec:</p>
+<p>targets:</p>
+<p>- target: admission.k8s.gatekeeper.sh</p>
+<p>rego: |</p>
+<p>package k8sresourcelimits</p>
+<p>violation[{"msg": msg}] {</p>
+<p>container := input.review.object.spec.containers[_]</p>
+<p>not container.resources.limits</p>
+<p>msg := sprintf("Container %v must have resource limits", [container.name])</p>
+<p>}</code></pre>
+
+<h2 id="outils-d-audit-kubernetes">Outils d'audit Kubernetes</h2>
+
+<pre><code class="language-bash"># Kube-bench - Vérification CIS Benchmark
+<p>docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro \</p>
+<p>-t aquasec/kube-bench:latest</p>
+
+<h1>Falco - Détection d'anomalies runtime</h1>
+<p>helm install falco falcosecurity/falco \</p>
+<p>--set driver.kind=ebpf</p>
+
+<h1>Règles Falco personnalisées</h1>
+<h1>/etc/falco/rules.d/custom.yaml</h1>
+<ul><li>rule: Shell in Container</li></ul>
+<p>desc: Détecte l'ouverture d'un shell dans un conteneur</p>
+<p>condition: &gt;</p>
+<p>spawned_process and container</p>
+<p>and shell_procs</p>
+<p>and not proc.pname in (java, python)</p>
+<p>output: Shell dans conteneur (user=%user.name cmd=%proc.cmdline)</p>
+<p>priority: WARNING</p>
+
+<h1>Trivy - Scan des images ET de la configuration K8s</h1>
+<p>trivy k8s --report all cluster</p>
+<p>trivy image mon-app:latest</p>
+
+<h1>Kubesec - Score de sécurité d'un manifest</h1>
+<p>kubesec scan deployment.yaml</code></pre>
+
+<h2 id="checklist-s-curit-kubernetes">Checklist sécurité Kubernetes</h2>
+
+<pre><code>Cluster
+<p>✅ API Server non exposé sur Internet</p>
+<p>✅ RBAC activé (--authorization-mode=RBAC)</p>
+<p>✅ Accès anonyme désactivé</p>
+<p>✅ Audit logging activé</p>
+<p>✅ etcd chiffré</p>
+
+<p>Workloads</p>
+<p>✅ Pas de conteneurs privilégiés</p>
+<p>✅ runAsNonRoot: true</p>
+<p>✅ readOnlyRootFilesystem: true</p>
+<p>✅ CPU/Memory limits définis</p>
+<p>✅ automountServiceAccountToken: false si non nécessaire</p>
+
+<p>Réseau</p>
+<p>✅ Network Policies "deny all" par défaut</p>
+<p>✅ Règles d'autorisation explicites</p>
+<p>✅ Ingress TLS configuré</p>
+
+<p>Secrets</p>
+<p>✅ Chiffrement etcd activé</p>
+<p>✅ External Secrets (Vault) de préférence</p>
+<p>✅ Pas de secrets dans les images</p>
+
+<p>Images</p>
+<p>✅ Tags versionnés (jamais :latest en prod)</p>
+<p>✅ Scan d'images dans CI/CD (Trivy)</p>
+<p>✅ Registre privé approuvé</p>
+<p>✅ Images non-root par défaut</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Kubernetes est puissant mais complexe à sécuriser. Les principaux risques viennent du <strong>RBAC trop permissif, des conteneurs privilégiés et des secrets mal gérés</strong>. Commencez par appliquer le CIS Kubernetes Benchmark avec kube-bench, activez Falco pour la détection runtime, et implémentez Network Policies pour micro-segmenter vos workloads.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-kubernetes" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ransomware-anatomie.html" class="nav-prev">← Ransomware : anatomie d'une attaque moderne</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/steganographie.html" class="nav-next">Stéganographie : l'art de cacher des données →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Threat Intelligence : anticiper les cyberattaques — Temgus.CyberBlog</title>
 <meta name="description" content="IOCs, MISP, sources OSINT, profiling d'acteurs APT et intégration dans un SIEM pour une sécurité prédictive.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/threat-intelligence.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/threat-intelligence.html">
 <meta property="og:title" content="Threat Intelligence : anticiper les cyberattaques — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Threat Intelligence : anticiper les cyberattaques — Temgus.CyberBlog">
 <meta name="twitter:description" content="IOCs, MISP, sources OSINT, profiling d'acteurs APT et intégration dans un SIEM pour une sécurité prédictive.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,518 @@
   "headline": "Threat Intelligence : anticiper les cyberattaques",
   "description": "IOCs, MISP, sources OSINT, profiling d'acteurs APT et intégration dans un SIEM pour une sécurité prédictive.",
   "datePublished": "2025-08-05",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/threat-intelligence.html",
   "inLanguage": "fr",
   "keywords": "threat intelligence, MISP, IOC, APT, MITRE ATT&CK",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎯</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Threat Intelligence : anticiper les cyberattaques</h1>
-  <p style="color:#8892a4;max-width:500px">IOCs, MISP, sources OSINT, profiling d'acteurs APT et intégration dans un SIEM pour une sécurité prédictive.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#threat-intelligence" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎯</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Threat Intelligence : anticiper les cyberattaques</div>
+      <div class="meta-details">
+        <span>📅 2025-08-05</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-que-la-threat-intelligence-">Qu'est-ce que la Threat Intelligence ?</a></li>
+<li><a href="#les-4-niveaux-de-threat-intelligence">Les 4 niveaux de Threat Intelligence</a></li>
+<li><a href="#les-iocs-indicateurs-de-compromission">Les IOCs — Indicateurs de Compromission</a></li>
+<li><a href="#sources-de-threat-intelligence">Sources de Threat Intelligence</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#sources-ouvertes-osint-">Sources ouvertes (OSINT)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#int-gration-dans-un-siem">Intégration dans un SIEM</a></li>
+<li><a href="#misp-plateforme-de-partage-de-ti">MISP — Plateforme de partage de TI</a></li>
+<li><a href="#profiling-d-acteurs-malveillants">Profiling d'acteurs malveillants</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Threat Intelligence : anticiper les cyberattaques</h1>
+
+<p>La Threat Intelligence (renseignement sur les menaces) consiste à collecter, analyser et partager des informations sur les cybermenaces pour anticiper les attaques avant qu'elles ne se produisent. C'est le passage d'une sécurité réactive à une sécurité prédictive.</p>
+
+<h2 id="qu-est-ce-que-la-threat-intelligence-">Qu'est-ce que la Threat Intelligence ?</h2>
+
+<pre><code>Sécurité réactive :
+<p>Attaque → Détection → Réponse</p>
+<p>(on subit et on réagit)</p>
+
+<p>Sécurité avec Threat Intelligence :</p>
+<p>Renseignement → Anticipation → Prévention</p>
+<p>(on sait ce qui arrive avant que ça arrive)</p>
+
+<p>Analogie militaire :</p>
+<p>Un général sans renseignement combat à l'aveugle</p>
+<p>Un général avec renseignement connaît l'ennemi, ses outils, ses tactiques</code></pre>
+
+<h2 id="les-4-niveaux-de-threat-intelligence">Les 4 niveaux de Threat Intelligence</h2>
+
+<pre><code>1. STRATÉGIQUE
+<p>Audience : Direction, RSSI, Board</p>
+<p>Format : Rapports, présentations</p>
+<p>Contenu : Tendances macro, risques business</p>
+<p>Exemple : "Les attaques ransomware contre le secteur santé</p>
+<p>ont augmenté de 130% en 2023"</p>
+
+<li>OPÉRATIONNEL</li>
+<p>Audience : Équipes sécurité, SOC managers</p>
+<p>Format : Rapports techniques</p>
+<p>Contenu : Campagnes en cours, TTPs des acteurs</p>
+<p>Exemple : "APT28 cible les organisations OTAN avec des</p>
+<p>phishing leurres sur Ukraine depuis 3 mois"</p>
+
+<li>TACTIQUE</li>
+<p>Audience : Analystes SOC, Threat Hunters</p>
+<p>Format : TTPs MITRE ATT&amp;CK, Sigma rules</p>
+<p>Contenu : Techniques, tactiques, procédures</p>
+<p>Exemple : "Ce groupe utilise PowerShell EncodedCommand</p>
+<p>puis Cobalt Strike via DNS C2"</p>
+
+<li>TECHNIQUE</li>
+<p>Audience : Équipes techniques, SIEM</p>
+<p>Format : IOCs (IP, domaines, hashes)</p>
+<p>Contenu : Indicateurs de compromission</p>
+<p>Exemple : "IP 185.220.101.5, hash abc123, domaine evil.com"</code></pre>
+
+<h2 id="les-iocs-indicateurs-de-compromission">Les IOCs — Indicateurs de Compromission</h2>
+
+<pre><code class="language-python"># Types d'IOCs et leur durée de vie
+
+<p>iocs = {</p>
+<p>"Hashes (MD5/SHA256)": {</p>
+<p>"exemple": "d41d8cd98f00b204e9800998ecf8427e",</p>
+<p>"durée_de_vie": "Permanente",</p>
+<p>"qualité": "Élevée mais facile à contourner (modifier 1 bit)",</p>
+<p>"usage": "Identifier un fichier malveillant exact"</p>
+<p>},</p>
+<p>"IPs": {</p>
+<p>"exemple": "185.220.101.5",</p>
+<p>"durée_de_vie": "Heures à jours",</p>
+<p>"qualité": "Faible (les attaquants changent d'IP facilement)",</p>
+<p>"usage": "Bloquer temporairement, enrichir le contexte"</p>
+<p>},</p>
+<p>"Domaines": {</p>
+<p>"exemple": "update-windows-security.com",</p>
+<p>"durée_de_vie": "Jours à semaines",</p>
+<p>"qualité": "Moyenne (domaines jetables)",</p>
+<p>"usage": "Bloquer DNS, détecter C2"</p>
+<p>},</p>
+<p>"URLs": {</p>
+<p>"exemple": "http://evil.com/payload.ps1",</p>
+<p>"durée_de_vie": "Heures",</p>
+<p>"qualité": "Faible mais précise",</p>
+<p>"usage": "Bloquer proxy web"</p>
+<p>},</p>
+<p>"TTPs MITRE ATT&amp;CK": {</p>
+<p>"exemple": "T1059.001 PowerShell",</p>
+<p>"durée_de_vie": "Mois à années",</p>
+<p>"qualité": "Très élevée (les attaquants changent rarement de TTP)",</p>
+<p>"usage": "Détections durables, threat hunting"</p>
+<p>}</p>
+<p>}</p>
+
+<h1>Pyramide de la douleur (David Bianco) :</h1>
+<h1>Plus l'IOC est haut dans la pyramide, plus il est difficile</h1>
+<h1>pour l'attaquant de le changer</h1>
+
+<h1>    TTPs          ← Très difficile à changer</h1>
+<h1>   --------</h1>
+<h1>   Outils         ← Difficile</h1>
+<h1>  ----------</h1>
+<h1>  Infrastructure  ← Moyen</h1>
+<h1> ------------</h1>
+<h1> Réseau/Host     ← Facile</h1>
+<h1>--------------</h1>
+<h1>Hashes atomiques ← Trivial</code></pre></h1>
+
+<h2 id="sources-de-threat-intelligence">Sources de Threat Intelligence</h2>
+
+<h3 id="sources-ouvertes-osint-">Sources ouvertes (OSINT)</h3>
+
+<pre><code class="language-bash"># Feeds d'IOCs gratuits
+<p>→ AlienVault OTX (otx.alienvault.com) : millions d'IOCs</p>
+<p>→ Abuse.ch (abuse.ch) : MalwareBazaar, URLhaus, ThreatFox</p>
+<p>→ VirusTotal (virustotal.com) : enrichissement IOCs</p>
+<p>→ MISP (misp-project.org) : plateforme de partage</p>
+<p>→ OpenPhish (openphish.com) : URLs de phishing</p>
+<p>→ PhishTank (phishtank.org) : phishing URLs</p>
+
+<h1>Rapports APT gratuits</h1>
+<p>→ MITRE ATT&amp;CK Groups (attack.mitre.org/groups)</p>
+<p>→ Mandiant APT Reports (mandiant.com/resources)</p>
+<p>→ CrowdStrike Intelligence (crowdstrike.com/blog)</p>
+<p>→ Recorded Future (recordedfuture.com/research)</p>
+<p>→ ANSSI rapports (cert.ssi.gouv.fr/actualite)</p>
+
+<h1>Monitoring de vulnérabilités</h1>
+<p>→ NVD (nvd.nist.gov) : CVE officiels</p>
+<p>→ Exploit-DB (exploit-db.com) : exploits publics</p>
+<p>→ CISA KEV (Known Exploited Vulnerabilities)</code></pre>
+
+<h3 id="int-gration-dans-un-siem">Intégration dans un SIEM</h3>
+
+<pre><code class="language-python"># Script Python : collecter et ingérer des IOCs dans un SIEM
+
+<p>import requests</p>
+<p>import json</p>
+<p>from datetime import datetime</p>
+
+<p>def collecter_iocs_abuse():</p>
+<p>"""Collecter les IOCs depuis Abuse.ch ThreatFox"""</p>
+<p>url = "https://threatfox-api.abuse.ch/api/v1/"</p>
+<p>payload = {</p>
+<p>"query": "get_iocs",</p>
+<p>"days": 1  # IOCs des dernières 24h</p>
+<p>}</p>
+<p>response = requests.post(url, json=payload)</p>
+<p>data = response.json()</p>
+
+<p>iocs = []</p>
+<p>for ioc in data.get('data', []):</p>
+<p>iocs.append({</p>
+<p>'type': ioc['ioc_type'],</p>
+<p>'value': ioc['ioc'],</p>
+<p>'malware': ioc['malware'],</p>
+<p>'confidence': ioc['confidence_level'],</p>
+<p>'tags': ioc['tags'],</p>
+<p>'first_seen': ioc['first_seen']</p>
+<p>})</p>
+<p>return iocs</p>
+
+<p>def ingerer_dans_siem(iocs, siem_url, api_key):</p>
+<p>"""Envoyer les IOCs vers le SIEM (ex: Elastic/OpenSearch)"""</p>
+<p>headers = {'Authorization': f'ApiKey {api_key}', 'Content-Type': 'application/json'}</p>
+<p>for ioc in iocs:</p>
+<p>ioc['@timestamp'] = datetime.utcnow().isoformat()</p>
+<p>ioc['source'] = 'ThreatFox'</p>
+<p>requests.post(f"{siem_url}/threat-intel/_doc", json=ioc, headers=headers)</p>
+<p>print(f"{len(iocs)} IOCs ingérés")</p>
+
+<h1>Automatiser avec un cron job toutes les heures</h1>
+<p>iocs = collecter_iocs_abuse()</p>
+<p>ingerer_dans_siem(iocs, "http://elasticsearch:9200", "YOUR_API_KEY")</code></pre>
+
+<h2 id="misp-plateforme-de-partage-de-ti">MISP — Plateforme de partage de TI</h2>
+
+<pre><code class="language-bash"># MISP (Malware Information Sharing Platform)
+<h1>Standard open source pour partager la Threat Intelligence</h1>
+
+<h1>Installation avec Docker</h1>
+<p>git clone https://github.com/MISP/misp-docker</p>
+<p>cd misp-docker</p>
+<p>docker-compose up -d</p>
+
+<h1>Fonctionnalités clés :</h1>
+<h1>→ Créer et partager des "Events" (incidents, campagnes)</h1>
+<h1>→ Corrélation automatique entre IOCs</h1>
+<h1>→ Export vers STIX/TAXII (standards interop)</h1>
+<h1>→ Connexion avec d'autres MISP (partage communautaire)</h1>
+<h1>→ Intégration SIEM, firewall, proxy</h1>
+
+<h1>Importer des IOCs depuis une source externe</h1>
+<p>from pymisp import PyMISP</p>
+
+<p>misp = PyMISP('https://misp.votre-org.com', 'VOTRE_API_KEY')</p>
+
+<p>event = misp.new_event(</p>
+<p>distribution=1,</p>
+<p>threat_level_id=2,</p>
+<p>analysis=1,</p>
+<p>info="Campagne phishing - Secteur financier - Mars 2025"</p>
+<p>)</p>
+
+<h1>Ajouter des IOCs</h1>
+<p>misp.add_named_attribute(event, 'ip-dst', '185.220.101.5', comment='C2 server')</p>
+<p>misp.add_named_attribute(event, 'domain', 'fake-bank-login.com', comment='Phishing domain')</p>
+<p>misp.add_named_attribute(event, 'md5', 'abc123...', comment='Payload dropper')</code></pre>
+
+<h2 id="profiling-d-acteurs-malveillants">Profiling d'acteurs malveillants</h2>
+
+<pre><code class="language-python"># Créer une fiche de profil d'un groupe APT
+
+<p>profil_lockbit = {</p>
+<p>"nom": "LockBit",</p>
+<p>"aussi_connu_sous": ["LockBit 3.0", "LockBit Black"],</p>
+<p>"type": "Ransomware-as-a-Service (RaaS)",</p>
+<p>"origine": "Russie (supposée)",</p>
+<p>"actif_depuis": "2019",</p>
+<p>"secteurs_ciblés": ["Santé", "Finance", "Industrie", "Gouvernement"],</p>
+<p>"pays_ciblés": ["USA", "Europe", "Australie"],</p>
+<p>"vecteurs_initiaux": [</p>
+<p>"RDP exposé + brute force",</p>
+<p>"Phishing ciblé",</p>
+<p>"Exploitation de vulnérabilités (Citrix, Fortinet)"</p>
+<p>],</p>
+<p>"outils_utilisés": [</p>
+<p>"Cobalt Strike",</p>
+<p>"AnyDesk (légal mais détourné)",</p>
+<p>"Mimikatz",</p>
+<p>"Rclone (exfiltration)"</p>
+<p>],</p>
+<p>"ttps_mitre": [</p>
+<p>"T1486 - Data Encrypted for Impact",</p>
+<p>"T1490 - Inhibit System Recovery",</p>
+<p>"T1562.001 - Disable Security Tools"</p>
+<p>],</p>
+<p>"iocs_domaines": ["lockbit3ouvrszfk.onion"],</p>
+<p>"statut": "Partiellement démantelé (Operation Cronos, Feb 2024)"</p>
+<p>}</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La Threat Intelligence transforme la cybersécurité d'une discipline réactive en une approche stratégique. En comprenant qui vous cible, avec quels outils et quelles techniques, vous pouvez adapter vos défenses avant l'attaque. Commencez par les sources gratuites (AlienVault OTX, MITRE ATT&CK), déployez MISP pour centraliser votre TI, et intégrez progressivement dans votre SIEM.</p>
+
+<p>---</p>
+<p><em>Catégorie : Pentest</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#threat-intelligence" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/bug-bounty.html" class="nav-prev">← Bug Bounty : gagner de l'argent en hackant légalement</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-linux.html" class="nav-next">Hardening Linux : durcissement complet d'un serveur →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

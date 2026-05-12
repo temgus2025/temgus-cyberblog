@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Stéganographie : l'art de cacher des données — Temgus.CyberBlog</title>
 <meta name="description" content="LSB, steghide, stéganalyse et utilisations légales et malveillantes de la stéganographie.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/steganographie.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/steganographie.html">
 <meta property="og:title" content="Stéganographie : l'art de cacher des données — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Stéganographie : l'art de cacher des données — Temgus.CyberBlog">
 <meta name="twitter:description" content="LSB, steghide, stéganalyse et utilisations légales et malveillantes de la stéganographie.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,563 @@
   "headline": "Stéganographie : l'art de cacher des données",
   "description": "LSB, steghide, stéganalyse et utilisations légales et malveillantes de la stéganographie.",
   "datePublished": "2025-06-08",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/steganographie.html",
   "inLanguage": "fr",
   "keywords": "stéganographie, LSB, CTF, forensics",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🖼️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Stéganographie : l'art de cacher des données</h1>
-  <p style="color:#8892a4;max-width:500px">LSB, steghide, stéganalyse et utilisations légales et malveillantes de la stéganographie.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#steganographie" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🖼️</div>
+    <div class="meta-info">
+      <div class="meta-category">Cryptographie</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Stéganographie : l'art de cacher des données</div>
+      <div class="meta-details">
+        <span>📅 2025-06-08</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#st-ganographie-vs-cryptographie">Stéganographie vs Cryptographie</a></li>
+<li><a href="#techniques-de-st-ganographie-num-rique">Techniques de stéganographie numérique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#lsb-least-significant-bit">LSB — Least Significant Bit</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#steghide-outil-classique">Steghide — Outil classique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#st-ganalyse-avec-stegdetect">Stéganalyse avec StegDetect</a></li>
+<li><a href="#st-ganographie-avanc-e">Stéganographie avancée</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#audio-st-ganographie">Audio stéganographie</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#st-ganographie-r-seau">Stéganographie réseau</a></li>
+<li><a href="#st-ganographie-dans-les-documents">Stéganographie dans les documents</a></li>
+<li><a href="#utilisations-r-elles">Utilisations réelles</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#usages-l-gitimes">Usages légitimes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#utilisations-malveillantes">Utilisations malveillantes</a></li>
+<li><a href="#outils-st-ganographie">Outils stéganographie</a></li>
+<li><a href="#d-tecter-la-st-ganographie">Détecter la stéganographie</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Stéganographie : l'art de cacher des données dans les fichiers</h1>
+
+<p>La stéganographie est l'art de <strong>dissimuler un message dans un support apparemment anodin</strong> — une image, un fichier audio, une vidéo. Contrairement à la cryptographie qui rend un message illisible, la stéganographie cache son existence même. Utilisée depuis l'antiquité, elle est aujourd'hui employée par les cybercriminels, les espions et les militants des droits de l'homme.</p>
+
+<h2 id="st-ganographie-vs-cryptographie">Stéganographie vs Cryptographie</h2>
+
+<pre><code>Cryptographie :
+<p>Message visible → ILLISIBLE</p>
+<p>"Réunion à 15h" → "kR8#mP2nL5"</p>
+<p>→ Tout le monde SAIT qu'il y a un message, mais ne peut pas le lire</p>
+
+<p>Stéganographie :</p>
+<p>Message → INVISIBLE dans un support anodin</p>
+<p>"Réunion à 15h" → [photo d'un chat tout à fait normale]</p>
+<p>→ Personne ne sait qu'il y a un message caché</p>
+
+<p>Steganocryptographie (combinaison) :</p>
+<p>Message chiffré → caché dans une image</p>
+<p>→ Protection maximale</code></pre>
+
+<h2 id="techniques-de-st-ganographie-num-rique">Techniques de stéganographie numérique</h2>
+
+<h3 id="lsb-least-significant-bit">LSB — Least Significant Bit</h3>
+
+<p>La technique la plus courante pour les images.</p>
+
+<pre><code class="language-python"># Principe LSB : modifier le bit le moins significatif de chaque pixel
+<h1>Un pixel RGB = 3 octets (Rouge, Vert, Bleu)</h1>
+<h1>Le LSB = le bit de poids faible = modification imperceptible à l'œil</h1>
+
+<h1>Pixel original : Rouge = 11001010 = 202</h1>
+<h1>Pixel modifié  : Rouge = 11001011 = 203  (différence de 1/255 ≈ 0.4%)</h1>
+<h1>Imperceptible !</h1>
+
+<h1>Chaque pixel peut stocker 3 bits (1 par canal RGB)</h1>
+<h1>Une image 1920×1080 = 2 073 600 pixels × 3 bits = 777 600 octets ≈ 760 Ko de données cachées !</h1>
+
+<p>def encode_lsb(image_path, message, output_path):</p>
+<p>from PIL import Image</p>
+<p>import numpy as np</p>
+
+<p>img = Image.open(image_path).convert('RGB')</p>
+<p>pixels = np.array(img)</p>
+
+<p># Convertir le message en bits</p>
+<p>message_bytes = message.encode('utf-8') + b'\x00\x00\x00'  # Marqueur de fin</p>
+<p>bits = ''.join(format(byte, '08b') for byte in message_bytes)</p>
+
+<p>flat = pixels.flatten().copy()</p>
+
+<p>if len(bits) &gt; len(flat):</p>
+<p>raise ValueError("Message trop grand pour cette image")</p>
+
+<p># Injecter les bits dans les LSB</p>
+<p>for i, bit in enumerate(bits):</p>
+<p>flat[i] = (flat[i] &amp; 0xFE) | int(bit)  # Remplace le LSB</p>
+<p># 0xFE = 11111110 → efface le LSB</p>
+<p># | int(bit) → met le bit du message</p>
+
+<p>modified = flat.reshape(pixels.shape)</p>
+<p>Image.fromarray(modified.astype(np.uint8)).save(output_path, 'PNG')</p>
+<p>print(f"Message caché dans {output_path}")</p>
+
+<p>def decode_lsb(image_path, message_length):</p>
+<p>from PIL import Image</p>
+<p>import numpy as np</p>
+
+<p>img = Image.open(image_path).convert('RGB')</p>
+<p>flat = np.array(img).flatten()</p>
+
+<p># Extraire les LSB</p>
+<p>bits = ''.join(str(pixel &amp; 1) for pixel in flat)</p>
+
+<p># Reconvertir en bytes</p>
+<p>chars = []</p>
+<p>for i in range(0, message_length * 8, 8):</p>
+<p>byte = bits[i:i+8]</p>
+<p>chars.append(chr(int(byte, 2)))</p>
+
+<p>return ''.join(chars)</p>
+
+<h1>Démonstration</h1>
+<p>encode_lsb('chat.png', 'Réunion secrète à 15h salle B', 'chat_modifie.png')</p>
+<p>message = decode_lsb('chat_modifie.png', 30)</p>
+<p>print(f"Message extrait : {message}")</code></pre>
+
+<h3 id="steghide-outil-classique">Steghide — Outil classique</h3>
+
+<pre><code class="language-bash"># Installer steghide
+<p>sudo apt install steghide</p>
+
+<h1>Cacher un fichier dans une image JPEG</h1>
+<p>steghide embed -cf photo.jpg -sf secret.txt -p "motdepasse"</p>
+<h1>-cf : cover file (l'image)</h1>
+<h1>-sf : secret file (le fichier à cacher)</h1>
+<h1>-p  : mot de passe</h1>
+
+<h1>Extraire le fichier caché</h1>
+<p>steghide extract -sf photo.jpg -p "motdepasse"</p>
+
+<h1>Voir les informations sans extraire</h1>
+<p>steghide info photo.jpg</code></pre>
+
+<h3 id="st-ganalyse-avec-stegdetect">Stéganalyse avec StegDetect</h3>
+
+<pre><code class="language-bash"># Détecter la présence de stéganographie dans une image
+<h1>StegDetect cherche les signatures statistiques</h1>
+
+<p>stegdetect -t p photo.jpg</p>
+<h1>-t p : teste spécifiquement JSteg, JPHide, Invisible Secrets</h1>
+
+<h1>Analyse statistique avec zsteg (PNG et BMP)</h1>
+<p>gem install zsteg</p>
+<p>zsteg image.png</p>
+<p>zsteg -a image.png  # Tous les tests</p>
+
+<h1>Analyse avec binwalk</h1>
+<p>binwalk -e image.png  # Extraire les fichiers embarqués</p>
+<p>binwalk --dd='.*' image.png  # Extraire tout</code></pre>
+
+<h2 id="st-ganographie-avanc-e">Stéganographie avancée</h2>
+
+<h3 id="audio-st-ganographie">Audio stéganographie</h3>
+
+<pre><code class="language-python"># Cacher des données dans un fichier WAV
+<p>import wave, struct</p>
+
+<p>def hide_in_audio(audio_file, message, output_file):</p>
+<p>with wave.open(audio_file, 'rb') as audio:</p>
+<p>frames = bytearray(audio.readframes(audio.getnframes()))</p>
+<p>params = audio.getparams()</p>
+
+<p>message_bits = ''.join(format(ord(c), '08b') for c in message) + '1111111111111110'</p>
+
+<p>for i, bit in enumerate(message_bits):</p>
+<p>frames[i] = (frames[i] &amp; 0xFE) | int(bit)</p>
+
+<p>with wave.open(output_file, 'wb') as out:</p>
+<p>out.setparams(params)</p>
+<p>out.writeframes(bytes(frames))</p>
+
+<h1>Stéganographie dans la phase du signal audio (plus résistante)</h1>
+<h1>OpenStego, DeepSound, SilentEye</code></pre></h1>
+
+<h3 id="st-ganographie-r-seau">Stéganographie réseau</h3>
+
+<pre><code class="language-python"># Cacher des données dans des paquets réseau
+<h1>Covert channels : communication cachée dans le trafic légitime</h1>
+
+<h1>TCP Timestamp Covert Channel</h1>
+<h1>Le champ timestamp de TCP peut transmettre des données</h1>
+
+<h1>ICMP Covert Channel</h1>
+<h1>Les octets de payload des pings peuvent contenir des messages</h1>
+<p>import subprocess</p>
+
+<p>def icmp_covert_send(target, message):</p>
+<p>"""Envoie un message caché dans des pings"""</p>
+<p>for char in message:</p>
+<p># Mettre le caractère dans le payload ICMP</p>
+<p>payload = f"{'A' <em> 16}{char}{'A' </em> 15}"  # 32 octets avec le char au milieu</p>
+<p>subprocess.run(['ping', '-c', '1', '-p',</p>
+<p>payload.encode().hex(), target],</p>
+<p>capture_output=True)</p>
+
+<h1>DNS Covert Channel (utilisé par les malwares pour exfiltrer)</h1>
+<h1>Les données sont encodées dans les noms de domaine DNS</h1>
+<h1>"dGhpcyBpcyBhIHRlc3Q=.evil.com" (base64 dans sous-domaine)</code></pre></h1>
+
+<h2 id="st-ganographie-dans-les-documents">Stéganographie dans les documents</h2>
+
+<pre><code class="language-python"># Stéganographie dans les fichiers Office/PDF
+
+<h1>Technique "Zero-Width Characters" (caractères invisibles)</h1>
+<h1>Encoder un message binaire avec des caractères Unicode invisibles</h1>
+<p>ZERO_WIDTH_SPACE = '\u200b'      # bit 0</p>
+<p>ZERO_WIDTH_NON_JOINER = '\u200c' # bit 1</p>
+
+<p>def encode_in_text(cover_text, secret_message):</p>
+<p>"""Cache un message dans du texte avec des caractères invisibles"""</p>
+<p>binary_message = ''.join(format(ord(c), '08b') for c in secret_message)</p>
+
+<p>hidden_chars = ''.join(</p>
+<p>ZERO_WIDTH_SPACE if bit == '0' else ZERO_WIDTH_NON_JOINER</p>
+<p>for bit in binary_message</p>
+<p>)</p>
+
+<p># Insérer au milieu du texte couverture</p>
+<p>mid = len(cover_text) // 2</p>
+<p>return cover_text[:mid] + hidden_chars + cover_text[mid:]</p>
+
+<p>cover = "Cette photo de vacances est magnifique, le soleil était au rendez-vous."</p>
+<p>stego_text = encode_in_text(cover, "Opération Soleil: J+3")</p>
+<h1>Le texte semble identique mais contient 22 caractères invisibles</code></pre></h1>
+
+<h2 id="utilisations-r-elles">Utilisations réelles</h2>
+
+<h3 id="usages-l-gitimes">Usages légitimes</h3>
+
+<pre><code>Watermarking (tatouage numérique) :
+<p>→ Protéger les droits d'auteur des images/vidéos</p>
+<p>→ Prouver la propriété d'un contenu</p>
+<p>→ Tracer les fuites (canary documents)</p>
+
+<p>Communications sécurisées :</p>
+<p>→ Journalistes et sources dans des pays autoritaires</p>
+<p>→ WhatsApp utilise la stéganographie pour les messages "disappearing"</p>
+<p>→ Militants des droits de l'homme</p>
+
+<p>Forensique :</p>
+<p>→ Cacher des métadonnées d'attribution</p>
+<p>→ Preuves numériques inaltérables</code></pre>
+
+<h3 id="utilisations-malveillantes">Utilisations malveillantes</h3>
+
+<pre><code>Malwares stéganographiques :
+<p>→ Sunburst (SolarWinds 2020) : commandes C2 cachées dans des images</p>
+<p>→ Zloader : charges malveillantes dans des PDFs</p>
+<p>→ APT29 (Cozy Bear) : communications C2 via images sur Instagram</p>
+
+<p>Exfiltration de données :</p>
+<p>→ Données sensibles cachées dans des images envoyées par email</p>
+<p>→ Contourne les DLP (Data Loss Prevention)</p>
+<p>→ Exemple : 1000 mots de passe dans une photo de vacances</p>
+
+<p>CTF (Capture The Flag) :</p>
+<p>→ Les CTF adorent la stéganographie</p>
+<p>→ Flags cachés dans des images, audio, vidéo</code></pre>
+
+<h2 id="outils-st-ganographie">Outils stéganographie</h2>
+
+<pre><code class="language-bash"># Pour cacher
+<p>steghide    # JPEG, BMP, WAV, AU</p>
+<p>OpenStego   # PNG (interface graphique)</p>
+<p>SilentEye   # BMP, JPEG, WAV (interface graphique)</p>
+<p>snow        # Espaces blancs dans le texte</p>
+
+<h1>Pour détecter / analyser (stéganalyse)</h1>
+<p>stegdetect  # JPEG (détection statistique)</p>
+<p>zsteg       # PNG, BMP</p>
+<p>binwalk     # Fichiers embarqués dans les binaires</p>
+<p>foremost    # Récupération forensique</p>
+<p>exiftool    # Métadonnées (souvent des données cachées là)</p>
+
+<h1>En Python</h1>
+<p>from stegano import lsb</p>
+<p>secret = lsb.hide("cover.png", "Mon message secret")</p>
+<p>secret.save("output.png")</p>
+<p>message = lsb.reveal("output.png")</code></pre>
+
+<h2 id="d-tecter-la-st-ganographie">Détecter la stéganographie</h2>
+
+<pre><code class="language-python"># Analyse statistique pour détecter le LSB stego
+<p>import numpy as np</p>
+<p>from PIL import Image</p>
+
+<p>def detect_lsb_stego(image_path):</p>
+<p>img = np.array(Image.open(image_path).convert('RGB'))</p>
+
+<p># Extraire les LSBs</p>
+<p>lsbs = img.flatten() &amp; 1</p>
+
+<p># Dans une image naturelle, les LSBs suivent une distribution pseudo-aléatoire</p>
+<p># Dans une image stégo, la distribution est plus uniforme (50/50)</p>
+<p>ones_ratio = np.sum(lsbs) / len(lsbs)</p>
+
+<p>print(f"Ratio de 1 dans les LSBs : {ones_ratio:.3f}")</p>
+<p>if 0.45 &lt; ones_ratio &lt; 0.55:</p>
+<p>print("⚠️  Distribution suspecte - Possible stéganographie LSB")</p>
+<p>else:</p>
+<p>print("✅ Distribution normale - Probablement pas de stégo LSB")</p>
+
+<p>detect_lsb_stego("image_suspecte.png")</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La stéganographie illustre que la sécurité ne se limite pas au visible — les données cachées peuvent être aussi dangereuses que les données chiffrées. Pour les défenseurs, les outils DLP modernes intègrent de plus en plus la détection stéganographique. Pour les curieux et les CTF players, c'est un domaine fascinant qui mêle mathématiques, perception humaine et créativité.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#steganographie" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-kubernetes.html" class="nav-prev">← Sécurité Kubernetes : protéger vos clusters</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/buffer-overflow.html" class="nav-next">Buffer Overflow : comprendre et exploiter les débordements →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -3,32 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\article.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:js\\article.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\active-directory.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\active-directory.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\cryptographie-avancee.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\cryptographie-avancee.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\serve.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:serve.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\attaques-navigateurs.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\attaques-navigateurs.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\architecture-reseau-securisee.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\architecture-reseau-securisee.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\data\\articles.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:data\\articles.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\intro-cybersecurite.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\intro-cybersecurite.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\ingenierie-sociale.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\ingenierie-sociale.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\facteur-humain-sensibilisation.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:articles\\facteur-humain-sensibilisation.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\article.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:article.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\generate.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:generate.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,93 +46,124 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "active-directory.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\active-directory.md",
+              "RelativeDocumentMoniker": "articles\\active-directory.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\active-directory.md",
+              "RelativeToolTip": "articles\\active-directory.md",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAqwNcAAABHAQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:29:08.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-19T13:50:59.166Z",
+              "Title": "cryptographie-avancee.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\cryptographie-avancee.md",
+              "RelativeDocumentMoniker": "articles\\cryptographie-avancee.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\cryptographie-avancee.md",
+              "RelativeToolTip": "articles\\cryptographie-avancee.md",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:29:02.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "serve.json",
-              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\serve.json",
-              "RelativeDocumentMoniker": "serve.json",
-              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\serve.json",
-              "RelativeToolTip": "serve.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-19T12:47:53.679Z"
+              "Title": "attaques-navigateurs.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\attaques-navigateurs.md",
+              "RelativeDocumentMoniker": "articles\\attaques-navigateurs.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\attaques-navigateurs.md",
+              "RelativeToolTip": "articles\\attaques-navigateurs.md",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:28:56.504Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "app.js",
-              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\app.js",
-              "RelativeDocumentMoniker": "js\\app.js",
-              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\app.js",
-              "RelativeToolTip": "js\\app.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-19T12:47:24.924Z"
+              "Title": "architecture-reseau-securisee.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\architecture-reseau-securisee.md",
+              "RelativeDocumentMoniker": "articles\\architecture-reseau-securisee.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\architecture-reseau-securisee.md",
+              "RelativeToolTip": "articles\\architecture-reseau-securisee.md",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:28:53.83Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "article.js",
-              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\article.js",
-              "RelativeDocumentMoniker": "js\\article.js",
-              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\js\\article.js",
-              "RelativeToolTip": "js\\article.js",
-              "ViewState": "AgIAAHsBAAAAAAAAAAAgwJoBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-19T12:46:34.696Z",
+              "DocumentIndex": 5,
+              "Title": "ingenierie-sociale.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\ingenierie-sociale.md",
+              "RelativeDocumentMoniker": "articles\\ingenierie-sociale.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\ingenierie-sociale.md",
+              "RelativeToolTip": "articles\\ingenierie-sociale.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:28:26.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "facteur-humain-sensibilisation.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\facteur-humain-sensibilisation.md",
+              "RelativeDocumentMoniker": "articles\\facteur-humain-sensibilisation.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\facteur-humain-sensibilisation.md",
+              "RelativeToolTip": "articles\\facteur-humain-sensibilisation.md",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:27:59.291Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "articles.json",
-              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\data\\articles.json",
-              "RelativeDocumentMoniker": "data\\articles.json",
-              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\data\\articles.json",
-              "RelativeToolTip": "data\\articles.json",
-              "ViewState": "AgIAAAsDAAAAAAAAAAAkwCsDAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-19T12:46:02.543Z"
+              "Title": "intro-cybersecurite.md",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\intro-cybersecurite.md",
+              "RelativeDocumentMoniker": "articles\\intro-cybersecurite.md",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\articles\\intro-cybersecurite.md",
+              "RelativeToolTip": "articles\\intro-cybersecurite.md",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAABYAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-12T10:27:47.046Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\index.html",
-              "RelativeDocumentMoniker": "index.html",
-              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\index.html",
-              "RelativeToolTip": "index.html",
-              "ViewState": "AgIAAHQAAAAAAAAAAAAYwJUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-03-19T12:40:01.529Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "article.html",
               "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\article.html",
               "RelativeDocumentMoniker": "article.html",
               "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\article.html",
               "RelativeToolTip": "article.html",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAYwJAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAYwKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-03-19T08:48:15.355Z"
+              "WhenOpened": "2026-05-12T10:26:56.034Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "generate.js",
+              "DocumentMoniker": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\generate.js",
+              "RelativeDocumentMoniker": "generate.js",
+              "ToolTip": "C:\\Users\\33758\\OneDrive\\Bureau\\web_securite\\generate.js",
+              "RelativeToolTip": "generate.js",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAmwGoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-05-12T10:26:12.326Z",
+              "EditorCaption": ""
             }
           ]
         }

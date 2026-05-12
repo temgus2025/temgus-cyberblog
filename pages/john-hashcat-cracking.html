@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>John the Ripper et Hashcat : cracker les mots de passe — Temgus.CyberBlog</title>
 <meta name="description" content="Attaques dictionnaire, règles de mutation, GPU acceleration, wordlists — maîtrisez le cracking de mots de passe.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/john-hashcat-cracking.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/john-hashcat-cracking.html">
 <meta property="og:title" content="John the Ripper et Hashcat : cracker les mots de passe — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="John the Ripper et Hashcat : cracker les mots de passe — Temgus.CyberBlog">
 <meta name="twitter:description" content="Attaques dictionnaire, règles de mutation, GPU acceleration, wordlists — maîtrisez le cracking de mots de passe.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,475 @@
   "headline": "John the Ripper et Hashcat : cracker les mots de passe",
   "description": "Attaques dictionnaire, règles de mutation, GPU acceleration, wordlists — maîtrisez le cracking de mots de passe.",
   "datePublished": "2025-08-15",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/john-hashcat-cracking.html",
   "inLanguage": "fr",
   "keywords": "Hashcat, John the Ripper, cracking, NTLM, wordlist",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔓</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">John the Ripper et Hashcat : cracker les mots de passe</h1>
-  <p style="color:#8892a4;max-width:500px">Attaques dictionnaire, règles de mutation, GPU acceleration, wordlists — maîtrisez le cracking de mots de passe.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#john-hashcat-cracking" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔓</div>
+    <div class="meta-info">
+      <div class="meta-category">Outils & Logiciels</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">John the Ripper et Hashcat : cracker les mots de passe</div>
+      <div class="meta-details">
+        <span>📅 2025-08-15</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#comprendre-le-cracking-de-mots-de-passe">Comprendre le cracking de mots de passe</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#comment-les-mots-de-passe-sont-stock-s">Comment les mots de passe sont stockés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#techniques-de-cracking">Techniques de cracking</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#types-de-hash-courants">Types de hash courants</a></li>
+<li><a href="#john-the-ripper">John the Ripper</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#installation">Installation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#utilisation-de-base">Utilisation de base</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-gles-john">Règles John</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#extraire-les-hashs">Extraire les hashs</a></li>
+<li><a href="#hashcat">Hashcat</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#installation">Installation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#modes-d-attaque">Modes d'attaque</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#identifier-le-type-de-hash">Identifier le type de hash</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaques-courantes">Attaques courantes</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#r-gles-hashcat-populaires">Règles hashcat populaires</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#optimisation-gpu">Optimisation GPU</a></li>
+<li><a href="#wordlists-recommand-es">Wordlists recommandées</a></li>
+<li><a href="#g-n-rer-des-wordlists-cibl-es-avec-cewl">Générer des wordlists ciblées avec CeWL</a></li>
+<li><a href="#cadre-l-gal">Cadre légal</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>John the Ripper et Hashcat : cracker les mots de passe</h1>
+
+<p>Le cracking de mots de passe est une compétence fondamentale en pentest. Que ce soit pour tester la robustesse des mots de passe d'une organisation ou pour progresser en CTF, maîtriser John the Ripper et Hashcat est indispensable.</p>
+
+<h2 id="comprendre-le-cracking-de-mots-de-passe">Comprendre le cracking de mots de passe</h2>
+
+<h3 id="comment-les-mots-de-passe-sont-stock-s">Comment les mots de passe sont stockés</h3>
+<p>Les mots de passe ne sont (normalement) jamais stockés en clair. Ils sont <strong>hachés</strong> : transformés par une fonction à sens unique.</p>
+
+<pre><code>"motdepasse123" → MD5 → "482c811da5d5b4bc6d497ffa98491e38"
+<p>"motdepasse123" → SHA1 → "cbfdac6008f9cab4083784cbd1874f76618d2a97"</p>
+<p>"motdepasse123" → bcrypt → "$2b$12$..."</code></pre>
+
+<h3 id="techniques-de-cracking">Techniques de cracking</h3>
+<ul><li><strong>Dictionnaire</strong> : tester des mots de passe courants (rockyou.txt...)</li><li><strong>Force brute</strong> : tester toutes les combinaisons possibles</li><li><strong>Règles</strong> : transformer les mots du dictionnaire (majuscules, substitutions, chiffres)</li><li><strong>Rainbow tables</strong> : tables précalculées de hash→password</li></ul>
+
+<h3 id="types-de-hash-courants">Types de hash courants</h3>
+
+<p>| Hash | Longueur | Vitesse | Utilisé par |</p>
+<p>|------|----------|---------|-------------|</p>
+<p>| MD5 | 32 chars | Très rapide | Anciens systèmes |</p>
+<p>| SHA1 | 40 chars | Rapide | Git, anciens systèmes |</p>
+<p>| SHA256 | 64 chars | Rapide | Modern systems |</p>
+<p>| NTLM | 32 chars | Très rapide | Windows |</p>
+<p>| bcrypt | 60 chars | Lent (intentionnel) | Linux, apps modernes |</p>
+<p>| Argon2 | Variable | Très lent | Recommandé 2025 |</p>
+
+<h2 id="john-the-ripper">John the Ripper</h2>
+
+<h3 id="installation">Installation</h3>
+<pre><code class="language-bash"># Kali Linux (pré-installé)
+<p>john --version</p>
+
+<h1>Ubuntu</h1>
+<p>sudo apt install john</p>
+
+<h1>Version Jumbo (plus de formats)</h1>
+<p>git clone https://github.com/openwall/john</p>
+<p>cd john/src &amp;&amp; ./configure &amp;&amp; make</code></pre>
+
+<h3 id="utilisation-de-base">Utilisation de base</h3>
+<pre><code class="language-bash"># Cracker un fichier de hash
+<p>john hashes.txt</p>
+
+<h1>Spécifier le format</h1>
+<p>john --format=md5crypt hashes.txt</p>
+<p>john --format=bcrypt hashes.txt</p>
+<p>john --format=NT hashes.txt      # NTLM Windows</p>
+
+<h1>Attaque par dictionnaire</h1>
+<p>john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt</p>
+
+<h1>Voir les mots de passe crackés</h1>
+<p>john --show hashes.txt</p>
+
+<h1>Lister les formats supportés</h1>
+<p>john --list=formats</code></pre>
+
+<h3 id="r-gles-john">Règles John</h3>
+<pre><code class="language-bash"># Appliquer des règles de mutation
+<p>john --wordlist=rockyou.txt --rules hashes.txt</p>
+
+<h1>Règles spécifiques</h1>
+<p>john --wordlist=rockyou.txt --rules=Jumbo hashes.txt</p>
+
+<h1>Exemple de règle personnalisée (~/.john/john.conf)</h1>
+<p>[List.Rules:Custom]</p>
+<h1>Ajouter des chiffres à la fin</h1>
+<p>$[0-9]$[0-9]</p>
+<h1>Capitaliser la première lettre</h1>
+<p>c</p>
+<h1>Remplacer a par @</h1>
+<p>sa@</code></pre>
+
+<h3 id="extraire-les-hashs">Extraire les hashs</h3>
+
+<pre><code class="language-bash"># Linux /etc/shadow
+<p>sudo cat /etc/shadow</p>
+
+<h1>Windows SAM (depuis Metasploit/impacket)</h1>
+<p>secretsdump.py -sam SAM -system SYSTEM LOCAL</p>
+
+<h1>Convertir pour John</h1>
+<p>unshadow /etc/passwd /etc/shadow &gt; combined.txt</code></pre>
+
+<h2 id="hashcat">Hashcat</h2>
+
+<p>Hashcat est plus rapide que John grâce à l'accélération GPU. Il supporte plus de 300 types de hash.</p>
+
+<h3 id="installation">Installation</h3>
+<pre><code class="language-bash"># Kali Linux (pré-installé)
+<p>hashcat --version</p>
+
+<h1>Windows</h1>
+<h1>Télécharger depuis hashcat.net</code></pre></h1>
+
+<h3 id="modes-d-attaque">Modes d'attaque</h3>
+
+<p>| Mode | Description |</p>
+<p>|------|-------------|</p>
+<p>| 0 | Dictionnaire seul |</p>
+<p>| 1 | Combinaison (deux dictionnaires) |</p>
+<p>| 3 | Force brute / masque |</p>
+<p>| 6 | Dictionnaire + masque |</p>
+<p>| 7 | Masque + dictionnaire |</p>
+
+<h3 id="identifier-le-type-de-hash">Identifier le type de hash</h3>
+<pre><code class="language-bash"># hashcat peut identifier automatiquement
+<p>hashcat hash.txt</p>
+
+<h1>Ou utiliser hash-identifier</h1>
+<p>hash-identifier</p>
+<h1>Entrez le hash pour l'identifier</code></pre></h1>
+
+<h3 id="attaques-courantes">Attaques courantes</h3>
+<pre><code class="language-bash"># Attaque dictionnaire (mode 0)
+<h1>-m = type de hash (-m 0 = MD5, -m 1000 = NTLM, -m 1800 = SHA-512 Unix)</h1>
+<p>hashcat -m 0 -a 0 hashes.txt rockyou.txt</p>
+
+<h1>NTLM Windows</h1>
+<p>hashcat -m 1000 -a 0 ntlm_hashes.txt rockyou.txt</p>
+
+<h1>bcrypt</h1>
+<p>hashcat -m 3200 -a 0 bcrypt_hashes.txt rockyou.txt</p>
+
+<h1>Force brute avec masque (mode 3)</h1>
+<h1>?l=minuscule, ?u=majuscule, ?d=chiffre, ?s=symbole, ?a=tout</h1>
+<p>hashcat -m 0 -a 3 hashes.txt ?l?l?l?l?l?l?l?l    # 8 minuscules</p>
+<p>hashcat -m 0 -a 3 hashes.txt ?u?l?l?l?d?d?d?d    # Mot de passe type "Pass1234"</p>
+
+<h1>Avec règles</h1>
+<p>hashcat -m 0 -a 0 hashes.txt rockyou.txt -r rules/best64.rule</p>
+
+<h1>Combiner dictionnaire + règles (très efficace)</h1>
+<p>hashcat -m 1000 -a 0 ntlm.txt rockyou.txt -r rules/dive.rule</code></pre>
+
+<h3 id="r-gles-hashcat-populaires">Règles hashcat populaires</h3>
+<pre><code class="language-bash"># Disponibles dans /usr/share/hashcat/rules/
+<p>best64.rule       # 64 règles efficaces</p>
+<p>rockyou-30000.rule # 30 000 règles</p>
+<p>dive.rule         # Très complet mais lent</p>
+<p>d3ad0ne.rule      # Polyvalent</code></pre>
+
+<h3 id="optimisation-gpu">Optimisation GPU</h3>
+<pre><code class="language-bash"># Voir les GPU disponibles
+<p>hashcat -I</p>
+
+<h1>Optimiser les performances</h1>
+<p>hashcat -m 0 -a 0 hashes.txt rockyou.txt \</p>
+<p>--optimized-kernel-enable \</p>
+<p>--workload-profile 3</p>
+
+<h1>Benchmark</h1>
+<p>hashcat -b -m 1000    # Benchmark NTLM</code></pre>
+
+<h2 id="wordlists-recommand-es">Wordlists recommandées</h2>
+
+<pre><code class="language-bash"># rockyou.txt (14 millions de mots de passe réels)
+<p>/usr/share/wordlists/rockyou.txt</p>
+
+<h1>SecLists (collection complète)</h1>
+<p>sudo apt install seclists</p>
+<p>ls /usr/share/seclists/Passwords/</p>
+
+<h1>Télécharger des wordlists spécialisées</h1>
+<h1>CrackStation: crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm</code></pre></h1>
+
+<h2 id="g-n-rer-des-wordlists-cibl-es-avec-cewl">Générer des wordlists ciblées avec CeWL</h2>
+
+<pre><code class="language-bash"># Générer une wordlist depuis un site web
+<p>cewl https://example.com -d 2 -m 6 -w wordlist.txt</p>
+
+<h1>Très utile pour cracker les mots de passe d'une organisation</h1>
+<h1>(ils utilisent souvent des mots de leur domaine)</code></pre></h1>
+
+<h2 id="cadre-l-gal">Cadre légal</h2>
+
+<p>⚠️ Le cracking de mots de passe sans autorisation est illégal. Utilisez ces techniques uniquement dans le cadre de :</p>
+<ul><li>Tests d'intrusion autorisés</li><li>Votre propre infrastructure</li><li>Labs et CTF dédiés</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>John et Hashcat sont complémentaires : John est plus simple pour débuter et gère bien les fichiers système, Hashcat est incontournable pour la vitesse GPU sur de gros volumes. La maîtrise des règles de mutation est la compétence clé pour cracker des mots de passe réalistes — la plupart suivent des patterns prévisibles que les règles exploitent efficacement.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#john-hashcat-cracking" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/metasploit-guide-pentesteur.html" class="nav-prev">← Metasploit Framework : le guide du pentesteur</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/privilege-escalation-linux.html" class="nav-next">Élévation de privilèges Linux : techniques et méthodes →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

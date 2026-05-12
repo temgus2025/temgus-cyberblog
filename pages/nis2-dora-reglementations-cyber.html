@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>NIS2 et DORA : les nouvelles réglementations cyber qui changent tout — Temgus.CyberBlog</title>
 <meta name="description" content="Obligations, sanctions, délais de notification — comprendre NIS2 et DORA et se mettre en conformité en 2025.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/nis2-dora-reglementations-cyber.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/nis2-dora-reglementations-cyber.html">
 <meta property="og:title" content="NIS2 et DORA : les nouvelles réglementations cyber qui changent tout — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="NIS2 et DORA : les nouvelles réglementations cyber qui changent tout — Temgus.CyberBlog">
 <meta name="twitter:description" content="Obligations, sanctions, délais de notification — comprendre NIS2 et DORA et se mettre en conformité en 2025.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,383 @@
   "headline": "NIS2 et DORA : les nouvelles réglementations cyber qui changent tout",
   "description": "Obligations, sanctions, délais de notification — comprendre NIS2 et DORA et se mettre en conformité en 2025.",
   "datePublished": "2025-09-08",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/nis2-dora-reglementations-cyber.html",
   "inLanguage": "fr",
   "keywords": "NIS2, DORA, conformité, ANSSI, réglementation",
-  "timeRequired": "PT10M"
+  "timeRequired": "PT10M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">⚖️</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">NIS2 et DORA : les nouvelles réglementations cyber qui changent tout</h1>
-  <p style="color:#8892a4;max-width:500px">Obligations, sanctions, délais de notification — comprendre NIS2 et DORA et se mettre en conformité en 2025.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#nis2-dora-reglementations-cyber" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">⚖️</div>
+    <div class="meta-info">
+      <div class="meta-category">Actualités cyber</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">NIS2 et DORA : les nouvelles réglementations cyber qui changent tout</div>
+      <div class="meta-details">
+        <span>📅 2025-09-08</span>
+        <span>⏱ 10 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#la-directive-nis2">La directive NIS2</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#qu-est-ce-que-nis2-">Qu'est-ce que NIS2 ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#qui-est-concern-">Qui est concerné ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-obligations-nis2">Les obligations NIS2</a></li>
+<li><a href="#le-r-glement-dora">Le règlement DORA</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#qu-est-ce-que-dora-">Qu'est-ce que DORA ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#qui-est-concern-">Qui est concerné ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#les-5-piliers-de-dora">Les 5 piliers de DORA</a></li>
+<li><a href="#nis2-vs-dora-quelle-diff-rence-">NIS2 vs DORA : quelle différence ?</a></li>
+<li><a href="#comment-se-pr-parer-">Comment se préparer ?</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-1-d-terminer-si-vous-tes-concern-">Étape 1 — Déterminer si vous êtes concerné</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-2-r-aliser-un-gap-analysis">Étape 2 — Réaliser un gap analysis</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-3-prioriser-et-planifier">Étape 3 — Prioriser et planifier</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-4-documenter">Étape 4 — Documenter</a></li>
+<li><a href="#ressources-officielles">Ressources officielles</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>NIS2 et DORA : les nouvelles réglementations cyber qui changent tout</h1>
+
+<p>2025 marque un tournant réglementaire majeur pour la cybersécurité en Europe. La directive NIS2 et le règlement DORA imposent de nouvelles obligations à des milliers d'organisations. Êtes-vous concerné ?</p>
+
+<h2 id="la-directive-nis2">La directive NIS2</h2>
+
+<h3 id="qu-est-ce-que-nis2-">Qu'est-ce que NIS2 ?</h3>
+<p>La directive <strong>NIS2</strong> (Network and Information Security 2) est la mise à jour de la directive NIS de 2016. Transposée en droit français en 2024, elle élargit considérablement le champ des organisations soumises à des obligations de cybersécurité.</p>
+
+<h3 id="qui-est-concern-">Qui est concerné ?</h3>
+<p>NIS2 concerne deux catégories d'entités :</p>
+
+<p><strong>Entités essentielles (EE) :</strong></p>
+<ul><li>Énergie (électricité, gaz, pétrole, hydrogène)</li><li>Transports (aérien, ferroviaire, maritime, routier)</li><li>Secteur bancaire et infrastructures des marchés financiers</li><li>Santé (hôpitaux, laboratoires)</li><li>Eau potable et eaux usées</li><li>Infrastructures numériques (DNS, cloud, datacenters)</li><li>Administration publique</li></ul>
+
+<p><strong>Entités importantes (EI) :</strong></p>
+<ul><li>Services postaux</li><li>Gestion des déchets</li><li>Chimie</li><li>Alimentation</li><li>Fabrication (dispositifs médicaux, électronique, machines)</li><li>Fournisseurs numériques (places de marché, moteurs de recherche, réseaux sociaux)</li></ul>
+
+<p><strong>Seuils :</strong> entreprises de plus de 50 salariés OU plus de 10 M€ de CA dans les secteurs concernés.</p>
+
+<h3 id="les-obligations-nis2">Les obligations NIS2</h3>
+
+<p><strong>1. Gouvernance</strong></p>
+<ul><li>La direction est <strong>personnellement responsable</strong> du respect de NIS2</li><li>Obligation de formation des dirigeants à la cybersécurité</li><li>Désignation d'un responsable sécurité</li></ul>
+
+<p><strong>2. Gestion des risques</strong></p>
+<ul><li>Analyse de risques documentée et régulièrement mise à jour</li><li>Politique de sécurité formalisée</li><li>Gestion des actifs informatiques</li></ul>
+
+<p><strong>3. Mesures techniques minimales</strong></p>
+<ul><li>Authentification multifacteur (MFA)</li><li>Chiffrement des données sensibles</li><li>Gestion des correctifs (patch management)</li><li>Sauvegardes régulières et testées</li><li>Sécurité de la chaîne d'approvisionnement</li></ul>
+
+<p><strong>4. Notification des incidents</strong></p>
+<ul><li><strong>24 heures</strong> : alerte initiale à l'ANSSI</li><li><strong>72 heures</strong> : rapport intermédiaire</li><li><strong>1 mois</strong> : rapport final détaillé</li></ul>
+
+<p><strong>5. Sanctions</strong></p>
+<ul><li>Entités essentielles : jusqu'à <strong>10 millions d'euros</strong> ou 2% du CA mondial</li><li>Entités importantes : jusqu'à <strong>7 millions d'euros</strong> ou 1,4% du CA mondial</li></ul>
+
+<h2 id="le-r-glement-dora">Le règlement DORA</h2>
+
+<h3 id="qu-est-ce-que-dora-">Qu'est-ce que DORA ?</h3>
+<p><strong>DORA</strong> (Digital Operational Resilience Act) est un règlement européen entré en application le <strong>17 janvier 2025</strong>, spécifiquement dédié au secteur financier.</p>
+
+<h3 id="qui-est-concern-">Qui est concerné ?</h3>
+<p>Pratiquement toutes les entités financières supervisées en Europe :</p>
+<ul><li>Banques et établissements de crédit</li><li>Assurances et réassurances</li><li>Entreprises d'investissement</li><li>Gestionnaires de fonds</li><li>Prestataires de services de paiement</li><li>Prestataires de services crypto (selon MiCA)</li><li><strong>Et leurs prestataires ICT critiques</strong> (cloud, SaaS, infra...)</li></ul>
+
+<h3 id="les-5-piliers-de-dora">Les 5 piliers de DORA</h3>
+
+<p><strong>1. Gestion des risques ICT</strong></p>
+<p>Cadre complet de gestion des risques technologiques : identification des actifs critiques, évaluation des risques, plans de traitement.</p>
+
+<p><strong>2. Gestion des incidents</strong></p>
+<p>Processus formalisé de détection, classification et notification des incidents. Les incidents majeurs doivent être signalés aux autorités sous <strong>4 heures</strong> (alerte initiale) puis <strong>72 heures</strong>.</p>
+
+<p><strong>3. Tests de résilience opérationnelle numérique</strong></p>
+<ul><li>Tests basiques annuels pour toutes les entités</li><li><strong>TLPT</strong> (Threat-Led Penetration Testing) tous les 3 ans pour les entités majeures : simulations d'attaques réelles menées par des red teamers certifiés</li></ul>
+
+<p><strong>4. Gestion du risque tiers</strong></p>
+<ul><li>Inventaire de tous les prestataires ICT</li><li>Évaluation de la criticité de chaque prestataire</li><li>Clauses contractuelles obligatoires (droit d'audit, plans de continuité...)</li><li>Registre des prestataires critiques supervisé par les régulateurs</li></ul>
+
+<p><strong>5. Partage d'informations</strong></p>
+<p>Encouragement au partage d'informations sur les cybermenaces entre entités financières.</p>
+
+<h2 id="nis2-vs-dora-quelle-diff-rence-">NIS2 vs DORA : quelle différence ?</h2>
+
+<p>| Critère | NIS2 | DORA |</p>
+<p>|---------|------|------|</p>
+<p>| Secteur | Multi-sectoriel | Financier uniquement |</p>
+<p>| Type | Directive (transposition nationale) | Règlement (application directe) |</p>
+<p>| En vigueur | Transposée en 2024 | Janvier 2025 |</p>
+<p>| Focus | Sécurité des réseaux et SI | Résilience opérationnelle numérique |</p>
+
+<p>Une entité financière peut être soumise aux <strong>deux</strong> simultanément.</p>
+
+<h2 id="comment-se-pr-parer-">Comment se préparer ?</h2>
+
+<h3 id="-tape-1-d-terminer-si-vous-tes-concern-">Étape 1 — Déterminer si vous êtes concerné</h3>
+<ul><li>Vérifiez votre secteur et vos seuils (taille, CA)</li><li>Consultez le site de l'ANSSI (anssi.gouv.fr)</li></ul>
+
+<h3 id="-tape-2-r-aliser-un-gap-analysis">Étape 2 — Réaliser un gap analysis</h3>
+<p>Comparez votre maturité actuelle aux exigences :</p>
+<ul><li>Avez-vous une politique de sécurité formalisée ?</li><li>Le MFA est-il déployé partout ?</li><li>Vos sauvegardes sont-elles testées ?</li><li>Avez-vous un plan de réponse aux incidents ?</li></ul>
+
+<h3 id="-tape-3-prioriser-et-planifier">Étape 3 — Prioriser et planifier</h3>
+<p>Établissez une roadmap de mise en conformité avec des jalons clairs.</p>
+
+<h3 id="-tape-4-documenter">Étape 4 — Documenter</h3>
+<p>La conformité doit être <strong>prouvable</strong> : documentez toutes vos mesures, tests et décisions.</p>
+
+<h2 id="ressources-officielles">Ressources officielles</h2>
+<ul><li><strong>ANSSI</strong> : anssi.gouv.fr — guides et FAQ NIS2</li><li><strong>ENISA</strong> : enisa.europa.eu — ressources européennes</li><li><strong>ABE/EBA</strong> : guidelines DORA pour le secteur bancaire</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>NIS2 et DORA représentent un changement de paradigme : la cybersécurité n'est plus optionnelle pour les secteurs critiques. Les organisations qui anticipent et investissent dans leur conformité transforment une contrainte réglementaire en avantage compétitif. Celles qui attendent s'exposent à des sanctions significatives et à des risques opérationnels majeurs.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#nis2-dora-reglementations-cyber" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-ransomware-apt-2025.html" class="nav-prev">← Ransomwares et groupes APT : bilan des menaces 2024-2025</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/agents-ia-securite.html" class="nav-next">Agents IA autonomes : nouveaux risques pour la cybersécurité →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>IA générative et ingénierie sociale : l'arnaque 2.0 — Temgus.CyberBlog</title>
 <meta name="description" content="Phishing parfait, chatbots d'arnaque, fausses offres d'emploi — comment l'IA générative révolutionne les escroqueries.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/ia-generative-ingenierie-sociale.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/ia-generative-ingenierie-sociale.html">
 <meta property="og:title" content="IA générative et ingénierie sociale : l'arnaque 2.0 — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="IA générative et ingénierie sociale : l'arnaque 2.0 — Temgus.CyberBlog">
 <meta name="twitter:description" content="Phishing parfait, chatbots d'arnaque, fausses offres d'emploi — comment l'IA générative révolutionne les escroqueries.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,348 @@
   "headline": "IA générative et ingénierie sociale : l'arnaque 2.0",
   "description": "Phishing parfait, chatbots d'arnaque, fausses offres d'emploi — comment l'IA générative révolutionne les escroqueries.",
   "datePublished": "2025-08-03",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/ia-generative-ingenierie-sociale.html",
   "inLanguage": "fr",
   "keywords": "IA générative, ingénierie sociale, phishing, arnaque, ChatGPT",
-  "timeRequired": "PT8M"
+  "timeRequired": "PT8M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🎭</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">IA générative et ingénierie sociale : l'arnaque 2.0</h1>
-  <p style="color:#8892a4;max-width:500px">Phishing parfait, chatbots d'arnaque, fausses offres d'emploi — comment l'IA générative révolutionne les escroqueries.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ia-generative-ingenierie-sociale" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🎭</div>
+    <div class="meta-info">
+      <div class="meta-category">Intelligence Artificielle & Sécurité</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">IA générative et ingénierie sociale : l'arnaque 2.0</div>
+      <div class="meta-details">
+        <span>📅 2025-08-03</span>
+        <span>⏱ 8 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#ce-que-l-ia-change-l-ing-nierie-sociale">Ce que l'IA change à l'ingénierie sociale</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-barri-re-de-la-langue-dispara-t">La barrière de la langue disparaît</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-personnalisation-grande-chelle">La personnalisation à grande échelle</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-vitesse-de-r-action">La vitesse de réaction</a></li>
+<li><a href="#les-nouvelles-arnaques-ia">Les nouvelles arnaques IA</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-faux-support-technique-ia">Le faux support technique IA</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-romance-scam-augment-">Le romance scam augmenté</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#la-fausse-offre-d-emploi">La fausse offre d'emploi</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#le-deepfake-en-temps-r-el">Le deepfake en temps réel</a></li>
+<li><a href="#reconna-tre-les-arnaques-ia">Reconnaître les arnaques IA</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#signaux-d-alerte">Signaux d'alerte</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#tester-si-c-est-un-bot">Tester si c'est un bot</a></li>
+<li><a href="#protection-individuelle">Protection individuelle</a></li>
+<li><a href="#protection-pour-les-entreprises">Protection pour les entreprises</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>IA générative et ingénierie sociale : l'arnaque 2.0</h1>
+
+<p>L'intelligence artificielle générative démultiplie les capacités des escrocs et cybercriminels. Emails parfaits, faux sites convaincants, voix clonées — l'ingénierie sociale entre dans une nouvelle ère.</p>
+
+<h2 id="ce-que-l-ia-change-l-ing-nierie-sociale">Ce que l'IA change à l'ingénierie sociale</h2>
+
+<h3 id="la-barri-re-de-la-langue-dispara-t">La barrière de la langue disparaît</h3>
+<p>Avant, les arnaques venues de l'étranger se reconnaissaient souvent à leur français approximatif. Aujourd'hui, ChatGPT rédige des emails parfaits dans n'importe quelle langue, avec le bon registre, les bonnes formules de politesse, le bon niveau de familiarité.</p>
+
+<h3 id="la-personnalisation-grande-chelle">La personnalisation à grande échelle</h3>
+<p>L'IA peut analyser les profils LinkedIn, les posts sur les réseaux sociaux, les communiqués de presse d'une entreprise — et générer des messages ultra-personnalisés pour des milliers de cibles simultanément.</p>
+
+<p><strong>Avant :</strong> "Cher client, votre compte a été compromis."</p>
+<p><strong>Après IA :</strong> "Bonjour Pierre, suite à votre connexion depuis Lyon hier soir avec votre MacBook Pro, nous avons détecté une anomalie sur votre compte Orange Business..."</p>
+
+<h3 id="la-vitesse-de-r-action">La vitesse de réaction</h3>
+<p>Les chatbots d'arnaque répondent instantanément, 24h/24, et maintiennent des conversations cohérentes pendant des heures — quelque chose d'impossible avec des humains.</p>
+
+<h2 id="les-nouvelles-arnaques-ia">Les nouvelles arnaques IA</h2>
+
+<h3 id="le-faux-support-technique-ia">Le faux support technique IA</h3>
+<p>Un chatbot imite parfaitement un agent de support Microsoft, Apple ou votre banque. Il pose des questions techniques crédibles, utilise le bon vocabulaire, connaît les procédures réelles. L'objectif : obtenir vos identifiants ou vous faire installer un logiciel malveillant.</p>
+
+<h3 id="le-romance-scam-augment-">Le romance scam augmenté</h3>
+<p>Les arnaques sentimentales (romance scams) utilisent maintenant des avatars générés par IA, des voix clonées pour les appels vocaux, et des LLMs pour maintenir des conversations romantiques crédibles pendant des semaines.</p>
+
+<h3 id="la-fausse-offre-d-emploi">La fausse offre d'emploi</h3>
+<p>Des annonces d'emploi parfaitement rédigées, pour des entreprises qui semblent réelles, mènent à des "entretiens" avec des interlocuteurs IA qui collectent vos informations personnelles (CV, pièce d'identité, RIB pour "les frais d'équipement").</p>
+
+<h3 id="le-deepfake-en-temps-r-el">Le deepfake en temps réel</h3>
+<p>Des outils permettent désormais de modifier une vidéo en temps réel lors d'appels Zoom ou Teams — un attaquant peut apparaître visuellement comme quelqu'un d'autre pendant un appel professionnel.</p>
+
+<h2 id="reconna-tre-les-arnaques-ia">Reconnaître les arnaques IA</h2>
+
+<h3 id="signaux-d-alerte">Signaux d'alerte</h3>
+<ul><li><strong>Urgence artificielle</strong> : "Votre compte sera bloqué dans 24h"</li><li><strong>Demande inhabituelle</strong> via un canal inhabituel</li><li><strong>Trop beau pour être vrai</strong> : offre d'emploi exceptionnelle, gain inattendu</li><li><strong>Pression pour contourner les procédures</strong> : "Ne passez pas par les canaux normaux"</li><li><strong>Demande d'informations sensibles</strong> : mot de passe, RIB, code SMS</li></ul>
+
+<h3 id="tester-si-c-est-un-bot">Tester si c'est un bot</h3>
+<ul><li>Posez des questions inattendues hors sujet</li><li>Demandez des détails très spécifiques et vérifiables</li><li>Créez une incohérence dans la conversation pour voir si le bot s'adapte</li><li>Appelez directement l'organisation concernée via un numéro officiel</li></ul>
+
+<h2 id="protection-individuelle">Protection individuelle</h2>
+
+<p><strong>Vérification systématique</strong></p>
+<p>Ne jamais agir sur la base d'un seul message ou appel. Toujours vérifier via un canal indépendant (appeler le numéro officiel, pas celui fourni dans le message).</p>
+
+<p><strong>Mot de passe de sécurité familial</strong></p>
+<p>Établissez un mot de code avec vos proches pour vérifier leur identité lors d'appels urgents demandant de l'argent.</p>
+
+<p><strong>Délai de réflexion</strong></p>
+<p>Toute demande urgente est suspecte. Prenez 24h avant d'agir sur une demande financière ou d'information sensible.</p>
+
+<p><strong>Formation continue</strong></p>
+<p>Les techniques évoluent vite. Restez informé des nouvelles arnaques via le site cybermalveillance.gouv.fr.</p>
+
+<h2 id="protection-pour-les-entreprises">Protection pour les entreprises</h2>
+
+<ul><li><strong>Procédures de virement strictes</strong> : double validation obligatoire, même pour les dirigeants</li><li><strong>Sensibilisation régulière</strong> avec des exemples concrets et récents</li><li><strong>Simulation d'attaques</strong> par ingénierie sociale (phishing, vishing)</li><li><strong>Canal de signalement</strong> simple et connu de tous</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>L'IA générative n'a pas inventé l'ingénierie sociale, mais elle l'a rendue beaucoup plus accessible, scalable et convaincante. La défense repose toujours sur les mêmes piliers : vérification, scepticisme constructif et procédures robustes. Dans le doute, raccrochez, et rappellez par un numéro que vous connaissez.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#ia-generative-ingenierie-sociale" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/agents-ia-securite.html" class="nav-prev">← Agents IA autonomes : nouveaux risques pour la cybersécurité</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/automatiser-securite-ia.html" class="nav-next">Automatiser sa sécurité avec l'IA : outils et stratégies →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

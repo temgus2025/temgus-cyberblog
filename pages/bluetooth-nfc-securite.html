@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Bluetooth et NFC : sécurité des communications sans fil — Temgus.CyberBlog</title>
 <meta name="description" content="BIAS, BlueBorne, relay attacks NFC, outils d'analyse et bonnes pratiques de protection.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/bluetooth-nfc-securite.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/bluetooth-nfc-securite.html">
 <meta property="og:title" content="Bluetooth et NFC : sécurité des communications sans fil — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Bluetooth et NFC : sécurité des communications sans fil — Temgus.CyberBlog">
 <meta name="twitter:description" content="BIAS, BlueBorne, relay attacks NFC, outils d'analyse et bonnes pratiques de protection.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,525 @@
   "headline": "Bluetooth et NFC : sécurité des communications sans fil",
   "description": "BIAS, BlueBorne, relay attacks NFC, outils d'analyse et bonnes pratiques de protection.",
   "datePublished": "2025-06-18",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/bluetooth-nfc-securite.html",
   "inLanguage": "fr",
   "keywords": "Bluetooth, NFC, RFID, sans fil",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📡</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Bluetooth et NFC : sécurité des communications sans fil</h1>
-  <p style="color:#8892a4;max-width:500px">BIAS, BlueBorne, relay attacks NFC, outils d'analyse et bonnes pratiques de protection.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#bluetooth-nfc-securite" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📡</div>
+    <div class="meta-info">
+      <div class="meta-category">Sécurité réseau</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Bluetooth et NFC : sécurité des communications sans fil</div>
+      <div class="meta-details">
+        <span>📅 2025-06-18</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#bluetooth-fonctionnement-et-versions">Bluetooth — Fonctionnement et versions</a></li>
+<li><a href="#attaques-bluetooth">Attaques Bluetooth</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#bluesnarfing-et-bluejacking">BlueSnarfing et BlueJacking</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#bias-attack-bluetooth-impersonation-attack-">BIAS Attack (Bluetooth Impersonation Attack)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#blesa-ble-spoofing-attack-">BLESA (BLE Spoofing Attack)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#blueborne">BlueBorne</a></li>
+<li><a href="#nfc-near-field-communication">NFC — Near Field Communication</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#fonctionnement">Fonctionnement</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaques-nfc">Attaques NFC</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#attaques-sur-les-paiements-sans-contact">Attaques sur les paiements sans contact</a></li>
+<li><a href="#bonnes-pratiques-de-s-curit-">Bonnes pratiques de sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#bluetooth">Bluetooth</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#nfc-et-cartes-sans-contact">NFC et cartes sans contact</a></li>
+<li><a href="#outils-de-s-curit-bluetooth-nfc">Outils de sécurité Bluetooth/NFC</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Bluetooth et NFC : sécurité des communications sans fil courte portée</h1>
+
+<p>Bluetooth et NFC sont omniprésents dans nos appareils quotidiens — écouteurs, claviers, paiements sans contact, badges d'accès. Ces technologies pratiques présentent des vecteurs d'attaque spécifiques souvent sous-estimés.</p>
+
+<h2 id="bluetooth-fonctionnement-et-versions">Bluetooth — Fonctionnement et versions</h2>
+
+<pre><code>Versions Bluetooth et leur sécurité :
+
+<p>Bluetooth Classic (BR/EDR) :</p>
+<p>→ Débit élevé, portée 10-100m</p>
+<p>→ Audio, transfert de fichiers</p>
+<p>→ Appairage via PIN (4-6 chiffres) → attaque par brute force</p>
+
+<p>Bluetooth Low Energy (BLE) :</p>
+<p>→ Faible consommation, IoT, wearables</p>
+<p>→ Appairage simplifié → vulnérabilités</p>
+<p>→ Utilisé par : FitBit, Apple Watch, serrures connectées, balises</p>
+
+<p>Bluetooth 5.x :</p>
+<p>→ Portée x4, débit x2</p>
+<p>→ Améliorations sécurité mais nouvelles fonctionnalités = nouvelle surface</p>
+
+<p>Modes d'appairage :</p>
+<p>Just Works (JW)     : Aucune authentification → MITM possible</p>
+<p>PIN Legacy          : PIN court → brute force</p>
+<p>Passkey Entry       : Code 6 chiffres → brute force possible</p>
+<p>Numeric Comparison  : Confirmer que le code est identique</p>
+<p>Out-of-Band (OOB)   : Via NFC ou QR code → plus sécurisé</code></pre>
+
+<h2 id="attaques-bluetooth">Attaques Bluetooth</h2>
+
+<h3 id="bluesnarfing-et-bluejacking">BlueSnarfing et BlueJacking</h3>
+
+<pre><code class="language-bash"># BlueJacking : envoi de messages non sollicités
+<h1>BlueSnarfing : accès non autorisé aux données</h1>
+
+<h1>Outils Bluetooth sous Linux</h1>
+<p>hcitool scan       # Découvrir les appareils Bluetooth visibles</p>
+<p>hcitool inq        # Enquête Bluetooth</p>
+<p>sdptool browse XX:XX:XX:XX:XX:XX  # Services disponibles</p>
+
+<h1>Bluetoothctl - Interface moderne</h1>
+<p>bluetoothctl</p>
+<p>[bluetooth]# scan on</p>
+<p>[bluetooth]# devices</p>
+<p>[bluetooth]# info XX:XX:XX:XX:XX:XX</p>
+
+<h1>Ubertooth - Sniffer Bluetooth dédié</h1>
+<p>ubertooth-btle -f  # Suivre les connexions BLE</p>
+<p>ubertooth-rx        # Capturer le trafic Bluetooth classic</code></pre>
+
+<h3 id="bias-attack-bluetooth-impersonation-attack-">BIAS Attack (Bluetooth Impersonation Attack)</h3>
+
+<pre><code class="language-python"># BIAS (2020) : vulnérabilité dans l'authentification Bluetooth Secure Simple Pairing
+<h1>Affecte TOUS les appareils Bluetooth (milliards d'appareils)</h1>
+
+<h1>Principe :</h1>
+<h1>1. L'attaquant se trouve à portée de deux appareils appairés (A et B)</h1>
+<h1>2. L'attaquant se fait passer pour A auprès de B</h1>
+<h1>3. BIAS permet de passer l'authentification sans la clé longue terme (LTK)</h1>
+<h1>4. L'attaquant peut envoyer des commandes à B comme s'il était A</h1>
+
+<h1>Impact :</h1>
+<h1>→ Contrôler des appareils médicaux</h1>
+<h1>→ Accéder à des ordinateurs via claviers BT</h1>
+<h1>→ Écouter des conversations via oreillettes BT</h1>
+
+<h1>Correction : patch des firmwares (appliqué en 2020 par la plupart des fabricants)</h1>
+<h1>Action requise : mettre à jour firmware de tous vos appareils BT</code></pre></h1>
+
+<h3 id="blesa-ble-spoofing-attack-">BLESA (BLE Spoofing Attack)</h3>
+
+<pre><code class="language-python"># BLESA affecte le BLE Reconnection process
+<h1>Quand deux appareils BLE se reconnectent, l'authentification est optionnelle</h1>
+
+<h1>Attaque :</h1>
+<h1>1. Simuler un périphérique BLE connu (ex: capteur de glycémie)</h1>
+<h1>2. Envoyer de fausses données lors de la reconnexion</h1>
+<h1>3. Les appareils vulnérables acceptent sans authentification</h1>
+
+<h1>Appareils affectés :</h1>
+<h1>iOS avant 13.4, Android, Linux BlueZ</h1>
+<h1>Particulièrement dangereux pour les appareils médicaux IoT !</code></pre></h1>
+
+<h3 id="blueborne">BlueBorne</h3>
+
+<pre><code class="language-bash"># BlueBorne (2017) : 8 vulnérabilités zero-click sur Bluetooth
+<h1>Pas besoin d'appairage, pas d'interaction utilisateur</h1>
+<h1>Propagation de type worm possible</h1>
+
+<h1>Testé sur : Windows, Linux, Android, iOS (avant iOS 10)</h1>
+<h1>Impact : RCE, MITM, propagation automatique</h1>
+
+<h1>Test de vulnérabilité BlueBorne</h1>
+<h1>https://github.com/ArmisSecurity/blueborne</h1>
+<p>python poc_android_stack_overflow.py -t XX:XX:XX:XX:XX:XX</p>
+
+<h1>Protection :</h1>
+<h1>→ Désactiver Bluetooth quand non utilisé</h1>
+<h1>→ Mettre à jour le firmware/OS</h1>
+<h1>→ Android : patch septembre 2017</h1>
+<h1>→ iOS : patch 10</code></pre></h1>
+
+<h2 id="nfc-near-field-communication">NFC — Near Field Communication</h2>
+
+<h3 id="fonctionnement">Fonctionnement</h3>
+
+<pre><code>NFC fonctionne à 13,56 MHz, portée max ~20cm
+<p>Standards :</p>
+<p>→ ISO 14443 (cartes de paiement sans contact)</p>
+<p>→ ISO 15693 (badges d'accès longue portée jusqu'à 1m)</p>
+<p>→ NDEF (NFC Data Exchange Format) pour l'échange de données</p>
+
+<p>Modes :</p>
+<p>→ Lecteur/Graveur : lire des tags NFC</p>
+<p>→ Emulation de carte : smartphone simule une carte bancaire (Apple Pay)</p>
+<p>→ Peer-to-peer : échange entre deux appareils NFC</code></pre>
+
+<h3 id="attaques-nfc">Attaques NFC</h3>
+
+<pre><code class="language-python"># NFC Eavesdropping (interception à distance)
+<h1>Théoriquement 20cm, mais avec une antenne amplifiée : jusqu'à 1 mètre</h1>
+
+<h1>Relay Attack - L'attaque la plus dangereuse sur les paiements sans contact</h1>
+<h1>Scénario :</h1>
+<h1>Victime à la caisse → Lecteur du magasin</h1>
+<p>#</p>
+<h1>Attaque relay :</h1>
+<h1>Victime → [Antenne émettrice de l'attaquant]</h1>
+<h1>                   ↓ (transmission en temps réel)</h1>
+<h1>          [Antenne réceptrice de l'attaquant] → Lecteur du magasin</h1>
+<p>#</p>
+<h1>L'attaquant peut faire un paiement n'importe où dans le monde</h1>
+<h1>en utilisant la carte de la victime (même dans sa poche !)</h1>
+
+<h1>Outils : Proxmark3, ACR122U, libnfc</h1>
+
+<h1>Protection :</h1>
+<h1>→ Portemonnaie RFID-blocking (cage de Faraday)</h1>
+<h1>→ Limites de paiement sans contact (50€ en France par défaut)</h1>
+<h1>→ Vérification dynamique avec le montant (Europay/Mastercard/Visa)</code></pre></h1>
+
+<pre><code class="language-bash"># Lire et cloner des tags NFC avec Proxmark3
+
+<h1>Détecter le type de tag</h1>
+<p>pm3 --&gt; hf search</p>
+
+<h1>Lire un tag MIFARE Classic</h1>
+<p>pm3 --&gt; hf mf autopwn</p>
+
+<h1>MIFARE Classic - Vulnérabilité Crypto1</h1>
+<h1>L'algorithme Crypto1 est cassé depuis 2008 (CRYPTO1 BROKEN)</h1>
+<h1>Attaque Darkside/Nested permet de lire/écrire sans la clé originale</h1>
+
+<h1>Cloner une carte MIFARE Classic</h1>
+<p>pm3 --&gt; hf mf dump          # Lire les 1K/4K blocs</p>
+<p>pm3 --&gt; hf mf restore       # Restaurer sur une carte vierge</p>
+
+<h1>Badges d'accès HID iCLASS</h1>
+<p>pm3 --&gt; hf iclass dump      # Extraire les données</p>
+<h1>Ces badges sont utilisés dans des milliers d'entreprises</h1>
+<h1>Une fois la clé extractée → dupliquer le badge en quelques secondes</code></pre></h1>
+
+<h3 id="attaques-sur-les-paiements-sans-contact">Attaques sur les paiements sans contact</h3>
+
+<pre><code class="language-python"># Le "pickpocketing NFC" existe mais est limité par :
+<h1>→ La portée très courte (&lt; 5cm en pratique)</h1>
+<h1>→ Les limites de transaction sans PIN</h1>
+<h1>→ La cryptographie dynamique (CVV dynamique)</h1>
+
+<h1>Vraie menace : vol de numéro de carte (pas de paiement complet)</h1>
+<h1>Un lecteur NFC peut lire :</h1>
+<h1>→ Numéro de carte (PAN)</h1>
+<h1>→ Date d'expiration</h1>
+<h1>→ Parfois les dernières transactions</h1>
+<h1>→ PAS le CVV (stocké séparément)</h1>
+<h1>→ PAS le PIN (jamais transmis en clair)</h1>
+
+<p>import nfc  # libnfc Python binding</p>
+
+<p>def scan_contactless_card(clf):</p>
+<p>"""Lire les informations d'une carte sans contact (ÉDUCATIF)"""</p>
+<p>tag = clf.connect(rdwr={'on-connect': lambda tag: False})</p>
+<p>if tag:</p>
+<p># Lire les données EMV</p>
+<p>response = tag.transceive(b'\x00\xa4\x04\x00\x07\xa0\x00\x00\x00\x03\x10\x10')</p>
+<p># Décoder le numéro de carte depuis la réponse TLV</p>
+<p>print(f"Type de carte : {tag.type}")</p>
+
+<h1>Protection :</h1>
+<h1>Portefeuille RFID-blocking = efficace</h1>
+<h1>Étui métal pour la carte bancaire seule = efficace</h1>
+<h1>Application mobile avec notifications temps réel = recommandé</code></pre></h1>
+
+<h2 id="bonnes-pratiques-de-s-curit-">Bonnes pratiques de sécurité</h2>
+
+<h3 id="bluetooth">Bluetooth</h3>
+
+<pre><code>✅ Désactiver Bluetooth quand non utilisé
+<p>✅ Appairage seulement dans un lieu privé (pas dans un café)</p>
+<p>✅ Refuser les demandes d'appairage inattendues</p>
+<p>✅ Mettre à jour le firmware de tous les appareils BT</p>
+<p>✅ Utiliser "Non visible" / "Non découvrable" par défaut</p>
+<p>✅ Mode "Just Works" : éviter pour les appareils sensibles</p>
+<p>✅ Préférer les appareils avec PIN ou confirmation numérique</p>
+
+<p>Pour les entreprises :</p>
+<p>✅ Interdire Bluetooth dans les zones sensibles</p>
+<p>✅ Inventaire des appareils BT autorisés</p>
+<p>✅ Monitoring des connexions BT (XDR/EDR)</code></pre>
+
+<h3 id="nfc-et-cartes-sans-contact">NFC et cartes sans contact</h3>
+
+<pre><code>✅ Portefeuille/porte-carte RFID-blocking (5-15€)
+<p>✅ Activer les notifications de paiement en temps réel</p>
+<p>✅ Paramétrer un plafond de paiement sans contact</p>
+<p>✅ Appareils IoT : changer les clés MIFARE par défaut</p>
+<p>✅ Badges d'entreprise : préférer MIFARE DESFire (AES-128) vs MIFARE Classic cassé</p>
+<p>✅ Auditer régulièrement les lecteurs de badges (compromission possible)</code></pre>
+
+<h2 id="outils-de-s-curit-bluetooth-nfc">Outils de sécurité Bluetooth/NFC</h2>
+
+<pre><code class="language-bash"># Bluetooth
+<p>bluetoothctl          # Interface système (Linux)</p>
+<p>gatttool              # Analyse GATT BLE</p>
+<p>btlejuice             # MITM sur BLE</p>
+<p>btlejack              # Hijack connexions BLE</p>
+<p>Wireshark + btsnoop   # Capturer le trafic BT</p>
+
+<h1>NFC</h1>
+<p>Proxmark3             # Outil tout-en-un (300-500€)</p>
+<p>ACR122U               # Lecteur/graveur USB NFC abordable (30€)</p>
+<p>libnfc                # Bibliothèque NFC open source</p>
+<p>nfc-tools             # Utilitaires en ligne de commande</p>
+<p>NFCtools (Android)    # Application Android pour lire les tags</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Bluetooth et NFC sont des technologies pratiques mais pas sans risques. Les vulnérabilités comme BlueBorne et BIAS ont montré que ces protocoles peuvent être exploités de façon transparente. La défense basique est simple : <strong>désactivez Bluetooth quand vous ne l'utilisez pas, utilisez un portefeuille RFID-blocking, et maintenez vos firmwares à jour</strong>. Pour les entreprises, la migration vers MIFARE DESFire pour les badges d'accès est urgente.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#bluetooth-nfc-securite" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/supply-chain-attacks.html" class="nav-prev">← Attaques supply chain : compromettre par les fournisseurs</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/hardening-windows-server.html" class="nav-next">Hardening Windows Server : durcissement complet →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

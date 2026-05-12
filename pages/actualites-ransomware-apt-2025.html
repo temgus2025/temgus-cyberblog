@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Ransomwares et groupes APT : bilan des menaces 2024-2025 — Temgus.CyberBlog</title>
 <meta name="description" content="LockBit, ALPHV, Volt Typhoon, Lazarus — analyse des cybermenaces majeures et des tendances de l'année 2024-2025.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-ransomware-apt-2025.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/actualites-ransomware-apt-2025.html">
 <meta property="og:title" content="Ransomwares et groupes APT : bilan des menaces 2024-2025 — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Ransomwares et groupes APT : bilan des menaces 2024-2025 — Temgus.CyberBlog">
 <meta name="twitter:description" content="LockBit, ALPHV, Volt Typhoon, Lazarus — analyse des cybermenaces majeures et des tendances de l'année 2024-2025.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,355 @@
   "headline": "Ransomwares et groupes APT : bilan des menaces 2024-2025",
   "description": "LockBit, ALPHV, Volt Typhoon, Lazarus — analyse des cybermenaces majeures et des tendances de l'année 2024-2025.",
   "datePublished": "2025-07-17",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/actualites-ransomware-apt-2025.html",
   "inLanguage": "fr",
   "keywords": "ransomware, APT, LockBit, threat intelligence, 2025",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">📰</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Ransomwares et groupes APT : bilan des menaces 2024-2025</h1>
-  <p style="color:#8892a4;max-width:500px">LockBit, ALPHV, Volt Typhoon, Lazarus — analyse des cybermenaces majeures et des tendances de l'année 2024-2025.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#actualites-ransomware-apt-2025" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">📰</div>
+    <div class="meta-info">
+      <div class="meta-category">Actualités cyber</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Ransomwares et groupes APT : bilan des menaces 2024-2025</div>
+      <div class="meta-details">
+        <span>📅 2025-07-17</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Intermédiaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-v-nements-marquants-de-2024">Les événements marquants de 2024</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#l-op-ration-cronos-contre-lockbit">L'opération Cronos contre LockBit</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#l-attaque-contre-change-healthcare">L'attaque contre Change Healthcare</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mgm-resorts-et-scattered-spider">MGM Resorts et Scattered Spider</a></li>
+<li><a href="#les-tendances-2024-2025">Les tendances 2024-2025</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#escalade-des-ran-ons">Escalade des rançons</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#double-et-triple-extorsion">Double et triple extorsion</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ciblage-des-backups">Ciblage des backups</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#living-off-the-land-lotl-">Living Off the Land (LotL)</a></li>
+<li><a href="#les-groupes-apt-tatiques-actifs">Les groupes APT étatiques actifs</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#apt29-cozy-bear-russie-">APT29 / Cozy Bear (Russie)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#volt-typhoon-chine-">Volt Typhoon (Chine)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#lazarus-group-cor-e-du-nord-">Lazarus Group (Corée du Nord)</a></li>
+<li><a href="#comment-se-prot-ger">Comment se protéger</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pour-les-entreprises">Pour les entreprises</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#pour-les-individus">Pour les individus</a></li>
+<li><a href="#ressources-pour-suivre-l-actualit-cyber">Ressources pour suivre l'actualité cyber</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Ransomwares et groupes APT : bilan des menaces 2024-2025</h1>
+
+<p>L'année 2024 a été marquée par des attaques d'une sophistication et d'un impact sans précédent. Démantèlements d'infrastructures criminelles, rançons records, attaques contre les infrastructures critiques — voici le bilan des menaces majeures.</p>
+
+<h2 id="les-v-nements-marquants-de-2024">Les événements marquants de 2024</h2>
+
+<h3 id="l-op-ration-cronos-contre-lockbit">L'opération Cronos contre LockBit</h3>
+<p>En février 2024, une opération internationale coordonnée par Europol et le FBI a démantelé l'infrastructure de <strong>LockBit</strong>, le groupe de ransomware-as-a-service le plus actif au monde. Les autorités ont saisi 34 serveurs, arrêté 5 membres, récupéré plus de 1 000 clés de déchiffrement et gelé 200 comptes cryptomonnaie.</p>
+
+<p>Malgré ce coup dur, LockBit a annoncé reprendre ses activités quelques semaines plus tard — illustrant la résilience des groupes criminels organisés.</p>
+
+<h3 id="l-attaque-contre-change-healthcare">L'attaque contre Change Healthcare</h3>
+<p>En février 2024, le groupe <strong>ALPHV/BlackCat</strong> a frappé Change Healthcare, un acteur majeur du traitement de paiements médicaux aux États-Unis. Résultat : des milliers de pharmacies et hôpitaux incapables de traiter les paiements pendant des semaines, une rançon de 22 millions de dollars payée, et plus de 100 millions d'Américains dont les données ont été exposées.</p>
+
+<h3 id="mgm-resorts-et-scattered-spider">MGM Resorts et Scattered Spider</h3>
+<p>Le groupe <strong>Scattered Spider</strong>, composé majoritairement de jeunes anglophones, a causé plus de 100 millions de dollars de pertes chez MGM Resorts. Leur technique signature : le <strong>vishing</strong> ciblant les équipes helpdesk pour réinitialiser les accès MFA.</p>
+
+<h2 id="les-tendances-2024-2025">Les tendances 2024-2025</h2>
+
+<h3 id="escalade-des-ran-ons">Escalade des rançons</h3>
+<ul><li>Rançon moyenne en 2024 : <strong>2,73 millions de dollars</strong> (source : Sophos)</li><li>Record absolu : <strong>75 millions de dollars</strong> payés à Dark Angels</li></ul>
+
+<h3 id="double-et-triple-extorsion">Double et triple extorsion</h3>
+<p>Les groupes ne se contentent plus de chiffrer les données. Ils :</p>
+<li><strong>Chiffrent</strong> les systèmes</li>
+<li><strong>Exfiltrent</strong> les données et menacent de les publier</li>
+<li>Contactent <strong>directement les clients</strong> de la victime pour augmenter la pression</li>
+<li>Lancent des <strong>attaques DDoS</strong> simultanées</li>
+
+<h3 id="ciblage-des-backups">Ciblage des backups</h3>
+<p>Les attaquants s'attaquent en priorité aux sauvegardes avant de chiffrer les données de production, rendant la récupération sans paiement de rançon quasi impossible.</p>
+
+<h3 id="living-off-the-land-lotl-">Living Off the Land (LotL)</h3>
+<p>Les groupes APT utilisent de plus en plus les outils légitimes déjà présents sur les systèmes (PowerShell, WMI, PsExec) pour se déplacer sans déclencher les antivirus.</p>
+
+<h2 id="les-groupes-apt-tatiques-actifs">Les groupes APT étatiques actifs</h2>
+
+<h3 id="apt29-cozy-bear-russie-">APT29 / Cozy Bear (Russie)</h3>
+<p>Lié au SVR (renseignement extérieur russe). Actif contre les gouvernements occidentaux et les chaînes d'approvisionnement logicielles. Responsable de la compromission de SolarWinds en 2020, toujours actif en 2024-2025.</p>
+
+<p><strong>Techniques caractéristiques :</strong> spear-phishing ciblé, compromission de la supply chain, utilisation de zero-days.</p>
+
+<h3 id="volt-typhoon-chine-">Volt Typhoon (Chine)</h3>
+<p>Groupe APT lié à l'armée chinoise révélé en 2023. Cible les <strong>infrastructures critiques</strong> américaines (énergie, eau, transport) dans une logique de pré-positionnement.</p>
+
+<p><strong>Particularité :</strong> utilise exclusivement des techniques LotL pour rester indétectable.</p>
+
+<h3 id="lazarus-group-cor-e-du-nord-">Lazarus Group (Corée du Nord)</h3>
+<p>Spécialisé dans le vol de cryptomonnaies pour financer le régime. En 2024, responsable du vol de plusieurs centaines de millions de dollars en actifs numériques.</p>
+
+<h2 id="comment-se-prot-ger">Comment se protéger</h2>
+
+<h3 id="pour-les-entreprises">Pour les entreprises</h3>
+<ul><li><strong>Segmentation réseau</strong> : limiter la propagation latérale</li><li><strong>Sauvegardes 3-2-1 hors ligne</strong> : 3 copies, 2 supports différents, 1 hors site ET hors ligne</li><li><strong>EDR</strong> : détecter les comportements suspects</li><li><strong>Plan de réponse aux incidents</strong> testé et à jour</li><li><strong>Formation anti-phishing</strong> régulière</li></ul>
+
+<h3 id="pour-les-individus">Pour les individus</h3>
+<ul><li><strong>MFA</strong> sur tous les comptes critiques</li><li><strong>Sauvegardes régulières</strong> hors ligne</li><li><strong>Mises à jour</strong> rapides des systèmes</li><li><strong>Méfiance</strong> envers les appels téléphoniques demandant des accès</li></ul>
+
+<h2 id="ressources-pour-suivre-l-actualit-cyber">Ressources pour suivre l'actualité cyber</h2>
+
+<ul><li><strong>CERT-FR</strong> (cert.ssi.gouv.fr) : alertes officielles françaises</li><li><strong>CISA</strong> (cisa.gov) : agence américaine de cybersécurité</li><li><strong>Bleeping Computer</strong> : actualités ransomware détaillées</li><li><strong>The Record</strong> : journalisme cyber de qualité</li></ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le paysage des menaces en 2024-2025 montre une professionnalisation croissante des groupes criminels et une sophistication des attaques étatiques. La défense doit être proactive, avec une veille constante et des plans de résilience testés régulièrement.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#actualites-ransomware-apt-2025" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/nmap-guide-complet.html" class="nav-prev">← Nmap : maîtriser le scanner réseau incontournable</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/nis2-dora-reglementations-cyber.html" class="nav-next">NIS2 et DORA : les nouvelles réglementations cyber qui changent tout →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

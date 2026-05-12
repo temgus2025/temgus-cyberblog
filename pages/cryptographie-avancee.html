@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Cryptographie avancée : PKI, certificats et post-quantique — Temgus.CyberBlog</title>
 <meta name="description" content="PKI, certificats X.509, Certificate Transparency, CRYSTALS-Kyber et migration vers la cryptographie post-quantique.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-avancee.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-avancee.html">
 <meta property="og:title" content="Cryptographie avancée : PKI, certificats et post-quantique — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Cryptographie avancée : PKI, certificats et post-quantique — Temgus.CyberBlog">
 <meta name="twitter:description" content="PKI, certificats X.509, Certificate Transparency, CRYSTALS-Kyber et migration vers la cryptographie post-quantique.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,447 @@
   "headline": "Cryptographie avancée : PKI, certificats et post-quantique",
   "description": "PKI, certificats X.509, Certificate Transparency, CRYSTALS-Kyber et migration vers la cryptographie post-quantique.",
   "datePublished": "2025-08-31",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/cryptographie-avancee.html",
   "inLanguage": "fr",
   "keywords": "PKI, certificats, TLS, post-quantique, Kyber",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔐</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Cryptographie avancée : PKI, certificats et post-quantique</h1>
-  <p style="color:#8892a4;max-width:500px">PKI, certificats X.509, Certificate Transparency, CRYSTALS-Kyber et migration vers la cryptographie post-quantique.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cryptographie-avancee" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔐</div>
+    <div class="meta-info">
+      <div class="meta-category">Cryptographie</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Cryptographie avancée : PKI, certificats et post-quantique</div>
+      <div class="meta-details">
+        <span>📅 2025-08-31</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#pki-infrastructure-cl-s-publiques">PKI — Infrastructure à Clés Publiques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#cr-er-sa-propre-pki-avec-openssl">Créer sa propre PKI avec OpenSSL</a></li>
+<li><a href="#certificats-x-509-en-d-tail">Certificats X.509 en détail</a></li>
+<li><a href="#certificate-transparency-ct-">Certificate Transparency (CT)</a></li>
+<li><a href="#cryptographie-post-quantique">Cryptographie post-quantique</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Cryptographie avancée : PKI, certificats et protocoles modernes</h1>
+
+<p>Au-delà du chiffrement symétrique et asymétrique, la cryptographie moderne repose sur des infrastructures complexes. Ce guide explore la PKI, les certificats X.509, TLS moderne et les algorithmes post-quantiques.</p>
+
+<h2 id="pki-infrastructure-cl-s-publiques">PKI — Infrastructure à Clés Publiques</h2>
+
+<pre><code>PKI (Public Key Infrastructure) = système de gestion des certificats
+
+<p>Composants :</p>
+<p>→ CA (Certificate Authority) : émet et signe les certificats</p>
+<p>→ RA (Registration Authority) : vérifie l'identité avant émission</p>
+<p>→ CRL (Certificate Revocation List) : liste des certificats révoqués</p>
+<p>→ OCSP (Online Certificate Status Protocol) : vérification en temps réel</p>
+
+<p>Hiérarchie de confiance :</p>
+<p>Root CA (autosigné, hors ligne)</p>
+<p>↓</p>
+<p>Intermediate CA (en ligne)</p>
+<p>↓</p>
+<p>End-Entity Certificate (votre domaine)</p>
+
+<p>Pourquoi cette hiérarchie ?</p>
+<p>→ Root CA toujours hors ligne = si compromise, on révoque l'intermédiaire</p>
+<p>→ Intermediate CA peut être révoquée sans toucher la Root</p>
+<p>→ Defense in depth pour la confiance</code></pre>
+
+<h3 id="cr-er-sa-propre-pki-avec-openssl">Créer sa propre PKI avec OpenSSL</h3>
+
+<pre><code class="language-bash"># 1. Créer la Root CA
+<p>mkdir -p /ca/root/{certs,crl,newcerts,private}</p>
+<p>chmod 700 /ca/root/private</p>
+<p>touch /ca/root/index.txt</p>
+<p>echo 1000 &gt; /ca/root/serial</p>
+
+<h1>Générer la clé privée Root CA (4096 bits, chiffrée)</h1>
+<p>openssl genrsa -aes256 -out /ca/root/private/ca.key.pem 4096</p>
+<p>chmod 400 /ca/root/private/ca.key.pem</p>
+
+<h1>Créer le certificat Root CA (autosigné, valide 20 ans)</h1>
+<p>openssl req -config openssl.cnf \</p>
+<p>-key /ca/root/private/ca.key.pem \</p>
+<p>-new -x509 -days 7300 -sha256 \</p>
+<p>-extensions v3_ca \</p>
+<p>-out /ca/root/certs/ca.cert.pem</p>
+
+<h1>2. Créer l'Intermediate CA</h1>
+<p>openssl genrsa -aes256 -out /ca/intermediate/private/intermediate.key.pem 4096</p>
+
+<p>openssl req -config openssl.cnf \</p>
+<p>-new -sha256 \</p>
+<p>-key /ca/intermediate/private/intermediate.key.pem \</p>
+<p>-out /ca/intermediate/csr/intermediate.csr.pem</p>
+
+<h1>Signer l'Intermediate avec la Root CA</h1>
+<p>openssl ca -config openssl.cnf -extensions v3_intermediate_ca \</p>
+<p>-days 3650 -notext -md sha256 \</p>
+<p>-in /ca/intermediate/csr/intermediate.csr.pem \</p>
+<p>-out /ca/intermediate/certs/intermediate.cert.pem</p>
+
+<h1>3. Émettre un certificat serveur</h1>
+<p>openssl genrsa -out /ca/intermediate/private/server.key.pem 2048</p>
+
+<p>openssl req -config openssl.cnf \</p>
+<p>-key /ca/intermediate/private/server.key.pem \</p>
+<p>-new -sha256 \</p>
+<p>-out /ca/intermediate/csr/server.csr.pem</p>
+
+<p>openssl ca -config openssl.cnf -extensions server_cert \</p>
+<p>-days 365 -notext -md sha256 \</p>
+<p>-in /ca/intermediate/csr/server.csr.pem \</p>
+<p>-out /ca/intermediate/certs/server.cert.pem</code></pre>
+
+<h2 id="certificats-x-509-en-d-tail">Certificats X.509 en détail</h2>
+
+<pre><code class="language-python"># Analyser un certificat avec Python
+<p>from cryptography import x509</p>
+<p>from cryptography.hazmat.backends import default_backend</p>
+<p>import ssl, socket</p>
+
+<p>def analyser_certificat(hostname, port=443):</p>
+<p># Récupérer le certificat du serveur</p>
+<p>context = ssl.create_default_context()</p>
+<p>with socket.create_connection((hostname, port)) as sock:</p>
+<p>with context.wrap_socket(sock, server_hostname=hostname) as ssock:</p>
+<p>cert_der = ssock.getpeercert(binary_form=True)</p>
+
+<p>cert = x509.load_der_x509_certificate(cert_der, default_backend())</p>
+
+<p>analyse = {</p>
+<p>"sujet": cert.subject.rfc4514_string(),</p>
+<p>"émetteur": cert.issuer.rfc4514_string(),</p>
+<p>"valide_du": cert.not_valid_before_utc,</p>
+<p>"valide_au": cert.not_valid_after_utc,</p>
+<p>"numéro_série": hex(cert.serial_number),</p>
+<p>"algorithme_signature": cert.signature_algorithm_oid._name,</p>
+<p>"clé_publique_type": cert.public_key().__class__.__name__,</p>
+<p>}</p>
+
+<p># Extensions importantes</p>
+<p>try:</p>
+<p>san = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName)</p>
+<p>analyse["SANs"] = [str(name) for name in san.value]</p>
+<p>except: pass</p>
+
+<p>try:</p>
+<p>ku = cert.extensions.get_extension_for_class(x509.KeyUsage)</p>
+<p>analyse["key_usage"] = {</p>
+<p>"digital_signature": ku.value.digital_signature,</p>
+<p>"key_encipherment": ku.value.key_encipherment,</p>
+<p>}</p>
+<p>except: pass</p>
+
+<p>return analyse</p>
+
+<p>print(analyser_certificat("google.com"))</code></pre>
+
+<h2 id="certificate-transparency-ct-">Certificate Transparency (CT)</h2>
+
+<pre><code class="language-bash"># Certificate Transparency = logs publics de tous les certificats émis
+<h1>Permet de détecter les certificats frauduleux</h1>
+
+<h1>Rechercher tous les certificats d'un domaine</h1>
+<p>curl "https://crt.sh/?q=%.target.com&amp;output=json" | python3 -m json.tool</p>
+
+<h1>Utilisation en reconnaissance :</h1>
+<h1>Trouver des sous-domaines via les certificats émis !</h1>
+<p>curl -s "https://crt.sh/?q=%.microsoft.com&amp;output=json" | \</p>
+<p>python3 -c "import sys,json; data=json.load(sys.stdin); [print(c['name_value']) for c in data]" | \</p>
+<p>sort -u | head -50</code></pre>
+
+<h2 id="cryptographie-post-quantique">Cryptographie post-quantique</h2>
+
+<pre><code>Le problème quantique :
+<p>→ Les ordinateurs quantiques peuvent factoriser RSA en temps polynomial (algorithme de Shor)</p>
+<p>→ RSA-2048 : actuellement impossible à casser → Cassable par QC suffisamment puissant</p>
+<p>→ Timeline : ordinateurs quantiques "cryptographiquement pertinents" dans 10-15 ans ?</p>
+
+<p>NIST Post-Quantum Standards (2024) :</p>
+<p>→ CRYSTALS-Kyber (ML-KEM) : chiffrement/échange de clés</p>
+<p>→ CRYSTALS-Dilithium (ML-DSA) : signatures numériques</p>
+<p>→ SPHINCS+ (SLH-DSA) : signatures basées sur les hash functions</p>
+
+<p>Sécurité "harvest now, decrypt later" :</p>
+<p>Les adversaires collectent MAINTENANT des communications chiffrées</p>
+<p>pour les déchiffrer PLUS TARD quand les QC seront disponibles</p>
+<p>→ Migration vers la crypto post-quantique urgente pour données à longue durée</code></pre>
+
+<pre><code class="language-python"># Utiliser liboqs (Open Quantum Safe)
+<p>from oqs import KeyEncapsulation</p>
+
+<h1>Kyber512 - Échange de clés post-quantique</h1>
+<p>with KeyEncapsulation('Kyber512') as kem:</p>
+<p>public_key = kem.generate_keypair()</p>
+
+<p># Encapsulation (côté client)</p>
+<p>ciphertext, shared_secret_enc = kem.encap_secret(public_key)</p>
+
+<p># Decapsulation (côté serveur)</p>
+<p>shared_secret_dec = kem.decap_secret(ciphertext)</p>
+
+<p>assert shared_secret_enc == shared_secret_dec</p>
+<p>print(f"Clé partagée établie : {shared_secret_enc.hex()[:32]}...")</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La cryptographie moderne est bien plus que RSA et AES. La PKI structure la confiance sur Internet, les certificats X.509 authentifient l'identité, et la cryptographie post-quantique se prépare pour l'ère des ordinateurs quantiques. Pour un professionnel sécurité, comprendre ces mécanismes est indispensable pour auditer et configurer correctement les systèmes de l'entreprise.</p>
+
+<p>---</p>
+<p><em>Catégorie : Cryptographie</em></p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#cryptographie-avancee" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/incident-response.html" class="nav-prev">← Réponse aux incidents : gérer une cyberattaque en temps réel</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-memoire-avance.html" class="nav-next">Forensics mémoire avancé : Volatility 3 et analyse d'incidents →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

